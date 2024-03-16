@@ -22,4 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
->>>>>>> 71b2389 (setup vite)
+
+# Environment variables and secrets
+**/.env
+
+
