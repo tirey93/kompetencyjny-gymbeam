@@ -1,1 +1,4 @@
-#empty backend gitgnore
+/.vs
+/GymBeam/.vs/GymBeam
+/GymBeam/bin/Debug/net7.0
+/GymBeam/obj
