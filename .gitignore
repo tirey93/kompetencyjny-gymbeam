@@ -3,3 +3,10 @@
 ################################################################################
 
 /.vs
+.idea
+
+# Environment variables and secrets
+**/.env
+
+# Frontend-specific files and directories
+**/node_modules
