@@ -1,0 +1,17 @@
+version: "3.4"
+services:
+    ui-service:
+        build:
+            context: frontend
+            dockerfile: Dockerfile
+        networks:
+            - services_network
+        ports:
+            - "5000:80"
+        environment:
+            - PORT=80
+            - STATIC_FILES_DIR=./static
+
+networks:
+    services_network:
+        external: true
