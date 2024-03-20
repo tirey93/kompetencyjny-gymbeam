@@ -1,14 +1,17 @@
-import {ThemeProvider} from "./common/theme/ThemeProvider";
-import {Outlet} from "react-router-dom";
-import {NavigationShell} from "./features/navigation/Shell/Shell";
-import {Container} from "@mantine/core";
+import { Outlet } from "react-router-dom";
+import { Container } from "@mantine/core";
+
+import { ThemeProvider } from "./common/theme/ThemeProvider";
+import { NavigationShell } from "./features/navigation/Shell/Shell";
 
 export const Root = () => {
-    return <ThemeProvider>
+    return (
+        <ThemeProvider>
             <NavigationShell>
                 <Container>
                     <Outlet />
                 </Container>
             </NavigationShell>
-    </ThemeProvider>
-}
+        </ThemeProvider>
+    );
+};

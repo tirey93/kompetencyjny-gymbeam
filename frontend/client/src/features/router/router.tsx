@@ -1,7 +1,8 @@
-import {createBrowserRouter} from "react-router-dom";
-import {Routes} from "./Routes";
-import {Root} from "../../Root";
-import {RegistrationPage} from "../pages/Registration/Registration";
+import { createBrowserRouter } from "react-router-dom";
+
+import { Root } from "../../Root";
+import { RegistrationPage } from "../pages/Registration/Registration";
+import { Routes } from "./Routes";
 
 export const router = createBrowserRouter([
     {
@@ -9,9 +10,9 @@ export const router = createBrowserRouter([
         element: <Root />,
         children: [
             {
-                path: Routes.REGISTRATION,
-                element: <RegistrationPage />
-            }
-        ]
-    }
-])
+                path: Routes.ROOT,
+                element: <RegistrationPage />,
+            },
+        ],
+    },
+]);

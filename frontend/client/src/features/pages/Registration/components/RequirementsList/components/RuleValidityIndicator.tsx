@@ -1,9 +1,9 @@
-import {ThemeIcon} from "@mantine/core";
-import {useMemo} from "react";
+import { useMemo } from "react";
+import { ThemeIcon } from "@mantine/core";
 
 type RuleValidityIndicatorProps = {
     state: boolean | null;
-}
+};
 
 export const RuleValidityIndicator = ({ state }: RuleValidityIndicatorProps) => {
     const color = useMemo(() => {
@@ -15,7 +15,7 @@ export const RuleValidityIndicator = ({ state }: RuleValidityIndicatorProps) => 
             default:
                 return "info";
         }
-    }, [state])
+    }, [state]);
 
-    return <ThemeIcon size={10} color={color} radius={0} />
-}
+    return <ThemeIcon size={10} color={color} radius={0} />;
+};

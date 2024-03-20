@@ -1,13 +1,16 @@
-import {Routes} from "../../../../router/Routes";
-import {Box} from "@mantine/core";
+import { Box } from "@mantine/core";
+
+import { Routes } from "../../../../router/Routes";
 
 type NavbarLinkProps = {
-    route: Routes,
+    route: Routes;
     text: string;
-}
+};
 
 export const NavbarLink = ({ route, text }: NavbarLinkProps) => {
-    return <Box component="a" href={route}>
-        {text}
-    </Box>
-}
+    return (
+        <Box component="a" href={route}>
+            {text}
+        </Box>
+    );
+};

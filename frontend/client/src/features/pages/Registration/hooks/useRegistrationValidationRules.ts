@@ -1,5 +1,6 @@
-import {useCallback, useMemo} from "react";
-import {ValidationRule} from "../Registration.types";
+import { useCallback, useMemo } from "react";
+
+import { ValidationRule } from "../Registration.types";
 
 const MIN_LOGIN_LENGTH = 4;
 const MAX_LOGIN_LENGTH = 64;
@@ -20,33 +21,32 @@ const PASSWORDS_SHOULD_MATCH_MESSAGE = "Passwords have to match.";
 
 export const useRegistrationValidationRules = () => {
     const validatePasswordMinimumLength = useCallback((password: string) => {
-        return password.length >= MIN_PASSWORD_LENGTH
-    }, [])
+        return password.length >= MIN_PASSWORD_LENGTH;
+    }, []);
 
     const validatePasswordMaximumLength = useCallback((password: string) => {
         return password.length <= MAX_PASSWORD_LENGTH;
-    }, [])
+    }, []);
 
     const validateNameMinimumLength = useCallback((name: string) => {
-        return name.length >= MIN_NAME_LENGTH
-    }, [])
+        return name.length >= MIN_NAME_LENGTH;
+    }, []);
 
     const validateNameMaximumLength = useCallback((name: string) => {
         return name.length <= MAX_NAME_LENGTH;
-    }, [])
+    }, []);
 
     const validateLoginMinimumLength = useCallback((login: string) => {
-        return login.length >= MIN_LOGIN_LENGTH
-    }, [])
+        return login.length >= MIN_LOGIN_LENGTH;
+    }, []);
 
     const validateLoginMaximumLength = useCallback((login: string) => {
         return login.length <= MAX_LOGIN_LENGTH;
-    }, [])
+    }, []);
 
     const validatePasswordsMatch = useCallback((passwords: string[]) => {
         return passwords[0] === passwords[1];
-    }, [])
-
+    }, []);
 
     const passwordValidationRules = useMemo((): ValidationRule[] => {
         return [
@@ -58,10 +58,10 @@ export const useRegistrationValidationRules = () => {
             {
                 rule: PASSWORD_MAX_LENGTH_MESSAGE,
                 type: "singleValue",
-                validator: validatePasswordMaximumLength
-            }
-        ]
-    }, [validatePasswordMaximumLength, validatePasswordMinimumLength])
+                validator: validatePasswordMaximumLength,
+            },
+        ];
+    }, [validatePasswordMaximumLength, validatePasswordMinimumLength]);
 
     const nameValidationRules = useMemo((): ValidationRule[] => {
         return [
@@ -73,10 +73,10 @@ export const useRegistrationValidationRules = () => {
             {
                 rule: NAME_MAX_LENGTH_MESSAGE,
                 type: "singleValue",
-                validator: validateNameMaximumLength
-            }
-        ]
-    }, [validateNameMaximumLength, validateNameMinimumLength])
+                validator: validateNameMaximumLength,
+            },
+        ];
+    }, [validateNameMaximumLength, validateNameMinimumLength]);
 
     const loginValidationRules = useMemo((): ValidationRule[] => {
         return [
@@ -88,10 +88,10 @@ export const useRegistrationValidationRules = () => {
             {
                 rule: LOGIN_MAX_LENGTH_MESSAGE,
                 type: "singleValue",
-                validator: validateLoginMaximumLength
-            }
-        ]
-    }, [validateLoginMaximumLength, validateLoginMinimumLength])
+                validator: validateLoginMaximumLength,
+            },
+        ];
+    }, [validateLoginMaximumLength, validateLoginMinimumLength]);
 
     const confirmPasswordValidationRules = useMemo((): ValidationRule[] => {
         return [
@@ -100,13 +100,16 @@ export const useRegistrationValidationRules = () => {
                 type: "multiValue",
                 validator: validatePasswordsMatch,
             },
-        ]
-    }, [validatePasswordsMatch])
+        ];
+    }, [validatePasswordsMatch]);
 
-    return useMemo(() => ({
-        login: loginValidationRules,
-        name: nameValidationRules,
-        password: passwordValidationRules,
-        confirmPassword: confirmPasswordValidationRules
-    }), [loginValidationRules, nameValidationRules, passwordValidationRules, confirmPasswordValidationRules]);
-}
+    return useMemo(
+        () => ({
+            login: loginValidationRules,
+            name: nameValidationRules,
+            password: passwordValidationRules,
+            confirmPassword: confirmPasswordValidationRules,
+        }),
+        [loginValidationRules, nameValidationRules, passwordValidationRules, confirmPasswordValidationRules]
+    );
+};

@@ -1,8 +1,9 @@
-import {AppShell, Burger, Group} from '@mantine/core';
-import {useDisclosure} from '@mantine/hooks';
-import {PropsWithChildren} from "react";
-import {NavbarLink} from "./components/NavbarLink/NavbarLink";
-import {Routes} from "../../router/Routes";
+import { PropsWithChildren } from "react";
+import { AppShell, Burger, Group } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+
+import { NavbarLink } from "./components/NavbarLink/NavbarLink";
+import { Routes } from "../../router/Routes";
 
 export const NavigationShell = ({ children }: PropsWithChildren) => {
     const [isNavbarVisible, { toggle: toggleNavbar }] = useDisclosure();
@@ -10,7 +11,7 @@ export const NavigationShell = ({ children }: PropsWithChildren) => {
     return (
         <AppShell
             header={{ height: 60 }}
-            navbar={{ width: 300, breakpoint: 'sm', collapsed: { desktop: true, mobile: !isNavbarVisible } }}
+            navbar={{ width: 300, breakpoint: "sm", collapsed: { desktop: true, mobile: !isNavbarVisible } }}
             padding="md"
         >
             <AppShell.Header withBorder={false}>
@@ -26,9 +27,7 @@ export const NavigationShell = ({ children }: PropsWithChildren) => {
                 <NavbarLink route={Routes.REGISTRATION} text="Sign up" />
             </AppShell.Navbar>
 
-            <AppShell.Main>
-                {children}
-            </AppShell.Main>
+            <AppShell.Main>{children}</AppShell.Main>
         </AppShell>
     );
-}
+};
