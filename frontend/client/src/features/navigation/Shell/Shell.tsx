@@ -17,13 +17,13 @@ export const NavigationShell = ({ children }: PropsWithChildren) => {
                 <Group h="100%" px="md">
                     <Burger opened={isNavbarVisible} onClick={toggleNavbar} hiddenFrom="sm" size="sm" />
                     <Group style={{ flex: 1, justifyContent: "flex-end" }} ml="xl" visibleFrom="sm">
-                        <NavbarLink route={Routes.ROOT} text="Home" />
+                        <NavbarLink route={Routes.REGISTRATION} text="Sign up" />
                     </Group>
                 </Group>
             </AppShell.Header>
 
             <AppShell.Navbar py="md" px={4}>
-                <NavbarLink route={Routes.ROOT} text="Home" />
+                <NavbarLink route={Routes.REGISTRATION} text="Sign up" />
             </AppShell.Navbar>
 
             <AppShell.Main>
