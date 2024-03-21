@@ -14,8 +14,9 @@ const NAME_MAX_LENGTH_MESSAGE = `Up to ${MAX_NAME_LENGTH} characters.`;
 
 const MIN_PASSWORD_LENGTH = 8;
 const MAX_PASSWORD_LENGTH = 64;
-const PASSWORD_MIN_LENGTH_MESSAGE = `Minimum ${MIN_PASSWORD_LENGTH} characters`;
-const PASSWORD_MAX_LENGTH_MESSAGE = `Up to ${MAX_PASSWORD_LENGTH} characters`;
+const PASSWORD_MIN_LENGTH_MESSAGE = `Minimum ${MIN_PASSWORD_LENGTH} characters.`;
+const PASSWORD_MAX_LENGTH_MESSAGE = `Up to ${MAX_PASSWORD_LENGTH} characters.`;
+const PASSWORD_SPECIAL_CHARACTERS_MESSAGE = "At least 1 special character.";
 
 const PASSWORDS_SHOULD_MATCH_MESSAGE = "Passwords have to match.";
 
@@ -26,6 +27,10 @@ export const useRegistrationValidationRules = () => {
 
     const validatePasswordMaximumLength = useCallback((password: string) => {
         return password.length <= MAX_PASSWORD_LENGTH;
+    }, []);
+
+    const validatePasswordSpecialCharacters = useCallback((password: string) => {
+        return /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
     }, []);
 
     const validateNameMinimumLength = useCallback((name: string) => {
@@ -59,6 +64,11 @@ export const useRegistrationValidationRules = () => {
                 rule: PASSWORD_MAX_LENGTH_MESSAGE,
                 type: "singleValue",
                 validator: validatePasswordMaximumLength,
+            },
+            {
+                rule: PASSWORD_SPECIAL_CHARACTERS_MESSAGE,
+                type: "singleValue",
+                validator: validatePasswordSpecialCharacters,
             },
         ];
     }, [validatePasswordMaximumLength, validatePasswordMinimumLength]);

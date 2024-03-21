@@ -11,12 +11,17 @@ export const StepperButtons = ({ onPreviousStep, onNextStep, nextLabel, previous
     return (
         <Group justify="center" mt="xl">
             {onPreviousStep && (
-                <Button color="secondary" variant="default" onClick={onPreviousStep}>
+                <Button color="secondary" w="45%" variant="default" onClick={onPreviousStep}>
                     {previousLabel ?? "Back"}
                 </Button>
             )}
             {onNextStep && (
-                <Button color="secondary" onClick={onNextStep}>
+                <Button
+                    variant="gradient"
+                    gradient={{ from: "success", to: "secondary", deg: 45 }}
+                    w="45%"
+                    onClick={onNextStep}
+                >
                     {nextLabel ?? "Next"}
                 </Button>
             )}

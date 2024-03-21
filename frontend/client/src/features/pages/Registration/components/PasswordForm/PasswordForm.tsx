@@ -1,3 +1,5 @@
+import { Paper } from "@mantine/core";
+
 import { Styled } from "../../Registration.styled";
 import { RegistrationFormProps } from "../../Registration.types";
 import { RequirementsList } from "../RequirementsList/RequirementsList";
@@ -15,26 +17,29 @@ export const PasswordForm = ({ onPreviousStep, onNextStep, form, rules }: Regist
     };
 
     return (
-        <Styled.Stack>
-            <Styled.PasswordInput
-                size="md"
-                required
-                label="PASSWORD"
-                placeholder="Enter your password"
-                {...form.getInputProps("password")}
-            />
-            <RequirementsList rules={rules.password} />
+        <>
+            <Paper radius="md" withBorder p="lg" shadow="xl">
+                <Styled.Stack>
+                    <Styled.PasswordInput
+                        size="md"
+                        required
+                        label="PASSWORD"
+                        placeholder="Enter your password"
+                        {...form.getInputProps("password")}
+                    />
+                    <RequirementsList rules={rules.password} />
 
-            <Styled.PasswordInput
-                size="md"
-                required
-                label="CONFIRM PASSWORD"
-                placeholder="Confirm your password"
-                {...form.getInputProps("confirmPassword")}
-            />
-            <RequirementsList rules={rules.confirmPassword} />
-
+                    <Styled.PasswordInput
+                        size="md"
+                        required
+                        label="CONFIRM PASSWORD"
+                        placeholder="Confirm your password"
+                        {...form.getInputProps("confirmPassword")}
+                    />
+                    <RequirementsList rules={rules.confirmPassword} />
+                </Styled.Stack>
+            </Paper>
             <StepperButtons onPreviousStep={onPreviousStep} onNextStep={onNextStepInternal} />
-        </Styled.Stack>
+        </>
     );
 };
