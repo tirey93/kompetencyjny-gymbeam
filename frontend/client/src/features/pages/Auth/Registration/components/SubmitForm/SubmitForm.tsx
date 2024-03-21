@@ -2,8 +2,9 @@ import { useState } from "react";
 import { CloseButton, Group, Paper, Stack, Text, ThemeIcon } from "@mantine/core";
 import { IconEye, IconEyeOff, IconUser } from "@tabler/icons-react";
 
+import { translate } from "../../../../../../common/i18n/i18n";
 import { RegistrationFormProps } from "../../Registration.types";
-import { StepperButtons } from "../StepperButtons/StepperButtons";
+import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
 
 export const SubmitForm = ({ onPreviousStep, onNextStep, form }: RegistrationFormProps) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -12,11 +13,11 @@ export const SubmitForm = ({ onPreviousStep, onNextStep, form }: RegistrationFor
         <>
             <Paper radius="md" withBorder p="lg" shadow="xl">
                 <Text fw={600} mb="xl" ta="center">
-                    Is this data correct?
+                    {translate("pages.registration.steps.summary.header")}
                 </Text>
 
                 <Stack align="center" gap="xs">
-                    <ThemeIcon radius="100%" size={100} color="secondary">
+                    <ThemeIcon radius="100%" size={100} color="primary">
                         <IconUser size={50} />
                     </ThemeIcon>
 
@@ -25,12 +26,13 @@ export const SubmitForm = ({ onPreviousStep, onNextStep, form }: RegistrationFor
                     </Text>
 
                     <Text ta="center" c="dimmed" fz="md">
-                        Login: {form.values.login}
+                        {translate("pages.registration.steps.summary.login")}: {form.values.login}
                     </Text>
 
                     <Group>
                         <Text ta="center" c="dimmed" fz="md">
-                            Password: {isPasswordVisible ? form.values.password : "***********"}
+                            {translate("pages.registration.steps.summary.password")}:{" "}
+                            {isPasswordVisible ? form.values.password : "***********"}
                         </Text>
                         <CloseButton
                             icon={
@@ -44,7 +46,11 @@ export const SubmitForm = ({ onPreviousStep, onNextStep, form }: RegistrationFor
                     </Group>
                 </Stack>
             </Paper>
-            <StepperButtons onPreviousStep={onPreviousStep} onNextStep={onNextStep} nextLabel="Submit" />
+            <RegistrationFormFooter
+                onPreviousStep={onPreviousStep}
+                onNextStep={onNextStep}
+                nextLabel={translate("pages.registration.navigation.submit")}
+            />
         </>
     );
 };

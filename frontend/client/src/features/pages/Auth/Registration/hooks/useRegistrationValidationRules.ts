@@ -1,24 +1,16 @@
 import { useCallback, useMemo } from "react";
 
+import { translate } from "../../../../../common/i18n/i18n";
 import { ValidationRule } from "../Registration.types";
 
 const MIN_LOGIN_LENGTH = 4;
 const MAX_LOGIN_LENGTH = 64;
-const LOGIN_MIN_LENGTH_MESSAGE = `Minimum ${MIN_LOGIN_LENGTH} characters.`;
-const LOGIN_MAX_LENGTH_MESSAGE = `Up to ${MAX_LOGIN_LENGTH} characters.`;
 
 const MIN_NAME_LENGTH = 2;
 const MAX_NAME_LENGTH = 16;
-const NAME_MIN_LENGTH_MESSAGE = `Minimum ${MIN_NAME_LENGTH} characters.`;
-const NAME_MAX_LENGTH_MESSAGE = `Up to ${MAX_NAME_LENGTH} characters.`;
 
 const MIN_PASSWORD_LENGTH = 8;
 const MAX_PASSWORD_LENGTH = 64;
-const PASSWORD_MIN_LENGTH_MESSAGE = `Minimum ${MIN_PASSWORD_LENGTH} characters.`;
-const PASSWORD_MAX_LENGTH_MESSAGE = `Up to ${MAX_PASSWORD_LENGTH} characters.`;
-const PASSWORD_SPECIAL_CHARACTERS_MESSAGE = "At least 1 special character.";
-
-const PASSWORDS_SHOULD_MATCH_MESSAGE = "Passwords have to match.";
 
 export const useRegistrationValidationRules = () => {
     const validatePasswordMinimumLength = useCallback((password: string) => {
@@ -56,17 +48,21 @@ export const useRegistrationValidationRules = () => {
     const passwordValidationRules = useMemo((): ValidationRule[] => {
         return [
             {
-                rule: PASSWORD_MIN_LENGTH_MESSAGE,
+                rule: translate("pages.registration.field.password.validation.tooShort", {
+                    length: MIN_PASSWORD_LENGTH,
+                }),
                 type: "singleValue",
                 validator: validatePasswordMinimumLength,
             },
             {
-                rule: PASSWORD_MAX_LENGTH_MESSAGE,
+                rule: translate("pages.registration.field.password.validation.tooLong", {
+                    length: MAX_PASSWORD_LENGTH,
+                }),
                 type: "singleValue",
                 validator: validatePasswordMaximumLength,
             },
             {
-                rule: PASSWORD_SPECIAL_CHARACTERS_MESSAGE,
+                rule: translate("pages.registration.field.password.validation.noSpecialCharacters"),
                 type: "singleValue",
                 validator: validatePasswordSpecialCharacters,
             },
@@ -76,12 +72,12 @@ export const useRegistrationValidationRules = () => {
     const nameValidationRules = useMemo((): ValidationRule[] => {
         return [
             {
-                rule: NAME_MIN_LENGTH_MESSAGE,
+                rule: translate("pages.registration.field.name.validation.tooShort", { length: MIN_NAME_LENGTH }),
                 type: "singleValue",
                 validator: validateNameMinimumLength,
             },
             {
-                rule: NAME_MAX_LENGTH_MESSAGE,
+                rule: translate("pages.registration.field.name.validation.tooLong", { length: MAX_NAME_LENGTH }),
                 type: "singleValue",
                 validator: validateNameMaximumLength,
             },
@@ -91,12 +87,12 @@ export const useRegistrationValidationRules = () => {
     const loginValidationRules = useMemo((): ValidationRule[] => {
         return [
             {
-                rule: LOGIN_MIN_LENGTH_MESSAGE,
+                rule: translate("pages.registration.field.login.validation.tooShort", { length: MIN_LOGIN_LENGTH }),
                 type: "singleValue",
                 validator: validateLoginMinimumLength,
             },
             {
-                rule: LOGIN_MAX_LENGTH_MESSAGE,
+                rule: translate("pages.registration.field.login.validation.tooLong", { length: MAX_LOGIN_LENGTH }),
                 type: "singleValue",
                 validator: validateLoginMaximumLength,
             },
@@ -106,7 +102,7 @@ export const useRegistrationValidationRules = () => {
     const confirmPasswordValidationRules = useMemo((): ValidationRule[] => {
         return [
             {
-                rule: PASSWORDS_SHOULD_MATCH_MESSAGE,
+                rule: translate("pages.registration.field.confirmPassword.validation.noMatch"),
                 type: "multiValue",
                 validator: validatePasswordsMatch,
             },

@@ -1,9 +1,9 @@
-import { Paper } from "@mantine/core";
+import { Paper, Stack, TextInput } from "@mantine/core";
 
-import { Styled } from "../../Registration.styled";
+import { translate } from "../../../../../../common/i18n/i18n";
 import { RegistrationFormProps } from "../../Registration.types";
+import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
 import { RequirementsList } from "../RequirementsList/RequirementsList";
-import { StepperButtons } from "../StepperButtons/StepperButtons";
 
 export const NameForm = ({ onPreviousStep, onNextStep, form, rules }: RegistrationFormProps) => {
     const validateFields = () => {
@@ -19,27 +19,28 @@ export const NameForm = ({ onPreviousStep, onNextStep, form, rules }: Registrati
     return (
         <>
             <Paper radius="md" withBorder p="lg" shadow="xl">
-                <Styled.Stack>
-                    <Styled.TextInput
+                <Stack m="md">
+                    <TextInput
                         size="md"
                         required
-                        label="NAME"
-                        placeholder="Enter your display name"
+                        label={translate("pages.registration.field.name.label")}
+                        placeholder={translate("pages.registration.field.name.placeholder")}
                         {...form.getInputProps("name")}
                     />
                     <RequirementsList rules={rules.name} />
 
-                    <Styled.TextInput
+                    <TextInput
                         size="md"
                         required
-                        label="LOGIN"
-                        placeholder="Enter your login"
+                        label={translate("pages.registration.field.login.label")}
+                        placeholder={translate("pages.registration.field.login.placeholder")}
                         {...form.getInputProps("login")}
+                        mt="md"
                     />
                     <RequirementsList rules={rules.login} />
-                </Styled.Stack>
+                </Stack>
             </Paper>
-            <StepperButtons onPreviousStep={onPreviousStep} onNextStep={onNextStepInternal} />
+            <RegistrationFormFooter onPreviousStep={onPreviousStep} onNextStep={onNextStepInternal} />
         </>
     );
 };

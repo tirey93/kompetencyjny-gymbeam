@@ -13,7 +13,7 @@ export const RuleValidityIndicator = ({ state }: RuleValidityIndicatorProps) => 
             case true:
                 return "success";
             default:
-                return "info";
+                return "primary";
         }
     }, [state]);
 
