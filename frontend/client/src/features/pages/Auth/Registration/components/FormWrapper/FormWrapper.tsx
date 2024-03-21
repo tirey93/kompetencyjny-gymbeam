@@ -5,11 +5,11 @@ export const FormWrapper = ({ children }: PropsWithChildren) => {
     return (
         <Stack mih="60vh" justify="center">
             <Title ta="center" mb="xl">
-                Happy to see{" "}
+                Nice to meet{" "}
                 <Text span c="success" inherit>
                     you
-                </Text>{" "}
-                here!
+                </Text>
+                !
             </Title>
             {children}
         </Stack>

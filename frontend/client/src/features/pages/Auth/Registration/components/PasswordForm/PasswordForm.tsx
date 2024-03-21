@@ -1,9 +1,8 @@
-import { Paper } from "@mantine/core";
+import { Paper, PasswordInput, Stack } from "@mantine/core";
 
-import { Styled } from "../../Registration.styled";
 import { RegistrationFormProps } from "../../Registration.types";
+import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
 import { RequirementsList } from "../RequirementsList/RequirementsList";
-import { StepperButtons } from "../StepperButtons/StepperButtons";
 
 export const PasswordForm = ({ onPreviousStep, onNextStep, form, rules }: RegistrationFormProps) => {
     const validateFields = () => {
@@ -19,8 +18,8 @@ export const PasswordForm = ({ onPreviousStep, onNextStep, form, rules }: Regist
     return (
         <>
             <Paper radius="md" withBorder p="lg" shadow="xl">
-                <Styled.Stack>
-                    <Styled.PasswordInput
+                <Stack m="md">
+                    <PasswordInput
                         size="md"
                         required
                         label="PASSWORD"
@@ -29,17 +28,18 @@ export const PasswordForm = ({ onPreviousStep, onNextStep, form, rules }: Regist
                     />
                     <RequirementsList rules={rules.password} />
 
-                    <Styled.PasswordInput
+                    <PasswordInput
                         size="md"
                         required
                         label="CONFIRM PASSWORD"
                         placeholder="Confirm your password"
                         {...form.getInputProps("confirmPassword")}
+                        mt="md"
                     />
                     <RequirementsList rules={rules.confirmPassword} />
-                </Styled.Stack>
+                </Stack>
             </Paper>
-            <StepperButtons onPreviousStep={onPreviousStep} onNextStep={onNextStepInternal} />
+            <RegistrationFormFooter onPreviousStep={onPreviousStep} onNextStep={onNextStepInternal} />
         </>
     );
 };

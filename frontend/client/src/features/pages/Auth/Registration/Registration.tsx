@@ -28,7 +28,7 @@ export const RegistrationPage = () => {
     };
 
     return (
-        <Container>
+        <Container maw="800px">
             <Stepper active={step} onStepClick={setStep} radius="xs" color="success">
                 <Stepper.Step
                     label="Let's introduce!"
