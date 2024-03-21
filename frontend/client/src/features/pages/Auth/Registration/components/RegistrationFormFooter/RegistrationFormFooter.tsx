@@ -1,5 +1,6 @@
 import { Anchor, Button, Group, Stack } from "@mantine/core";
 
+import { translate } from "../../../../../../common/i18n/i18n";
 import { Routes } from "../../../../../router/Routes";
 import { RegistrationFormProps } from "../../Registration.types";
 
@@ -19,7 +20,7 @@ export const RegistrationFormFooter = ({
             <Group justify="center" mt="xl">
                 {onPreviousStep && (
                     <Button miw="35%" variant="default" onClick={onPreviousStep} size="md">
-                        {previousLabel ?? "Back"}
+                        {previousLabel ?? translate("pages.registration.navigation.previousStep")}
                     </Button>
                 )}
                 {onNextStep && (
@@ -30,12 +31,12 @@ export const RegistrationFormFooter = ({
                         size="md"
                         onClick={onNextStep}
                     >
-                        {nextLabel ?? "Next"}
+                        {nextLabel ?? translate("pages.registration.navigation.nextStep")}
                     </Button>
                 )}
             </Group>
             <Anchor ta="center" c="info" href={Routes.LOGIN}>
-                I want to sign in
+                {translate("pages.registration.navigation.signInLink")}
             </Anchor>
         </Stack>
     );

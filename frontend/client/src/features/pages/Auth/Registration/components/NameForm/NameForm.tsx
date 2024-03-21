@@ -1,5 +1,6 @@
 import { Paper, Stack, TextInput } from "@mantine/core";
 
+import { translate } from "../../../../../../common/i18n/i18n";
 import { RegistrationFormProps } from "../../Registration.types";
 import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
 import { RequirementsList } from "../RequirementsList/RequirementsList";
@@ -22,8 +23,8 @@ export const NameForm = ({ onPreviousStep, onNextStep, form, rules }: Registrati
                     <TextInput
                         size="md"
                         required
-                        label="NAME"
-                        placeholder="Enter your display name"
+                        label={translate("pages.registration.field.name.label")}
+                        placeholder={translate("pages.registration.field.name.placeholder")}
                         {...form.getInputProps("name")}
                     />
                     <RequirementsList rules={rules.name} />
@@ -31,8 +32,8 @@ export const NameForm = ({ onPreviousStep, onNextStep, form, rules }: Registrati
                     <TextInput
                         size="md"
                         required
-                        label="LOGIN"
-                        placeholder="Enter your login"
+                        label={translate("pages.registration.field.login.label")}
+                        placeholder={translate("pages.registration.field.login.placeholder")}
                         {...form.getInputProps("login")}
                         mt="md"
                     />

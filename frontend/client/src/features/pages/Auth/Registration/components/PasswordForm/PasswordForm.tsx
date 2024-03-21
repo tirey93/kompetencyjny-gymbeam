@@ -1,5 +1,6 @@
 import { Paper, PasswordInput, Stack } from "@mantine/core";
 
+import { translate } from "../../../../../../common/i18n/i18n";
 import { RegistrationFormProps } from "../../Registration.types";
 import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
 import { RequirementsList } from "../RequirementsList/RequirementsList";
@@ -22,8 +23,8 @@ export const PasswordForm = ({ onPreviousStep, onNextStep, form, rules }: Regist
                     <PasswordInput
                         size="md"
                         required
-                        label="PASSWORD"
-                        placeholder="Enter your password"
+                        label={translate("pages.registration.field.password.label")}
+                        placeholder={translate("pages.registration.field.password.placeholder")}
                         {...form.getInputProps("password")}
                     />
                     <RequirementsList rules={rules.password} />
@@ -31,8 +32,8 @@ export const PasswordForm = ({ onPreviousStep, onNextStep, form, rules }: Regist
                     <PasswordInput
                         size="md"
                         required
-                        label="CONFIRM PASSWORD"
-                        placeholder="Confirm your password"
+                        label={translate("pages.registration.field.confirmPassword.label")}
+                        placeholder={translate("pages.registration.field.confirmPassword.placeholder")}
                         {...form.getInputProps("confirmPassword")}
                         mt="md"
                     />

@@ -6,6 +6,7 @@ import { NameForm } from "./components/NameForm/NameForm";
 import { PasswordForm } from "./components/PasswordForm/PasswordForm";
 import { SubmitForm } from "./components/SubmitForm/SubmitForm";
 import { useRegistrationForm } from "./hooks/useRegistrationForm";
+import { translate } from "../../../../common/i18n/i18n";
 
 export const RegistrationPage = () => {
     const { form, validatedRules } = useRegistrationForm();
@@ -31,16 +32,20 @@ export const RegistrationPage = () => {
         <Container maw="800px">
             <Stepper active={step} onStepClick={setStep} radius="xs" color="success">
                 <Stepper.Step
-                    label="Let's introduce!"
-                    description="Personal details"
+                    label={translate("pages.registration.steps.personalDetails.label")}
+                    description={translate("pages.registration.steps.personalDetails.description")}
                     allowStepSelect={canSelectStep(0)}
                 >
-                    <FormWrapper>
+                    <FormWrapper userName={form.values.name}>
                         <NameForm form={form} rules={validatedRules} onNextStep={goToNextStep} />
                     </FormWrapper>
                 </Stepper.Step>
-                <Stepper.Step label="Almost there..." description="Password" allowStepSelect={canSelectStep(1)}>
-                    <FormWrapper>
+                <Stepper.Step
+                    label={translate("pages.registration.steps.passwords.label")}
+                    description={translate("pages.registration.steps.passwords.description")}
+                    allowStepSelect={canSelectStep(1)}
+                >
+                    <FormWrapper userName={form.values.name}>
                         <PasswordForm
                             form={form}
                             rules={validatedRules}
@@ -49,8 +54,12 @@ export const RegistrationPage = () => {
                         />
                     </FormWrapper>
                 </Stepper.Step>
-                <Stepper.Step label="Everything set!" description="Confirmation" allowStepSelect={canSelectStep(2)}>
-                    <FormWrapper>
+                <Stepper.Step
+                    label={translate("pages.registration.steps.summary.label")}
+                    description={translate("pages.registration.steps.summary.description")}
+                    allowStepSelect={canSelectStep(2)}
+                >
+                    <FormWrapper userName={form.values.name}>
                         <SubmitForm
                             form={form}
                             rules={validatedRules}
@@ -59,7 +68,6 @@ export const RegistrationPage = () => {
                         />
                     </FormWrapper>
                 </Stepper.Step>
-                <Stepper.Completed>Done</Stepper.Completed>
             </Stepper>
         </Container>
     );
