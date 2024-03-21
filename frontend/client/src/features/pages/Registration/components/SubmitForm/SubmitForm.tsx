@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { CloseButton, Group, Paper, Stack, Text, ThemeIcon, Title } from "@mantine/core";
+import { CloseButton, Group, Paper, Stack, Text, ThemeIcon } from "@mantine/core";
 import { IconEye, IconEyeOff, IconUser } from "@tabler/icons-react";
 
-import { Styled } from "../../Registration.styled";
 import { RegistrationFormProps } from "../../Registration.types";
 import { StepperButtons } from "../StepperButtons/StepperButtons";
 
@@ -10,9 +9,12 @@ export const SubmitForm = ({ onPreviousStep, onNextStep, form }: RegistrationFor
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     return (
-        <Styled.Stack>
-            <Title ta="center">Is this correct?</Title>
-            <Paper radius="md" withBorder p="lg">
+        <>
+            <Paper radius="md" withBorder p="lg" shadow="xl">
+                <Text fw={600} mb="xl" ta="center">
+                    Is this data correct?
+                </Text>
+
                 <Stack align="center" gap="xs">
                     <ThemeIcon radius="100%" size={100} color="secondary">
                         <IconUser size={50} />
@@ -43,6 +45,6 @@ export const SubmitForm = ({ onPreviousStep, onNextStep, form }: RegistrationFor
                 </Stack>
             </Paper>
             <StepperButtons onPreviousStep={onPreviousStep} onNextStep={onNextStep} nextLabel="Submit" />
-        </Styled.Stack>
+        </>
     );
 };

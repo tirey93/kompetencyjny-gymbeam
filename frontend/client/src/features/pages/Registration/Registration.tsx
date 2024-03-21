@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { Container, Stepper } from "@mantine/core";
 
+import { FormWrapper } from "./components/FormWrapper/FormWrapper";
 import { NameForm } from "./components/NameForm/NameForm";
 import { PasswordForm } from "./components/PasswordForm/PasswordForm";
 import { SubmitForm } from "./components/SubmitForm/SubmitForm";
@@ -34,23 +35,29 @@ export const RegistrationPage = () => {
                     description="Personal details"
                     allowStepSelect={canSelectStep(0)}
                 >
-                    <NameForm form={form} rules={validatedRules} onNextStep={goToNextStep} />
+                    <FormWrapper>
+                        <NameForm form={form} rules={validatedRules} onNextStep={goToNextStep} />
+                    </FormWrapper>
                 </Stepper.Step>
                 <Stepper.Step label="Almost there..." description="Password" allowStepSelect={canSelectStep(1)}>
-                    <PasswordForm
-                        form={form}
-                        rules={validatedRules}
-                        onNextStep={goToNextStep}
-                        onPreviousStep={goToPreviousStep}
-                    />
+                    <FormWrapper>
+                        <PasswordForm
+                            form={form}
+                            rules={validatedRules}
+                            onNextStep={goToNextStep}
+                            onPreviousStep={goToPreviousStep}
+                        />
+                    </FormWrapper>
                 </Stepper.Step>
                 <Stepper.Step label="Everything set!" description="Confirmation" allowStepSelect={canSelectStep(2)}>
-                    <SubmitForm
-                        form={form}
-                        rules={validatedRules}
-                        onPreviousStep={goToPreviousStep}
-                        onNextStep={submitRegistrationForm}
-                    />
+                    <FormWrapper>
+                        <SubmitForm
+                            form={form}
+                            rules={validatedRules}
+                            onPreviousStep={goToPreviousStep}
+                            onNextStep={submitRegistrationForm}
+                        />
+                    </FormWrapper>
                 </Stepper.Step>
                 <Stepper.Completed>Done</Stepper.Completed>
             </Stepper>
