@@ -9,9 +9,15 @@ namespace GymBeam.Controllers
     public class AuthenticationController : ControllerBase
     {
         [HttpPost("Register")]
-        public IActionResult Register([FromBody] UserRequest dto)
+        public ActionResult<UserResponse> Register([FromBody] UserRequest dto)
         {
-            return NoContent();
+            return new UserResponse
+            {
+                Id = 34,
+                Login = dto.Login,
+                DisplayName = dto.DisplayName,
+                Role = dto.Role
+            };
         }
 
         [HttpPost("Login")]
@@ -26,8 +32,8 @@ namespace GymBeam.Controllers
             };
         }
 
-        [HttpPost("{id:int}/Logout")]
-        public IActionResult Logout(int id)
+        [HttpPost("{user_id:int}/Logout")]
+        public IActionResult Logout(int user_id)
         {
             return NoContent();
         }
