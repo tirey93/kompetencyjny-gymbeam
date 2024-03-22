@@ -23,25 +23,25 @@ export const SignInPage = () => {
                 </Text>{" "}
                 {translate("pages.signIn.header.postEmphasis")}
             </Title>
-            <Paper radius="md" withBorder p="xl" shadow="xl">
-                <Stack m="md">
-                    <TextInput
-                        size="md"
-                        required
-                        label={translate("pages.signIn.field.login.label")}
-                        placeholder={translate("pages.signIn.field.login.placeholder")}
-                        {...form.getInputProps("login")}
-                    />
-                    <PasswordInput
-                        size="md"
-                        mt="md"
-                        required
-                        label={translate("pages.signIn.field.password.label")}
-                        placeholder={translate("pages.signIn.field.password.placeholder")}
-                        {...form.getInputProps("password")}
-                    />
-                </Stack>
+
+            <Paper radius="md" withBorder p="xl" shadow="xl" component={Stack}>
+                <TextInput
+                    size="md"
+                    required
+                    label={translate("pages.signIn.field.login.label")}
+                    placeholder={translate("pages.signIn.field.login.placeholder")}
+                    {...form.getInputProps("login")}
+                />
+                <PasswordInput
+                    size="md"
+                    mt="md"
+                    required
+                    label={translate("pages.signIn.field.password.label")}
+                    placeholder={translate("pages.signIn.field.password.placeholder")}
+                    {...form.getInputProps("password")}
+                />
             </Paper>
+
             <Stack mt="sm" maw="400px" miw="50%" m="0 auto">
                 <Button
                     size="md"

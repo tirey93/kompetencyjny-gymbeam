@@ -1,11 +1,23 @@
 import { PropsWithChildren, useMemo } from "react";
-import { Stack, Text, Title } from "@mantine/core";
+import { Paper, Stack, Text, Title } from "@mantine/core";
 
 import { translate } from "../../../../../../common/i18n/i18n";
+import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
 
 const MAX_DISPLAYABLE_USER_NAME_LENGTH = 10;
 
-export const FormWrapper = ({ children, userName }: PropsWithChildren<{ userName: string }>) => {
+export type RegistrationFormWrapperProps = PropsWithChildren<{
+    onNextStep?: () => unknown;
+    onPreviousStep?: () => unknown;
+    userName: string;
+}>;
+
+export const RegistrationFormWrapper = ({
+    children,
+    userName,
+    onPreviousStep,
+    onNextStep,
+}: RegistrationFormWrapperProps) => {
     const parsedUserName = useMemo(() => {
         if (!userName) {
             return;
@@ -31,7 +43,11 @@ export const FormWrapper = ({ children, userName }: PropsWithChildren<{ userName
                 {padWithSpaceIfNotEmpty(translate("pages.registration.header.postEmphasis"))}
                 {parsedUserName}!
             </Title>
-            {children}
+
+            <Paper radius="md" withBorder p="xl" shadow="xl" component={Stack}>
+                {children}
+            </Paper>
+            <RegistrationFormFooter onPreviousStep={onPreviousStep} onNextStep={onNextStep} />
         </Stack>
     );
 };

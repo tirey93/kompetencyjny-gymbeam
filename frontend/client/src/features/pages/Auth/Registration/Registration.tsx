@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { Container, Stepper } from "@mantine/core";
 
-import { FormWrapper } from "./components/FormWrapper/FormWrapper";
+import { RegistrationFormWrapper } from "./components/FormWrapper/RegistrationFormWrapper";
 import { NameForm } from "./components/NameForm/NameForm";
 import { PasswordForm } from "./components/PasswordForm/PasswordForm";
 import { SubmitForm } from "./components/SubmitForm/SubmitForm";
@@ -20,9 +20,24 @@ export const RegistrationPage = () => {
         setStep((step) => --step);
     }, []);
 
-    const canSelectStep = (stepNumber: number) => {
-        return stepNumber <= step;
-    };
+    const canSelectStep = useCallback(
+        (stepNumber: number) => {
+            return stepNumber <= step;
+        },
+        [step]
+    );
+
+    const onNextStepNameForm = useCallback(() => {
+        if (!form.validateField("name").hasError && !form.validateField("login").hasError) {
+            goToNextStep();
+        }
+    }, [form, goToNextStep]);
+
+    const onNextStepPasswordForm = useCallback(() => {
+        if (!form.validateField("password").hasError && !form.validateField("confirmPassword").hasError) {
+            goToNextStep();
+        }
+    }, [form, goToNextStep]);
 
     const submitRegistrationForm = () => {
         console.log("registration form submitted");
@@ -36,37 +51,35 @@ export const RegistrationPage = () => {
                     description={translate("pages.registration.steps.personalDetails.description")}
                     allowStepSelect={canSelectStep(0)}
                 >
-                    <FormWrapper userName={form.values.name}>
-                        <NameForm form={form} rules={validatedRules} onNextStep={goToNextStep} />
-                    </FormWrapper>
+                    <RegistrationFormWrapper userName={form.values.name} onNextStep={onNextStepNameForm}>
+                        <NameForm form={form} rules={validatedRules} />
+                    </RegistrationFormWrapper>
                 </Stepper.Step>
                 <Stepper.Step
                     label={translate("pages.registration.steps.passwords.label")}
                     description={translate("pages.registration.steps.passwords.description")}
                     allowStepSelect={canSelectStep(1)}
                 >
-                    <FormWrapper userName={form.values.name}>
-                        <PasswordForm
-                            form={form}
-                            rules={validatedRules}
-                            onNextStep={goToNextStep}
-                            onPreviousStep={goToPreviousStep}
-                        />
-                    </FormWrapper>
+                    <RegistrationFormWrapper
+                        userName={form.values.name}
+                        onPreviousStep={goToPreviousStep}
+                        onNextStep={onNextStepPasswordForm}
+                    >
+                        <PasswordForm form={form} rules={validatedRules} />
+                    </RegistrationFormWrapper>
                 </Stepper.Step>
                 <Stepper.Step
                     label={translate("pages.registration.steps.summary.label")}
                     description={translate("pages.registration.steps.summary.description")}
                     allowStepSelect={canSelectStep(2)}
                 >
-                    <FormWrapper userName={form.values.name}>
-                        <SubmitForm
-                            form={form}
-                            rules={validatedRules}
-                            onPreviousStep={goToPreviousStep}
-                            onNextStep={submitRegistrationForm}
-                        />
-                    </FormWrapper>
+                    <RegistrationFormWrapper
+                        userName={form.values.name}
+                        onPreviousStep={goToPreviousStep}
+                        onNextStep={submitRegistrationForm}
+                    >
+                        <SubmitForm form={form} rules={validatedRules} />
+                    </RegistrationFormWrapper>
                 </Stepper.Step>
             </Stepper>
         </Container>
