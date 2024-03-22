@@ -89,6 +89,7 @@ export type TranslationSource = {
                 preEmphasis: string;
                 emphasised: string;
                 postEmphasis: string;
+                defaultName: string;
             };
         };
     };

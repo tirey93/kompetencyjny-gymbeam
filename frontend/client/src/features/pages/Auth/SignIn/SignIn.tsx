@@ -2,17 +2,21 @@ import { useCallback } from "react";
 import { Anchor, Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 
 import { useSignInForm } from "./hooks/useSignInForm";
+import { useAppOverlayStore } from "../../../../common/components/AppOverlay/hooks/useAppOverlayStore";
 import { translate } from "../../../../common/i18n/i18n";
 import { Routes } from "../../../router/Routes";
 
 export const SignInPage = () => {
     const { form } = useSignInForm();
+    const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
 
-    const onSubmit = useCallback(() => {
+    const onSubmit = useCallback(async () => {
         if (form.validate()) {
-            console.log("sign in");
+            setIsLoading(true);
+            await new Promise((resolve) => setTimeout(resolve, 1500));
+            setIsLoading(false);
         }
-    }, [form]);
+    }, [form, setIsLoading]);
 
     return (
         <Stack mih="60vh" justify="center" maw="600px" m="0 auto">
@@ -23,25 +27,25 @@ export const SignInPage = () => {
                 </Text>{" "}
                 {translate("pages.signIn.header.postEmphasis")}
             </Title>
-            <Paper radius="md" withBorder p="xl" shadow="xl">
-                <Stack m="md">
-                    <TextInput
-                        size="md"
-                        required
-                        label={translate("pages.signIn.field.login.label")}
-                        placeholder={translate("pages.signIn.field.login.placeholder")}
-                        {...form.getInputProps("login")}
-                    />
-                    <PasswordInput
-                        size="md"
-                        mt="md"
-                        required
-                        label={translate("pages.signIn.field.password.label")}
-                        placeholder={translate("pages.signIn.field.password.placeholder")}
-                        {...form.getInputProps("password")}
-                    />
-                </Stack>
+
+            <Paper radius="md" withBorder p="xl" shadow="xl" component={Stack}>
+                <TextInput
+                    size="md"
+                    required
+                    label={translate("pages.signIn.field.login.label")}
+                    placeholder={translate("pages.signIn.field.login.placeholder")}
+                    {...form.getInputProps("login")}
+                />
+                <PasswordInput
+                    size="md"
+                    mt="md"
+                    required
+                    label={translate("pages.signIn.field.password.label")}
+                    placeholder={translate("pages.signIn.field.password.placeholder")}
+                    {...form.getInputProps("password")}
+                />
             </Paper>
+
             <Stack mt="sm" maw="400px" miw="50%" m="0 auto">
                 <Button
                     size="md"

@@ -2,9 +2,9 @@ import { Anchor, Button, Group, Stack } from "@mantine/core";
 
 import { translate } from "../../../../../../common/i18n/i18n";
 import { Routes } from "../../../../../router/Routes";
-import { RegistrationFormProps } from "../../Registration.types";
+import { RegistrationFormWrapperProps } from "../FormWrapper/RegistrationFormWrapper";
 
-type StepperButtonsProps = Pick<RegistrationFormProps, "onPreviousStep" | "onNextStep"> & {
+type StepperButtonsProps = Pick<RegistrationFormWrapperProps, "onPreviousStep" | "onNextStep"> & {
     nextLabel?: string;
     previousLabel?: string;
 };

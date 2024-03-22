@@ -1,8 +1,6 @@
 import { UseRegistrationForm } from "./hooks/useRegistrationForm";
 
 export type RegistrationFormProps = {
-    onNextStep?: () => unknown;
-    onPreviousStep?: () => unknown;
     form: UseRegistrationForm["form"];
     rules: UseRegistrationForm["validatedRules"];
 };
