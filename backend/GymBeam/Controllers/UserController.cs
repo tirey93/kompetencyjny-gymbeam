@@ -43,13 +43,6 @@ namespace GymBeam.Controllers
             };
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody] UserRequest dto)
-        {
-
-            return NoContent();
-        }
-
         [HttpPut("{id:int}")]
         public IActionResult Put(int id, UserRequest dto)
         {
@@ -62,29 +55,5 @@ namespace GymBeam.Controllers
         {
             return NoContent();
         }
-
-        [HttpGet]
-        [Route("{id:int}/Login")]
-        public ActionResult<UserResponse> Login(int id)
-        {
-            return new UserResponse
-            {
-                Id = id,
-                Login = "testlogin",
-                DisplayName = "testDisplayName",
-                Role = "User"
-            };
-        }
-
-        [HttpPost]
-        [Route("{id:int}/Logout")]
-        public IActionResult Logout(int id)
-        {
-            return NoContent();
-        }
-
-        
-
     }
-
 }
