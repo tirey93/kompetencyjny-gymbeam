@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Container } from "@mantine/core";
 
+import { AppOverlay } from "./common/components/AppOverlay/AppOverlay";
 import { ThemeProvider } from "./common/theme/ThemeProvider";
 import { NavigationShell } from "./features/navigation/Shell/Shell";
 import { useRedirect } from "./features/router/hooks/useRedirect";
@@ -13,6 +14,7 @@ export const Root = () => {
         <ThemeProvider>
             <NavigationShell>
                 <Container>
+                    <AppOverlay />
                     <Outlet />
                 </Container>
             </NavigationShell>

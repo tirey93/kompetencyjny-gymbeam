@@ -2,17 +2,21 @@ import { useCallback } from "react";
 import { Anchor, Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 
 import { useSignInForm } from "./hooks/useSignInForm";
+import { useAppOverlayStore } from "../../../../common/components/AppOverlay/hooks/useAppOverlayStore";
 import { translate } from "../../../../common/i18n/i18n";
 import { Routes } from "../../../router/Routes";
 
 export const SignInPage = () => {
     const { form } = useSignInForm();
+    const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
 
-    const onSubmit = useCallback(() => {
+    const onSubmit = useCallback(async () => {
         if (form.validate()) {
-            console.log("sign in");
+            setIsLoading(true);
+            await new Promise((resolve) => setTimeout(resolve, 1500));
+            setIsLoading(false);
         }
-    }, [form]);
+    }, [form, setIsLoading]);
 
     return (
         <Stack mih="60vh" justify="center" maw="600px" m="0 auto">
