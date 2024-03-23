@@ -10,7 +10,7 @@ type RequirementItemProps = {
 export const RequirementItem = ({ rule }: RequirementItemProps) => {
     return (
         <List.Item icon={<RuleValidityIndicator state={rule.state} />}>
-            <Text fw={600} span size="sm">
+            <Text fw={500} span size="sm">
                 {rule.rule}
             </Text>
         </List.Item>

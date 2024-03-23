@@ -1,15 +1,19 @@
 import { useCallback, useState } from "react";
-import { Container, Stepper } from "@mantine/core";
+import { Stack, Stepper } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 
 import { RegistrationFormWrapper } from "./components/FormWrapper/RegistrationFormWrapper";
 import { NameForm } from "./components/NameForm/NameForm";
 import { PasswordForm } from "./components/PasswordForm/PasswordForm";
 import { SubmitForm } from "./components/SubmitForm/SubmitForm";
 import { useRegistrationForm } from "./hooks/useRegistrationForm";
+import { useAuthentication } from "../../../../common/auth/hooks/useAuthentication";
 import { translate } from "../../../../common/i18n/i18n";
 
 export const RegistrationPage = () => {
     const { form, validatedRules } = useRegistrationForm();
+    const verboseSteps = useMediaQuery("(min-width: 60em)");
+    const { signUp } = useAuthentication();
     const [step, setStep] = useState(0);
 
     const goToNextStep = useCallback(() => {
@@ -40,24 +44,26 @@ export const RegistrationPage = () => {
     }, [form, goToNextStep]);
 
     const submitRegistrationForm = () => {
-        console.log("registration form submitted");
+        const { login, password, name } = form.values;
+        void signUp({ login, password, name });
     };
 
     return (
-        <Container maw="800px">
+        <Stack maw="800px" mih="800px" m="auto" justify="center">
             <Stepper active={step} onStepClick={setStep} radius="xs" color="success">
                 <Stepper.Step
-                    label={translate("pages.registration.steps.personalDetails.label")}
-                    description={translate("pages.registration.steps.personalDetails.description")}
+                    label={verboseSteps ? translate("pages.registration.steps.personalDetails.label") : ""}
+                    description={verboseSteps ? translate("pages.registration.steps.personalDetails.description") : ""}
                     allowStepSelect={canSelectStep(0)}
                 >
                     <RegistrationFormWrapper userName={form.values.name} onNextStep={onNextStepNameForm}>
                         <NameForm form={form} rules={validatedRules} />
                     </RegistrationFormWrapper>
                 </Stepper.Step>
+
                 <Stepper.Step
-                    label={translate("pages.registration.steps.passwords.label")}
-                    description={translate("pages.registration.steps.passwords.description")}
+                    label={verboseSteps ? translate("pages.registration.steps.passwords.label") : ""}
+                    description={verboseSteps ? translate("pages.registration.steps.passwords.description") : ""}
                     allowStepSelect={canSelectStep(1)}
                 >
                     <RegistrationFormWrapper
@@ -68,9 +74,10 @@ export const RegistrationPage = () => {
                         <PasswordForm form={form} rules={validatedRules} />
                     </RegistrationFormWrapper>
                 </Stepper.Step>
+
                 <Stepper.Step
-                    label={translate("pages.registration.steps.summary.label")}
-                    description={translate("pages.registration.steps.summary.description")}
+                    label={verboseSteps ? translate("pages.registration.steps.summary.label") : ""}
+                    description={verboseSteps ? translate("pages.registration.steps.summary.description") : ""}
                     allowStepSelect={canSelectStep(2)}
                 >
                     <RegistrationFormWrapper
@@ -82,6 +89,6 @@ export const RegistrationPage = () => {
                     </RegistrationFormWrapper>
                 </Stepper.Step>
             </Stepper>
-        </Container>
+        </Stack>
     );
 };

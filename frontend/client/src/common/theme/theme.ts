@@ -78,8 +78,8 @@ export const theme = createTheme({
         ],
     },
     defaultGradient: {
-        from: "orange",
-        to: "red",
+        from: "primary",
+        to: "secondary",
         deg: 45,
     },
     defaultRadius: "md",
