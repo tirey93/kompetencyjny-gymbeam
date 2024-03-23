@@ -44,7 +44,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet("CheckAvailability/ByName/{username}")]
-        public IActionResult CheckUsernameAvailability(string username)
+        public ActionResult<bool> CheckUsernameAvailability(string username)
         {
             bool isUsernameAvailable;
 
@@ -56,7 +56,7 @@ namespace GymBeam.Controllers
             {
                 isUsernameAvailable = false;
             }
-            return Ok(isUsernameAvailable);
+            return isUsernameAvailable;
         }
 
         [HttpPut("{id:int}")]
