@@ -17,14 +17,14 @@ namespace GymBeam.Controllers
                 new UserResponse
                 {
                     Id = 42,
-                    Login = "testlogin",
+                    Username = "testUsername",
                     DisplayName = "testDisplayName",
                     Role = "User"
                 },
                 new UserResponse
                 {
                     Id = 57,
-                    Login = "testlogin2",
+                    Username = "testUsername2",
                     DisplayName = "testDisplayName2",
                     Role = "Admin"
                 }
@@ -37,7 +37,7 @@ namespace GymBeam.Controllers
             return new UserResponse
             {
                 Id = id,
-                Login = "testlogin",
+                Username = "testUsername",
                 DisplayName = "testDisplayName",
                 Role = "User"
             };
