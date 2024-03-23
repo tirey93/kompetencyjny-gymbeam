@@ -21,7 +21,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost("Login")]
-        public ActionResult<UserResponse> Login([FromBody] UserLoginRequest dto)
+        public ActionResult<UserResponse> Login([FromBody] LoginRequest dto)
         {
             return new UserResponse
             {
@@ -32,7 +32,7 @@ namespace GymBeam.Controllers
             };
         }
 
-        [HttpPost("{user_id:int}/Logout")]
+        [HttpPost("Logout")]
         public IActionResult Logout(int user_id)
         {
             return NoContent();
