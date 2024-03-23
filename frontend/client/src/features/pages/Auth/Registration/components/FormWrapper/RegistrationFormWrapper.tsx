@@ -1,7 +1,7 @@
 import { PropsWithChildren, useMemo } from "react";
 import { Paper, Stack, Text, Title } from "@mantine/core";
 
-import { translate } from "../../../../../../common/i18n/i18n";
+import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
 import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
 
 const MAX_DISPLAYABLE_USER_NAME_LENGTH = 10;
@@ -18,6 +18,8 @@ export const RegistrationFormWrapper = ({
     onPreviousStep,
     onNextStep,
 }: RegistrationFormWrapperProps) => {
+    const translate = useTranslate();
+
     const parsedUserName = useMemo(() => {
         if (!userName) {
             return;

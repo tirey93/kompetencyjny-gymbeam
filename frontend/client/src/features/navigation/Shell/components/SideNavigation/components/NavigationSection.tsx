@@ -10,7 +10,7 @@ export const NavigationSection = ({ tiles }: NavigationSectionProps) => {
     return (
         <Stack justify="center" gap="sm" mt="xl">
             {tiles.map((tile) => (
-                <NavigationTile {...tile} key={tile.label} />
+                <NavigationTile {...tile} key={tile.labelTranslationKey} />
             ))}
         </Stack>
     );

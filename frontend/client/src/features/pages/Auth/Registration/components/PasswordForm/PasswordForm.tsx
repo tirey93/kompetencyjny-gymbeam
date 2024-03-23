@@ -1,11 +1,13 @@
 import { PasswordInput } from "@mantine/core";
 
-import { translate } from "../../../../../../common/i18n/i18n";
+import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
 import { INPUT_LABEL_PROPS } from "../../../Auth.shared";
 import { RegistrationFormProps } from "../../Registration.types";
 import { RequirementsList } from "../RequirementsList/RequirementsList";
 
 export const PasswordForm = ({ form, rules }: RegistrationFormProps) => {
+    const translate = useTranslate();
+
     return (
         <>
             <PasswordInput

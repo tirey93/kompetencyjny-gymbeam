@@ -2,6 +2,18 @@
 import { TranslationSource } from "./i18n";
 
 export const pl: TranslationSource = {
+    navigation: {
+        labels: {
+            home: "Strona główna",
+            signIn: "Logowanie",
+            signOut: "Wyloguj",
+            signUp: "Rejestracja",
+            qr: "Karnet",
+            account: "Konto",
+            activities: "Zajęcia",
+            adminDashboard: "Panel admina",
+        },
+    },
     pages: {
         "404": {
             title: "Nic tu nie ma",

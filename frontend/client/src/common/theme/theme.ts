@@ -90,4 +90,6 @@ export const theme = createTheme({
         lg: "1rem",
         xl: "2rem",
     },
+    fontFamily: "Montserrat, sans-serif",
+    fontFamilyMonospace: "Monaco, Courier, monospace",
 });

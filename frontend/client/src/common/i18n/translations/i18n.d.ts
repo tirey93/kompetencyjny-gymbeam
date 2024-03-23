@@ -1,4 +1,17 @@
 export type TranslationSource = {
+    navigation: {
+        labels: {
+            home: string;
+            signIn: string;
+            signOut: string;
+            signUp: string;
+            qr: string;
+            account: string;
+            activities: string;
+            adminDashboard: string;
+        };
+    };
+
     pages: {
         "404": {
             title: string;

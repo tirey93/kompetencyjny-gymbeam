@@ -3,18 +3,27 @@ import { useNavigate } from "react-router-dom";
 import { Button, Tooltip } from "@mantine/core";
 import { Icon, IconProps } from "@tabler/icons-react";
 
+import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
+import { TranslationKey } from "../../../../../../common/i18n/translations/i18n";
 import { Routes } from "../../../../../router/Routes";
 
 export type NavigationTileProps = {
-    label: string;
     route: Routes;
+    labelTranslationKey: TranslationKey;
     Icon: ForwardRefExoticComponent<Omit<IconProps, "ref"> & RefAttributes<Icon>>;
     asyncBeforeRedirect?: () => Promise<unknown>;
     isActive?: boolean;
 };
 
-export const NavigationTile = ({ label, Icon, isActive, route, asyncBeforeRedirect }: NavigationTileProps) => {
+export const NavigationTile = ({
+    labelTranslationKey,
+    Icon,
+    isActive,
+    route,
+    asyncBeforeRedirect,
+}: NavigationTileProps) => {
     const navigate = useNavigate();
+    const translate = useTranslate();
 
     const handleNavigation = useCallback(async () => {
         await asyncBeforeRedirect?.();
@@ -23,7 +32,7 @@ export const NavigationTile = ({ label, Icon, isActive, route, asyncBeforeRedire
 
     return (
         <Tooltip
-            label={label}
+            label={translate(labelTranslationKey)}
             color="primary"
             position="right"
             p="md"

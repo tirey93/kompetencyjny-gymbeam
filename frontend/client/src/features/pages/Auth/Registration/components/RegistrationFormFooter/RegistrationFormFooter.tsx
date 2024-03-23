@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Anchor, Button, Group, Stack } from "@mantine/core";
 
-import { translate } from "../../../../../../common/i18n/i18n";
+import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
 import { Routes } from "../../../../../router/Routes";
 import { RegistrationFormWrapperProps } from "../FormWrapper/RegistrationFormWrapper";
 
@@ -16,6 +16,7 @@ export const RegistrationFormFooter = ({
     nextLabel,
     previousLabel,
 }: StepperButtonsProps) => {
+    const translate = useTranslate();
     const navigate = useNavigate();
 
     return (

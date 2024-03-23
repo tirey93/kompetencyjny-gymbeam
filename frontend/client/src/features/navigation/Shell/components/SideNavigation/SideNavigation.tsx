@@ -14,21 +14,32 @@ import { NavigationSection } from "./components/NavigationSection";
 import { NavigationTile } from "./components/NavigationTile";
 import { UserRoleGuard } from "../../../../../common/auth/components/UserRoleGuard";
 import { useAuthentication } from "../../../../../common/auth/hooks/useAuthentication";
+import { TranslationKey } from "../../../../../common/i18n/translations/i18n";
 import { Routes } from "../../../../router/Routes";
 
-const COMMON_NAVIGATION_ITEMS = [{ Icon: IconHome2, label: "Home", route: Routes.ROOT }];
+type NavigationItem = {
+    Icon: typeof IconDashboard;
+    labelTranslationKey: TranslationKey;
+    route: Routes;
+};
 
-const ADMIN_NAVIGATION_ITEMS = [{ Icon: IconDashboard, label: "Admin Dashboard", route: Routes.ROOT }];
-
-const USER__NAVIGATION_ITEMS = [
-    { Icon: IconUser, label: "Account", route: Routes.ROOT },
-    { Icon: IconBarbell, label: "Gym Activities", route: Routes.ROOT },
-    { Icon: IconQrcode, label: "Gym Pass", route: Routes.ROOT },
+const COMMON_NAVIGATION_ITEMS: NavigationItem[] = [
+    { Icon: IconHome2, labelTranslationKey: "navigation.labels.home", route: Routes.ROOT },
 ];
 
-const GUEST_NAVIGATION_ITEMS = [
-    { Icon: IconLogin, label: "Sign in", route: Routes.LOGIN },
-    { Icon: IconUserPlus, label: "Sign up", route: Routes.REGISTRATION },
+const ADMIN_NAVIGATION_ITEMS: NavigationItem[] = [
+    { Icon: IconDashboard, labelTranslationKey: "navigation.labels.adminDashboard", route: Routes.ROOT },
+];
+
+const USER__NAVIGATION_ITEMS: NavigationItem[] = [
+    { Icon: IconUser, labelTranslationKey: "navigation.labels.account", route: Routes.ROOT },
+    { Icon: IconBarbell, labelTranslationKey: "navigation.labels.activities", route: Routes.ROOT },
+    { Icon: IconQrcode, labelTranslationKey: "navigation.labels.qr", route: Routes.ROOT },
+];
+
+const GUEST_NAVIGATION_ITEMS: NavigationItem[] = [
+    { Icon: IconLogin, labelTranslationKey: "navigation.labels.signIn", route: Routes.LOGIN },
+    { Icon: IconUserPlus, labelTranslationKey: "navigation.labels.signUp", route: Routes.REGISTRATION },
 ];
 
 export const SideNavigation = () => {
@@ -56,7 +67,7 @@ export const SideNavigation = () => {
                 <Stack justify="center" gap={0} mt="auto">
                     <NavigationTile
                         Icon={IconLogout}
-                        label="Logout"
+                        labelTranslationKey="navigation.labels.signOut"
                         asyncBeforeRedirect={signOut}
                         route={Routes.LOGIN}
                     />
