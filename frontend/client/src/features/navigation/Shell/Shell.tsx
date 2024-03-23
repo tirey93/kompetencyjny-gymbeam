@@ -1,7 +1,8 @@
 import { PropsWithChildren } from "react";
-import { AppShell, Burger } from "@mantine/core";
+import { AppShell, Burger, Group } from "@mantine/core";
 import { useDisclosure, useHeadroom } from "@mantine/hooks";
 
+import { LanguageSelect } from "./components/LanguageToggle/LanguageSelect";
 import { SideNavigation } from "./components/SideNavigation/SideNavigation";
 
 export const NavigationShell = ({ children }: PropsWithChildren) => {
@@ -16,6 +17,9 @@ export const NavigationShell = ({ children }: PropsWithChildren) => {
         >
             <AppShell.Header p="md">
                 <Burger opened={isNavbarVisible} hiddenFrom="sm" onClick={toggleNavbar} size="sm" />
+                <Group ml="auto" w="fit-content">
+                    <LanguageSelect />
+                </Group>
             </AppShell.Header>
 
             <AppShell.Navbar p="md">

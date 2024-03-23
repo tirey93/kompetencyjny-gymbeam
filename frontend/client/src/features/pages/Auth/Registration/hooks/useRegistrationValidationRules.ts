@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 
-import { translate } from "../../../../../common/i18n/i18n";
+import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
 import { ValidationRule } from "../Registration.types";
 
 const MIN_LOGIN_LENGTH = 4;
@@ -13,6 +13,8 @@ const MIN_PASSWORD_LENGTH = 8;
 const MAX_PASSWORD_LENGTH = 64;
 
 export const useRegistrationValidationRules = () => {
+    const translate = useTranslate();
+
     const validatePasswordMinimumLength = useCallback((password: string) => {
         return password.length >= MIN_PASSWORD_LENGTH;
     }, []);

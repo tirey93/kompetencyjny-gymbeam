@@ -4,11 +4,12 @@ import { Anchor, Button, Paper, PasswordInput, Stack, Text, TextInput, Title } f
 
 import { useSignInForm } from "./hooks/useSignInForm";
 import { useAuthentication } from "../../../../common/auth/hooks/useAuthentication";
-import { translate } from "../../../../common/i18n/i18n";
+import { useTranslate } from "../../../../common/i18n/hooks/useTranslate";
 import { Routes } from "../../../router/Routes";
 import { INPUT_LABEL_PROPS } from "../Auth.shared";
 
 export const SignInPage = () => {
+    const translate = useTranslate();
     const { form } = useSignInForm();
     const { signIn } = useAuthentication();
     const navigate = useNavigate();

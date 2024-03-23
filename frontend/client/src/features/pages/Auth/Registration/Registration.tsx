@@ -8,10 +8,11 @@ import { PasswordForm } from "./components/PasswordForm/PasswordForm";
 import { SubmitForm } from "./components/SubmitForm/SubmitForm";
 import { useRegistrationForm } from "./hooks/useRegistrationForm";
 import { useAuthentication } from "../../../../common/auth/hooks/useAuthentication";
-import { translate } from "../../../../common/i18n/i18n";
+import { useTranslate } from "../../../../common/i18n/hooks/useTranslate";
 
 export const RegistrationPage = () => {
     const { form, validatedRules } = useRegistrationForm();
+    const translate = useTranslate();
     const verboseSteps = useMediaQuery("(min-width: 60em)");
     const { signUp } = useAuthentication();
     const [step, setStep] = useState(0);

@@ -2,11 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { Button, Group, Stack, Text, Title } from "@mantine/core";
 
 import { Illustration404 } from "./assets/Illustration404";
-import { translate } from "../../../common/i18n/i18n";
+import { useTranslate } from "../../../common/i18n/hooks/useTranslate";
 import { Routes } from "../../router/Routes";
 
 export const NotFoundPage = () => {
     const navigate = useNavigate();
+    const translate = useTranslate();
 
     return (
         <Stack justify="center" align="center" mih="100dvh" w="100dvw">
