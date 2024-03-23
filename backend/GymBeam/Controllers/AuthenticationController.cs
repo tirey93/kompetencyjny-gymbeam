@@ -32,8 +32,8 @@ namespace GymBeam.Controllers
             };
         }
 
-        [HttpPost("Logout")]
-        public IActionResult Logout(int user_id)
+        [HttpPost("Logout/User/{id:int}")]
+        public IActionResult Logout(int id)
         {
             return NoContent();
         }
