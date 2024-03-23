@@ -17,14 +17,14 @@ namespace GymBeam.Controllers
                 new UserResponse
                 {
                     Id = 42,
-                    Username = "testUsername",
+                    Name = "testUsername",
                     DisplayName = "testDisplayName",
                     Role = "User"
                 },
                 new UserResponse
                 {
                     Id = 57,
-                    Username = "testUsername2",
+                    Name = "testUsername2",
                     DisplayName = "testDisplayName2",
                     Role = "Admin"
                 }
@@ -37,10 +37,26 @@ namespace GymBeam.Controllers
             return new UserResponse
             {
                 Id = id,
-                Username = "testUsername",
+                Name = "testUsername",
                 DisplayName = "testDisplayName",
                 Role = "User"
             };
+        }
+
+        [HttpGet("CheckAvailability/ByName/{username}")]
+        public IActionResult CheckUsernameAvailability(string username)
+        {
+            bool isUsernameAvailable;
+
+            if (username.ToLower() == "test1" || (username.ToLower() == "test2"))
+            {
+                isUsernameAvailable = true;
+            }
+            else
+            {
+                isUsernameAvailable = false;
+            }
+            return Ok(isUsernameAvailable);
         }
 
         [HttpPut("{id:int}")]

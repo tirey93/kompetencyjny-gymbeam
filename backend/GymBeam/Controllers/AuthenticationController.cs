@@ -14,7 +14,7 @@ namespace GymBeam.Controllers
             return new UserResponse
             {
                 Id = 34,
-                Username = dto.Username,
+                Name = dto.Name,
                 DisplayName = dto.DisplayName,
                 Role = dto.Role
             };
@@ -26,7 +26,7 @@ namespace GymBeam.Controllers
             return new UserResponse
             {
                 Id = 25,
-                Username = dto.Username,
+                Name = dto.Username,
                 DisplayName = "testDisplayName",
                 Role = "User"
             };
