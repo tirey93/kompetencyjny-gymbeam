@@ -1,5 +1,12 @@
 export type TranslationSource = {
     pages: {
+        "404": {
+            title: string;
+            description: string;
+            goToHome: string;
+            goBack: string;
+        };
+
         signIn: {
             field: {
                 login: {
