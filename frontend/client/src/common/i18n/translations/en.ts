@@ -3,6 +3,13 @@ import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
     pages: {
+        "404": {
+            title: "Nothing to see here",
+            description:
+                "Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL.",
+            goToHome: "Take me back to home page",
+            goBack: "Go back",
+        },
         signIn: {
             field: {
                 password: {
