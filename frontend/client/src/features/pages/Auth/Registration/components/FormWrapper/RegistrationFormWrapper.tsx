@@ -34,7 +34,7 @@ export const RegistrationFormWrapper = ({
     };
 
     return (
-        <Stack mih="60vh" justify="center" mt="xl">
+        <Stack justify="center" mt="xl">
             <Title ta="center" mb="xl" textWrap="wrap">
                 {translate("pages.registration.header.preEmphasis")}{" "}
                 <Text span c="success" inherit>

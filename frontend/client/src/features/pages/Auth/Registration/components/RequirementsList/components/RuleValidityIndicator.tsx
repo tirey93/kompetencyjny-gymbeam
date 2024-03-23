@@ -13,9 +13,9 @@ export const RuleValidityIndicator = ({ state }: RuleValidityIndicatorProps) => 
             case true:
                 return "success";
             default:
-                return "primary";
+                return "info";
         }
     }, [state]);
 
-    return <ThemeIcon size={10} color={color} radius={0} />;
+    return <ThemeIcon size={10} color={color} radius="xl" />;
 };
