@@ -33,7 +33,6 @@ export const NavigationTile = ({
     return (
         <Tooltip
             label={translate(labelTranslationKey)}
-            color="primary"
             position="right"
             p="md"
             fw={600}
@@ -45,7 +44,6 @@ export const NavigationTile = ({
                 variant={isActive ? "gradient" : "subtle"}
                 onClick={handleNavigation}
                 data-active={isActive}
-                color="primary"
                 h="50px"
                 w="50px"
                 p={0}

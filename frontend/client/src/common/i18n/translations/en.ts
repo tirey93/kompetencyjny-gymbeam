@@ -15,6 +15,63 @@ export const en: TranslationSource = {
         },
     },
     pages: {
+        home: {
+            whyUs: {
+                title: "Why you should start your journey with us?",
+                description:
+                    "We have like a thousand good reasons, but it would be hard to scroll while reading all of them, so we have picked some most important ones:",
+                awards: {
+                    sport2022: "Sport.com - best gym of 2022",
+                    sport2023: "Sport.com - best gym of 2023",
+                    startups2023: "startupz.com - promising start-ups of 2023",
+                },
+                cards: {
+                    efficiency: {
+                        description: "Our reservation system is blazing fast, enroll for an activity just under 60s!",
+                        label: "Highly efficient",
+                    },
+                    customers: {
+                        description: "Over 28.000+ people have trusted us already, 98% of them is still with us!",
+                        label: "Happy customers",
+                    },
+                    privacy: {
+                        description: "We won't share your data with any third party. We value your trust.",
+                        label: "No third parties",
+                    },
+                },
+            },
+            heroBanner: {
+                title: {
+                    firstLine: "Modern approach",
+                    secondLine: "to",
+                    highlighted: "sport activities",
+                },
+                description:
+                    "Keeping a healthy lifestyle is simpler than ever; choose from 60+ sport activities in our gym, become an even better version of yourself (although you already are great!).",
+                bulletPoints: {
+                    variety: {
+                        label: "For everyone",
+                        description:
+                            "choose from variety of available activities, for beginners and battle-tested professionals.",
+                    },
+                    simplicity: {
+                        label: "Simple to use",
+                        description:
+                            "create an account, enroll for an activity, go to the gym and show your QR code at the gate.",
+                    },
+                    costs: {
+                        label: "No hidden costs",
+                        description:
+                            "we are 100% transparent with our pricing policy and value customers more than money.",
+                    },
+                },
+                buttons: {
+                    learnMore: "Learn more",
+                    getStarted: "Get started",
+                },
+            },
+        },
+
         "404": {
             title: "Nothing to see here",
             description:

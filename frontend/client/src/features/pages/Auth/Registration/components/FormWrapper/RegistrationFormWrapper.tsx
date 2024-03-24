@@ -39,7 +39,7 @@ export const RegistrationFormWrapper = ({
         <Stack justify="center" mt="xl">
             <Title ta="center" mb="xl" textWrap="wrap">
                 {translate("pages.registration.header.preEmphasis")}{" "}
-                <Text span c="success" inherit>
+                <Text span c="primary" inherit>
                     {translate("pages.registration.header.emphasised")}
                 </Text>
                 {padWithSpaceIfNotEmpty(translate("pages.registration.header.postEmphasis"))}

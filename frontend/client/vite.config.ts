@@ -19,4 +19,11 @@ export default defineConfig({
             port: VITE_PORT,
         },
     },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: '@import "./src/_mantine";',
+            },
+        },
+    },
 });

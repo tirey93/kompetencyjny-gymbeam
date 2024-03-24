@@ -17,7 +17,7 @@ export const SignInPage = () => {
     const onSubmit = useCallback(async () => {
         if (!form.validate().hasErrors) {
             const { login, password } = form.values;
-            void signIn({ login, password });
+            await signIn({ login, password });
         }
     }, [form, signIn]);
 
@@ -25,7 +25,7 @@ export const SignInPage = () => {
         <Stack maw="600px" mih="800px" m="auto" justify="center">
             <Title ta="center" mb="xl">
                 {translate("pages.signIn.header.preEmphasis")}{" "}
-                <Text span c="warning" inherit>
+                <Text span c="accent" inherit>
                     {translate("pages.signIn.header.emphasised")}
                 </Text>{" "}
                 {translate("pages.signIn.header.postEmphasis")}

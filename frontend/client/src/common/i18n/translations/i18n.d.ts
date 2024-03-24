@@ -13,6 +13,58 @@ export type TranslationSource = {
     };
 
     pages: {
+        home: {
+            whyUs: {
+                title: string;
+                description: string;
+                awards: {
+                    sport2022: string;
+                    sport2023: string;
+                    startups2023: string;
+                };
+                cards: {
+                    efficiency: {
+                        label: string;
+                        description: string;
+                    };
+                    customers: {
+                        label: string;
+                        description: string;
+                    };
+                    privacy: {
+                        label: string;
+                        description: string;
+                    };
+                };
+            };
+            heroBanner: {
+                title: {
+                    firstLine: string;
+                    secondLine: string;
+                    highlighted: string;
+                };
+                description: string;
+                bulletPoints: {
+                    variety: {
+                        label: string;
+                        description: string;
+                    };
+                    simplicity: {
+                        label: string;
+                        description: string;
+                    };
+                    costs: {
+                        label: string;
+                        description: string;
+                    };
+                };
+                buttons: {
+                    learnMore: string;
+                    getStarted: string;
+                };
+            };
+        };
+
         "404": {
             title: string;
             description: string;

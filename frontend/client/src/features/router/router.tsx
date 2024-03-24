@@ -5,9 +5,14 @@ import { Root } from "../../Root";
 import { NotFoundPage } from "../pages/404/404";
 import { RegistrationPage } from "../pages/Auth/Registration/Registration";
 import { SignInPage } from "../pages/Auth/SignIn/SignIn";
+import { HomePage } from "../pages/Home/Home";
 import { Routes } from "./Routes";
 
 const APP_PAGES = [
+    {
+        path: Routes.ROOT,
+        element: <HomePage />,
+    },
     {
         path: Routes.REGISTRATION,
         element: <RegistrationPage />,
