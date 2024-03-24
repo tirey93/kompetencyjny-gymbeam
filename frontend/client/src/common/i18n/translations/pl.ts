@@ -16,6 +16,20 @@ export const pl: TranslationSource = {
     },
     pages: {
         home: {
+            FAQ: {
+                header: "Często Zadawane Pytania",
+                items: {
+                    abandoning: {
+                        question: "Czy mogę zrezygnować z zajęć?",
+                        answer: "Tak, ale z pewnymi ograniczeniami. Możesz zrezygnować najpóźniej do 2h przed rozpoczęciem zajęć. Jednak jeśli nie zdążysz, to nic złego się nie stanie - jesteśmy wyrozumiali, takie rzeczy się zdarzają, a Tobie mogą zdarzyć się do 3 razy w miesiącu. Jeśli przekroczysz ten limit, zablokujemy ci możliwość zapisów na zajęcia, ale tylko do końca miesiąca kalendarzowego.",
+                    },
+                    newActivities: {
+                        question: "Czy planowane są inne zajęcia?",
+                        answer: "Oczywiście! Stale staramy się poszerzać naszą ofertę. Jeśli masz na myśli coś konkretnego, to po prostu napisz do nas, a my odpowiemy najszybciej jak to tylko możliwe. Niestety nie dajemy gwarancji, że ta propozycja zostanie rozpatrzona pozytywnie, ale kto wie, może jednak stanie się następnym wielkim hitem!",
+                    },
+                },
+            },
+
             whyUs: {
                 title: "Dlaczego powinniśmy zacząć wspólną przygodę?",
                 description:

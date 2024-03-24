@@ -16,6 +16,19 @@ export const en: TranslationSource = {
     },
     pages: {
         home: {
+            FAQ: {
+                header: "Frequently Asked Questions",
+                items: {
+                    abandoning: {
+                        question: "Can I resign from activities?",
+                        answer: "Yes, but, to some extent. You can resign no later than 2 hours before given activity. Don't worry though, if you miss this deadline, nothing too bad happens. We are understanding and things like that happen, so you can do it 3 times a month. If you break this limit, we will prevent you from enrolling on another activities.",
+                    },
+                    newActivities: {
+                        question: "Do you plan to add new activities?",
+                        answer: "Certainly! We are constantly expanding our offer. If you have something specific in mind, just write to us with your suggestion and we will respond as fast as possible. Unfortunately, not every kind of activity is suitable for our gym, but who knows, maybe your suggestion will be a next big hit!",
+                    },
+                },
+            },
             whyUs: {
                 title: "Why you should start your journey with us?",
                 description:

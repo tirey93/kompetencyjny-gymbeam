@@ -1,7 +1,8 @@
 import { Container, Space } from "@mantine/core";
 
-import { WhyUsSection } from "./components/FeatureCards/WhyUsSection";
+import { FAQSection } from "./components/FAQSection/FAQSection";
 import { HeroBanner } from "./components/HeroBanner/HeroBanner";
+import { WhyUsSection } from "./components/WhyUsSection/WhyUsSection";
 
 export const HomePage = () => {
     return (
@@ -9,6 +10,8 @@ export const HomePage = () => {
             <HeroBanner />
             <Space h="xl" />
             <WhyUsSection />
+            <Space h="xl" />
+            <FAQSection />
         </Container>
     );
 };

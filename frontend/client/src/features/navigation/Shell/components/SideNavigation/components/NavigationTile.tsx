@@ -40,7 +40,7 @@ export const NavigationTile = ({ label, Icon, isActive, route, asyncBeforeRedire
                 miw="50px"
                 h="50px"
             >
-                <Icon width={20} height={20} />
+                <Icon width={25} height={25} />
                 <Text ml="sm" hiddenFrom="md" size="lg" fw={700}>
                     {label}
                 </Text>

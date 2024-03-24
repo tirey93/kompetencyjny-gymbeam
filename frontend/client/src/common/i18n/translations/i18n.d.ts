@@ -14,6 +14,20 @@ export type TranslationSource = {
 
     pages: {
         home: {
+            FAQ: {
+                header: string;
+                items: {
+                    abandoning: {
+                        question: string;
+                        answer: string;
+                    };
+                    newActivities: {
+                        question: string;
+                        answer: string;
+                    };
+                };
+            };
+
             whyUs: {
                 title: string;
                 description: string;
