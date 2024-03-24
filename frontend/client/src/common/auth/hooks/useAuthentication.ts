@@ -1,5 +1,7 @@
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { Routes } from "../../../features/router/Routes";
 import { useAppOverlayStore } from "../../components/AppOverlay/hooks/useAppOverlayStore";
 import { useAuthState } from "./useAuthState";
 
@@ -16,6 +18,7 @@ export const useAuthentication = (): UseAuthentication => {
     const clearCurrentUserDetails = useAuthState((state) => state.clearCurrentUserDetails);
     const setCurrentUserDetails = useAuthState((state) => state.setCurrentUserDetails);
     const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
+    const navigate = useNavigate();
 
     const signOut = useCallback(async () => {
         setIsLoading(true);
@@ -31,9 +34,10 @@ export const useAuthentication = (): UseAuthentication => {
             await new Promise((resolve) => setTimeout(resolve, 1500));
             setCurrentUserDetails({ name: "Mock", login: "MockLogin", role: "Admin" });
             console.log("mock sign in", data);
+            navigate(Routes.ROOT);
             setIsLoading(false);
         },
-        [setCurrentUserDetails, setIsLoading]
+        [navigate, setCurrentUserDetails, setIsLoading]
     );
 
     const signUp = useCallback(
@@ -42,9 +46,10 @@ export const useAuthentication = (): UseAuthentication => {
             await new Promise((resolve) => setTimeout(resolve, 1500));
             setCurrentUserDetails({ name: "Mock", login: "MockLogin", role: "Admin" });
             console.log("mock sign up", data);
+            navigate(Routes.ROOT);
             setIsLoading(false);
         },
-        [setCurrentUserDetails, setIsLoading]
+        [navigate, setCurrentUserDetails, setIsLoading]
     );
 
     return { signOut, signIn, signUp };

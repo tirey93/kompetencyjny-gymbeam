@@ -7,17 +7,17 @@ import { SideNavigation } from "./components/SideNavigation/SideNavigation";
 
 export const NavigationShell = ({ children }: PropsWithChildren) => {
     const [isNavbarVisible, { toggle: toggleNavbar }] = useDisclosure(false);
-    const pinned = useHeadroom({ fixedAt: 150 });
+    const pinned = useHeadroom({ fixedAt: 100 });
 
     return (
         <AppShell
             header={{ height: 60, collapsed: !pinned }}
             navbar={{ width: 100, breakpoint: "sm", collapsed: { desktop: false, mobile: !isNavbarVisible } }}
-            padding="md"
         >
             <AppShell.Header p="md">
-                <Burger opened={isNavbarVisible} hiddenFrom="sm" onClick={toggleNavbar} size="sm" />
-                <Group ml="auto" w="fit-content">
+                <Group w="100%" justify="flex-end">
+                    <Burger opened={isNavbarVisible} mr="auto" hiddenFrom="sm" onClick={toggleNavbar} size="sm" />
+
                     <LanguageSelect />
                 </Group>
             </AppShell.Header>

@@ -16,7 +16,7 @@ export const SubmitForm = ({ form }: RegistrationFormProps) => {
             </Text>
 
             <Stack align="center" gap="xs">
-                <ThemeIcon radius="100%" size={100} color="primary">
+                <ThemeIcon radius="100%" size={100}>
                     <IconUser size={50} />
                 </ThemeIcon>
 
