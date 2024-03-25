@@ -28,18 +28,18 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
             signOut: {
                 Icon: IconUserPlus,
                 label: translate("navigation.labels.signOut"),
-                route: Routes.REGISTRATION,
+                route: Routes.NA,
                 asyncBeforeRedirect: signOutAsync,
             },
             home: { Icon: IconHome2, label: translate("navigation.labels.home"), route: Routes.ROOT },
             adminDashboard: {
                 Icon: IconDashboard,
                 label: translate("navigation.labels.adminDashboard"),
-                route: Routes.ROOT,
+                route: Routes.NA,
             },
-            activities: { Icon: IconBarbell, label: translate("navigation.labels.activities"), route: Routes.ROOT },
-            qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: Routes.ROOT },
+            activities: { Icon: IconBarbell, label: translate("navigation.labels.activities"), route: Routes.NA },
+            qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: Routes.NA },
         }),
-        [translate]
+        [signOutAsync, translate]
     );
 };

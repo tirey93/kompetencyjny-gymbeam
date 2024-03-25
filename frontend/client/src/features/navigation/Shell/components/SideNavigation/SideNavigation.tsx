@@ -12,7 +12,7 @@ export const SideNavigation = () => {
         <Stack component="nav" align="center" h="100%">
             <Stack gap={0}>
                 <Center pt="md">
-                    <Logo size="xl" />
+                    <Logo logoSize={65} />
                 </Center>
 
                 <NavigationSection tiles={[home]} />
