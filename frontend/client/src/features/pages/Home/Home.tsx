@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Container, SimpleGrid, Space } from "@mantine/core";
+import { useScrollIntoView } from "@mantine/hooks";
 import { IconAt, IconMapPin, IconPhone } from "@tabler/icons-react";
 
 import { FAQSection } from "./components/FAQSection/FAQSection";
@@ -10,6 +11,9 @@ import { useTranslate } from "../../../common/i18n/hooks/useTranslate";
 
 export const HomePage = () => {
     const translate = useTranslate();
+    const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({
+        cancelable: true,
+    });
 
     const contactInfo = useMemo(
         () => [
@@ -35,7 +39,7 @@ export const HomePage = () => {
 
     return (
         <Container fluid p={0}>
-            <HeroBanner />
+            <HeroBanner onLearnMoreClick={scrollIntoView} />
             <Space h="xl" />
             <WhyUsSection />
             <Space h="xl" />
@@ -50,7 +54,7 @@ export const HomePage = () => {
                 </SimpleGrid>
             </Container>
             <Space h="xl" />
-            <FAQSection />
+            <FAQSection targetRef={targetRef} />
         </Container>
     );
 };

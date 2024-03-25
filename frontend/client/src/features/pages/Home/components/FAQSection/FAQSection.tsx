@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { RefObject, useMemo } from "react";
 import { Accordion, Container, Title } from "@mantine/core";
 
 import { FAQItem } from "./components/FAQItem";
@@ -6,7 +6,11 @@ import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
 
 import classes from "./FAQSection.module.scss";
 
-export const FAQSection = () => {
+type FAQSectionProps = {
+    targetRef: RefObject<HTMLDivElement>;
+};
+
+export const FAQSection = ({ targetRef }: FAQSectionProps) => {
     const translate = useTranslate();
 
     const questions = useMemo(
@@ -61,7 +65,7 @@ export const FAQSection = () => {
     );
 
     return (
-        <Container>
+        <Container ref={targetRef}>
             <Title ta="center" mb="lg" order={2}>
                 {translate("pages.home.FAQ.header")}
             </Title>
