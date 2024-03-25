@@ -34,7 +34,7 @@ export const NavigationTile = ({ label, Icon, isActive, route, asyncBeforeRedire
             color="primary"
         >
             <Button
-                variant={isActive ? "gradient" : "subtle"}
+                variant={isActive ? "outline" : "subtle"}
                 onClick={handleNavigation}
                 data-active={isActive}
                 miw="50px"
