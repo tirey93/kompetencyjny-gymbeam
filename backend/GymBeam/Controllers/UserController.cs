@@ -1,5 +1,6 @@
 ﻿using GymBeam.Requests;
 using GymBeam.Response;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymBeam.Controllers
@@ -60,6 +61,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles="user")]
         public IActionResult Put(int id, UserRequest dto)
         {
             
