@@ -10,7 +10,7 @@ export const FAQItem = ({ value, label, description }: FAQItemProps) => {
     return (
         <Accordion.Item value={value}>
             <Accordion.Control>
-                <Text fz="md" fw={600}>
+                <Text fz="sm" fw={500}>
                     {label}
                 </Text>
             </Accordion.Control>

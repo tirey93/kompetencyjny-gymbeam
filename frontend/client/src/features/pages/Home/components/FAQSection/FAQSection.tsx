@@ -12,22 +12,57 @@ export const FAQSection = () => {
     const questions = useMemo(
         () => [
             {
-                value: "abandoning",
-                label: translate("pages.home.FAQ.items.abandoning.question"),
-                description: translate("pages.home.FAQ.items.abandoning.answer"),
+                value: "cancelationPolicy",
+                label: translate("pages.home.FAQ.items.cancelationPolicy.question"),
+                description: translate("pages.home.FAQ.items.cancelationPolicy.answer"),
             },
             {
-                value: "new-activities",
-                label: translate("pages.home.FAQ.items.newActivities.question"),
-                description: translate("pages.home.FAQ.items.newActivities.answer"),
+                value: "lateAttendancePenalty",
+                label: translate("pages.home.FAQ.items.lateAttendancePenalty.question"),
+                description: translate("pages.home.FAQ.items.lateAttendancePenalty.answer"),
+            },
+            {
+                value: "attendanceByProxy",
+                label: translate("pages.home.FAQ.items.attendanceByProxy.question"),
+                description: translate("pages.home.FAQ.items.attendanceByProxy.answer"),
+            },
+            {
+                value: "futureActivities",
+                label: translate("pages.home.FAQ.items.futureActivities.question"),
+                description: translate("pages.home.FAQ.items.futureActivities.answer"),
+            },
+            {
+                value: "changingRegistration",
+                label: translate("pages.home.FAQ.items.changingRegistration.question"),
+                description: translate("pages.home.FAQ.items.changingRegistration.answer"),
+            },
+            {
+                value: "lateArrivalPolicy",
+                label: translate("pages.home.FAQ.items.lateArrivalPolicy.question"),
+                description: translate("pages.home.FAQ.items.lateArrivalPolicy.answer"),
+            },
+            {
+                value: "membershipSuspension",
+                label: translate("pages.home.FAQ.items.membershipSuspension.question"),
+                description: translate("pages.home.FAQ.items.membershipSuspension.answer"),
+            },
+            {
+                value: "classAccessRestrictions",
+                label: translate("pages.home.FAQ.items.classAccessRestrictions.question"),
+                description: translate("pages.home.FAQ.items.classAccessRestrictions.answer"),
+            },
+            {
+                value: "technicalSupport",
+                label: translate("pages.home.FAQ.items.technicalSupport.question"),
+                description: translate("pages.home.FAQ.items.technicalSupport.answer"),
             },
         ],
         [translate]
     );
 
     return (
-        <Container size="sm">
-            <Title ta="center" mb="xl" order={2}>
+        <Container>
+            <Title ta="center" mb="lg" order={2}>
                 {translate("pages.home.FAQ.header")}
             </Title>
 

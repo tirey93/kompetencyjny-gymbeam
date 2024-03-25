@@ -14,14 +14,56 @@ export type TranslationSource = {
 
     pages: {
         home: {
+            contact: {
+                email: string;
+                phone: string;
+                address: string;
+                title: string;
+            };
+
+            workingHours: {
+                monThu: string;
+                friSat: string;
+                sun: string;
+                title: string;
+            };
+
             FAQ: {
                 header: string;
                 items: {
-                    abandoning: {
+                    cancelationPolicy: {
                         question: string;
                         answer: string;
                     };
-                    newActivities: {
+                    lateAttendancePenalty: {
+                        question: string;
+                        answer: string;
+                    };
+                    attendanceByProxy: {
+                        question: string;
+                        answer: string;
+                    };
+                    futureActivities: {
+                        question: string;
+                        answer: string;
+                    };
+                    changingRegistration: {
+                        question: string;
+                        answer: string;
+                    };
+                    lateArrivalPolicy: {
+                        question: string;
+                        answer: string;
+                    };
+                    membershipSuspension: {
+                        question: string;
+                        answer: string;
+                    };
+                    classAccessRestrictions: {
+                        question: string;
+                        answer: string;
+                    };
+                    technicalSupport: {
                         question: string;
                         answer: string;
                     };

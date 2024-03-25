@@ -16,16 +16,59 @@ export const en: TranslationSource = {
     },
     pages: {
         home: {
+            contact: {
+                email: "Email",
+                address: "Address",
+                phone: "Phone",
+                title: "Contact information",
+            },
+
+            workingHours: {
+                monThu: "Monday - Thursday",
+                friSat: "Friday - Saturday",
+                sun: "Sunday",
+                title: "Working hours",
+            },
+
             FAQ: {
                 header: "Frequently Asked Questions",
                 items: {
-                    abandoning: {
-                        question: "Can I resign from activities?",
-                        answer: "Yes, but, to some extent. You can resign no later than 2 hours before given activity. Don't worry though, if you miss this deadline, nothing too bad happens. We are understanding and things like that happen, so you can do it 3 times a month. If you break this limit, we will prevent you from enrolling on another activities.",
+                    cancelationPolicy: {
+                        question: "How far in advance can I cancel my class registration?",
+                        answer: "You can cancel your registration up to 2 hours before the start of the class. However, if you miss this window, don't worry - we understand that things happen, and you're allowed up to 3 late cancellations per month. If you exceed this limit, we'll temporarily block your ability to sign up for classes, but only until the end of the calendar month.",
                     },
-                    newActivities: {
-                        question: "Do you plan to add new activities?",
-                        answer: "Certainly! We are constantly expanding our offer. If you have something specific in mind, just write to us with your suggestion and we will respond as fast as possible. Unfortunately, not every kind of activity is suitable for our gym, but who knows, maybe your suggestion will be a next big hit!",
+                    lateAttendancePenalty: {
+                        question: "Is there a penalty for missing classes?",
+                        answer: "If you miss classes no more than 3 times per month, there's no penalty. Otherwise, we'll block your ability to sign up for sports classes. However, you'll still have unlimited access to the gym.",
+                    },
+                    attendanceByProxy: {
+                        question: "Can someone else attend the class on my behalf?",
+                        answer: "Unfortunately, no. Tickets are personalized, and while we won't actively check if you're attending on someone else's behalf, we kindly ask not to share your tickets with third parties.",
+                    },
+                    futureActivities: {
+                        question: "Are there any plans for new activities?",
+                        answer: "Absolutely! We're constantly expanding our offerings. If you have something specific in mind, just reach out to us, and we'll respond as quickly as possible. While we can't guarantee that every suggestion will be implemented, who knows, it might just become the next big hit!",
+                    },
+                    changingRegistration: {
+                        question: "How can I change my class registration to a different time or activity?",
+                        answer: "To make changes to your registration, please contact us directly through our mobile app or online platform. Our staff will assist you in making the change according to the available options.",
+                    },
+                    lateArrivalPolicy: {
+                        question: "What happens if I arrive late to a class?",
+                        answer: "If you arrive late to a class, please adjust to the ongoing session as quickly as possible. We encourage punctuality to ensure you make the most of the workout time.",
+                    },
+                    membershipSuspension: {
+                        question: "Can I suspend my gym membership temporarily?",
+                        answer: "Yes, there is an option to temporarily suspend your membership due to specific life situations such as vacation, illness, etc. Please contact our customer service office for further information on the membership suspension procedure.",
+                    },
+                    classAccessRestrictions: {
+                        question: "Are there any restrictions on attending specific classes based on membership type?",
+                        answer: "Yes, some classes may only be available to certain types of memberships or may require an additional fee. We encourage you to check our current class schedule and membership policies.",
+                    },
+                    technicalSupport: {
+                        question:
+                            "What should I do if I encounter technical issues with the gym's app or online services?",
+                        answer: "If you encounter technical issues, please contact our technical support department. You can also report the issue through the contact form on our website or in person at the club's reception.",
                     },
                 },
             },
