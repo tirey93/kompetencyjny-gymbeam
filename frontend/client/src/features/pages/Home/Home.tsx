@@ -43,6 +43,8 @@ export const HomePage = () => {
             <Space h="xl" />
             <WhyUsSection />
             <Space h="xl" />
+            <FAQSection targetRef={targetRef} />
+            <Space h="xl" />
             <Container py="xl">
                 <SimpleGrid cols={{ sm: 1, md: 2 }}>
                     <InformationCard title={translate("pages.home.contact.title")} items={contactInfo} bg="primary" />
@@ -53,8 +55,6 @@ export const HomePage = () => {
                     />
                 </SimpleGrid>
             </Container>
-            <Space h="xl" />
-            <FAQSection targetRef={targetRef} />
         </Container>
     );
 };
