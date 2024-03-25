@@ -1,5 +1,13 @@
 import { useMemo } from "react";
-import { IconBarbell, IconDashboard, IconHome2, IconLogin, IconQrcode, IconUserPlus } from "@tabler/icons-react";
+import {
+    IconBarbell,
+    IconDashboard,
+    IconHome2,
+    IconLogin,
+    IconLogout,
+    IconQrcode,
+    IconUserPlus,
+} from "@tabler/icons-react";
 
 import { useAuthentication } from "../../../../../../common/auth/hooks/useAuthentication";
 import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
@@ -26,7 +34,7 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
             signIn: { Icon: IconLogin, label: translate("navigation.labels.signIn"), route: Routes.LOGIN },
             signUp: { Icon: IconUserPlus, label: translate("navigation.labels.signUp"), route: Routes.REGISTRATION },
             signOut: {
-                Icon: IconUserPlus,
+                Icon: IconLogout,
                 label: translate("navigation.labels.signOut"),
                 route: Routes.NA,
                 asyncBeforeRedirect: signOutAsync,
