@@ -18,7 +18,6 @@ namespace GymBeam.Utils
             var claims = new[]
             {
             new Claim(JwtRegisteredClaimNames.Sub,username),
-            // this guarantees the token is unique
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 

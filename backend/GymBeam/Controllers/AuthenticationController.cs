@@ -1,8 +1,10 @@
-﻿using GymBeam.Requests;
+﻿using GymBeam.Constants;
+using GymBeam.Extensions;
+using GymBeam.Requests;
 using GymBeam.Response;
 using GymBeam.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -12,7 +14,14 @@ namespace GymBeam.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+        public AuthenticationController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         [HttpPost("Register")]
+        [AllowAnonymous]
         public ActionResult<UserResponse> Register([FromBody] UserRequest dto)
         {
             return new UserResponse
@@ -25,13 +34,16 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost("Login")]
+        [AllowAnonymous]
         public ActionResult<UserResponse> Login([FromBody] LoginRequest dto)
         {
-            var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Role, "user"));
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Role, Roles.Admin)
+            };
 
-            var issuer = "https://mysite.com";
-            var audience = "https://mysite.com";
+
+            int userId = 25;
             var signingKey = "12345@4321aaabbbcccddd";  //  some long id
 
             // create a new token with token helper and add our claim
@@ -39,14 +51,14 @@ namespace GymBeam.Controllers
             var token = JwtHelper.GetJwtToken(
                 dto.Username,
                 signingKey,
-                issuer,
-                audience,
+                _configuration["JWT:Issuer"],
+                _configuration["JWT:Audience"],
                 TimeSpan.FromMinutes(5),
                 claims.ToArray());
 
-            var token_2 = new JwtSecurityTokenHandler().WriteToken(token);
-
-            Response.Cookies.Append("X-Access-Token", token_2, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+            Response.Cookies
+                .AppendToCookie("X-Access-Token", new JwtSecurityTokenHandler().WriteToken(token))
+                .AppendToCookie("X-User-Id", userId.ToString());
 
             return new UserResponse
             {
@@ -58,6 +70,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost("Logout/User/{id:int}")]
+        [Authorize(Roles = Roles.User)]
         public IActionResult Logout(int id)
         {
             return NoContent();

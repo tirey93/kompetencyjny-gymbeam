@@ -1,5 +1,7 @@
-﻿using GymBeam.Requests;
+﻿using GymBeam.Constants;
+using GymBeam.Requests;
 using GymBeam.Response;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymBeam.Controllers
@@ -9,6 +11,7 @@ namespace GymBeam.Controllers
     public class ReservationController : ControllerBase
     {
         [HttpGet]
+        [Authorize(Roles = Roles.Admin)]
         public ActionResult<IEnumerable<ReservationResponse>> Get()
         {
 
@@ -38,6 +41,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize(Roles = Roles.User)]
         public ActionResult<ReservationResponse> Get(int id)
         {
             return new ReservationResponse
@@ -53,12 +57,14 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.User)]
         public IActionResult Post([FromBody] ReservationRequest dto)
         {
             return NoContent();
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = Roles.User)]
         public ActionResult Delete(int id)
         {
             return NoContent();
