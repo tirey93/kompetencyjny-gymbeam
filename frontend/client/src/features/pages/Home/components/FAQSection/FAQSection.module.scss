@@ -1,0 +1,13 @@
+.item {
+  transition: transform 150ms ease;
+  position: relative;
+  z-index: 0;
+
+  &[data-active] {
+    z-index: 1;
+    transform: scale(1.05);
+    border-radius: var(--mantine-radius-md);
+    overflow: hidden;
+  }
+}
+

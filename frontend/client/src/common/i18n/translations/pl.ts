@@ -16,6 +16,64 @@ export const pl: TranslationSource = {
     },
     pages: {
         home: {
+            contact: {
+                email: "Email",
+                address: "Lokalizacja",
+                phone: "Telefon",
+                title: "Informacje kontaktowe",
+            },
+
+            workingHours: {
+                monThu: "Poniedziałek - Czwartek",
+                friSat: "Piątek - Sobota",
+                sun: "Niedziela",
+                title: "Godziny pracy",
+            },
+
+            FAQ: {
+                header: "Często Zadawane Pytania",
+                items: {
+                    cancelationPolicy: {
+                        question: "Czy mogę zrezygnować z zajęć?",
+                        answer: "Możesz anulować rejestrację najpóźniej na 2 godziny przed rozpoczęciem zajęć. Jednak jeśli przegapisz ten okres, nie martw się - rozumiemy, że różne sytuacje się zdarzają, i masz możliwość do 3 opóźnionych anulowań miesięcznie. Jeśli przekroczysz ten limit, tymczasowo zablokujemy możliwość zapisu na zajęcia, ale tylko do końca bieżącego miesiąca kalendarzowego.",
+                    },
+                    lateAttendancePenalty: {
+                        question: "Czy istnieje kara za spóźnienie się na zajęcia?",
+                        answer: "Jeśli opóźniasz się na zajęcia nie więcej niż 3 razy w miesiącu, nie ma kary. W przeciwnym razie, zablokujemy możliwość zapisu na zajęcia sportowe. Niemniej jednak, będziesz mieć w dalszym ciągu nieograniczony dostęp do siłowni.",
+                    },
+                    attendanceByProxy: {
+                        question: "Czy ktoś inny może uczestniczyć w zajęciach w moim imieniu?",
+                        answer: "Niestety, nie. Wejściówki są personalizowane, i chociaż nie będziemy aktywnie sprawdzać, czy uczestniczysz w imieniu kogoś innego, uprzejmie prosimy, abyś nie udostępniał swoich wejściówek osobom trzecim.",
+                    },
+                    futureActivities: {
+                        question: "Czy planowane są jakieś nowe zajęcia?",
+                        answer: "Oczywiście! Ciągle poszerzamy naszą ofertę. Jeśli masz coś konkretnego na myśli, po prostu skontaktuj się z nami, a odpowiemy tak szybko, jak to możliwe. Mimo że nie możemy zagwarantować, że każda sugestia zostanie zrealizowana, kto wie, może to właśnie stanie się następnym wielkim hitem!",
+                    },
+                    changingRegistration: {
+                        question: "Jak mogę zmienić swoją rejestrację na zajęcia na inny termin lub inną aktywność?",
+                        answer: "Aby dokonać zmiany w rejestracji, prosimy o kontakt bezpośrednio za pośrednictwem naszej aplikacji mobilnej lub platformy internetowej. Nasz personel pomoże Ci dokonać zmiany zgodnie z dostępnymi opcjami.",
+                    },
+                    lateArrivalPolicy: {
+                        question: "Co się stanie, jeśli spóźnię się na zajęcia?",
+                        answer: "Jeśli spóźnisz się na zajęcia, prosimy o jak najszybsze dostosowanie się do trwającej sesji. Zachęcamy do punktualności, aby jak najlepiej wykorzystać czas treningu.",
+                    },
+                    membershipSuspension: {
+                        question: "Czy mogę tymczasowo zawiesić moje członkostwo w klubie fitness?",
+                        answer: "Tak, istnieje możliwość tymczasowego zawieszenia członkostwa z powodu określonych sytuacji życiowych, takich jak wakacje, choroba, itp. Prosimy o kontakt z naszym biurem obsługi klienta w celu uzyskania dalszych informacji na temat procedury zawieszenia członkostwa.",
+                    },
+                    classAccessRestrictions: {
+                        question:
+                            "Czy istnieją ograniczenia dotyczące uczestnictwa w konkretnych zajęciach w zależności od rodzaju członkostwa?",
+                        answer: "Tak, niektóre zajęcia mogą być dostępne tylko dla określonych typów członkostwa lub mogą wymagać dodatkowej opłaty. Zachęcamy do sprawdzenia naszego aktualnego harmonogramu zajęć i zasad członkostwa.",
+                    },
+                    technicalSupport: {
+                        question:
+                            "Co powinienem zrobić, jeśli napotkam problemy techniczne z aplikacją klubową lub usługami online?",
+                        answer: "Jeśli napotkasz problemy techniczne, prosimy o kontakt z naszym działem wsparcia technicznego. Możesz również zgłosić problem poprzez formularz kontaktowy na naszej stronie internetowej lub osobiście w recepcji klubu.",
+                    },
+                },
+            },
+
             whyUs: {
                 title: "Dlaczego powinniśmy zacząć wspólną przygodę?",
                 description:

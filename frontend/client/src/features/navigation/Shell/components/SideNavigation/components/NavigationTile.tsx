@@ -1,29 +1,20 @@
 import { ForwardRefExoticComponent, RefAttributes, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Tooltip } from "@mantine/core";
+import { Button, Text, Tooltip } from "@mantine/core";
 import { Icon, IconProps } from "@tabler/icons-react";
 
-import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
-import { TranslationKey } from "../../../../../../common/i18n/translations/i18n";
 import { Routes } from "../../../../../router/Routes";
 
 export type NavigationTileProps = {
     route: Routes;
-    labelTranslationKey: TranslationKey;
+    label: string;
     Icon: ForwardRefExoticComponent<Omit<IconProps, "ref"> & RefAttributes<Icon>>;
     asyncBeforeRedirect?: () => Promise<unknown>;
     isActive?: boolean;
 };
 
-export const NavigationTile = ({
-    labelTranslationKey,
-    Icon,
-    isActive,
-    route,
-    asyncBeforeRedirect,
-}: NavigationTileProps) => {
+export const NavigationTile = ({ label, Icon, isActive, route, asyncBeforeRedirect }: NavigationTileProps) => {
     const navigate = useNavigate();
-    const translate = useTranslate();
 
     const handleNavigation = useCallback(async () => {
         await asyncBeforeRedirect?.();
@@ -32,23 +23,27 @@ export const NavigationTile = ({
 
     return (
         <Tooltip
-            label={translate(labelTranslationKey)}
+            label={label}
             position="right"
             p="md"
             fw={600}
             withArrow
             arrowSize={8}
             transitionProps={{ transition: "pop" }}
+            visibleFrom="md"
+            color="primary"
         >
             <Button
                 variant={isActive ? "gradient" : "subtle"}
                 onClick={handleNavigation}
                 data-active={isActive}
+                miw="50px"
                 h="50px"
-                w="50px"
-                p={0}
             >
-                <Icon width={20} height={20} />
+                <Icon width={25} height={25} />
+                <Text ml="sm" hiddenFrom="md" size="lg" fw={700}>
+                    {label}
+                </Text>
             </Button>
         </Tooltip>
     );

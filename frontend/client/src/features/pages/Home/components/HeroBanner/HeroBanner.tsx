@@ -6,7 +6,11 @@ import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
 
 import classes from "./HeroBanner.module.scss";
 
-export const HeroBanner = () => {
+type HeroBannerProps = {
+    onLearnMoreClick: () => unknown;
+};
+
+export const HeroBanner = ({ onLearnMoreClick }: HeroBannerProps) => {
     const translate = useTranslate();
 
     return (
@@ -52,7 +56,7 @@ export const HeroBanner = () => {
                         <Button size="md" variant="gradient">
                             {translate("pages.home.heroBanner.buttons.getStarted")}
                         </Button>
-                        <Button variant="default" size="md">
+                        <Button variant="default" size="md" onClick={onLearnMoreClick}>
                             {translate("pages.home.heroBanner.buttons.learnMore")}
                         </Button>
                     </Group>
