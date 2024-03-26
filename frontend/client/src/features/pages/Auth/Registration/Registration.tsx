@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Stack, Stepper } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
@@ -7,14 +8,16 @@ import { NameForm } from "./components/NameForm/NameForm";
 import { PasswordForm } from "./components/PasswordForm/PasswordForm";
 import { SubmitForm } from "./components/SubmitForm/SubmitForm";
 import { useRegistrationForm } from "./hooks/useRegistrationForm";
-import { useAuthentication } from "../../../../common/auth/hooks/useAuthentication";
+import { useSignUp } from "../../../../common/auth/hooks/useSignUp";
 import { useTranslate } from "../../../../common/i18n/hooks/useTranslate";
+import { Routes } from "../../../router/Routes";
 
 export const RegistrationPage = () => {
+    const verboseSteps = useMediaQuery("(min-width: 60em)");
     const { form, validatedRules } = useRegistrationForm();
     const translate = useTranslate();
-    const verboseSteps = useMediaQuery("(min-width: 60em)");
-    const { signUp } = useAuthentication();
+    const navigate = useNavigate();
+    const { signUp } = useSignUp();
     const [step, setStep] = useState(0);
 
     const goToNextStep = useCallback(() => {
@@ -44,9 +47,10 @@ export const RegistrationPage = () => {
         }
     }, [form, goToNextStep]);
 
-    const submitRegistrationForm = () => {
-        const { login, password, name } = form.values;
-        void signUp({ login, password, name });
+    const submitRegistrationForm = async () => {
+        const { login: name, password, name: displayName } = form.values;
+        await signUp({ name, password, displayName });
+        navigate(Routes.ROOT);
     };
 
     return (
