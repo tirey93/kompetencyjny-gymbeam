@@ -25,7 +25,8 @@ namespace GymBeam.Controllers
                     Duration = 20,
                     LeaderName = "testLeaderName",
                     StartTime = DateTime.Now,
-                    UserId = 56
+                    UserId = 56,
+                    UserDisplayName = "testUser1"
                 },
                 new ReservationResponse
                 {
@@ -35,7 +36,8 @@ namespace GymBeam.Controllers
                     Duration = 90,
                     LeaderName = "testLeaderName2",
                     StartTime = DateTime.Now.AddHours(2),
-                    UserId = 76
+                    UserId = 76,
+                    UserDisplayName = "testUser2"
                 }
             };
         }
@@ -52,7 +54,8 @@ namespace GymBeam.Controllers
                 Duration = 45,
                 LeaderName = "LeaderTanca",
                 StartTime = DateTime.Now.AddDays(2),
-                UserId = 96
+                UserId = 96,
+                UserDisplayName = "testUser3"
             };
         }
 

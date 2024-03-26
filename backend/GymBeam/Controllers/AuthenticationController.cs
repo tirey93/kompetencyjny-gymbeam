@@ -1,4 +1,5 @@
 ﻿using GymBeam.Constants;
+using GymBeam.Exceptions;
 using GymBeam.Extensions;
 using GymBeam.Requests;
 using GymBeam.Response;
@@ -42,31 +43,40 @@ namespace GymBeam.Controllers
                 new Claim(ClaimTypes.Role, Roles.Admin)
             };
 
-
             int userId = 25;
-            var signingKey = "12345@4321aaabbbcccddd";  //  some long id
-
-            // create a new token with token helper and add our claim
-            // from `Westwind.AspNetCore`  NuGet Package
-            var token = JwtHelper.GetJwtToken(
-                dto.Username,
-                signingKey,
-                _configuration["JWT:Issuer"],
-                _configuration["JWT:Audience"],
-                TimeSpan.FromMinutes(5),
-                claims.ToArray());
-
-            Response.Cookies
-                .AppendToCookie("X-Access-Token", new JwtSecurityTokenHandler().WriteToken(token))
-                .AppendToCookie("X-User-Id", userId.ToString());
-
-            return new UserResponse
+            try
             {
-                Id = 25,
-                Name = dto.Username,
-                DisplayName = "testDisplayName",
-                Role = "User"
-            };
+                var signingKey = Environment.GetEnvironmentVariable(_configuration["JWT:EnvironmentSecretVariableName"]);
+                if (string.IsNullOrEmpty(signingKey))
+                {
+                    throw new MissingSigningKeyException();
+                }
+                // create a new token with token helper and add our claim
+                // from `Westwind.AspNetCore`  NuGet Package
+                var token = JwtHelper.GetJwtToken(
+                    dto.Username,
+                    signingKey,
+                    _configuration["JWT:Issuer"],
+                    _configuration["JWT:Audience"],
+                    TimeSpan.FromMinutes(5),
+                    claims.ToArray());
+
+                Response.Cookies
+                    .AppendToCookie("X-Access-Token", new JwtSecurityTokenHandler().WriteToken(token))
+                    .AppendToCookie("X-User-Id", userId.ToString());
+
+                return new UserResponse
+                {
+                    Id = 25,
+                    Name = dto.Username,
+                    DisplayName = "testDisplayName",
+                    Role = "User"
+                };
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpPost("Logout/User/{id:int}")]

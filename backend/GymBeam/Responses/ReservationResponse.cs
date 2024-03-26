@@ -10,5 +10,6 @@
         public DateTime StartTime { get; set; }
         public string LeaderName { get; set; }
         public string ActivityName { get; set; }
+        public string UserDisplayName { get; set; }
     }
 }
