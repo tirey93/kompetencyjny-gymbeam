@@ -12,6 +12,15 @@ services:
             - PORT=80
             - STATIC_FILES_DIR=./static
 
+    backend:
+        build:
+            context: backend/GymBeam
+            dockerfile: Dockerfile
+        networks:
+            - services_network
+        ports:
+            - "5260:80"
+
 networks:
     services_network:
         external: true
