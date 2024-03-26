@@ -1,8 +1,10 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { notifications } from "@mantine/notifications";
 
 import { Routes } from "../../../features/router/Routes";
 import { useAppOverlayStore } from "../../components/AppOverlay/hooks/useAppOverlayStore";
+import { useTranslate } from "../../i18n/hooks/useTranslate";
 import { useAuthState } from "./useAuthState";
 
 type SignUpData = { name: string; login: string; password: string };
@@ -19,37 +21,56 @@ export const useAuthentication = (): UseAuthentication => {
     const setCurrentUserDetails = useAuthState((state) => state.setCurrentUserDetails);
     const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
     const navigate = useNavigate();
+    const translate = useTranslate();
 
     const signOut = useCallback(async () => {
         setIsLoading(true);
         await new Promise((resolve) => setTimeout(resolve, 1500));
         clearCurrentUserDetails();
-        console.log("mock sign out");
         setIsLoading(false);
-    }, [clearCurrentUserDetails, setIsLoading]);
+
+        notifications.show({
+            title: translate("notifications.auth.signedOut.title"),
+            message: translate("notifications.auth.signedOut.description"),
+            color: "success",
+            withBorder: true,
+        });
+    }, [clearCurrentUserDetails, setIsLoading, translate]);
 
     const signIn = useCallback(
-        async (data: SignInData) => {
+        async (_data: SignInData) => {
             setIsLoading(true);
             await new Promise((resolve) => setTimeout(resolve, 1500));
             setCurrentUserDetails({ name: "Mock", login: "MockLogin", role: "Admin" });
-            console.log("mock sign in", data);
             navigate(Routes.ROOT);
             setIsLoading(false);
+
+            notifications.show({
+                title: translate("notifications.auth.signedIn.title"),
+                message: translate("notifications.auth.signedIn.description"),
+                color: "success",
+                withBorder: true,
+            });
         },
-        [navigate, setCurrentUserDetails, setIsLoading]
+        [navigate, setCurrentUserDetails, setIsLoading, translate]
     );
 
     const signUp = useCallback(
-        async (data: SignUpData) => {
+        async (_data: SignUpData) => {
             setIsLoading(true);
             await new Promise((resolve) => setTimeout(resolve, 1500));
             setCurrentUserDetails({ name: "Mock", login: "MockLogin", role: "Admin" });
-            console.log("mock sign up", data);
             navigate(Routes.ROOT);
             setIsLoading(false);
+
+            notifications.show({
+                title: translate("notifications.auth.signedUp.title"),
+                message: translate("notifications.auth.signedUp.description"),
+                color: "success",
+                withBorder: true,
+            });
         },
-        [navigate, setCurrentUserDetails, setIsLoading]
+        [navigate, setCurrentUserDetails, setIsLoading, translate]
     );
 
     return { signOut, signIn, signUp };
