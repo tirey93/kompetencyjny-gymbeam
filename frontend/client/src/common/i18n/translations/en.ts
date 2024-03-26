@@ -2,6 +2,22 @@
 import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
+    notifications: {
+        auth: {
+            signedIn: {
+                title: "You are now signed in.",
+                description: "Good to see you back!",
+            },
+            signedOut: {
+                title: "You have been signed out.",
+                description: "See you later!",
+            },
+            signedUp: {
+                title: "Account created successfully.",
+                description: "Our journey begins!",
+            },
+        },
+    },
     navigation: {
         labels: {
             home: "Home",

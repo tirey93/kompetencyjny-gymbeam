@@ -1,4 +1,21 @@
 export type TranslationSource = {
+    notifications: {
+        auth: {
+            signedIn: {
+                title: string;
+                description: string;
+            };
+            signedOut: {
+                title: string;
+                description: string;
+            };
+            signedUp: {
+                title: string;
+                description: string;
+            };
+        };
+    };
+
     navigation: {
         labels: {
             home: string;

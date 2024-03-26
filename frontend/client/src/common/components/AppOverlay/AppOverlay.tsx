@@ -6,7 +6,7 @@ export const AppOverlay = () => {
     const isLoading = useAppOverlayStore((state) => state.isLoading);
 
     return isLoading ? (
-        <Overlay blur={2} backgroundOpacity={0.5}>
+        <Overlay fixed blur={2} backgroundOpacity={0.5}>
             <Center h="90%">
                 <Loader color="info" size="xl" type="dots" />
             </Center>

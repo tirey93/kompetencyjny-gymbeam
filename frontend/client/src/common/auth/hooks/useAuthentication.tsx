@@ -4,6 +4,7 @@ import { notifications } from "@mantine/notifications";
 
 import { Routes } from "../../../features/router/Routes";
 import { useAppOverlayStore } from "../../components/AppOverlay/hooks/useAppOverlayStore";
+import { useTranslate } from "../../i18n/hooks/useTranslate";
 import { useAuthState } from "./useAuthState";
 
 type SignUpData = { name: string; login: string; password: string };
@@ -20,6 +21,7 @@ export const useAuthentication = (): UseAuthentication => {
     const setCurrentUserDetails = useAuthState((state) => state.setCurrentUserDetails);
     const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
     const navigate = useNavigate();
+    const translate = useTranslate();
 
     const signOut = useCallback(async () => {
         setIsLoading(true);
@@ -28,12 +30,12 @@ export const useAuthentication = (): UseAuthentication => {
         setIsLoading(false);
 
         notifications.show({
-            title: "You have been signed out.",
-            message: "See you later!",
+            title: translate("notifications.auth.signedOut.title"),
+            message: translate("notifications.auth.signedOut.description"),
             color: "success",
             withBorder: true,
         });
-    }, [clearCurrentUserDetails, setIsLoading]);
+    }, [clearCurrentUserDetails, setIsLoading, translate]);
 
     const signIn = useCallback(
         async (_data: SignInData) => {
@@ -44,13 +46,13 @@ export const useAuthentication = (): UseAuthentication => {
             setIsLoading(false);
 
             notifications.show({
-                title: "You are now signed in.",
-                message: "Good to see you back!",
+                title: translate("notifications.auth.signedIn.title"),
+                message: translate("notifications.auth.signedIn.description"),
                 color: "success",
                 withBorder: true,
             });
         },
-        [navigate, setCurrentUserDetails, setIsLoading]
+        [navigate, setCurrentUserDetails, setIsLoading, translate]
     );
 
     const signUp = useCallback(
@@ -62,13 +64,13 @@ export const useAuthentication = (): UseAuthentication => {
             setIsLoading(false);
 
             notifications.show({
-                title: "Account created successfully.",
-                message: "Our journey begins!",
+                title: translate("notifications.auth.signedUp.title"),
+                message: translate("notifications.auth.signedUp.description"),
                 color: "success",
                 withBorder: true,
             });
         },
-        [navigate, setCurrentUserDetails, setIsLoading]
+        [navigate, setCurrentUserDetails, setIsLoading, translate]
     );
 
     return { signOut, signIn, signUp };
