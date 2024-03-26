@@ -7,14 +7,14 @@ import { NameForm } from "./components/NameForm/NameForm";
 import { PasswordForm } from "./components/PasswordForm/PasswordForm";
 import { SubmitForm } from "./components/SubmitForm/SubmitForm";
 import { useRegistrationForm } from "./hooks/useRegistrationForm";
-import { useAuthentication } from "../../../../common/auth/hooks/useAuthentication";
+import { useSignUp } from "../../../../common/auth/hooks/useSignUp";
 import { useTranslate } from "../../../../common/i18n/hooks/useTranslate";
 
 export const RegistrationPage = () => {
     const { form, validatedRules } = useRegistrationForm();
     const translate = useTranslate();
     const verboseSteps = useMediaQuery("(min-width: 60em)");
-    const { signUp } = useAuthentication();
+    const { signUp } = useSignUp();
     const [step, setStep] = useState(0);
 
     const goToNextStep = useCallback(() => {

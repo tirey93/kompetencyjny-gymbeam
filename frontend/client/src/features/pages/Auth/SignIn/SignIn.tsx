@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Anchor, Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 
 import { useSignInForm } from "./hooks/useSignInForm";
-import { useAuthentication } from "../../../../common/auth/hooks/useAuthentication";
+import { useSignIn } from "../../../../common/auth/hooks/useSignIn";
 import { useTranslate } from "../../../../common/i18n/hooks/useTranslate";
 import { Routes } from "../../../router/Routes";
 import { INPUT_LABEL_PROPS } from "../Auth.shared";
@@ -11,7 +11,7 @@ import { INPUT_LABEL_PROPS } from "../Auth.shared";
 export const SignInPage = () => {
     const translate = useTranslate();
     const { form } = useSignInForm();
-    const { signIn } = useAuthentication();
+    const { signIn } = useSignIn();
     const navigate = useNavigate();
 
     const onSubmit = useCallback(async () => {
