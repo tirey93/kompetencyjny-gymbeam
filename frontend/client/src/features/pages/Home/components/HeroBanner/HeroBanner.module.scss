@@ -1,5 +1,7 @@
+@import "src/_mantine.scss";
+
 .content {
-  max-width: rem(480px);
+  max-width: calc_rem(480px);
 
   @media (max-width: $mantine-breakpoint-md) {
     max-width: 100%;

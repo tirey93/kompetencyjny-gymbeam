@@ -1,12 +1,14 @@
+@import "src/_mantine.scss";
+
 .title {
-  font-size: rem(34px);
+  font-size: calc_rem(34px);
 
   @media (max-width: $mantine-breakpoint-sm) {
-    font-size: rem(24px);
+    font-size: calc_rem(24px);
   }
 }
 
 .description {
-  max-width: rem(600px);
+  max-width: calc_rem(600px);
 }
 
