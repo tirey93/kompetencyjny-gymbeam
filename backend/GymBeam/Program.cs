@@ -1,4 +1,5 @@
 using GymBeam.Extensions;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,9 @@ var envVariable = builder.Configuration["JWT:EnvironmentSecretVariableName"];
 builder.Services.AddJWTAuthentication(issuer, audience, envVariable);
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
+builder.Services.AddDbContext<GymBeam.AppDbContext>(options =>
+    options.UseSqlite("Filename=MyDatabase.db"));
 
 var app = builder.Build();
 
