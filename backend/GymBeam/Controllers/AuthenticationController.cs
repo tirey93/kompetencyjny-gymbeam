@@ -7,6 +7,7 @@ using GymBeam.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 
 namespace GymBeam.Controllers
@@ -48,11 +49,8 @@ namespace GymBeam.Controllers
             {
                 var signingKey = Environment.GetEnvironmentVariable(_configuration["JWT:EnvironmentSecretVariableName"]);
                 if (string.IsNullOrEmpty(signingKey))
-                {
                     throw new MissingSigningKeyException();
-                }
-                // create a new token with token helper and add our claim
-                // from `Westwind.AspNetCore`  NuGet Package
+
                 var token = JwtHelper.GetJwtToken(
                     dto.Username,
                     signingKey,
@@ -75,7 +73,8 @@ namespace GymBeam.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    $"Internal Server Error: {ex.Message}");
             }
         }
 

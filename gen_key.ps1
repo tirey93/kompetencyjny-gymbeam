@@ -12,6 +12,9 @@ $rng.GetBytes($keyBytes)
 
 # Convert key to hexadecimal string
 $signingKey = [System.BitConverter]::ToString($keyBytes).Replace("-", "")
+$envName = "GymBeamSecret"
 
 # Set an environment variable with the generated key
-[Environment]::SetEnvironmentVariable("GymBeamSecret", $signingKey, "User")
+[Environment]::SetEnvironmentVariable($envName, $signingKey, "User")
+$newKey = [System.Environment]::GetEnvironmentVariable($envName)
+Write-Output "Environment variable with name: $envName set to: $newKey"

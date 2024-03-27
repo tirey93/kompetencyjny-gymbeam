@@ -6,12 +6,9 @@ namespace GymBeam.Extensions
 {
     public static class ServiceExtensions
     {
-        public static void AddJWTAuthentication(this IServiceCollection services)
+        public static void AddJWTAuthentication(this IServiceCollection services, string issuer, string audience, string envVariable)
         {
-            // TODO: read this data from appsettings.json and the environment variable
-            var issuer = "https://gymbeam.pl";
-            var audience = "https://gymbeam.pl";
-            var signingKey = "key_from_env_var";
+            var signingKey = Environment.GetEnvironmentVariable(envVariable);
 
             services.AddAuthentication(auth =>
             {

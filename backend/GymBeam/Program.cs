@@ -9,7 +9,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddJWTAuthentication();
+var issuer = builder.Configuration["JWT:Issuer"];
+var audience = builder.Configuration["JWT:Audience"];
+var envVariable = builder.Configuration["JWT:EnvironmentSecretVariableName"];
+builder.Services.AddJWTAuthentication(issuer, audience, envVariable);
 
 var app = builder.Build();
 
