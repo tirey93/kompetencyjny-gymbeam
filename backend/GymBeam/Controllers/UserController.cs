@@ -1,6 +1,9 @@
 ﻿using GymBeam.Requests;
 using GymBeam.Response;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using GymBeam.Controllers;
+using GymBeam.Constants;
 
 namespace GymBeam.Controllers
 {
@@ -9,6 +12,7 @@ namespace GymBeam.Controllers
     public class UserController : ControllerBase
     {
         [HttpGet]
+        [Authorize(Roles = Roles.Admin)]
         public ActionResult<IEnumerable<UserResponse>> Get()
         {
 
@@ -32,6 +36,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize(Roles = Roles.User)]
         public ActionResult<UserResponse> Get(int id)
         {
             return new UserResponse
@@ -44,6 +49,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet("CheckAvailability/ByName/{username}")]
+        [AllowAnonymous]
         public ActionResult<bool> CheckUsernameAvailability(string username)
         {
             bool isUsernameAvailable;
@@ -60,6 +66,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles = Roles.User)]
         public IActionResult Put(int id, UserRequest dto)
         {
             
@@ -67,6 +74,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = Roles.User)]
         public ActionResult Delete(int id)
         {
             return NoContent();
