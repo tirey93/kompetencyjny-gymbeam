@@ -1,6 +1,8 @@
-﻿using GymBeam.Requests;
+﻿using GymBeam.Constants;
+using GymBeam.Requests;
 using GymBeam.Response;
 using GymBeam.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymBeam.Controllers
@@ -10,6 +12,7 @@ namespace GymBeam.Controllers
     public class ActivityController : ControllerBase
     {
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<ActivityResponse>> Get()
         {
 
@@ -47,6 +50,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [AllowAnonymous]
         public ActionResult<ActivityResponse> Get(int id)
         {
             return new ActivityResponse
@@ -66,12 +70,14 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Post([FromBody] ActivityRequest dto)
         {
             return NoContent();
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Put(int id, ActivityRequest dto)
         {
 
@@ -79,6 +85,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize(Roles = Roles.Admin)]
         public ActionResult Delete(int id)
         {
             return NoContent();

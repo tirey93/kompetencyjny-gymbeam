@@ -1,4 +1,6 @@
-﻿using GymBeam.Responses;
+﻿using GymBeam.Constants;
+using GymBeam.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +11,7 @@ namespace GymBeam.Controllers
     public class EnrollmentController : ControllerBase
     {
         [HttpGet("ByUserId/{id:int}")]
+        [Authorize(Roles = Roles.User)]
         public ActionResult<IEnumerable<EnrollmentResponse>> ByUserId(int id)
         {
             return new List<EnrollmentResponse>
@@ -30,6 +33,7 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet("ByDates")]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<EnrollmentResponse>> GetByDates(DateTime from, DateTime to)
         {
             return new List<EnrollmentResponse>
