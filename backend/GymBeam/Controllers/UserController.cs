@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using GymBeam.Controllers;
 using GymBeam.Constants;
+using GymBeam.Queries;
+using MediatR;
 
 namespace GymBeam.Controllers
 {
@@ -11,28 +13,19 @@ namespace GymBeam.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
+        private readonly IMediator _mediator;
+        public UserController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         [HttpGet]
         [Authorize(Roles = Roles.Admin)]
-        public ActionResult<IEnumerable<UserResponse>> Get()
+        public async Task<ActionResult<IEnumerable<UserResponse>>> Get()
         {
-
-            return new List<UserResponse>
-            {
-                new UserResponse
-                {
-                    Id = 42,
-                    Name = "testUsername",
-                    DisplayName = "testDisplayName",
-                    Role = "User"
-                },
-                new UserResponse
-                {
-                    Id = 57,
-                    Name = "testUsername2",
-                    DisplayName = "testDisplayName2",
-                    Role = "Admin"
-                }
-            };
+            var request = new GetAllUsersQuery();
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpGet("{id:int}")]

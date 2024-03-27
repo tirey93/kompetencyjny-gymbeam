@@ -78,10 +78,12 @@ namespace GymBeam.Controllers
             }
         }
 
-        [HttpPost("Logout/User/{id:int}")]
+        [HttpPost("Logout")]
         [Authorize(Roles = Roles.User)]
-        public IActionResult Logout(int id)
+        public IActionResult Logout()
         {
+            var userId = Request.Cookies["X-User-Id"];
+
             return NoContent();
         }
     }
