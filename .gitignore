@@ -5,3 +5,5 @@
 /.vs
 .idea
 /MyDatabase.db
+/MyDatabase.db-shm
+/MyDatabase.db-wal
