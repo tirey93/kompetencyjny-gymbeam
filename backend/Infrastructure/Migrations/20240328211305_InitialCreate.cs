@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -21,8 +20,7 @@ namespace Infrastructure.Migrations
                     DisplayName = table.Column<string>(type: "TEXT", nullable: true),
                     Role = table.Column<string>(type: "TEXT", nullable: true),
                     Password = table.Column<string>(type: "TEXT", nullable: true),
-                    ReservationDisabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    testDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    ReservationDisabled = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
