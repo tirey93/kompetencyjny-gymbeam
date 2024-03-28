@@ -8,9 +8,9 @@ type InformationCardProps = {
     bg?: string;
 };
 
-export const InformationCard = ({ title, items, bg }: InformationCardProps) => {
+export const InformationCard = ({ title, items, bg = "primary" }: InformationCardProps) => {
     return (
-        <Paper bg={bg} p="lg">
+        <Paper p="lg" bg={bg}>
             <Text fz="lg" fw={700} mb="md">
                 {title}
             </Text>

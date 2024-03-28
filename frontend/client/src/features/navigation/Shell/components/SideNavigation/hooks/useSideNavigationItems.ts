@@ -46,7 +46,7 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
                 route: Routes.NA,
             },
             activities: { Icon: IconBarbell, label: translate("navigation.labels.activities"), route: Routes.NA },
-            qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: Routes.NA },
+            qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: Routes.GYM_PASS },
         }),
         [signOutAsync, translate]
     );
