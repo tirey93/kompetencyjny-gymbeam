@@ -1,7 +1,6 @@
-using GymBeam;
 using GymBeam.Extensions;
-using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,13 +14,10 @@ builder.Services.AddSwaggerGen();
 var issuer = builder.Configuration["JWT:Issuer"];
 var audience = builder.Configuration["JWT:Audience"];
 var envVariable = builder.Configuration["JWT:EnvironmentSecretVariableName"];
+var fileName = builder.Configuration.GetConnectionString("WebApiDatabase");
 builder.Services.AddJWTAuthentication(issuer, audience, envVariable);
-
+builder.Services.AddInfrastructure(fileName);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Filename=../../MyDatabase.db"));
-builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 

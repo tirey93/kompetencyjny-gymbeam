@@ -1,6 +1,6 @@
 ﻿using Domain;
 
-namespace GymBeam
+namespace Infrastructure
 {
     public class Repository : IRepository
     {

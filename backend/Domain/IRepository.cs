@@ -1,6 +1,5 @@
-﻿using Domain;
-
-namespace GymBeam
+﻿
+namespace Domain
 {
     public interface IRepository
     {

@@ -11,6 +11,5 @@ namespace Domain
         public string Role { get; set; }
         public string Password { get; set; }
         public bool ReservationDisabled { get; set; }
-        public DateTime testDate { get; set; }
     }
 }

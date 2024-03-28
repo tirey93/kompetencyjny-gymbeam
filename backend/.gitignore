@@ -3,6 +3,8 @@
 /GymBeam/.vs/GymBeam
 /GymBeam/bin/Debug/net7.0
 /GymBeam/bin/Release/net7.0
-/Domain/bin/Debug/net7.0
 /GymBeam/obj
+/Domain/bin/Debug/net7.0
+/Infrastructure/bin/Debug/net7.0
 /Domain/obj
+/Infrastructure/obj

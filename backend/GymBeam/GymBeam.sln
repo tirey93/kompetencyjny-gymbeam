@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymBeam", "GymBeam.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "..\Domain\Domain.csproj", "{457364CC-704F-49B3-A78A-60CEAEB6888D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{9C8BE7C2-149B-4C50-84E8-194892189807}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{457364CC-704F-49B3-A78A-60CEAEB6888D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{457364CC-704F-49B3-A78A-60CEAEB6888D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{457364CC-704F-49B3-A78A-60CEAEB6888D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C8BE7C2-149B-4C50-84E8-194892189807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C8BE7C2-149B-4C50-84E8-194892189807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C8BE7C2-149B-4C50-84E8-194892189807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C8BE7C2-149B-4C50-84E8-194892189807}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

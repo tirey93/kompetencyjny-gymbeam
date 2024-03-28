@@ -23,7 +23,6 @@ namespace GymBeam.Queries
                 Role = "User",
                 Password = "Passworddddd",
                 ReservationDisabled = false,
-                testDate = DateTime.Now
             }); ;
             await _repository.SaveChangesAsync();
 

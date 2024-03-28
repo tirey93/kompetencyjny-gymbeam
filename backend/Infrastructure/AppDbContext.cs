@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace GymBeam
+namespace Infrastructure
 {
     public class AppDbContext : DbContext
     {
