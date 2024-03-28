@@ -8,8 +8,8 @@ namespace GymBeam.Queries
 {
     public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<UserResponse>>
     {
-        AppDbContext _appDbContext;
-        public GetAllUsersQueryHandler(AppDbContext appDbContext) 
+        IAppDbContext _appDbContext;
+        public GetAllUsersQueryHandler(IAppDbContext appDbContext) 
         {
             _appDbContext = appDbContext;
         }
@@ -17,7 +17,7 @@ namespace GymBeam.Queries
         {
             // Create
             Console.WriteLine("Inserting a new user");
-            _appDbContext.Add(new User
+            _appDbContext.AddEntity(new User
             {
                 Name = "testUsernameTheSecondOne",
                 DisplayName = "testDisplayName2",
@@ -26,7 +26,7 @@ namespace GymBeam.Queries
                 ReservationDisabled = false,
                 testDate = DateTime.Now
             }); ;
-            await _appDbContext.SaveChangesAsync();
+            await _appDbContext.SaveAsync();
 
             // Read
             Console.WriteLine("Querying for a blog");

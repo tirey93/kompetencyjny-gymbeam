@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace GymBeam
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : DbContext, IAppDbContext
     {
         public DbSet<User> Users { get; set; }
 
@@ -16,6 +16,16 @@ namespace GymBeam
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
+
+        public void AddEntity<T>(T user) where T : class
+        {
+            Add(user);
+        }
+
+        public async Task SaveAsync()
+        {
+            await SaveChangesAsync();
         }
     }
 }

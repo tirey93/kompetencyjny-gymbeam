@@ -1,3 +1,4 @@
+using GymBeam;
 using GymBeam.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -18,8 +19,9 @@ builder.Services.AddJWTAuthentication(issuer, audience, envVariable);
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-builder.Services.AddDbContext<GymBeam.AppDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Filename=../../MyDatabase.db"));
+builder.Services.AddScoped<IAppDbContext,  AppDbContext>();
 
 var app = builder.Build();
 
