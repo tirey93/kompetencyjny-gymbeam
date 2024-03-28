@@ -8,16 +8,17 @@ namespace GymBeam.Queries
 {
     public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<UserResponse>>
     {
-        IAppDbContext _appDbContext;
-        public GetAllUsersQueryHandler(IAppDbContext appDbContext) 
+        private readonly IRepository _repository;
+
+        public GetAllUsersQueryHandler(IRepository repository) 
         {
-            _appDbContext = appDbContext;
+            _repository = repository;
         }
         public async Task<IEnumerable<UserResponse>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
             // Create
             Console.WriteLine("Inserting a new user");
-            _appDbContext.AddEntity(new User
+            _repository.Add(new User
             {
                 Name = "testUsernameTheSecondOne",
                 DisplayName = "testDisplayName2",
@@ -26,11 +27,11 @@ namespace GymBeam.Queries
                 ReservationDisabled = false,
                 testDate = DateTime.Now
             }); ;
-            await _appDbContext.SaveAsync();
+            await _repository.SaveChangesAsync();
 
             // Read
             Console.WriteLine("Querying for a blog");
-            var blog = _appDbContext.UserList;
+            var blog = _repository.Users;
             var result = blog.Select(x => new UserResponse
             {
                 Id = x.Id,

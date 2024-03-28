@@ -21,7 +21,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.Get
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Filename=../../MyDatabase.db"));
-builder.Services.AddScoped<IAppDbContext,  AppDbContext>();
+builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 
