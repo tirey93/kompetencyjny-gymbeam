@@ -17,7 +17,9 @@ export const InformationCardItem = ({ icon: Icon, title, description }: Informat
             )}
 
             <Box>
-                <Text size="xs">{title}</Text>
+                <Text fw={700} size="xs">
+                    {title}
+                </Text>
                 <Text>{description}</Text>
             </Box>
         </Group>

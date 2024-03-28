@@ -6,7 +6,7 @@ export const pl: TranslationSource = {
         auth: {
             signedIn: {
                 title: "Zalogowano.",
-                description: "Dobrze Cię znowu widzieć!",
+                description: "Dobrze Cię znowu widzieć, {{user}}!",
             },
             signedOut: {
                 title: "Wylogowano.",
@@ -31,6 +31,13 @@ export const pl: TranslationSource = {
         },
     },
     pages: {
+        qr: {
+            gymPassDetails: {
+                owner: "Właściciel",
+                expires: "Ważność",
+            },
+        },
+
         home: {
             contact: {
                 email: "Email",

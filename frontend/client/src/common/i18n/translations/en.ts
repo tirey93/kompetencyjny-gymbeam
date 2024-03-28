@@ -6,7 +6,7 @@ export const en: TranslationSource = {
         auth: {
             signedIn: {
                 title: "You are now signed in.",
-                description: "Good to see you back!",
+                description: "Good to see you back, {{user}}!",
             },
             signedOut: {
                 title: "You have been signed out.",
@@ -31,6 +31,13 @@ export const en: TranslationSource = {
         },
     },
     pages: {
+        qr: {
+            gymPassDetails: {
+                owner: "Owner",
+                expires: "Expires",
+            },
+        },
+
         home: {
             contact: {
                 email: "Email",

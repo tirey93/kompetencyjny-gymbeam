@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using GymBeam.Constants;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -40,6 +41,17 @@ namespace GymBeam.Extensions
                         return Task.CompletedTask;
                     }
                 };
+            });
+        }
+
+        public static void AddCors(this IServiceCollection services, string[] allowedOrigin)
+        {
+            services.AddCors(options => {
+                options.AddPolicy(Config.Cors, policy => {
+                    policy.WithOrigins(allowedOrigin)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
             });
         }
     }

@@ -9,7 +9,7 @@ import {
     IconUserPlus,
 } from "@tabler/icons-react";
 
-import { useAuthentication } from "../../../../../../common/auth/hooks/useAuthentication";
+import { useSignOut } from "../../../../../../common/auth/hooks/useSignOut";
 import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
 import { Routes } from "../../../../../router/Routes";
 
@@ -27,7 +27,7 @@ type UseSideNavigationItems = Record<
 
 export const useSideNavigationItems = (): UseSideNavigationItems => {
     const translate = useTranslate();
-    const { signOut: signOutAsync } = useAuthentication();
+    const { signOut: signOutAsync } = useSignOut();
 
     return useMemo(
         () => ({
@@ -46,7 +46,7 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
                 route: Routes.NA,
             },
             activities: { Icon: IconBarbell, label: translate("navigation.labels.activities"), route: Routes.NA },
-            qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: Routes.NA },
+            qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: Routes.GYM_PASS },
         }),
         [signOutAsync, translate]
     );
