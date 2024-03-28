@@ -19,7 +19,7 @@ builder.Services.AddJWTAuthentication(issuer, audience, envVariable);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddDbContext<GymBeam.AppDbContext>(options =>
-    options.UseSqlite("Filename=MyDatabase.db"));
+    options.UseSqlite("Filename=../../MyDatabase.db"));
 
 var app = builder.Build();
 
