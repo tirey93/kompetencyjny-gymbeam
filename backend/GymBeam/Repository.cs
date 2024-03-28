@@ -13,9 +13,9 @@ namespace GymBeam
 
         public List<User> Users => _appDbContext.Users.ToList();
 
-        public void Add<T>(T user) where T : class
+        public void Add<T>(T entity) where T : class
         {
-            _appDbContext.Add(user);
+            _appDbContext.Add(entity);
         }
 
         public async Task SaveChangesAsync()
