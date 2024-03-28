@@ -1,8 +1,6 @@
-﻿using GymBeam.Domain;
+﻿using Domain;
 using GymBeam.Response;
 using MediatR;
-using Microsoft.Extensions.Hosting;
-using System.Reflection.Metadata;
 
 namespace GymBeam.Queries
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GymBeam.Domain
+namespace Domain
 {
     public class User
     {

@@ -1,4 +1,4 @@
-﻿using GymBeam.Domain;
+﻿using Domain;
 
 namespace GymBeam
 {
