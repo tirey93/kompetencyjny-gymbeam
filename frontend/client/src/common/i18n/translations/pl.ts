@@ -31,6 +31,13 @@ export const pl: TranslationSource = {
         },
     },
     pages: {
+        qr: {
+            gymPassDetails: {
+                owner: "Właściciel",
+                expires: "Ważność",
+            },
+        },
+
         home: {
             contact: {
                 email: "Email",

@@ -30,6 +30,13 @@ export type TranslationSource = {
     };
 
     pages: {
+        qr: {
+            gymPassDetails: {
+                owner: string;
+                expires: string;
+            };
+        };
+
         home: {
             contact: {
                 email: string;
