@@ -10,9 +10,12 @@ namespace GymBeam.Extensions
                value,
                new CookieOptions()
                {
+                   SameSite = SameSiteMode.None,
+                   Secure = true,
                    HttpOnly = true,
-                   SameSite = SameSiteMode.Strict
+                   MaxAge = new TimeSpan(12, 0, 0)
                });
+
             return cookies;
         }
     }

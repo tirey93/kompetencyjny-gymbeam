@@ -26,6 +26,8 @@ builder.Services.AddCors(allowedOrigin);
 /********************************************************/
 var app = builder.Build();
 
+app.UseCors(Config.Cors);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -37,8 +39,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseCors(Config.Cors);
 
 app.MapControllers();
 

@@ -50,7 +50,8 @@ namespace GymBeam.Extensions
                 options.AddPolicy(Config.Cors, policy => {
                     policy.WithOrigins(allowedOrigin)
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
+                        .AllowAnyMethod()
+                        .AllowCredentials();
                 });
             });
         }
