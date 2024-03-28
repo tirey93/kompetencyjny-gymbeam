@@ -11,7 +11,9 @@ namespace GymBeam.Controllers
     public class EnrollmentController : ControllerBase
     {
         [HttpGet("ByUserId/{id:int}")]
+#if !DEBUG
         [Authorize(Roles = Roles.User)]
+#endif
         public ActionResult<IEnumerable<EnrollmentResponse>> ByUserId(int id)
         {
             return new List<EnrollmentResponse>

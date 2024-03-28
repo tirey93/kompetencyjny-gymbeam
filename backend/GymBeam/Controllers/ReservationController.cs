@@ -11,7 +11,9 @@ namespace GymBeam.Controllers
     public class ReservationController : ControllerBase
     {
         [HttpGet]
+#if !DEBUG
         [Authorize(Roles = Roles.Admin)]
+#endif
         public ActionResult<IEnumerable<ReservationResponse>> Get()
         {
 
@@ -43,7 +45,9 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet("{id:int}")]
+#if !DEBUG
         [Authorize(Roles = Roles.User)]
+#endif
         public ActionResult<ReservationResponse> Get(int id)
         {
             return new ReservationResponse
@@ -60,14 +64,18 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost]
+#if !DEBUG
         [Authorize(Roles = Roles.User)]
+#endif
         public IActionResult Post([FromBody] ReservationRequest dto)
         {
             return NoContent();
         }
 
         [HttpDelete("{id:int}")]
+#if !DEBUG
         [Authorize(Roles = Roles.User)]
+#endif
         public ActionResult Delete(int id)
         {
             return NoContent();

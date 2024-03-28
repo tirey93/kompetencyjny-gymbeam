@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using GymBeam.Controllers;
 using GymBeam.Constants;
+using GymBeam.Queries;
+using MediatR;
 
 namespace GymBeam.Controllers
 {
@@ -11,28 +13,21 @@ namespace GymBeam.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        [HttpGet]
-        [Authorize(Roles = Roles.Admin)]
-        public ActionResult<IEnumerable<UserResponse>> Get()
+        private readonly IMediator _mediator;
+        public UserController(IMediator mediator)
         {
+            _mediator = mediator;
+        }
 
-            return new List<UserResponse>
-            {
-                new UserResponse
-                {
-                    Id = 42,
-                    Name = "testUsername",
-                    DisplayName = "testDisplayName",
-                    Role = "User"
-                },
-                new UserResponse
-                {
-                    Id = 57,
-                    Name = "testUsername2",
-                    DisplayName = "testDisplayName2",
-                    Role = "Admin"
-                }
-            };
+        [HttpGet]
+#if !DEBUG
+        [Authorize(Roles = Roles.Admin)]
+#endif
+        public async Task<ActionResult<IEnumerable<UserResponse>>> Get()
+        {
+            var request = new GetAllUsersQuery();
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpGet("{id:int}")]
@@ -66,7 +61,9 @@ namespace GymBeam.Controllers
         }
 
         [HttpPut("{id:int}")]
+#if !DEBUG
         [Authorize(Roles = Roles.User)]
+#endif
         public IActionResult Put(int id, UserRequest dto)
         {
             
@@ -74,7 +71,9 @@ namespace GymBeam.Controllers
         }
 
         [HttpDelete("{id:int}")]
+#if !DEBUG
         [Authorize(Roles = Roles.User)]
+#endif
         public ActionResult Delete(int id)
         {
             return NoContent();

@@ -1,5 +1,7 @@
 using GymBeam.Constants;
 using GymBeam.Extensions;
+using System.Reflection;
+using Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +14,13 @@ var issuer = builder.Configuration["JWT:Issuer"];
 var audience = builder.Configuration["JWT:Audience"];
 var envVariable = builder.Configuration["JWT:EnvironmentSecretVariableName"];
 var allowedOrigin = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+var fileName = builder.Configuration.GetConnectionString("WebApiDatabase");
 
 builder.Services.AddJWTAuthentication(issuer, audience, envVariable);
+builder.Services.AddInfrastructure(fileName);
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddCors(allowedOrigin);
+
 
 
 /********************************************************/
