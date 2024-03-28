@@ -30,7 +30,7 @@ namespace GymBeam.Queries
 
             // Read
             Console.WriteLine("Querying for a blog");
-            var blog = _appDbContext.Users.ToList();
+            var blog = _appDbContext.UserList;
             var result = blog.Select(x => new UserResponse
             {
                 Id = x.Id,

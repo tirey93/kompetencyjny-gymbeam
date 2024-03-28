@@ -20,7 +20,9 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet]
+#if !DEBUG
         [Authorize(Roles = Roles.Admin)]
+#endif
         public async Task<ActionResult<IEnumerable<UserResponse>>> Get()
         {
             var request = new GetAllUsersQuery();
@@ -59,7 +61,9 @@ namespace GymBeam.Controllers
         }
 
         [HttpPut("{id:int}")]
+#if !DEBUG
         [Authorize(Roles = Roles.User)]
+#endif
         public IActionResult Put(int id, UserRequest dto)
         {
             
@@ -67,7 +71,9 @@ namespace GymBeam.Controllers
         }
 
         [HttpDelete("{id:int}")]
+#if !DEBUG
         [Authorize(Roles = Roles.User)]
+#endif
         public ActionResult Delete(int id)
         {
             return NoContent();

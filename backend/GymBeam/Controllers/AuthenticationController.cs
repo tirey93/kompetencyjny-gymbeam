@@ -79,7 +79,9 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost("Logout")]
+#if !DEBUG
         [Authorize(Roles = Roles.User)]
+#endif
         public IActionResult Logout()
         {
             var userId = Request.Cookies["X-User-Id"];

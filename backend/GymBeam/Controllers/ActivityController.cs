@@ -70,14 +70,18 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost]
+#if !DEBUG
         [Authorize(Roles = Roles.Admin)]
+#endif
         public IActionResult Post([FromBody] ActivityRequest dto)
         {
             return NoContent();
         }
 
         [HttpPut("{id:int}")]
+#if !DEBUG
         [Authorize(Roles = Roles.Admin)]
+#endif
         public IActionResult Put(int id, ActivityRequest dto)
         {
 
@@ -85,7 +89,9 @@ namespace GymBeam.Controllers
         }
 
         [HttpDelete("{id:int}")]
+#if !DEBUG
         [Authorize(Roles = Roles.Admin)]
+#endif
         public ActionResult Delete(int id)
         {
             return NoContent();
