@@ -24,14 +24,15 @@ namespace GymBeam.Controllers
 
         [HttpPost("Register")]
         [AllowAnonymous]
-        public ActionResult<UserResponse> Register([FromBody] UserRequest dto)
+        public ActionResult<UserResponse> Register([FromBody] RegisterRequest dto)
         {
             return new UserResponse
             {
                 Id = 34,
-                Name = dto.Name,
+                Name = dto.Username,
                 DisplayName = dto.DisplayName,
-                Role = dto.Role
+                Role = "user",
+                ReservationDisabled = false
             };
         }
 

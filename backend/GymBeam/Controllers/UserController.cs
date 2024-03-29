@@ -60,6 +60,24 @@ namespace GymBeam.Controllers
             return isUsernameAvailable;
         }
 
+        [HttpPut("User/{id:int}/Role")]
+#if !DEBUG
+        [Authorize(Roles = Roles.Admin)]
+#endif
+        public IActionResult ChangeRole(int id, string role)
+        {
+            return NoContent();
+        }
+
+        [HttpPut("User/{id:int}/ReservationDisabled")]
+#if !DEBUG
+        [Authorize(Roles = Roles.Admin)]
+#endif
+        public IActionResult ChangeReservationDisabledFlag(int id, bool value)
+        {
+            return NoContent();
+        }
+
         [HttpPut("{id:int}")]
 #if !DEBUG
         [Authorize(Roles = Roles.User)]
