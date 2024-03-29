@@ -6,6 +6,8 @@ using GymBeam.Controllers;
 using GymBeam.Constants;
 using GymBeam.Queries;
 using MediatR;
+using System.Net;
+using GymBeam.Exceptions;
 
 namespace GymBeam.Controllers
 {
@@ -31,7 +33,9 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [Authorize(Roles = Roles.User)]
+#if !DEBUG
+        [Authorize(Roles = Roles.Admin)]
+#endif
         public ActionResult<UserResponse> Get(int id)
         {
             return new UserResponse
@@ -41,6 +45,35 @@ namespace GymBeam.Controllers
                 DisplayName = "testDisplayName",
                 Role = "User"
             };
+        }
+
+        [HttpGet("LoggedIn")]
+#if !DEBUG
+        [Authorize(Roles = Roles.User)]
+#endif
+        public ActionResult<UserResponse> GetLoggedIn()
+        {
+            int userId;
+            try
+            {
+                string cookiesUserId = Request.Cookies[Cookies.UserId];
+                if (!int.TryParse(cookiesUserId, out userId))
+                    throw new InvalidUserIdException();
+
+                return new UserResponse
+                {
+                    Id = userId,
+                    Name = "loggedInUser",
+                    DisplayName = "loggedInUserDisplayName",
+                    Role = "User",
+                    ReservationDisabled = false
+                };
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    $"BadRequest: {ex.Message}");
+            }
         }
 
         [HttpGet("CheckAvailability/ByName/{username}")]
