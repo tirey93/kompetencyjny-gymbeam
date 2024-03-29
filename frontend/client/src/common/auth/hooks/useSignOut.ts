@@ -12,10 +12,7 @@ type UseSignOut = {
 };
 
 const signOutRequest = () => {
-    return request("api/Authentication/Logout/User/1", {
-        method: "POST",
-        credentials: "include",
-    });
+    return request("SignOut", { method: "POST" });
 };
 
 export const useSignOut = (): UseSignOut => {

@@ -23,7 +23,7 @@ export const SignInPage = () => {
     }, [form, navigate, signIn]);
 
     return (
-        <Stack maw="600px" mih="800px" m="auto" justify="center">
+        <Stack maw="600px" mih="800px" m="auto" justify="center" p="xl">
             <Title ta="center" mb="xl">
                 {translate("pages.signIn.header.preEmphasis")}{" "}
                 <Text span c="accent" inherit>

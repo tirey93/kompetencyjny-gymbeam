@@ -5,7 +5,11 @@ import { useSideNavigationItems } from "./hooks/useSideNavigationItems";
 import { UserRoleGuard } from "../../../../../common/auth/components/UserRoleGuard";
 import { Logo } from "../../../../../common/components/Logo/Logo";
 
-export const SideNavigation = () => {
+type SideNavigationProps = {
+    onNavigate?: () => unknown;
+};
+
+export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
     const { qr, signOut, signIn, signUp, home, adminDashboard, activities } = useSideNavigationItems();
 
     return (
@@ -15,23 +19,23 @@ export const SideNavigation = () => {
                     <Logo logoSize={65} />
                 </Center>
 
-                <NavigationSection tiles={[home]} />
+                <NavigationSection onNavigate={onNavigate} tiles={[home]} />
 
                 <UserRoleGuard allowedRoles={["Admin", "User"]}>
-                    <NavigationSection tiles={[activities, qr]} />
+                    <NavigationSection onNavigate={onNavigate} tiles={[activities, qr]} />
                 </UserRoleGuard>
 
                 <UserRoleGuard allowedRoles={["Admin"]}>
-                    <NavigationSection tiles={[adminDashboard]} />
+                    <NavigationSection onNavigate={onNavigate} tiles={[adminDashboard]} />
                 </UserRoleGuard>
             </Stack>
 
             <Divider mt="auto" />
             <UserRoleGuard allowedRoles={["Guest"]}>
-                <NavigationSection tiles={[signIn, signUp]} />
+                <NavigationSection onNavigate={onNavigate} tiles={[signIn, signUp]} />
             </UserRoleGuard>
             <UserRoleGuard allowedRoles={["Admin", "User"]}>
-                <NavigationSection tiles={[signOut]} />
+                <NavigationSection onNavigate={onNavigate} tiles={[signOut]} />
             </UserRoleGuard>
         </Stack>
     );

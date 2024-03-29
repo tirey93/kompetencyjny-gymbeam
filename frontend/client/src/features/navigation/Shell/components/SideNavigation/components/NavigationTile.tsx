@@ -11,15 +11,24 @@ export type NavigationTileProps = {
     Icon: ForwardRefExoticComponent<Omit<IconProps, "ref"> & RefAttributes<Icon>>;
     asyncBeforeRedirect?: () => Promise<unknown>;
     isActive?: boolean;
+    onNavigate?: () => unknown;
 };
 
-export const NavigationTile = ({ label, Icon, isActive, route, asyncBeforeRedirect }: NavigationTileProps) => {
+export const NavigationTile = ({
+    label,
+    Icon,
+    isActive,
+    route,
+    onNavigate,
+    asyncBeforeRedirect,
+}: NavigationTileProps) => {
     const navigate = useNavigate();
 
     const handleNavigation = useCallback(async () => {
         await asyncBeforeRedirect?.();
         navigate(route);
-    }, [asyncBeforeRedirect, navigate, route]);
+        onNavigate?.();
+    }, [asyncBeforeRedirect, navigate, onNavigate, route]);
 
     return (
         <Tooltip

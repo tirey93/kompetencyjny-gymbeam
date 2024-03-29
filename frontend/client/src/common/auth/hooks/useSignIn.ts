@@ -4,28 +4,15 @@ import { useMutation } from "@tanstack/react-query";
 
 import { useAppOverlayStore } from "../../components/AppOverlay/hooks/useAppOverlayStore";
 import { useTranslate } from "../../i18n/hooks/useTranslate";
-import { request } from "../../request/request";
-import { UserRole } from "../Auth";
+import { request, SignInRequestBody } from "../../request";
 import { useAuthState } from "./useAuthState";
-
-type SignInRequestBody = { username: string; password: string };
-
-type SignInResponse = {
-    id: number;
-    name: string;
-    displayName: string;
-    role: UserRole;
-};
 
 type UseSignIn = {
     signIn: (signInData: SignInRequestBody) => Promise<void>;
 };
 
 const signInRequest = (body: SignInRequestBody) => {
-    return request<SignInResponse>("api/Authentication/Login", {
-        body: JSON.stringify(body),
-        method: "POST",
-    });
+    return request("SignIn", { body, method: "POST" });
 };
 
 export const useSignIn = (): UseSignIn => {

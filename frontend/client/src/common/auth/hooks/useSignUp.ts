@@ -4,28 +4,15 @@ import { useMutation } from "@tanstack/react-query";
 
 import { useAppOverlayStore } from "../../components/AppOverlay/hooks/useAppOverlayStore";
 import { useTranslate } from "../../i18n/hooks/useTranslate";
-import { request } from "../../request/request";
-import { UserRole } from "../Auth";
+import { request, SignUpRequestBody } from "../../request";
 import { useAuthState } from "./useAuthState";
-
-type SignUpRequestBody = { displayName: string; name: string; password: string };
-
-type SignUpResponse = {
-    id: number;
-    name: string;
-    displayName: string;
-    role: UserRole;
-};
 
 type UseSignUp = {
     signUp: (signUpData: SignUpRequestBody) => Promise<void>;
 };
 
 const signUpRequest = (body: SignUpRequestBody) => {
-    return request<SignUpResponse>("api/Authentication/Register", {
-        body: JSON.stringify(body),
-        method: "POST",
-    });
+    return request("SignUp", { body, method: "POST" });
 };
 
 export const useSignUp = (): UseSignUp => {

@@ -54,7 +54,7 @@ export const RegistrationPage = () => {
     };
 
     return (
-        <Stack maw="800px" mih="800px" m="auto" justify="center">
+        <Stack maw="800px" mih="800px" m="auto" justify="center" p="xl">
             <Stepper active={step} onStepClick={setStep} radius="xs" color="success">
                 <Stepper.Step
                     label={verboseSteps ? translate("pages.registration.steps.personalDetails.label") : ""}
