@@ -56,7 +56,7 @@ namespace GymBeam.Controllers
             int userId;
             try
             {
-                string cookiesUserId = Request.Cookies["X-User-Id"];
+                string cookiesUserId = Request.Cookies[Cookies.UserId];
                 if (!int.TryParse(cookiesUserId, out userId))
                     throw new InvalidUserIdException();
 

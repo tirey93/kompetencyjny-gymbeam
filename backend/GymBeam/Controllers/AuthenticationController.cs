@@ -61,8 +61,8 @@ namespace GymBeam.Controllers
                     claims.ToArray());
 
                 Response.Cookies
-                    .AppendToCookie("X-Access-Token", new JwtSecurityTokenHandler().WriteToken(token))
-                    .AppendToCookie("X-User-Id", userId.ToString());
+                    .AppendToCookie(Cookies.AccessToken, new JwtSecurityTokenHandler().WriteToken(token))
+                    .AppendToCookie(Cookies.UserId, userId.ToString());
 
                 return new UserResponse
                 {
@@ -85,9 +85,20 @@ namespace GymBeam.Controllers
 #endif
         public IActionResult Logout()
         {
-            var userId = Request.Cookies["X-User-Id"];
+            int userId;
+            try
+            {
+                string cookiesUserId = Request.Cookies[Cookies.UserId];
+                if (!int.TryParse(cookiesUserId, out userId))
+                    throw new InvalidUserIdException();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    $"BadRequest: {ex.Message}");
+            }
         }
     }
 }
