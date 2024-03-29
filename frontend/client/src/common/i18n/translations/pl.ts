@@ -2,6 +2,21 @@
 import { TranslationSource } from "./i18n";
 
 export const pl: TranslationSource = {
+    apiErrors: {
+        auth: {
+            signIn: {
+                incorrectCredentials: "Nieprawidłowy login lub hasło.",
+                default: "Coś poszło źle po naszej stronie, nie możemy Cię zalogować.",
+            },
+            signUp: {
+                loginTaken: "Ten login jest już zajęty. Prosimy o wybranie innego.",
+                default: "Nie udało się stworzyć konta, coś poszło nie tak po naszej stronie.",
+            },
+            signOut: {
+                default: "Nie udało nam się Cię wylogować. Prosimy spróbować ponownie.",
+            },
+        },
+    },
     notifications: {
         auth: {
             signedIn: {
@@ -11,6 +26,10 @@ export const pl: TranslationSource = {
             signedOut: {
                 title: "Wylogowano.",
                 description: "Do później!",
+            },
+            signingOutFailed: {
+                title: "Wylogowanie nie powiodło się",
+                description: "Spróbuj ponownie za chwilę.",
             },
             signedUp: {
                 title: "Konto zostało założone.",

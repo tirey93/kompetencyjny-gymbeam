@@ -7,6 +7,10 @@ export type RequestResult<TData> = {
     error: unknown | null;
 };
 
+export type RequestError = {
+    status?: number;
+};
+
 export type RequestOptions = Partial<{
     body: object;
     method: "POST" | "GET" | "PUT" | "DELETE" | "PATCH";

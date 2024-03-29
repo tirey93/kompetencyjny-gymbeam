@@ -50,7 +50,7 @@ export const NavigationTile = ({
                 h="50px"
             >
                 <Icon width={25} height={25} />
-                <Text ml="sm" hiddenFrom="md" size="lg" fw={700}>
+                <Text ml="sm" hiddenFrom="sm" size="lg" fw={700}>
                     {label}
                 </Text>
             </Button>

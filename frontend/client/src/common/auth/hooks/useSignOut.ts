@@ -26,9 +26,19 @@ export const useSignOut = (): UseSignOut => {
 
     const signOut = useCallback(async () => {
         setIsLoading(true);
+        const { error } = await mutateAsync();
+        setIsLoading(false);
 
-        try {
-            await mutateAsync();
+        if (error) {
+            notifications.show({
+                title: translate("notifications.auth.signingOutFailed.title"),
+                message: translate("notifications.auth.signingOutFailed.description"),
+                color: "error",
+                withBorder: true,
+            });
+
+            throw new Error(translate("apiErrors.auth.signOut.default"));
+        } else {
             clearCurrentUserDetails();
             notifications.show({
                 title: translate("notifications.auth.signedOut.title"),
@@ -36,10 +46,6 @@ export const useSignOut = (): UseSignOut => {
                 color: "success",
                 withBorder: true,
             });
-        } catch (e) {
-            console.error(e);
-        } finally {
-            setIsLoading(false);
         }
     }, [clearCurrentUserDetails, mutateAsync, setIsLoading, translate]);
 

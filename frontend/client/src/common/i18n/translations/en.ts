@@ -2,6 +2,21 @@
 import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
+    apiErrors: {
+        auth: {
+            signIn: {
+                incorrectCredentials: "Incorrect login or password.",
+                default: "Something went wrong on our side, can't sign you in.",
+            },
+            signUp: {
+                loginTaken: "Login is already taken. Please choose another one.",
+                default: "Failed to create account, something went wrong on our side.",
+            },
+            signOut: {
+                default: "We couldn't sign you out. Please try again.",
+            },
+        },
+    },
     notifications: {
         auth: {
             signedIn: {
@@ -11,6 +26,10 @@ export const en: TranslationSource = {
             signedOut: {
                 title: "You have been signed out.",
                 description: "See you later!",
+            },
+            signingOutFailed: {
+                title: "Failed to sign you out.",
+                description: "Please try again in a while.",
             },
             signedUp: {
                 title: "Account created successfully.",
