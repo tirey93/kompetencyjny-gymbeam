@@ -52,6 +52,9 @@ export const pl: TranslationSource = {
     pages: {
         adminDashboard: {
             usersPanel: {
+                search: {
+                    placeholder: "Wyszukaj użytkownika",
+                },
                 header: {
                     id: "ID",
                     user: "Użytkownik",

@@ -52,6 +52,9 @@ export type TranslationSource = {
     pages: {
         adminDashboard: {
             usersPanel: {
+                search: {
+                    placeholder: string;
+                };
                 header: {
                     id: string;
                     user: string;

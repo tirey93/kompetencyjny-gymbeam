@@ -1,30 +1,61 @@
 import { Table } from "@mantine/core";
 
-import { SortableTableHeader } from "../../../../../../../common/components/Table";
+import { UserDetails } from "../../../../../../../common/auth";
+import { SortableTableHeader, SortableTableHeaderProps } from "../../../../../../../common/components/Table";
 import { useTranslate } from "../../../../../../../common/i18n";
 
-export const UserManagementPanelHeader = () => {
+type UserManagementPanelHeaderProps = {
+    onSort: (column: keyof UserDetails) => unknown;
+    sortBy: keyof UserDetails | null;
+    sortDirection: "ASC" | "DESC" | null;
+};
+
+export const UserManagementPanelHeader = ({ onSort, sortBy, sortDirection }: UserManagementPanelHeaderProps) => {
     const translate = useTranslate();
+
+    const sortableColumns: (Partial<SortableTableHeaderProps> & { column: keyof UserDetails })[] = [
+        {
+            children: translate("pages.adminDashboard.usersPanel.header.id"),
+            column: "id",
+            ta: "center",
+        },
+        {
+            children: translate("pages.adminDashboard.usersPanel.header.user"),
+            column: "displayName",
+            colSpan: 2,
+        },
+        {
+            children: translate("pages.adminDashboard.usersPanel.header.login"),
+            column: "name",
+        },
+        {
+            children: translate("pages.adminDashboard.usersPanel.header.role"),
+            column: "role",
+            ta: "center",
+        },
+        {
+            children: translate("pages.adminDashboard.usersPanel.header.reservations"),
+            column: "reservationDisabled",
+            ta: "center",
+        },
+    ];
 
     return (
         <Table.Thead>
             <Table.Tr ta="center">
-                <SortableTableHeader sorted={true} reversed={true} onSort={() => console.log("a")} ta="center">
-                    {translate("pages.adminDashboard.usersPanel.header.id")}
-                </SortableTableHeader>
-                <SortableTableHeader sorted={true} reversed={true} onSort={() => console.log("a")} colSpan={2}>
-                    {translate("pages.adminDashboard.usersPanel.header.user")}
-                </SortableTableHeader>
-                <SortableTableHeader sorted={true} reversed={true} onSort={() => console.log("a")}>
-                    {translate("pages.adminDashboard.usersPanel.header.login")}
-                </SortableTableHeader>
-                <SortableTableHeader sorted={true} reversed={true} onSort={() => console.log("a")} ta="center">
-                    {translate("pages.adminDashboard.usersPanel.header.role")}
-                </SortableTableHeader>
-                <SortableTableHeader sorted={true} reversed={true} onSort={() => console.log("a")} ta="center">
-                    {translate("pages.adminDashboard.usersPanel.header.reservations")}
-                </SortableTableHeader>
-                <SortableTableHeader sorted={true} reversed={true} onSort={() => console.log("a")} ta="center">
+                {sortableColumns.map(({ column, children, ...rest }) => (
+                    <SortableTableHeader
+                        key={column}
+                        {...rest}
+                        onSort={() => onSort(column)}
+                        sorted={sortBy === column}
+                        reversed={sortDirection === "DESC"}
+                    >
+                        {children}
+                    </SortableTableHeader>
+                ))}
+
+                <SortableTableHeader ta="center">
                     {translate("pages.adminDashboard.usersPanel.header.options")}
                 </SortableTableHeader>
             </Table.Tr>
