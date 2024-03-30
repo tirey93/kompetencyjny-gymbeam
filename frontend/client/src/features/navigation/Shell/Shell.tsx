@@ -6,6 +6,10 @@ import { Footer } from "./components/Footer/Footer";
 import { LanguageSelect } from "./components/LanguageToggle/LanguageSelect";
 import { SideNavigation } from "./components/SideNavigation/SideNavigation";
 
+const NAVIGATION_HEADER_HEIGHT = 60;
+const NAVIGATION_FOOTER_HEIGHT = 80;
+export const NAVIGATION_SHELL_TOTAL_HEIGHT = NAVIGATION_HEADER_HEIGHT + NAVIGATION_FOOTER_HEIGHT;
+
 export const NavigationShell = ({ children }: PropsWithChildren) => {
     const [isNavbarVisible, { toggle: toggleNavbar, close: closeNavbar }] = useDisclosure(false);
 
@@ -13,8 +17,8 @@ export const NavigationShell = ({ children }: PropsWithChildren) => {
         <AppShell
             withBorder={false}
             layout="alt"
-            header={{ height: 60 }}
-            footer={{ height: 80 }}
+            header={{ height: NAVIGATION_HEADER_HEIGHT }}
+            footer={{ height: NAVIGATION_FOOTER_HEIGHT }}
             navbar={{ width: 100, breakpoint: "sm", collapsed: { desktop: false, mobile: !isNavbarVisible } }}
         >
             <AppShell.Header p="md">

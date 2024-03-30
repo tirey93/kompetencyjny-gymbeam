@@ -43,7 +43,7 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
             adminDashboard: {
                 Icon: IconDashboard,
                 label: translate("navigation.labels.adminDashboard"),
-                route: Routes.NA,
+                route: Routes.ADMIN_DASHBOARD,
             },
             activities: { Icon: IconBarbell, label: translate("navigation.labels.activities"), route: Routes.NA },
             qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: Routes.GYM_PASS },

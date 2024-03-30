@@ -47,8 +47,7 @@ export const useSignUp = (): UseSignUp => {
             setIsLoading(false);
 
             if (data) {
-                const { name, displayName, role } = data;
-                setCurrentUserDetails({ name, displayName, role });
+                setCurrentUserDetails(data);
                 notifications.show({
                     title: translate("notifications.auth.signedUp.title"),
                     message: translate("notifications.auth.signedUp.description"),

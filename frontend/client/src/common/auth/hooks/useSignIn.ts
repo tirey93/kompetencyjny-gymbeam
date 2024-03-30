@@ -50,11 +50,10 @@ export const useSignIn = (): UseSignIn => {
             setIsLoading(false);
 
             if (data) {
-                const { name, displayName, role } = data;
-                setCurrentUserDetails({ name, displayName, role });
+                setCurrentUserDetails(data);
                 notifications.show({
                     title: translate("notifications.auth.signedIn.title"),
-                    message: translate("notifications.auth.signedIn.description", { user: displayName }),
+                    message: translate("notifications.auth.signedIn.description", { user: data.displayName }),
                     color: "success",
                     withBorder: true,
                 });

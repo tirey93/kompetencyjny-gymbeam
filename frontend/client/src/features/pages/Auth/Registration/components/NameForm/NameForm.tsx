@@ -2,7 +2,7 @@ import { TextInput } from "@mantine/core";
 
 import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
 import { INPUT_LABEL_PROPS } from "../../../Auth.shared";
-import { RegistrationFormProps } from "../../Registration.types";
+import { RegistrationFormProps } from "../../Registration";
 import { RequirementsList } from "../RequirementsList/RequirementsList";
 
 export const NameForm = ({ form, rules }: RegistrationFormProps) => {

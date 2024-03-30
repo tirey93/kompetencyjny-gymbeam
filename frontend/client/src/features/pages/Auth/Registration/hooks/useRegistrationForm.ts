@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useForm } from "@mantine/form";
 
-import { RuleValidationResult, ValidationRule } from "../Registration.types";
+import { RuleValidationResult, ValidationRule } from "../Registration";
 import { useRegistrationValidationRules } from "./useRegistrationValidationRules";
 
 export type UseRegistrationForm = ReturnType<typeof useRegistrationForm>;

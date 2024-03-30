@@ -50,6 +50,31 @@ export type TranslationSource = {
     };
 
     pages: {
+        adminDashboard: {
+            usersPanel: {
+                header: {
+                    id: string;
+                    user: string;
+                    login: string;
+                    role: string;
+                    reservations: string;
+                    options: string;
+                };
+                rows: {
+                    roles: {
+                        user: string;
+                        admin: string;
+                    };
+                    reservations: {
+                        on: string;
+                        off: string;
+                    };
+                    name: string;
+                    login: string;
+                };
+            };
+        };
+
         qr: {
             gymPassDetails: {
                 owner: string;

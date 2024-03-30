@@ -50,6 +50,31 @@ export const en: TranslationSource = {
         },
     },
     pages: {
+        adminDashboard: {
+            usersPanel: {
+                header: {
+                    id: "ID",
+                    user: "User",
+                    login: "Login",
+                    role: "Role",
+                    reservations: "Reservations",
+                    options: "Options",
+                },
+                rows: {
+                    roles: {
+                        user: "User",
+                        admin: "Admin",
+                    },
+                    reservations: {
+                        on: "Enabled",
+                        off: "Disabled",
+                    },
+                    name: "Name",
+                    login: "Login",
+                },
+            },
+        },
+
         qr: {
             gymPassDetails: {
                 owner: "Owner",

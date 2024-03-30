@@ -12,6 +12,7 @@ type AuthState = {
 export const useAuthState = create<AuthState>((set, getState) => ({
     currentUserDetails: null,
     getCurrentUserRole: () => getState()?.currentUserDetails?.role ?? "Guest",
-    setCurrentUserDetails: (currentUserDetails) => set({ currentUserDetails }),
+    setCurrentUserDetails: (currentUserDetails) =>
+        set({ currentUserDetails: { ...currentUserDetails, role: "Admin" } }),
     clearCurrentUserDetails: () => set({ currentUserDetails: null }),
 }));

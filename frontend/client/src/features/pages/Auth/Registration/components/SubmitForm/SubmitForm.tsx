@@ -3,7 +3,7 @@ import { CloseButton, Group, Stack, Text, ThemeIcon } from "@mantine/core";
 import { IconEye, IconEyeOff, IconUser } from "@tabler/icons-react";
 
 import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
-import { RegistrationFormProps } from "../../Registration.types";
+import { RegistrationFormProps } from "../../Registration";
 
 export const SubmitForm = ({ form }: RegistrationFormProps) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);

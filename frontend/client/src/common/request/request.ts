@@ -10,7 +10,7 @@ import {
 const { VITE_API_BASE_URL } = import.meta.env;
 
 const AVAILABLE_API_RESOURCES: Record<ApiResourceName, string> = {
-    CurrentUserDetails: "User",
+    CurrentUserDetails: "User/LoggedIn",
     SignIn: "api/Authentication/Login",
     SignUp: "api/Authentication/Register",
     SignOut: "api/Authentication/Logout",
