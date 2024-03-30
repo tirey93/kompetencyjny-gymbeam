@@ -20,7 +20,7 @@ namespace GymBeam.Requests
             RuleFor(loginRequest => loginRequest.Password)
                 .NotEmpty().WithMessage("Password is required.")
                 .MinimumLength(8).WithMessage("Password must be at least 8 characters long.")
-                .MaximumLength(20).WithMessage("Password must not exceed 20 characters.");
+                .MaximumLength(255).WithMessage("Password must not exceed 255 characters.");
         }
     }
 }

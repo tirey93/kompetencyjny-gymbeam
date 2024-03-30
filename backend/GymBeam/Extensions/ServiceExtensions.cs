@@ -1,4 +1,7 @@
-﻿using GymBeam.Constants;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using GymBeam.Constants;
+using GymBeam.Requests;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -54,6 +57,14 @@ namespace GymBeam.Extensions
                         .AllowCredentials();
                 });
             });
+        }
+
+        public static void AddFluentValidation(this IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblyContaining<RegisterRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<LoginRequestValidator>();
+            services.AddFluentValidationAutoValidation();
+            services.AddFluentValidationClientsideAdapters();
         }
     }
 }
