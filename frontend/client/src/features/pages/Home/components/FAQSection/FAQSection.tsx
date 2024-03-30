@@ -2,7 +2,7 @@ import { RefObject, useMemo } from "react";
 import { Accordion, Container, Title } from "@mantine/core";
 
 import { FAQItem } from "./components/FAQItem";
-import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
+import { useTranslate } from "../../../../../common/i18n";
 
 import classes from "./FAQSection.module.scss";
 

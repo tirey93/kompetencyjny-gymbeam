@@ -2,7 +2,7 @@ import { Button, Container, Group, Image, List, rem, Stack, Text, ThemeIcon, Tit
 import { IconCheck } from "@tabler/icons-react";
 
 import picture from "./assets/hero-banner-picture.svg";
-import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
+import { useTranslate } from "../../../../../common/i18n";
 
 import classes from "./HeroBanner.module.scss";
 

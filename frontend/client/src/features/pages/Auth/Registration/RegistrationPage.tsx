@@ -3,14 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Stack, Stepper } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
-import { RegistrationFormWrapper } from "./components/FormWrapper/RegistrationFormWrapper";
-import { NameForm } from "./components/NameForm/NameForm";
-import { PasswordForm } from "./components/PasswordForm/PasswordForm";
-import { SubmitForm } from "./components/SubmitForm/SubmitForm";
 import { useRegistrationForm } from "./hooks/useRegistrationForm";
-import { useSignUp } from "../../../../common/auth/hooks/useSignUp";
-import { useTranslate } from "../../../../common/i18n/hooks/useTranslate";
-import { Routes } from "../../../router/Routes";
+import { useSignUp } from "../../../../common/auth";
+import { useTranslate } from "../../../../common/i18n";
+import { Routes } from "../../../router";
+import { NameForm, PasswordForm, RegistrationFormWrapper, SubmitForm } from "./components";
 
 export const RegistrationPage = () => {
     const verboseSteps = useMediaQuery("(min-width: 60em)");

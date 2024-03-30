@@ -1,6 +1,6 @@
 import { PasswordInput } from "@mantine/core";
 
-import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
+import { useTranslate } from "../../../../../../common/i18n";
 import { INPUT_LABEL_PROPS } from "../../../Auth.shared";
 import { RegistrationFormProps } from "../../Registration";
 import { RequirementsList } from "../RequirementsList/RequirementsList";

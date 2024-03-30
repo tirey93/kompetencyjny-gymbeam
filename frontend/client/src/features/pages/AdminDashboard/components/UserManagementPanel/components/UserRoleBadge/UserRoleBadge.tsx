@@ -1,7 +1,7 @@
 import { Badge } from "@mantine/core";
 
-import { UserRole } from "../../../../../../common/auth/Auth";
-import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
+import { UserRole } from "../../../../../../../common/auth";
+import { useTranslate } from "../../../../../../../common/i18n";
 
 type UserRoleBadgeProps = {
     role: UserRole;

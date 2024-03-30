@@ -1,8 +1,7 @@
 import { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 
-import { UserRole } from "../../../../common/auth/Auth";
-import { useAuthState } from "../../../../common/auth/hooks/useAuthState";
+import { useAuthState, UserRole } from "../../../../common/auth";
 import { Routes } from "../../Routes";
 
 type ProtectedRouteProps = PropsWithChildren<{

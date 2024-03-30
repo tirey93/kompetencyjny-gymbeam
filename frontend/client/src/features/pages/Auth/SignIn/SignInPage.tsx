@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Anchor, Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 
 import { useSignInForm } from "./hooks/useSignInForm";
-import { useSignIn } from "../../../../common/auth/hooks/useSignIn";
-import { ErrorMessage } from "../../../../common/components/ErrorMessage/ErrorMessage";
-import { useTranslate } from "../../../../common/i18n/hooks/useTranslate";
-import { Routes } from "../../../router/Routes";
+import { useSignIn } from "../../../../common/auth";
+import { ErrorMessage } from "../../../../common/components/DataDisplay";
+import { useTranslate } from "../../../../common/i18n";
+import { Routes } from "../../../router";
 import { INPUT_LABEL_PROPS } from "../Auth.shared";
 
 export const SignInPage = () => {

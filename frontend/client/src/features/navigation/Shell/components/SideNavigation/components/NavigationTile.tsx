@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Text, Tooltip } from "@mantine/core";
 import { Icon, IconProps } from "@tabler/icons-react";
 
-import { Routes } from "../../../../../router/Routes";
+import { Routes } from "../../../../../router";
 
 export type NavigationTileProps = {
     route: Routes;

@@ -2,8 +2,8 @@ import { useCallback, useMemo, useState } from "react";
 import { notifications } from "@mantine/notifications";
 import { useMutation } from "@tanstack/react-query";
 
-import { useAppOverlayStore } from "../../components/AppOverlay/hooks/useAppOverlayStore";
-import { useTranslate } from "../../i18n/hooks/useTranslate";
+import { useAppOverlayStore } from "../../components/AppOverlay";
+import { useTranslate } from "../../i18n";
 import { TranslationKey } from "../../i18n/translations/i18n";
 import { request, RequestError, SignUpRequestBody } from "../../request";
 import { useAuthState } from "./useAuthState";

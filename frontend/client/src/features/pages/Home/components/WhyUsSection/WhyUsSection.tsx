@@ -2,8 +2,8 @@ import { useMemo } from "react";
 import { Badge, Container, Group, SimpleGrid, Text, Title } from "@mantine/core";
 import { IconCookie, IconGauge, IconStarFilled, IconUser } from "@tabler/icons-react";
 
-import { FeatureCard } from "../../../../../common/components/FeatureCard/FeatureCard";
-import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
+import { FeatureCard } from "../../../../../common/components/DataDisplay";
+import { useTranslate } from "../../../../../common/i18n";
 
 import classes from "./WhyUsSection.module.scss";
 

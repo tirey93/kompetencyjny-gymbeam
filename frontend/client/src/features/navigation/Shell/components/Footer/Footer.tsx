@@ -1,6 +1,6 @@
 import { Container, Group } from "@mantine/core";
 
-import { Logo } from "../../../../../common/components/Logo/Logo";
+import { Logo } from "../../../../../common/components/Logo";
 
 export const Footer = () => {
     return (

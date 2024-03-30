@@ -1,8 +1,8 @@
 import { PropsWithChildren, useMemo } from "react";
 import { Paper, Stack, Text, Title } from "@mantine/core";
 
-import { ErrorMessage } from "../../../../../../common/components/ErrorMessage/ErrorMessage";
-import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
+import { ErrorMessage } from "../../../../../../common/components/DataDisplay";
+import { useTranslate } from "../../../../../../common/i18n";
 import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
 
 const MAX_DISPLAYABLE_USER_NAME_LENGTH = 10;

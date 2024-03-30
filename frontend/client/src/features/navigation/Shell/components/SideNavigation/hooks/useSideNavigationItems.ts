@@ -9,9 +9,9 @@ import {
     IconUserPlus,
 } from "@tabler/icons-react";
 
-import { useSignOut } from "../../../../../../common/auth/hooks/useSignOut";
-import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
-import { Routes } from "../../../../../router/Routes";
+import { useSignOut } from "../../../../../../common/auth";
+import { useTranslate } from "../../../../../../common/i18n";
+import { Routes } from "../../../../../router";
 
 type NavigationItem = {
     Icon: typeof IconDashboard;

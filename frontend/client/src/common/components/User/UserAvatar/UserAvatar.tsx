@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Avatar } from "@mantine/core";
 
-import { UserDetails } from "../../../../../../common/auth/Auth";
+import { UserDetails } from "../../../auth";
 
 type UserAvatarProps = {
     user: UserDetails;

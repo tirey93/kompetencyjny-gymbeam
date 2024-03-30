@@ -1,12 +1,12 @@
 import { Table, Text } from "@mantine/core";
 
-import { UserDetails } from "../../../../../../common/auth/Auth";
-import { TextWithTooltip } from "../../../../../../common/components/TextWithTooltip/TextWithTooltip";
-import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
-import { UserAvatar } from "./UserAvatar";
-import { UserManagementOptionsDropdown } from "./UserManagementOptionsDropdown";
-import { UserReservationsPermissionBadge } from "./UserReservationsPermissionBadge";
-import { UserRoleBadge } from "./UserRoleBadge";
+import { UserDetails } from "../../../../../../../common/auth/Auth";
+import { TextWithTooltip } from "../../../../../../../common/components/DataDisplay";
+import { UserAvatar } from "../../../../../../../common/components/User";
+import { useTranslate } from "../../../../../../../common/i18n";
+import { UserManagementOptionsDropdown } from "../UserManagementOptionsDropdown/UserManagementOptionsDropdown";
+import { UserReservationsPermissionBadge } from "../UserReservationsPermissionBadge/UserReservationsPermissionBadge";
+import { UserRoleBadge } from "../UserRoleBadge/UserRoleBadge";
 
 type UserRowProps = {
     userDetails: UserDetails;

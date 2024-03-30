@@ -3,12 +3,12 @@ import { createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import { AppProvider } from "../../AppProvider";
 import { Root } from "../../Root";
-import { NotFoundPage } from "../pages/404/404";
-import { AdminDashboardPage } from "../pages/AdminDashboard/AdminDashboardPage";
-import { RegistrationPage } from "../pages/Auth/Registration/RegistrationPage";
-import { SignInPage } from "../pages/Auth/SignIn/SignInPage";
-import { GymPassPage } from "../pages/GymPass/GymPass";
-import { HomePage } from "../pages/Home/Home";
+import { NotFoundPage } from "../pages/404";
+import { AdminDashboardPage } from "../pages/AdminDashboard";
+import { RegistrationPage } from "../pages/Auth/Registration";
+import { SignInPage } from "../pages/Auth/SignIn";
+import { GymPassPage } from "../pages/GymPass";
+import { HomePage } from "../pages/Home";
 import { Routes } from "./Routes";
 
 const APP_PAGES = [

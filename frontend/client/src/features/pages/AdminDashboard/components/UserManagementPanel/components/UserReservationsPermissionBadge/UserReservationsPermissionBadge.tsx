@@ -1,6 +1,6 @@
 import { Badge } from "@mantine/core";
 
-import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
+import { useTranslate } from "../../../../../../../common/i18n";
 
 type UserReservationsEnabledBadgeProps = {
     disabled?: boolean;

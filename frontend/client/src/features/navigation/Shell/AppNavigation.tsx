@@ -2,15 +2,13 @@ import { PropsWithChildren } from "react";
 import { AppShell, Burger, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { Footer } from "./components/Footer/Footer";
-import { LanguageSelect } from "./components/LanguageToggle/LanguageSelect";
-import { SideNavigation } from "./components/SideNavigation/SideNavigation";
+import { Footer, LanguageSelect, SideNavigation } from "./components";
 
 const NAVIGATION_HEADER_HEIGHT = 60;
 const NAVIGATION_FOOTER_HEIGHT = 80;
 export const NAVIGATION_SHELL_TOTAL_HEIGHT = NAVIGATION_HEADER_HEIGHT + NAVIGATION_FOOTER_HEIGHT;
 
-export const NavigationShell = ({ children }: PropsWithChildren) => {
+export const AppNavigation = ({ children }: PropsWithChildren) => {
     const [isNavbarVisible, { toggle: toggleNavbar, close: closeNavbar }] = useDisclosure(false);
 
     return (

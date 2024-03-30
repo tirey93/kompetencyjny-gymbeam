@@ -2,8 +2,8 @@ import { Center, Divider, Stack } from "@mantine/core";
 
 import { NavigationSection } from "./components/NavigationSection";
 import { useSideNavigationItems } from "./hooks/useSideNavigationItems";
-import { UserRoleGuard } from "../../../../../common/auth/components/UserRoleGuard";
-import { Logo } from "../../../../../common/components/Logo/Logo";
+import { UserRoleGuard } from "../../../../../common/auth";
+import { Logo } from "../../../../../common/components/Logo";
 
 type SideNavigationProps = {
     onNavigate?: () => unknown;

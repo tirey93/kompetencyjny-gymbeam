@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { Anchor, Button, Group, Stack } from "@mantine/core";
 
-import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
-import { Routes } from "../../../../../router/Routes";
-import { RegistrationFormWrapperProps } from "../FormWrapper/RegistrationFormWrapper";
+import { useTranslate } from "../../../../../../common/i18n";
+import { Routes } from "../../../../../router";
 
-type StepperButtonsProps = Pick<RegistrationFormWrapperProps, "onPreviousStep" | "onNextStep"> & {
+type StepperButtonsProps = {
+    onPreviousStep?: () => unknown;
+    onNextStep?: () => unknown;
     nextLabel?: string;
     previousLabel?: string;
 };

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CloseButton, Group, Stack, Text, ThemeIcon } from "@mantine/core";
 import { IconEye, IconEyeOff, IconUser } from "@tabler/icons-react";
 
-import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
+import { useTranslate } from "../../../../../../common/i18n";
 import { RegistrationFormProps } from "../../Registration";
 
 export const SubmitForm = ({ form }: RegistrationFormProps) => {

@@ -1,6 +1,6 @@
 import { Box, Stack, Text } from "@mantine/core";
 
-import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
+import { useTranslate } from "../../../../../common/i18n";
 
 type GymPassInfoProps = {
     owner: string;

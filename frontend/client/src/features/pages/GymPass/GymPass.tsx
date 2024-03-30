@@ -1,9 +1,7 @@
 import { SimpleGrid, Space, Stack } from "@mantine/core";
 
-import { GymPassInfo } from "./components/GymPassInfo/GymPassInfo";
-import { GymPassQR } from "./components/GymPassQR/GymPassQR";
-import { Timestamp } from "./components/Timestamp/Timestamp";
-import { useAuthState } from "../../../common/auth/hooks/useAuthState";
+import { useAuthState } from "../../../common/auth";
+import { GymPassInfo, GymPassQR, Timestamp } from "./components";
 
 export const GymPassPage = () => {
     const currentUserDetails = useAuthState((state) => state.currentUserDetails);

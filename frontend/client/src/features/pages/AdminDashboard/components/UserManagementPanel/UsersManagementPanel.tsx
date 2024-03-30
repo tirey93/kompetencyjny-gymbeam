@@ -1,10 +1,9 @@
 import { Table } from "@mantine/core";
 import { useViewportSize } from "@mantine/hooks";
 
-import { UserManagementPanelHeader } from "./components/UserManagementPanelHeader";
-import { UserRow } from "./components/UserRow";
 import { UserDetails } from "../../../../../common/auth/Auth";
-import { NAVIGATION_SHELL_TOTAL_HEIGHT } from "../../../../navigation/Shell/Shell";
+import { NAVIGATION_SHELL_TOTAL_HEIGHT } from "../../../../navigation/Shell/AppNavigation";
+import { UserManagementPanelHeader, UserRow } from "./components";
 
 const data: UserDetails[] = [
     {

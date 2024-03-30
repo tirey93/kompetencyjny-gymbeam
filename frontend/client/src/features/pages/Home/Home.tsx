@@ -3,11 +3,9 @@ import { Container, SimpleGrid, Space } from "@mantine/core";
 import { useScrollIntoView } from "@mantine/hooks";
 import { IconAt, IconMapPin, IconPhone } from "@tabler/icons-react";
 
-import { FAQSection } from "./components/FAQSection/FAQSection";
-import { HeroBanner } from "./components/HeroBanner/HeroBanner";
-import { WhyUsSection } from "./components/WhyUsSection/WhyUsSection";
-import { InformationCard } from "../../../common/components/InformationCard/InformationCard";
-import { useTranslate } from "../../../common/i18n/hooks/useTranslate";
+import { InformationCard } from "../../../common/components/DataDisplay";
+import { useTranslate } from "../../../common/i18n";
+import { FAQSection, HeroBanner, WhyUsSection } from "./components";
 
 export const HomePage = () => {
     const translate = useTranslate();
