@@ -5,17 +5,16 @@ import { useTranslate } from "../../../../../../../common/i18n";
 
 type UserRoleBadgeProps = {
     role: UserRole;
+    onClick?: () => unknown;
 };
 
-export const UserRoleBadge = ({ role }: UserRoleBadgeProps) => {
+export const UserRoleBadge = ({ role, onClick }: UserRoleBadgeProps) => {
     const translate = useTranslate();
     const isAdmin = role === "Admin";
 
     return (
-        <Badge variant="light" color={isAdmin ? "secondary" : "accent"}>
-            {isAdmin
-                ? translate("pages.adminDashboard.usersPanel.rows.roles.admin")
-                : translate("pages.adminDashboard.usersPanel.rows.roles.user")}
+        <Badge variant="light" color={isAdmin ? "secondary" : "accent"} onClick={onClick}>
+            {isAdmin ? translate("user.roles.admin") : translate("user.roles.user")}
         </Badge>
     );
 };

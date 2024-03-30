@@ -1,19 +1,20 @@
 import { Table, Text } from "@mantine/core";
 
-import { UserDetails } from "../../../../../../../common/auth/Auth";
+import { UserDetails } from "../../../../../../../common/auth";
 import { TextWithTooltip } from "../../../../../../../common/components/DataDisplay";
 import { UserAvatar } from "../../../../../../../common/components/User";
 import { useTranslate } from "../../../../../../../common/i18n";
+import { UserManagementEvents } from "../../UsersManagementPanel";
 import { UserManagementOptionsDropdown } from "../UserManagementOptionsDropdown/UserManagementOptionsDropdown";
 import { UserReservationsPermissionBadge } from "../UserReservationsPermissionBadge/UserReservationsPermissionBadge";
 import { UserRoleBadge } from "../UserRoleBadge/UserRoleBadge";
 
 type UserRowProps = {
     userDetails: UserDetails;
-    onDelete: () => void;
+    events: UserManagementEvents;
 };
 
-export const UserRow = ({ userDetails, onDelete }: UserRowProps) => {
+export const UserRow = ({ userDetails, events }: UserRowProps) => {
     const translate = useTranslate();
 
     return (
@@ -45,15 +46,18 @@ export const UserRow = ({ userDetails, onDelete }: UserRowProps) => {
             </Table.Td>
 
             <Table.Td ta="center">
-                <UserRoleBadge role={userDetails.role} />
+                <UserRoleBadge onClick={events.onUserRoleChange} role={userDetails.role} />
             </Table.Td>
 
             <Table.Td ta="center">
-                <UserReservationsPermissionBadge disabled={userDetails.reservationDisabled} />
+                <UserReservationsPermissionBadge
+                    onClick={events.onUserReservationsPermissionToggle}
+                    disabled={userDetails.reservationDisabled}
+                />
             </Table.Td>
 
             <Table.Td ta="center">
-                <UserManagementOptionsDropdown onDelete={onDelete} />
+                <UserManagementOptionsDropdown events={events} />
             </Table.Td>
         </Table.Tr>
     );

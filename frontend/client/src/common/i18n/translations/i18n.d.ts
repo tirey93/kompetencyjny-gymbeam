@@ -53,11 +53,18 @@ export type TranslationSource = {
         id: string;
         name: string;
         login: string;
+        roles: {
+            user: string;
+            admin: string;
+        };
     };
 
     pages: {
         adminDashboard: {
             usersPanel: {
+                options: {
+                    delete: string;
+                };
                 modals: {
                     delete: {
                         buttons: {
@@ -66,6 +73,23 @@ export type TranslationSource = {
                         };
                         title: string;
                         caption: string;
+                    };
+                    changeRole: {
+                        buttons: {
+                            confirm: string;
+                            cancel: string;
+                        };
+                        title: string;
+                        caption: string;
+                    };
+                    toggleReservations: {
+                        buttons: {
+                            confirm: string;
+                            cancel: string;
+                        };
+                        title: string;
+                        toggleOnCaption: string;
+                        toggleOffCaption: string;
                     };
                 };
                 search: {
@@ -80,10 +104,6 @@ export type TranslationSource = {
                     options: string;
                 };
                 rows: {
-                    roles: {
-                        user: string;
-                        admin: string;
-                    };
                     reservations: {
                         on: string;
                         off: string;

@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { Table } from "@mantine/core";
 import { useViewportSize } from "@mantine/hooks";
 
@@ -6,7 +7,7 @@ import { SearchBar } from "../../../../../common/components/DataInput";
 import { useTranslate } from "../../../../../common/i18n";
 import { NAVIGATION_SHELL_TOTAL_HEIGHT } from "../../../../navigation/Shell/AppNavigation";
 import { UserManagementPanelHeader, UserRow } from "./components";
-import { useUsersManagementPanelEvents, useUsersManagementPanelSortAndSearch } from "./hooks";
+import { useUsersManagementModalEvents, useUsersManagementPanelSortAndSearch } from "./hooks";
 
 const MOCK_DATA: UserDetails[] = [
     {
@@ -32,12 +33,25 @@ const MOCK_DATA: UserDetails[] = [
     },
 ];
 
+export type UserManagementEvents = {
+    onDelete: () => void;
+    onUserRoleChange: () => void;
+    onUserReservationsPermissionToggle: () => void;
+};
+
 export const UsersManagementPanel = () => {
     const { sortBy, onSort, sortDirection, data, onSearch } = useUsersManagementPanelSortAndSearch(MOCK_DATA);
-    const { onUserDelete } = useUsersManagementPanelEvents();
+    const { onUserDelete, onUserRoleChange, onUserReservationsPermissionToggle } = useUsersManagementModalEvents();
     const translate = useTranslate();
     const { height } = useViewportSize();
     const scrollContainerHeight = height - NAVIGATION_SHELL_TOTAL_HEIGHT;
+
+    const onUserRoleChangeInternal = useCallback(
+        (user: UserDetails) => {
+            return onUserRoleChange(user, user.role === "Admin" ? "User" : "Admin");
+        },
+        [onUserRoleChange]
+    );
 
     return (
         <Table.ScrollContainer minWidth={800} h={scrollContainerHeight}>
@@ -50,7 +64,15 @@ export const UsersManagementPanel = () => {
                 <UserManagementPanelHeader sortBy={sortBy} onSort={onSort} sortDirection={sortDirection} />
                 <Table.Tbody>
                     {data.map((user) => (
-                        <UserRow key={user.id} userDetails={user} onDelete={() => onUserDelete(user)} />
+                        <UserRow
+                            key={user.id}
+                            userDetails={user}
+                            events={{
+                                onDelete: () => onUserDelete(user),
+                                onUserRoleChange: () => onUserRoleChangeInternal(user),
+                                onUserReservationsPermissionToggle: () => onUserReservationsPermissionToggle(user),
+                            }}
+                        />
                     ))}
                 </Table.Tbody>
             </Table>

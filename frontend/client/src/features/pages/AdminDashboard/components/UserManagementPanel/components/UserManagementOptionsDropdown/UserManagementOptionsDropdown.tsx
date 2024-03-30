@@ -1,11 +1,16 @@
 import { ActionIcon, Menu, rem } from "@mantine/core";
 import { IconDots, IconTrash } from "@tabler/icons-react";
 
+import { useTranslate } from "../../../../../../../common/i18n";
+import { UserManagementEvents } from "../../UsersManagementPanel";
+
 type UserManagementOptionsDropdownProps = {
-    onDelete: () => void;
+    events: UserManagementEvents;
 };
 
-export const UserManagementOptionsDropdown = ({ onDelete }: UserManagementOptionsDropdownProps) => {
+export const UserManagementOptionsDropdown = ({ events }: UserManagementOptionsDropdownProps) => {
+    const translate = useTranslate();
+
     return (
         <Menu transitionProps={{ transition: "pop" }} withArrow position="right">
             <Menu.Target>
@@ -15,11 +20,11 @@ export const UserManagementOptionsDropdown = ({ onDelete }: UserManagementOption
             </Menu.Target>
             <Menu.Dropdown>
                 <Menu.Item
-                    onClick={onDelete}
+                    onClick={events.onDelete}
                     leftSection={<IconTrash style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
                     color="red"
                 >
-                    Delete account
+                    {translate("pages.adminDashboard.usersPanel.options.delete")}
                 </Menu.Item>
             </Menu.Dropdown>
         </Menu>

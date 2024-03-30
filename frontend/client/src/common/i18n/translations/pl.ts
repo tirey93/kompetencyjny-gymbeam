@@ -53,18 +53,43 @@ export const pl: TranslationSource = {
         id: "ID",
         name: "Nazwa",
         login: "Login",
+        roles: {
+            user: "Użytkownik",
+            admin: "Administrator",
+        },
     },
     pages: {
         adminDashboard: {
             usersPanel: {
+                options: {
+                    delete: "Usuń konto użytkownika",
+                },
                 modals: {
                     delete: {
                         buttons: {
                             confirm: "Potwierdź",
                             cancel: "Anuluj",
                         },
-                        title: "Jesteś o krok od usunięcia użytkownika!",
+                        title: "Usuwanie użytkownika",
                         caption: "Ta akcja jest nieodwracalna! Czy na pewno chcesz usunąć tego użytkownika?",
+                    },
+                    changeRole: {
+                        buttons: {
+                            confirm: "Potwierdź",
+                            cancel: "Anuluj",
+                        },
+                        title: "Zmiana roli użytkownika",
+                        caption: 'Czy na pewno chcesz zmienić rolę tego użytkownika na "{{role}}"?',
+                    },
+                    toggleReservations: {
+                        buttons: {
+                            confirm: "Confirm",
+                            cancel: "Cancel",
+                        },
+                        title: "Zmiana uprawnień do rezerwacji",
+                        toggleOnCaption: "Czy na pewno chcesz pozwolić temu użytkownikowi na rezerwowanie zajęć?",
+                        toggleOffCaption:
+                            "Czy na pewno chcesz zablokować temu użytkownikowi możliwość rezerwacji zajęć?",
                     },
                 },
                 search: {
@@ -79,10 +104,6 @@ export const pl: TranslationSource = {
                     options: "Opcje",
                 },
                 rows: {
-                    roles: {
-                        user: "Użytkownik",
-                        admin: "Administrator",
-                    },
                     reservations: {
                         on: "Włączone",
                         off: "Wyłączone",

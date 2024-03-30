@@ -53,18 +53,42 @@ export const en: TranslationSource = {
         id: "ID",
         name: "Name",
         login: "Login",
+        roles: {
+            user: "User",
+            admin: "Admin",
+        },
     },
     pages: {
         adminDashboard: {
             usersPanel: {
+                options: {
+                    delete: "Delete user's account",
+                },
                 modals: {
                     delete: {
                         buttons: {
                             confirm: "Confirm",
                             cancel: "Cancel",
                         },
-                        title: "You are about to delete an user!",
+                        title: "Delete user",
                         caption: "This action is irreversible! Are you sure you want to delete this user?",
+                    },
+                    changeRole: {
+                        buttons: {
+                            confirm: "Confirm",
+                            cancel: "Cancel",
+                        },
+                        title: "Change user role",
+                        caption: 'Are you sure you want to change role of this user to "{{role}}"?',
+                    },
+                    toggleReservations: {
+                        buttons: {
+                            confirm: "Confirm",
+                            cancel: "Cancel",
+                        },
+                        title: "Change reservations permissions",
+                        toggleOnCaption: "Are you sure you want to allow this user to make reservations?",
+                        toggleOffCaption: "Are you sure you want to prevent this user from making any reservations?",
                     },
                 },
                 search: {
@@ -79,10 +103,6 @@ export const en: TranslationSource = {
                     options: "Options",
                 },
                 rows: {
-                    roles: {
-                        user: "User",
-                        admin: "Admin",
-                    },
                     reservations: {
                         on: "Enabled",
                         off: "Disabled",

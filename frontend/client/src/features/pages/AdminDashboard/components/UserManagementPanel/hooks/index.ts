@@ -1,2 +1,2 @@
-export { useUsersManagementPanelEvents } from "./useUsersManagementPanelEvents";
+export { useUsersManagementModalEvents } from "./useUsersManagementModalEvents";
 export { useUsersManagementPanelSortAndSearch } from "./useUsersManagementPanelSortAndSearch";
