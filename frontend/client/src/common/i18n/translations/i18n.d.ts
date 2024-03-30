@@ -9,9 +9,29 @@ export type TranslationSource = {
                 title: string;
                 description: string;
             };
+            signingOutFailed: {
+                title: string;
+                description: string;
+            };
             signedUp: {
                 title: string;
                 description: string;
+            };
+        };
+    };
+
+    apiErrors: {
+        auth: {
+            signIn: {
+                incorrectCredentials: string;
+                default: string;
+            };
+            signUp: {
+                loginTaken: string;
+                default: string;
+            };
+            signOut: {
+                default: string;
             };
         };
     };

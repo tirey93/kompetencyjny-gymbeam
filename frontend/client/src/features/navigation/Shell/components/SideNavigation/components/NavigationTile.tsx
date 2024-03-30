@@ -11,15 +11,24 @@ export type NavigationTileProps = {
     Icon: ForwardRefExoticComponent<Omit<IconProps, "ref"> & RefAttributes<Icon>>;
     asyncBeforeRedirect?: () => Promise<unknown>;
     isActive?: boolean;
+    onNavigate?: () => unknown;
 };
 
-export const NavigationTile = ({ label, Icon, isActive, route, asyncBeforeRedirect }: NavigationTileProps) => {
+export const NavigationTile = ({
+    label,
+    Icon,
+    isActive,
+    route,
+    onNavigate,
+    asyncBeforeRedirect,
+}: NavigationTileProps) => {
     const navigate = useNavigate();
 
     const handleNavigation = useCallback(async () => {
         await asyncBeforeRedirect?.();
         navigate(route);
-    }, [asyncBeforeRedirect, navigate, route]);
+        onNavigate?.();
+    }, [asyncBeforeRedirect, navigate, onNavigate, route]);
 
     return (
         <Tooltip
@@ -41,7 +50,7 @@ export const NavigationTile = ({ label, Icon, isActive, route, asyncBeforeRedire
                 h="50px"
             >
                 <Icon width={25} height={25} />
-                <Text ml="sm" hiddenFrom="md" size="lg" fw={700}>
+                <Text ml="sm" hiddenFrom="sm" size="lg" fw={700}>
                     {label}
                 </Text>
             </Button>

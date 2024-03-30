@@ -4,6 +4,7 @@ import { Anchor, Button, Paper, PasswordInput, Stack, Text, TextInput, Title } f
 
 import { useSignInForm } from "./hooks/useSignInForm";
 import { useSignIn } from "../../../../common/auth/hooks/useSignIn";
+import { ErrorMessage } from "../../../../common/components/ErrorMessage/ErrorMessage";
 import { useTranslate } from "../../../../common/i18n/hooks/useTranslate";
 import { Routes } from "../../../router/Routes";
 import { INPUT_LABEL_PROPS } from "../Auth.shared";
@@ -11,19 +12,24 @@ import { INPUT_LABEL_PROPS } from "../Auth.shared";
 export const SignInPage = () => {
     const translate = useTranslate();
     const { form } = useSignInForm();
-    const { signIn } = useSignIn();
+    const { signIn, error, reset } = useSignIn();
     const navigate = useNavigate();
 
     const onSubmit = useCallback(async () => {
         if (!form.validate().hasErrors) {
             const { login, password } = form.values;
-            await signIn({ username: login, password });
-            navigate(Routes.ROOT);
+
+            try {
+                await signIn({ username: login, password });
+                navigate(Routes.ROOT);
+            } catch (error) {
+                console.error(error);
+            }
         }
     }, [form, navigate, signIn]);
 
     return (
-        <Stack maw="600px" mih="800px" m="auto" justify="center">
+        <Stack maw="600px" mih="800px" m="auto" justify="center" p="xl">
             <Title ta="center" mb="xl">
                 {translate("pages.signIn.header.preEmphasis")}{" "}
                 <Text span c="accent" inherit>
@@ -49,6 +55,8 @@ export const SignInPage = () => {
                     {...form.getInputProps("password")}
                 />
             </Paper>
+
+            {error && <ErrorMessage onClose={reset}>{error}</ErrorMessage>}
 
             <Stack mt="sm" maw="400px" miw="50%" m="0 auto">
                 <Button size="md" variant="gradient" onClick={onSubmit}>

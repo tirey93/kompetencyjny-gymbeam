@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stack, Stepper } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
@@ -17,7 +17,7 @@ export const RegistrationPage = () => {
     const { form, validatedRules } = useRegistrationForm();
     const translate = useTranslate();
     const navigate = useNavigate();
-    const { signUp } = useSignUp();
+    const { signUp, error, reset } = useSignUp();
     const [step, setStep] = useState(0);
 
     const goToNextStep = useCallback(() => {
@@ -47,14 +47,29 @@ export const RegistrationPage = () => {
         }
     }, [form, goToNextStep]);
 
-    const submitRegistrationForm = async () => {
+    const submitRegistrationForm = useCallback(async () => {
         const { login: name, password, name: displayName } = form.values;
-        await signUp({ name, password, displayName });
-        navigate(Routes.ROOT);
-    };
+        try {
+            await signUp({ name, password, displayName });
+            navigate(Routes.ROOT);
+        } catch (error) {
+            console.error(error);
+        }
+    }, [form.values, navigate, signUp]);
+
+    const signUpErrorProps = useMemo(
+        () =>
+            error
+                ? {
+                      signUpError: error,
+                      clearSignUpError: reset,
+                  }
+                : undefined,
+        [error]
+    );
 
     return (
-        <Stack maw="800px" mih="800px" m="auto" justify="center">
+        <Stack maw="800px" mih="800px" m="auto" justify="center" p="xl">
             <Stepper active={step} onStepClick={setStep} radius="xs" color="success">
                 <Stepper.Step
                     label={verboseSteps ? translate("pages.registration.steps.personalDetails.label") : ""}
@@ -86,6 +101,7 @@ export const RegistrationPage = () => {
                     allowStepSelect={canSelectStep(2)}
                 >
                     <RegistrationFormWrapper
+                        errorProps={signUpErrorProps}
                         userName={form.values.name}
                         onPreviousStep={goToPreviousStep}
                         onNextStep={submitRegistrationForm}

@@ -1,6 +1,7 @@
 import { PropsWithChildren, useMemo } from "react";
 import { Paper, Stack, Text, Title } from "@mantine/core";
 
+import { ErrorMessage } from "../../../../../../common/components/ErrorMessage/ErrorMessage";
 import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
 import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
 
@@ -10,6 +11,10 @@ export type RegistrationFormWrapperProps = PropsWithChildren<{
     onNextStep?: () => unknown;
     onPreviousStep?: () => unknown;
     userName: string;
+    errorProps?: {
+        signUpError?: string;
+        clearSignUpError: () => unknown;
+    };
 }>;
 
 export const RegistrationFormWrapper = ({
@@ -17,6 +22,7 @@ export const RegistrationFormWrapper = ({
     userName,
     onPreviousStep,
     onNextStep,
+    errorProps,
 }: RegistrationFormWrapperProps) => {
     const translate = useTranslate();
 
@@ -49,6 +55,8 @@ export const RegistrationFormWrapper = ({
             <Paper radius="md" withBorder p="xl" shadow="xl" component={Stack}>
                 {children}
             </Paper>
+
+            {errorProps && <ErrorMessage onClose={errorProps.clearSignUpError}>{errorProps.signUpError}</ErrorMessage>}
             <RegistrationFormFooter onPreviousStep={onPreviousStep} onNextStep={onNextStep} />
         </Stack>
     );
