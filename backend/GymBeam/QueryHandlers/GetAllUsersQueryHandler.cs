@@ -12,24 +12,10 @@ namespace GymBeam.Queries
         {
             _repository = repository;
         }
-        public async Task<IEnumerable<UserResponse>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<UserResponse>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            // Create
-            Console.WriteLine("Inserting a new user");
-            _repository.Add(new User
-            {
-                Name = "testUsernameTheSecondOne",
-                DisplayName = "testDisplayName2",
-                Role = "User",
-                Password = "Passworddddd",
-                ReservationDisabled = false,
-            }); ;
-            await _repository.SaveChangesAsync();
-
-            // Read
-            Console.WriteLine("Querying for a blog");
-            var blog = _repository.Users;
-            var result = blog.Select(x => new UserResponse
+            var users = _repository.Users;
+            var result = users.Select(x => new UserResponse
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -37,7 +23,7 @@ namespace GymBeam.Queries
                 Role = x.Role
             }).ToList();
 
-            return result;
+            return Task.FromResult<IEnumerable<UserResponse>>(result);
         }
     }
 }

@@ -8,6 +8,7 @@ using GymBeam.Queries;
 using MediatR;
 using System.Net;
 using GymBeam.Exceptions;
+using GymBeam.Commands;
 
 namespace GymBeam.Controllers
 {
@@ -36,38 +37,44 @@ namespace GymBeam.Controllers
 #if !DEBUG
         [Authorize(Roles = Roles.Admin)]
 #endif
-        public ActionResult<UserResponse> Get(int id)
+        public async Task<ActionResult<UserResponse>> Get(int id)
         {
-            return new UserResponse
+            var request = new GetUserQuery
             {
-                Id = id,
-                Name = "testUsername",
-                DisplayName = "testDisplayName",
-                Role = "User"
+                UserId = id
             };
+            try
+            {
+                var result = await _mediator.Send(request);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    $"BadRequest: {ex.Message}");
+            }
+
         }
 
         [HttpGet("LoggedIn")]
 #if !DEBUG
         [Authorize(Roles = Roles.User)]
 #endif
-        public ActionResult<UserResponse> GetLoggedIn()
+        public async Task<ActionResult<UserResponse>> GetLoggedIn()
         {
-            int userId;
+            int id;
             try
             {
                 string cookiesUserId = Request.Cookies[Cookies.UserId];
-                if (!int.TryParse(cookiesUserId, out userId))
+                if (!int.TryParse(cookiesUserId, out id))
                     throw new InvalidUserIdException();
 
-                return new UserResponse
+                var request = new GetUserQuery
                 {
-                    Id = userId,
-                    Name = "loggedInUser",
-                    DisplayName = "loggedInUserDisplayName",
-                    Role = "User",
-                    ReservationDisabled = false
+                    UserId = id
                 };
+                var result = await _mediator.Send(request);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -78,19 +85,14 @@ namespace GymBeam.Controllers
 
         [HttpGet("CheckAvailability/ByName/{username}")]
         [AllowAnonymous]
-        public ActionResult<bool> CheckUsernameAvailability(string username)
+        public async Task<ActionResult<bool>> CheckUsernameAvailability(string username)
         {
-            bool isUsernameAvailable;
-
-            if (username.ToLower() == "test1" || (username.ToLower() == "test2"))
+            var request = new CheckUsernameAvailabilityQuery
             {
-                isUsernameAvailable = true;
-            }
-            else
-            {
-                isUsernameAvailable = false;
-            }
-            return isUsernameAvailable;
+                Username = username
+            };
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpPut("User/{id:int}/Role")]
@@ -115,9 +117,23 @@ namespace GymBeam.Controllers
 #if !DEBUG
         [Authorize(Roles = Roles.User)]
 #endif
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return NoContent();
+            var request = new DeleteUserCommand
+            {
+                UserId = id
+            };
+
+            try
+            {
+                await _mediator.Send(request);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    $"BadRequest: {ex.Message}");
+            }
         }
     }
 }
