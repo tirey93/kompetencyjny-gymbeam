@@ -1,12 +1,12 @@
 import { Table } from "@mantine/core";
 import { useViewportSize } from "@mantine/hooks";
 
-import { useUsersManagementPanelSortAndSearch } from "./hooks/useUsersManagementPanelSortAndSearch";
 import { UserDetails } from "../../../../../common/auth";
 import { SearchBar } from "../../../../../common/components/DataInput";
 import { useTranslate } from "../../../../../common/i18n";
 import { NAVIGATION_SHELL_TOTAL_HEIGHT } from "../../../../navigation/Shell/AppNavigation";
 import { UserManagementPanelHeader, UserRow } from "./components";
+import { useUsersManagementPanelEvents, useUsersManagementPanelSortAndSearch } from "./hooks";
 
 const MOCK_DATA: UserDetails[] = [
     {
@@ -33,10 +33,11 @@ const MOCK_DATA: UserDetails[] = [
 ];
 
 export const UsersManagementPanel = () => {
+    const { sortBy, onSort, sortDirection, data, onSearch } = useUsersManagementPanelSortAndSearch(MOCK_DATA);
+    const { onUserDelete } = useUsersManagementPanelEvents();
     const translate = useTranslate();
     const { height } = useViewportSize();
     const scrollContainerHeight = height - NAVIGATION_SHELL_TOTAL_HEIGHT;
-    const { sortBy, onSort, sortDirection, data, onSearch } = useUsersManagementPanelSortAndSearch(MOCK_DATA);
 
     return (
         <Table.ScrollContainer minWidth={800} h={scrollContainerHeight}>
@@ -49,7 +50,7 @@ export const UsersManagementPanel = () => {
                 <UserManagementPanelHeader sortBy={sortBy} onSort={onSort} sortDirection={sortDirection} />
                 <Table.Tbody>
                     {data.map((user) => (
-                        <UserRow key={user.id} userDetails={user} />
+                        <UserRow key={user.id} userDetails={user} onDelete={() => onUserDelete(user)} />
                     ))}
                 </Table.Tbody>
             </Table>

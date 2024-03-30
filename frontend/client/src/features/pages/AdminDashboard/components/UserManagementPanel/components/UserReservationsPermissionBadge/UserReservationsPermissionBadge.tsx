@@ -10,7 +10,7 @@ export const UserReservationsPermissionBadge = ({ disabled }: UserReservationsEn
     const translate = useTranslate();
 
     return (
-        <Badge variant="light" color={disabled ? "error" : "success"}>
+        <Badge variant="light" color={disabled ? "danger" : "success"}>
             {disabled
                 ? translate("pages.adminDashboard.usersPanel.rows.reservations.off")
                 : translate("pages.adminDashboard.usersPanel.rows.reservations.on")}

@@ -33,7 +33,7 @@ export const useSignOut = (): UseSignOut => {
             notifications.show({
                 title: translate("notifications.auth.signingOutFailed.title"),
                 message: translate("notifications.auth.signingOutFailed.description"),
-                color: "error",
+                color: "danger",
                 withBorder: true,
             });
 

@@ -49,9 +49,25 @@ export type TranslationSource = {
         };
     };
 
+    user: {
+        id: string;
+        name: string;
+        login: string;
+    };
+
     pages: {
         adminDashboard: {
             usersPanel: {
+                modals: {
+                    delete: {
+                        buttons: {
+                            confirm: string;
+                            cancel: string;
+                        };
+                        title: string;
+                        caption: string;
+                    };
+                };
                 search: {
                     placeholder: string;
                 };

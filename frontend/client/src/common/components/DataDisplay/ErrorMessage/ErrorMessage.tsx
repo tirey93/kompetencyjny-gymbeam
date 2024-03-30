@@ -8,7 +8,7 @@ type ErrorMessageProps = PropsWithChildren<{
 
 export const ErrorMessage = ({ children, onClose }: ErrorMessageProps) => {
     return (
-        <Alert color="error" onClose={onClose} withCloseButton icon={<IconExclamationCircle />}>
+        <Alert color="danger" onClose={onClose} withCloseButton icon={<IconExclamationCircle />}>
             {children}
         </Alert>
     );

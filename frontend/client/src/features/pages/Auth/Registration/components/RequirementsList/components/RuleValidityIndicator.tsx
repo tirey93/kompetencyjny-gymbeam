@@ -9,7 +9,7 @@ export const RuleValidityIndicator = ({ state }: RuleValidityIndicatorProps) => 
     const color = useMemo(() => {
         switch (state) {
             case false:
-                return "error";
+                return "danger";
             case true:
                 return "success";
             default:

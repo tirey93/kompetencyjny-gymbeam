@@ -16,7 +16,7 @@ export const UserAvatar = ({ user }: UserAvatarProps) => {
 
     const avatarColor = useMemo(() => {
         if (user.reservationDisabled) {
-            return "error";
+            return "danger";
         }
 
         if (user.role === "Admin") {

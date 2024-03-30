@@ -10,9 +10,10 @@ import { UserRoleBadge } from "../UserRoleBadge/UserRoleBadge";
 
 type UserRowProps = {
     userDetails: UserDetails;
+    onDelete: () => void;
 };
 
-export const UserRow = ({ userDetails }: UserRowProps) => {
+export const UserRow = ({ userDetails, onDelete }: UserRowProps) => {
     const translate = useTranslate();
 
     return (
@@ -22,9 +23,11 @@ export const UserRow = ({ userDetails }: UserRowProps) => {
                     {userDetails.id}
                 </Text>
             </Table.Td>
+
             <Table.Td>
                 <UserAvatar user={userDetails} />
             </Table.Td>
+
             <Table.Td maw={200} pr="md">
                 <Text c="dimmed" fz="xs">
                     {translate("pages.adminDashboard.usersPanel.rows.name")}
@@ -33,20 +36,24 @@ export const UserRow = ({ userDetails }: UserRowProps) => {
                     {userDetails.displayName}
                 </TextWithTooltip>
             </Table.Td>
+
             <Table.Td maw={200} pr="md">
                 <Text c="dimmed" fz="xs">
                     {translate("pages.adminDashboard.usersPanel.rows.login")}
                 </Text>
                 <TextWithTooltip fz="sm">{userDetails.name}</TextWithTooltip>
             </Table.Td>
+
             <Table.Td ta="center">
                 <UserRoleBadge role={userDetails.role} />
             </Table.Td>
+
             <Table.Td ta="center">
                 <UserReservationsPermissionBadge disabled={userDetails.reservationDisabled} />
             </Table.Td>
+
             <Table.Td ta="center">
-                <UserManagementOptionsDropdown />
+                <UserManagementOptionsDropdown onDelete={onDelete} />
             </Table.Td>
         </Table.Tr>
     );

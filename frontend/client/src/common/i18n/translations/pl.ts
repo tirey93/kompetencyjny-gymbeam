@@ -49,9 +49,24 @@ export const pl: TranslationSource = {
             adminDashboard: "Panel admina",
         },
     },
+    user: {
+        id: "ID",
+        name: "Nazwa",
+        login: "Login",
+    },
     pages: {
         adminDashboard: {
             usersPanel: {
+                modals: {
+                    delete: {
+                        buttons: {
+                            confirm: "Potwierdź",
+                            cancel: "Anuluj",
+                        },
+                        title: "Jesteś o krok od usunięcia użytkownika!",
+                        caption: "Ta akcja jest nieodwracalna! Czy na pewno chcesz usunąć tego użytkownika?",
+                    },
+                },
                 search: {
                     placeholder: "Wyszukaj użytkownika",
                 },
