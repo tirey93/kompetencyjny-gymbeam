@@ -2,6 +2,7 @@ using GymBeam.Constants;
 using GymBeam.Extensions;
 using System.Reflection;
 using Infrastructure.Extensions;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ builder.Services.AddJWTAuthentication(issuer, audience, envVariable);
 builder.Services.AddInfrastructure(fileName);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddCors(allowedOrigin);
+builder.Services.AddFluentValidation();
 
 
 

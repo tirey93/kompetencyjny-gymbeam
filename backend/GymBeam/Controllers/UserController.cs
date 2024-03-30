@@ -111,16 +111,6 @@ namespace GymBeam.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id:int}")]
-#if !DEBUG
-        [Authorize(Roles = Roles.User)]
-#endif
-        public IActionResult Put(int id, UserRequest dto)
-        {
-            
-            return NoContent();
-        }
-
         [HttpDelete("{id:int}")]
 #if !DEBUG
         [Authorize(Roles = Roles.User)]
