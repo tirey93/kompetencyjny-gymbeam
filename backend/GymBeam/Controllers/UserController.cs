@@ -1,12 +1,10 @@
-﻿using GymBeam.Requests;
-using GymBeam.Response;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GymBeam.Controllers;
+using System.Net;
+using MediatR;
 using GymBeam.Constants;
 using GymBeam.Queries;
-using MediatR;
-using System.Net;
+using GymBeam.Response;
 using GymBeam.Exceptions;
 using GymBeam.Commands;
 
@@ -99,18 +97,53 @@ namespace GymBeam.Controllers
 #if !DEBUG
         [Authorize(Roles = Roles.Admin)]
 #endif
-        public IActionResult ChangeRole(int id, string role)
+        public async Task<IActionResult> ChangeRole(int id, string role)
         {
-            return NoContent();
+            if (role != "User" && role != "Admin")
+            {
+                return BadRequest("Invalid role. Role must be either 'User' or 'Admin'.");
+            }
+
+            var request = new UpdateUserRoleCommand
+            {
+                UserId = id,
+                NewRole = role
+            };
+
+            try
+            {
+                await _mediator.Send(request);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    $"BadRequest: {ex.Message}");
+            }
         }
 
         [HttpPut("User/{id:int}/ReservationDisabled")]
 #if !DEBUG
         [Authorize(Roles = Roles.Admin)]
 #endif
-        public IActionResult ChangeReservationDisabledFlag(int id, bool value)
+        public async Task<IActionResult> ChangeReservationDisabledFlag(int id, bool value)
         {
-            return NoContent();
+            var request = new UpdateUserReservationDisabledFlagCommand
+            {
+                UserId = id,
+                NewReservationDisabledFlagValue = value
+            };
+
+            try
+            {
+                await _mediator.Send(request);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    $"BadRequest: {ex.Message}");
+            }
         }
 
         [HttpDelete("{id:int}")]
