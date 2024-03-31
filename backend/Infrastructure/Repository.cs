@@ -6,7 +6,7 @@ namespace Infrastructure
     {
         private readonly AppDbContext _appDbContext;
 
-        public Repository(AppDbContext appDbContext) 
+        public Repository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
@@ -17,7 +17,14 @@ namespace Infrastructure
         {
             _appDbContext.Add(entity);
         }
-
+        public void Delete<T>(T entity) where T : class
+        {
+            _appDbContext.Remove(entity);
+        }
+        public T? GetById<T>(int id) where T : class
+        {
+            return _appDbContext.Set<T>().Find(id);
+        }
         public async Task SaveChangesAsync()
         {
             await _appDbContext.SaveChangesAsync();
