@@ -30,8 +30,8 @@ namespace GymBeam.Controllers
         {
             try
             {
-                var request = new GetAllUsersQuery();
-                var result = await _mediator.Send(request);
+                var query = new GetAllUsersQuery();
+                var result = await _mediator.Send(query);
                 return Ok(result);
             }
             catch (UserNotFoundException ex)
@@ -52,13 +52,13 @@ namespace GymBeam.Controllers
 #endif
         public async Task<ActionResult<UserResponse>> Get(int id)
         {
-            var request = new GetUserQuery
+            var query = new GetUserQuery
             {
                 UserId = id
             };
             try
             {
-                var result = await _mediator.Send(request);
+                var result = await _mediator.Send(query);
                 return Ok(result);
             }
             catch (UserNotFoundException ex)
@@ -82,11 +82,17 @@ namespace GymBeam.Controllers
             int id;
             try
             {
-                string cookiesUserId = Request.Cookies[Cookies.UserId];
+                if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
+                    throw new InvalidCookieException(Cookies.UserId);
                 if (!int.TryParse(cookiesUserId, out id))
                     throw new InvalidUserIdException();
 
                 return await Get(id);
+            }
+            catch (InvalidCookieException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    $"BadRequest: {ex.Message}");
             }
             catch (InvalidUserIdException ex)
             {
@@ -104,11 +110,11 @@ namespace GymBeam.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<bool>> CheckUsernameAvailability(string username)
         {
-            var request = new CheckUsernameAvailabilityQuery
+            var query = new CheckUsernameAvailabilityQuery
             {
                 Username = username
             };
-            var result = await _mediator.Send(request);
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
 

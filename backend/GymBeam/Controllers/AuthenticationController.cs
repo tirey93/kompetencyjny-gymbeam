@@ -88,16 +88,27 @@ namespace GymBeam.Controllers
             int userId;
             try
             {
-                string cookiesUserId = Request.Cookies[Cookies.UserId];
+                if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
+                    throw new InvalidCookieException(Cookies.UserId);
                 if (!int.TryParse(cookiesUserId, out userId))
                     throw new InvalidUserIdException();
 
                 return NoContent();
             }
-            catch (Exception ex)
+            catch (InvalidCookieException ex)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest,
                     $"BadRequest: {ex.Message}");
+            }
+            catch (InvalidUserIdException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    $"BadRequest: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    $"Internal Server Error: {ex.Message}");
             }
         }
     }
