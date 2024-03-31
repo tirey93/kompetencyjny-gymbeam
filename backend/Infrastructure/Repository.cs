@@ -6,7 +6,7 @@ namespace Infrastructure
     {
         private readonly AppDbContext _appDbContext;
 
-        public Repository(AppDbContext appDbContext) 
+        public Repository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
