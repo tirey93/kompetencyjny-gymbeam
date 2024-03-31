@@ -21,14 +21,9 @@ namespace Infrastructure
         {
             _appDbContext.Remove(entity);
         }
-        public T GetById<T>(int id) where T : class
+        public T? GetById<T>(int id) where T : class
         {
-            var entity = _appDbContext.Set<T>().Find(id);
-            if (entity == null)
-            {
-                return null;
-            }
-            return entity;
+            return _appDbContext.Set<T>().Find(id);
         }
         public async Task SaveChangesAsync()
         {
