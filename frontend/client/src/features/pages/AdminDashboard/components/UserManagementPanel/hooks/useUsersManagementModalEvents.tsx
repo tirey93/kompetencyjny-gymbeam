@@ -6,6 +6,8 @@ import { UserDetails, UserRole } from "../../../../../../common/auth";
 import { UserShortInfo } from "../../../../../../common/components/User";
 import { useTranslate } from "../../../../../../common/i18n";
 
+import classes from "./useUsersManagementModalEvents.module.scss";
+
 type UseUsersManagementModalEvents = {
     onUserDelete: (user: UserDetails) => void;
     onUserRoleChange: (user: UserDetails, newRole: Exclude<UserRole, "Guest">) => void;
@@ -23,13 +25,15 @@ export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents =
                     color: "danger",
                 },
                 title: (
-                    <Text c="danger" fw={700}>
+                    <Text className={classes.deleteModalTitle}>
                         {translate("pages.adminDashboard.usersPanel.modals.delete.title")}
                     </Text>
                 ),
                 children: (
                     <Stack>
-                        <Text size="sm">{translate("pages.adminDashboard.usersPanel.modals.delete.caption")}</Text>
+                        <Text className={classes.modalCaption}>
+                            {translate("pages.adminDashboard.usersPanel.modals.delete.caption")}
+                        </Text>
                         <UserShortInfo user={user} />
                     </Stack>
                 ),
@@ -49,13 +53,13 @@ export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents =
             return modals.openConfirmModal({
                 padding: "lg",
                 title: (
-                    <Text c="info" fw={700}>
+                    <Text className={classes.roleModalTitle}>
                         {translate("pages.adminDashboard.usersPanel.modals.changeRole.title")}
                     </Text>
                 ),
                 children: (
                     <Stack>
-                        <Text size="sm">
+                        <Text className={classes.modalCaption}>
                             {translate("pages.adminDashboard.usersPanel.modals.changeRole.caption", {
                                 role: translatedRole,
                             })}
@@ -80,13 +84,13 @@ export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents =
             return modals.openConfirmModal({
                 padding: "lg",
                 title: (
-                    <Text c="info" fw={700}>
+                    <Text className={classes.reservationsModalTitle}>
                         {translate("pages.adminDashboard.usersPanel.modals.toggleReservations.title")}
                     </Text>
                 ),
                 children: (
                     <Stack>
-                        <Text size="sm">
+                        <Text className={classes.modalCaption}>
                             {translate(
                                 shouldEnableReservations
                                     ? "pages.adminDashboard.usersPanel.modals.toggleReservations.toggleOnCaption"
