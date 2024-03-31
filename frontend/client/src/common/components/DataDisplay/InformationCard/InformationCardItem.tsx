@@ -1,5 +1,7 @@
-import { Box, Group, rem, Text } from "@mantine/core";
+import { Box, Group, Text, ThemeIcon } from "@mantine/core";
 import { IconSun } from "@tabler/icons-react";
+
+import classes from "./InformationCardItem.module.scss";
 
 export type InformationCardItemProps = {
     icon?: typeof IconSun;
@@ -9,17 +11,15 @@ export type InformationCardItemProps = {
 
 export const InformationCardItem = ({ icon: Icon, title, description }: InformationCardItemProps) => {
     return (
-        <Group>
+        <Group className={classes.informationCardItem}>
             {Icon && (
-                <Box mr="md">
-                    <Icon style={{ width: rem(24), height: rem(24) }} />
-                </Box>
+                <ThemeIcon className={classes.icon}>
+                    <Icon />
+                </ThemeIcon>
             )}
 
             <Box>
-                <Text fw={700} size="xs">
-                    {title}
-                </Text>
+                <Text className={classes.title}>{title}</Text>
                 <Text>{description}</Text>
             </Box>
         </Group>

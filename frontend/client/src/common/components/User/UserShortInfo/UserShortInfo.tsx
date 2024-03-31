@@ -5,6 +5,8 @@ import { UserDetails } from "../../../auth";
 import { useTranslate } from "../../../i18n";
 import { UserAvatar } from "../UserAvatar/UserAvatar";
 
+import classes from "./UserShortInfo.module.scss";
+
 type UserShortInfoProps = {
     user: UserDetails;
 };
@@ -31,16 +33,12 @@ export const UserShortInfo = ({ user }: UserShortInfoProps) => {
     );
 
     return (
-        <Group justify="center" my="md">
+        <Group className={classes.userShortInfoContainer}>
             <UserAvatar user={user} />
             {userData.map(({ label, value }) => (
                 <Box key={label}>
-                    <Text size="xs" c="dimmed">
-                        {label}
-                    </Text>
-                    <Text size="sm" fw={700} ta="center">
-                        {value}
-                    </Text>
+                    <Text className={classes.userDataLabel}>{label}</Text>
+                    <Text className={classes.userDataValue}>{value}</Text>
                 </Box>
             ))}
         </Group>

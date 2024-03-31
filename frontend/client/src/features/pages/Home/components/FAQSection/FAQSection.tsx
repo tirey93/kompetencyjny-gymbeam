@@ -66,11 +66,11 @@ export const FAQSection = ({ targetRef }: FAQSectionProps) => {
 
     return (
         <Container ref={targetRef}>
-            <Title ta="center" mb="lg" order={2}>
+            <Title order={2} className={classes.title}>
                 {translate("pages.home.FAQ.header")}
             </Title>
 
-            <Accordion chevronPosition="right" variant="contained" chevronSize={25} classNames={classes}>
+            <Accordion chevronPosition="right" variant="contained" chevronSize={25} classNames={{ item: classes.item }}>
                 {questions.map((question) => (
                     <FAQItem key={question.value} {...question} />
                 ))}

@@ -2,6 +2,8 @@ import { Paper, Stack, Text } from "@mantine/core";
 
 import { InformationCardItem, InformationCardItemProps } from "./InformationCardItem";
 
+import classes from "./InformationCard.module.scss";
+
 type InformationCardProps = {
     title: string;
     items: InformationCardItemProps[];
@@ -10,12 +12,10 @@ type InformationCardProps = {
 
 export const InformationCard = ({ title, items, bg = "primary" }: InformationCardProps) => {
     return (
-        <Paper p="lg" bg={bg}>
-            <Text fz="lg" fw={700} mb="md">
-                {title}
-            </Text>
+        <Paper bg={bg} className={classes.informationCard}>
+            <Text className={classes.title}>{title}</Text>
 
-            <Stack gap="lg">
+            <Stack className={classes.itemsContainer}>
                 {items.map((item) => (
                     <InformationCardItem key={item.title} {...item} />
                 ))}

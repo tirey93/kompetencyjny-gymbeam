@@ -4,6 +4,8 @@ import { UserDetails } from "../../../../../../../common/auth";
 import { SortableTableHeader, SortableTableHeaderProps } from "../../../../../../../common/components/Table";
 import { useTranslate } from "../../../../../../../common/i18n";
 
+import classes from "./UserManagementPanelHeader.module.scss";
+
 type UserManagementPanelHeaderProps = {
     onSort: (column: keyof UserDetails) => unknown;
     sortBy: keyof UserDetails | null;
@@ -42,7 +44,7 @@ export const UserManagementPanelHeader = ({ onSort, sortBy, sortDirection }: Use
 
     return (
         <Table.Thead>
-            <Table.Tr ta="center">
+            <Table.Tr className={classes.tableRow}>
                 {sortableColumns.map(({ column, children, ...rest }) => (
                     <SortableTableHeader
                         key={column}
@@ -54,10 +56,6 @@ export const UserManagementPanelHeader = ({ onSort, sortBy, sortDirection }: Use
                         {children}
                     </SortableTableHeader>
                 ))}
-
-                <SortableTableHeader ta="center">
-                    {translate("pages.adminDashboard.usersPanel.header.options")}
-                </SortableTableHeader>
             </Table.Tr>
         </Table.Thead>
     );

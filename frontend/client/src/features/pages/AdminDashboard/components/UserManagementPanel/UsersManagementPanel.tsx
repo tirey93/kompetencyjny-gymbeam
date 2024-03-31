@@ -9,6 +9,8 @@ import { NAVIGATION_SHELL_TOTAL_HEIGHT } from "../../../../navigation/Shell/AppN
 import { UserManagementPanelHeader, UserRow } from "./components";
 import { useUsersManagementModalEvents, useUsersManagementPanelSortAndSearch } from "./hooks";
 
+import classes from "./UserManagementPanel.module.scss";
+
 const MOCK_DATA: UserDetails[] = [
     {
         id: 2,
@@ -60,7 +62,7 @@ export const UsersManagementPanel = () => {
                 onSearch={onSearch}
             />
 
-            <Table verticalSpacing="md" stickyHeader highlightOnHover mt="md">
+            <Table stickyHeader highlightOnHover className={classes.table}>
                 <UserManagementPanelHeader sortBy={sortBy} onSort={onSort} sortDirection={sortDirection} />
                 <Table.Tbody>
                     {data.map((user) => (

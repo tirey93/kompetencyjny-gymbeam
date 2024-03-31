@@ -1,35 +1,33 @@
 import { useState } from "react";
-import { CloseButton, Group, Stack, Text, ThemeIcon } from "@mantine/core";
+import { Box, CloseButton, Group, Stack, Text, ThemeIcon } from "@mantine/core";
 import { IconEye, IconEyeOff, IconUser } from "@tabler/icons-react";
 
 import { useTranslate } from "../../../../../../common/i18n";
 import { RegistrationFormProps } from "../../Registration";
+
+import classes from "./SubmitForm.module.scss";
 
 export const SubmitForm = ({ form }: RegistrationFormProps) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const translate = useTranslate();
 
     return (
-        <>
-            <Text fw={600} mb="xl" ta="center">
-                {translate("pages.registration.steps.summary.header")}
-            </Text>
+        <Box className={classes.container}>
+            <Text className={classes.summaryHeader}>{translate("pages.registration.steps.summary.header")}</Text>
 
-            <Stack align="center" gap="xs">
-                <ThemeIcon radius="100%" size={100}>
+            <Stack className={classes.summaryDataWrapper}>
+                <ThemeIcon className={classes.userIcon} size={100}>
                     <IconUser size={50} />
                 </ThemeIcon>
 
-                <Text ta="center" fz="lg" fw={500} mt="md">
-                    {form.values.name}
-                </Text>
+                <Text className={classes.userName}>{form.values.name}</Text>
 
-                <Text ta="center" c="dimmed" fz="md">
+                <Text className={classes.userCredentials}>
                     {translate("pages.registration.steps.summary.login")}: {form.values.login}
                 </Text>
 
                 <Group>
-                    <Text ta="center" c="dimmed" fz="md">
+                    <Text className={classes.userCredentials}>
                         {translate("pages.registration.steps.summary.password")}:{" "}
                         {isPasswordVisible ? form.values.password : "***********"}
                     </Text>
@@ -44,6 +42,6 @@ export const SubmitForm = ({ form }: RegistrationFormProps) => {
                     />
                 </Group>
             </Stack>
-        </>
+        </Box>
     );
 };

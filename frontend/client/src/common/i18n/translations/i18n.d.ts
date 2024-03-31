@@ -117,7 +117,7 @@ export type TranslationSource = {
         qr: {
             gymPassDetails: {
                 owner: string;
-                expires: string;
+                reservationsPermission: string;
             };
         };
 

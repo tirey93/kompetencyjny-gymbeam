@@ -116,7 +116,7 @@ export const en: TranslationSource = {
         qr: {
             gymPassDetails: {
                 owner: "Owner",
-                expires: "Expires",
+                reservationsPermission: "Reservations permission",
             },
         },
 

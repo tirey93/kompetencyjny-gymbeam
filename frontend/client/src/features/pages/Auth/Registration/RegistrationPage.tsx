@@ -9,6 +9,8 @@ import { useTranslate } from "../../../../common/i18n";
 import { Routes } from "../../../router";
 import { NameForm, PasswordForm, RegistrationFormWrapper, SubmitForm } from "./components";
 
+import classes from "./RegistrationPage.module.scss";
+
 export const RegistrationPage = () => {
     const verboseSteps = useMediaQuery("(min-width: 60em)");
     const { form, validatedRules } = useRegistrationForm();
@@ -62,12 +64,12 @@ export const RegistrationPage = () => {
                       clearSignUpError: reset,
                   }
                 : undefined,
-        [error]
+        [error, reset]
     );
 
     return (
-        <Stack maw="800px" mih="800px" m="auto" justify="center" p="xl">
-            <Stepper active={step} onStepClick={setStep} radius="xs" color="success">
+        <Stack className={classes.container}>
+            <Stepper active={step} onStepClick={setStep} color="success">
                 <Stepper.Step
                     label={verboseSteps ? translate("pages.registration.steps.personalDetails.label") : ""}
                     description={verboseSteps ? translate("pages.registration.steps.personalDetails.description") : ""}

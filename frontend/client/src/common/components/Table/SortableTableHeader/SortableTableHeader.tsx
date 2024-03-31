@@ -1,8 +1,10 @@
 import { ReactNode } from "react";
-import { Center, Group, rem, Table, TableThProps, UnstyledButton } from "@mantine/core";
+import { Center, Group, Table, TableThProps, UnstyledButton } from "@mantine/core";
 import { IconChevronDown, IconChevronUp, IconSelector } from "@tabler/icons-react";
 
 import { TextWithTooltip } from "../../DataDisplay";
+
+import classes from "./SortableTableHeader.module.scss";
 
 export type SortableTableHeaderProps = TableThProps & {
     children: ReactNode;
@@ -15,9 +17,7 @@ export const SortableTableHeader = ({ children, reversed, sorted, onSort, ...res
     return (
         <Table.Th {...rest}>
             <Wrapper reversed={reversed} onSort={onSort} sorted={sorted}>
-                <TextWithTooltip fw={700} fz="sm">
-                    {children}
-                </TextWithTooltip>
+                <TextWithTooltip className={classes.columnName}>{children}</TextWithTooltip>
             </Wrapper>
         </Table.Th>
     );
@@ -32,10 +32,10 @@ const Wrapper = ({ onSort, sorted, reversed, children }: SortableTableHeaderProp
 
     return (
         <UnstyledButton onClick={onSort}>
-            <Group justify="space-between">
+            <Group className={classes.columnHeaderContentWrapper}>
                 {children}
                 <Center>
-                    <Icon style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+                    <Icon className={classes.sortIcon} />
                 </Center>
             </Group>
         </UnstyledButton>

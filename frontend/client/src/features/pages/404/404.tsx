@@ -1,29 +1,29 @@
 import { useNavigate } from "react-router-dom";
-import { Button, Group, Stack, Text, Title } from "@mantine/core";
+import { Box, Button, Group, Text, Title } from "@mantine/core";
 
 import { Illustration404 } from "./assets/Illustration404";
 import { useTranslate } from "../../../common/i18n";
 import { Routes } from "../../router";
+
+import classes from "./404.module.scss";
 
 export const NotFoundPage = () => {
     const navigate = useNavigate();
     const translate = useTranslate();
 
     return (
-        <Stack justify="center" align="center" mih="100dvh" w="100dvw">
-            <Illustration404 width="30dvmax" />
-            <Title mt="xl"> {translate("pages.404.title")}</Title>
-            <Text c="dimmed" size="lg" ta="center" maw="600px">
-                {translate("pages.404.description")}
-            </Text>
-            <Group>
-                <Button mt="xl" variant="default" size="md" onClick={() => navigate(Routes.ROOT)}>
+        <Box className={classes.pageContainer}>
+            <Illustration404 className={classes.Illustration404} />
+            <Title className={classes.title}> {translate("pages.404.title")}</Title>
+            <Text className={classes.description}>{translate("pages.404.description")}</Text>
+            <Group className={classes.buttonsWrapper}>
+                <Button variant="default" onClick={() => navigate(Routes.ROOT)}>
                     {translate("pages.404.goToHome")}
                 </Button>
-                <Button mt="xl" variant="gradient" size="md" onClick={() => navigate(-1)}>
+                <Button variant="gradient" onClick={() => navigate(-1)}>
                     {translate("pages.404.goBack")}
                 </Button>
             </Group>
-        </Stack>
+        </Box>
     );
 };

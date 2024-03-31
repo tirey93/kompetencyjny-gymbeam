@@ -4,6 +4,8 @@ import { Anchor, Button, Group, Stack } from "@mantine/core";
 import { useTranslate } from "../../../../../../common/i18n";
 import { Routes } from "../../../../../router";
 
+import classes from "./RegistrationFormFooter.module.scss";
+
 type StepperButtonsProps = {
     onPreviousStep?: () => unknown;
     onNextStep?: () => unknown;
@@ -21,20 +23,20 @@ export const RegistrationFormFooter = ({
     const navigate = useNavigate();
 
     return (
-        <Stack>
-            <Group justify="center" mt="xl">
+        <Stack className={classes.container}>
+            <Group className={classes.buttonsContainer}>
                 {onPreviousStep && (
-                    <Button miw="35%" variant="default" onClick={onPreviousStep} size="md">
+                    <Button className={classes.button} variant="default" onClick={onPreviousStep} size="md">
                         {previousLabel ?? translate("pages.registration.navigation.previousStep")}
                     </Button>
                 )}
                 {onNextStep && (
-                    <Button variant="gradient" miw="35%" size="md" onClick={onNextStep}>
+                    <Button className={classes.button} variant="gradient" size="md" onClick={onNextStep}>
                         {nextLabel ?? translate("pages.registration.navigation.nextStep")}
                     </Button>
                 )}
             </Group>
-            <Anchor ta="center" c="info" onClick={() => navigate(Routes.LOGIN)}>
+            <Anchor className={classes.signInLink} onClick={() => navigate(Routes.LOGIN)}>
                 {translate("pages.registration.navigation.signInLink")}
             </Anchor>
         </Stack>

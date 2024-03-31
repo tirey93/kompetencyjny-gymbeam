@@ -7,7 +7,8 @@ import { useSignIn } from "../../../../common/auth";
 import { ErrorMessage } from "../../../../common/components/DataDisplay";
 import { useTranslate } from "../../../../common/i18n";
 import { Routes } from "../../../router";
-import { INPUT_LABEL_PROPS } from "../Auth.shared";
+
+import classes from "./SignInPage.module.scss";
 
 export const SignInPage = () => {
     const translate = useTranslate();
@@ -29,8 +30,8 @@ export const SignInPage = () => {
     }, [form, navigate, signIn]);
 
     return (
-        <Stack maw="600px" mih="800px" m="auto" justify="center" p="xl">
-            <Title ta="center" mb="xl">
+        <Stack className={classes.container}>
+            <Title className={classes.title}>
                 {translate("pages.signIn.header.preEmphasis")}{" "}
                 <Text span c="accent" inherit>
                     {translate("pages.signIn.header.emphasised")}
@@ -38,18 +39,21 @@ export const SignInPage = () => {
                 {translate("pages.signIn.header.postEmphasis")}
             </Title>
 
-            <Paper radius="md" withBorder p="xl" shadow="xl" component={Stack}>
+            <Paper className={classes.form} withBorder component={Stack}>
                 <TextInput
+                    classNames={{
+                        label: classes.inputLabel,
+                    }}
                     size="md"
-                    labelProps={INPUT_LABEL_PROPS}
                     label={translate("pages.signIn.field.login.label")}
                     placeholder={translate("pages.signIn.field.login.placeholder")}
                     {...form.getInputProps("login")}
                 />
                 <PasswordInput
+                    classNames={{
+                        label: classes.inputLabel,
+                    }}
                     size="md"
-                    mt="md"
-                    labelProps={INPUT_LABEL_PROPS}
                     label={translate("pages.signIn.field.password.label")}
                     placeholder={translate("pages.signIn.field.password.placeholder")}
                     {...form.getInputProps("password")}
@@ -58,11 +62,11 @@ export const SignInPage = () => {
 
             {error && <ErrorMessage onClose={reset}>{error}</ErrorMessage>}
 
-            <Stack mt="sm" maw="400px" miw="50%" m="0 auto">
+            <Stack className={classes.buttonsContainer}>
                 <Button size="md" variant="gradient" onClick={onSubmit}>
                     {translate("pages.signIn.navigation.submit")}
                 </Button>
-                <Anchor ta="center" c="info" onClick={() => navigate(Routes.REGISTRATION)}>
+                <Anchor className={classes.signUpLink} onClick={() => navigate(Routes.REGISTRATION)}>
                     {translate("pages.signIn.navigation.signUpLink")}
                 </Anchor>
             </Stack>

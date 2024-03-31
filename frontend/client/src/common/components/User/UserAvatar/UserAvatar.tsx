@@ -3,6 +3,8 @@ import { Avatar } from "@mantine/core";
 
 import { UserDetails } from "../../../auth";
 
+import classes from "./UserAvatar.module.scss";
+
 type UserAvatarProps = {
     user: UserDetails;
 };
@@ -27,7 +29,7 @@ export const UserAvatar = ({ user }: UserAvatarProps) => {
     }, [user]);
 
     return (
-        <Avatar color={avatarColor} size="md" radius="md">
+        <Avatar color={avatarColor} className={classes.userAvatar}>
             {userInitials}
         </Avatar>
     );

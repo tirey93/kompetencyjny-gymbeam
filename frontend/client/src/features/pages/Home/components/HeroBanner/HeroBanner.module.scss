@@ -1,10 +1,58 @@
 @import "src/_mantine.scss";
 
-.content {
-  max-width: calc_rem(480px);
+html .container {
+  padding: var(--mantine-spacing-xl);
 
-  @media (max-width: $mantine-breakpoint-md) {
-    max-width: 100%;
-    margin-right: 0;
+  .group {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: var(--mantine-spacing-xl);
+    gap: var(--mantine-spacing-xl);
+
+    .image {
+      max-height: 330px;
+      margin-left: var(--mantine-spacing-xl);
+    }
+
+    .textContent {
+      max-width: calc_rem(480px);
+
+      @media (max-width: $mantine-breakpoint-md) {
+        max-width: 100%;
+        margin-right: 0;
+      }
+
+      .title {
+        font-weight: 800;
+
+        .titleHighlight {
+          color: var(--mantine-color-primary-7);
+        }
+      }
+
+      .description {
+        color: var(--mantine-color-dimmed);
+        margin-top: var(--mantine-spacing-md);
+      }
+
+      .featuresList {
+        margin-top: 30px;
+        --list-spacing: var(--mantine-spacing-sm);
+        --list-fz: var(--mantine-font-size-sm);
+      }
+
+      .checkIcon {
+        --ti-radius: var(--mantine-radius-xl);
+        --ti-bg: var(--mantine-color-success-8);
+        --ti-size: 16px;
+      }
+
+      .buttonsWrapper {
+        margin-top: var(--mantine-spacing-xl);
+      }
+    }
   }
 }
+
+

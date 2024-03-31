@@ -1,9 +1,11 @@
-import { Center, Divider, Stack } from "@mantine/core";
+import { Center, Stack } from "@mantine/core";
 
 import { NavigationSection } from "./components/NavigationSection";
 import { useSideNavigationItems } from "./hooks/useSideNavigationItems";
 import { UserRoleGuard } from "../../../../../common/auth";
 import { Logo } from "../../../../../common/components/Logo";
+
+import classes from "./SideNavigation.module.scss";
 
 type SideNavigationProps = {
     onNavigate?: () => unknown;
@@ -13,9 +15,9 @@ export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
     const { qr, signOut, signIn, signUp, home, adminDashboard, activities } = useSideNavigationItems();
 
     return (
-        <Stack component="nav" align="center" h="100%">
-            <Stack gap={0}>
-                <Center pt="md">
+        <Stack component="nav" className={classes.sideNavigationContainer}>
+            <Stack className={classes.sectionWrapper}>
+                <Center className={classes.logoWrapper}>
                     <Logo logoSize={65} />
                 </Center>
 
@@ -30,13 +32,14 @@ export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
                 </UserRoleGuard>
             </Stack>
 
-            <Divider mt="auto" />
-            <UserRoleGuard allowedRoles={["Guest"]}>
-                <NavigationSection onNavigate={onNavigate} tiles={[signIn, signUp]} />
-            </UserRoleGuard>
-            <UserRoleGuard allowedRoles={["Admin", "User"]}>
-                <NavigationSection onNavigate={onNavigate} tiles={[signOut]} />
-            </UserRoleGuard>
+            <Stack className={classes.sectionWrapper}>
+                <UserRoleGuard allowedRoles={["Guest"]}>
+                    <NavigationSection onNavigate={onNavigate} tiles={[signIn, signUp]} />
+                </UserRoleGuard>
+                <UserRoleGuard allowedRoles={["Admin", "User"]}>
+                    <NavigationSection onNavigate={onNavigate} tiles={[signOut]} />
+                </UserRoleGuard>
+            </Stack>
         </Stack>
     );
 };

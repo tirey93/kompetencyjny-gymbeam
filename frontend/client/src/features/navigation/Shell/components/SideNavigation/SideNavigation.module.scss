@@ -1,0 +1,13 @@
+html .sideNavigationContainer {
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+
+  .sectionWrapper {
+    gap: 0;
+
+    .logoWrapper {
+      padding-top: var(--mantine-spacing-md);
+    }
+  }
+}

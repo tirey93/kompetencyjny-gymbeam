@@ -1,14 +1,38 @@
 @import "src/_mantine.scss";
 
-.title {
-  font-size: calc_rem(34px);
+.container {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--mantine-spacing-xl);
 
-  @media (max-width: $mantine-breakpoint-sm) {
-    font-size: calc_rem(24px);
+  .title {
+    text-align: center;
+    margin-top: var(--mantine-spacing-sm);
+    font-size: var(--mantine-font-size-xl);
+
+    @media (max-width: $mantine-breakpoint-sm) {
+      font-size: var(--mantine-font-size-lg);
+    }
+  }
+
+  .description {
+    align-self: center;
+    text-align: center;
+    margin-top: var(--mantine-spacing-md);
+    max-width: calc_rem(600px);
+  }
+
+  .awardsContainer {
+    width: 100%;
+    justify-content: center;
+    margin: var(--mantine-spacing-md);
+  }
+
+  .featureCardsContainer {
+    gap: var(--mantine-spacing-md);
   }
 }
 
-.description {
-  max-width: calc_rem(600px);
-}
+
 
