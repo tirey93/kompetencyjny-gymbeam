@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Exceptions;
 using GymBeam.Exceptions;
 using GymBeam.Response;
 using MediatR;
@@ -16,23 +17,17 @@ namespace GymBeam.Queries
         }
         public Task<UserResponse> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
-            User user;
-            try
+            var user = _repository.GetById<User>(request.UserId) 
+                ?? throw new UserNotFoundException(request.UserId);
+
+            var result = new UserResponse
             {
-                user = _repository.GetById<User>(request.UserId);
-                var result = new UserResponse
-                {
-                    Id = user.Id,
-                    Name = user.Name,
-                    DisplayName = user.DisplayName,
-                    Role = user.Role
-                };
-                return Task.FromResult(result);
-            }
-            catch (Exception) 
-            {
-                throw new InvalidUserIdException();
-            }
+                Id = user.Id,
+                Name = user.Name,
+                DisplayName = user.DisplayName,
+                Role = user.Role
+            };
+            return Task.FromResult(result);
         }
     }
 }

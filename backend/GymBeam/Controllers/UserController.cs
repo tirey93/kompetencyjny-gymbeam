@@ -7,6 +7,8 @@ using GymBeam.Queries;
 using GymBeam.Response;
 using GymBeam.Exceptions;
 using GymBeam.Commands;
+using GymBeam.Requests;
+using Domain.Exceptions;
 
 namespace GymBeam.Controllers
 {
@@ -26,9 +28,18 @@ namespace GymBeam.Controllers
 #endif
         public async Task<ActionResult<IEnumerable<UserResponse>>> Get()
         {
-            var request = new GetAllUsersQuery();
-            var result = await _mediator.Send(request);
-            return Ok(result);
+            try
+            {
+                var request = new GetAllUsersQuery();
+                var result = await _mediator.Send(request);
+                return Ok(result);
+            }
+            catch (DomainException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                   $"NotFound: {ex.Message}");
+            }
+            
         }
 
         [HttpGet("{id:int}")]
@@ -46,10 +57,10 @@ namespace GymBeam.Controllers
                 var result = await _mediator.Send(request);
                 return Ok(result);
             }
-            catch (Exception ex)
+            catch (DomainException ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest,
-                    $"BadRequest: {ex.Message}");
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    $"NotFound: {ex.Message}");
             }
 
         }
@@ -67,14 +78,9 @@ namespace GymBeam.Controllers
                 if (!int.TryParse(cookiesUserId, out id))
                     throw new InvalidUserIdException();
 
-                var request = new GetUserQuery
-                {
-                    UserId = id
-                };
-                var result = await _mediator.Send(request);
-                return Ok(result);
+                return await Get(id);
             }
-            catch (Exception ex)
+            catch (DomainException ex)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest,
                     $"BadRequest: {ex.Message}");
@@ -97,17 +103,13 @@ namespace GymBeam.Controllers
 #if !DEBUG
         [Authorize(Roles = Roles.Admin)]
 #endif
-        public async Task<IActionResult> ChangeRole(int id, string role)
+        public async Task<IActionResult> ChangeRole(int id, [FromBody] UpdateRoleRequest dto)
         {
-            if (role != "User" && role != "Admin")
-            {
-                return BadRequest("Invalid role. Role must be either 'User' or 'Admin'.");
-            }
 
             var request = new UpdateUserRoleCommand
             {
                 UserId = id,
-                NewRole = role
+                NewRole = dto.NewRole
             };
 
             try
@@ -115,10 +117,10 @@ namespace GymBeam.Controllers
                 await _mediator.Send(request);
                 return NoContent();
             }
-            catch (Exception ex)
+            catch (DomainException ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest,
-                    $"BadRequest: {ex.Message}");
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    $"NotFound: {ex.Message}");
             }
         }
 
@@ -139,10 +141,10 @@ namespace GymBeam.Controllers
                 await _mediator.Send(request);
                 return NoContent();
             }
-            catch (Exception ex)
+            catch (DomainException ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest,
-                    $"BadRequest: {ex.Message}");
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    $"NotFound: {ex.Message}");
             }
         }
 
@@ -162,10 +164,10 @@ namespace GymBeam.Controllers
                 await _mediator.Send(request);
                 return NoContent();
             }
-            catch (Exception ex)
+            catch (DomainException ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest,
-                    $"BadRequest: {ex.Message}");
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    $"NotFound: {ex.Message}");
             }
         }
     }

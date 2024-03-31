@@ -26,14 +26,9 @@ namespace Infrastructure
             var entity = _appDbContext.Set<T>().Find(id);
             if (entity == null)
             {
-                throw new Exception();
+                return null;
             }
             return entity;
-        }
-        public bool isUsernameAvailable(string username)
-        {
-            var lowerUsername = username.ToLowerInvariant();
-            return !_appDbContext.Users.Any(u => u.Name.ToLower() == lowerUsername);
         }
         public async Task SaveChangesAsync()
         {

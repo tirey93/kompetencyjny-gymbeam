@@ -63,6 +63,7 @@ namespace GymBeam.Extensions
         {
             services.AddValidatorsFromAssemblyContaining<RegisterRequestValidator>();
             services.AddValidatorsFromAssemblyContaining<LoginRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<UpdateRoleRequestValidator>();
             services.AddFluentValidationAutoValidation();
             services.AddFluentValidationClientsideAdapters();
         }

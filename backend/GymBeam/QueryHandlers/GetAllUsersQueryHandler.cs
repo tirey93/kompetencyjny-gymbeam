@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Exceptions;
 using GymBeam.Response;
 using MediatR;
 
@@ -14,7 +15,9 @@ namespace GymBeam.Queries
         }
         public Task<IEnumerable<UserResponse>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = _repository.Users;
+            var users = _repository.Users
+                ?? throw new UsersNotFoundException();
+
             var result = users.Select(x => new UserResponse
             {
                 Id = x.Id,
