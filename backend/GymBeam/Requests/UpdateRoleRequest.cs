@@ -14,7 +14,11 @@ namespace GymBeam.Requests
         {
             RuleFor(x => x.NewRole)
                 .Must(role => Enum.TryParse<Domain.Roles>(role, out _))
-                .WithMessage("Invalid role. Role must be either 'User' or 'Admin'.");
+                .WithMessage(context =>
+                {
+                    var rolesList = string.Join(", ", Enum.GetNames(typeof(Domain.Roles)));
+                    return $"Role must be one of: {rolesList}";
+                });
         }
     }
 }

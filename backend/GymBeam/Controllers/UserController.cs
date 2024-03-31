@@ -34,12 +34,16 @@ namespace GymBeam.Controllers
                 var result = await _mediator.Send(request);
                 return Ok(result);
             }
-            catch (DomainException ex)
+            catch (UserNotFoundException ex)
             {
                 return StatusCode((int)HttpStatusCode.NotFound,
                    $"NotFound: {ex.Message}");
             }
-            
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpGet("{id:int}")]
@@ -57,12 +61,16 @@ namespace GymBeam.Controllers
                 var result = await _mediator.Send(request);
                 return Ok(result);
             }
-            catch (DomainException ex)
+            catch (UserNotFoundException ex)
             {
                 return StatusCode((int)HttpStatusCode.NotFound,
                     $"NotFound: {ex.Message}");
             }
-
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpGet("LoggedIn")]
@@ -80,10 +88,15 @@ namespace GymBeam.Controllers
 
                 return await Get(id);
             }
-            catch (DomainException ex)
+            catch (InvalidUserIdException ex)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest,
                     $"BadRequest: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    $"Internal Server Error: {ex.Message}");
             }
         }
 
@@ -117,10 +130,15 @@ namespace GymBeam.Controllers
                 await _mediator.Send(request);
                 return NoContent();
             }
-            catch (DomainException ex)
+            catch (UserNotFoundException ex)
             {
                 return StatusCode((int)HttpStatusCode.NotFound,
                     $"NotFound: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    $"Internal Server Error: {ex.Message}");
             }
         }
 
@@ -141,10 +159,15 @@ namespace GymBeam.Controllers
                 await _mediator.Send(request);
                 return NoContent();
             }
-            catch (DomainException ex)
+            catch (UserNotFoundException ex)
             {
                 return StatusCode((int)HttpStatusCode.NotFound,
                     $"NotFound: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    $"Internal Server Error: {ex.Message}");
             }
         }
 
@@ -164,10 +187,15 @@ namespace GymBeam.Controllers
                 await _mediator.Send(request);
                 return NoContent();
             }
-            catch (DomainException ex)
+            catch (UserNotFoundException ex)
             {
                 return StatusCode((int)HttpStatusCode.NotFound,
                     $"NotFound: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    $"Internal Server Error: {ex.Message}");
             }
         }
     }
