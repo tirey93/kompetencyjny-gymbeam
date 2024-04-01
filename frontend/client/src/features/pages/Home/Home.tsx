@@ -1,13 +1,13 @@
 import { useMemo } from "react";
-import { Container, SimpleGrid, Space } from "@mantine/core";
+import { Container, SimpleGrid } from "@mantine/core";
 import { useScrollIntoView } from "@mantine/hooks";
 import { IconAt, IconMapPin, IconPhone } from "@tabler/icons-react";
 
-import { FAQSection } from "./components/FAQSection/FAQSection";
-import { HeroBanner } from "./components/HeroBanner/HeroBanner";
-import { WhyUsSection } from "./components/WhyUsSection/WhyUsSection";
-import { InformationCard } from "../../../common/components/InformationCard/InformationCard";
-import { useTranslate } from "../../../common/i18n/hooks/useTranslate";
+import { InformationCard } from "../../../common/components/DataDisplay";
+import { useTranslate } from "../../../common/i18n";
+import { FAQSection, HeroBanner, WhyUsSection } from "./components";
+
+import classes from "./Home.module.scss";
 
 export const HomePage = () => {
     const translate = useTranslate();
@@ -38,14 +38,11 @@ export const HomePage = () => {
     );
 
     return (
-        <Container fluid p={0}>
+        <Container fluid className={classes.container}>
             <HeroBanner onLearnMoreClick={scrollIntoView} />
-            <Space h="xl" />
             <WhyUsSection />
-            <Space h="xl" />
             <FAQSection targetRef={targetRef} />
-            <Space h="xl" />
-            <Container py="xl">
+            <Container>
                 <SimpleGrid cols={{ sm: 1, md: 2 }}>
                     <InformationCard title={translate("pages.home.contact.title")} items={contactInfo} bg="primary" />
                     <InformationCard

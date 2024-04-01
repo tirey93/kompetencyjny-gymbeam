@@ -3,5 +3,6 @@ export enum Routes {
     REGISTRATION = "/sign-up",
     LOGIN = "/sign-in",
     GYM_PASS = "/gym-pass",
+    ADMIN_DASHBOARD = "/admin-dashboard",
     NA = "/na",
 }

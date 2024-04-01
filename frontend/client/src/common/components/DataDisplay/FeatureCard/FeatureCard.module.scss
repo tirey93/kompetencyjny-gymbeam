@@ -1,0 +1,26 @@
+html .featureCard {
+  padding: var(--mantine-spacing-xl);
+  border-radius: var(--mantine-radius-md);
+  box-shadow: var(--mantine-shadow-lg);
+
+  .icon {
+    width: calc_rem(50px);
+    height: calc_rem(50px);
+  }
+
+  .title {
+    font-size: var(--mantine-font-size-xl);
+    margin-top: var(--mantine-spacing-md);
+    font-weight: 600;
+  }
+
+  .description {
+    color: var(--mantine-color-dimmed);
+    font-size: var(--mantine-font-size-sm);
+    margin-top: var(--mantine-spacing-sm);
+  }
+}
+
+
+
+

@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Button, Text, Tooltip } from "@mantine/core";
 import { Icon, IconProps } from "@tabler/icons-react";
 
-import { Routes } from "../../../../../router/Routes";
+import { Routes } from "../../../../../router";
+
+import classes from "./NavigationTile.module.scss";
 
 export type NavigationTileProps = {
     route: Routes;
@@ -32,25 +34,23 @@ export const NavigationTile = ({
 
     return (
         <Tooltip
+            className={classes.navigationTileTooltip}
             label={label}
-            position="right"
-            p="md"
-            fw={600}
-            withArrow
-            arrowSize={8}
             transitionProps={{ transition: "pop" }}
+            position="right"
             visibleFrom="md"
             color="primary"
+            arrowSize={8}
+            withArrow
         >
             <Button
+                className={classes.navigationTile}
                 variant={isActive ? "outline" : "subtle"}
                 onClick={handleNavigation}
                 data-active={isActive}
-                miw="50px"
-                h="50px"
             >
-                <Icon width={25} height={25} />
-                <Text ml="sm" hiddenFrom="sm" size="lg" fw={700}>
+                <Icon />
+                <Text className={classes.iconLabel} hiddenFrom="sm">
                     {label}
                 </Text>
             </Button>

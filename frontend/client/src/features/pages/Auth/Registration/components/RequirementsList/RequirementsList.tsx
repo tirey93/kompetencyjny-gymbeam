@@ -1,7 +1,7 @@
 import { List } from "@mantine/core";
 
 import { RequirementItem } from "./components/RequirementItem";
-import { RuleValidationResult } from "../../Registration.types";
+import { RuleValidationResult } from "../../Registration";
 
 type RequirementsListProps = {
     rules: RuleValidationResult[];

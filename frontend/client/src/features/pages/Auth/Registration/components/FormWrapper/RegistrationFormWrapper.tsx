@@ -1,9 +1,11 @@
 import { PropsWithChildren, useMemo } from "react";
 import { Paper, Stack, Text, Title } from "@mantine/core";
 
-import { ErrorMessage } from "../../../../../../common/components/ErrorMessage/ErrorMessage";
-import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
+import { ErrorMessage } from "../../../../../../common/components/DataDisplay";
+import { useTranslate } from "../../../../../../common/i18n";
 import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
+
+import classes from "./RegistrationFormWrapper.module.scss";
 
 const MAX_DISPLAYABLE_USER_NAME_LENGTH = 10;
 
@@ -42,17 +44,17 @@ export const RegistrationFormWrapper = ({
     };
 
     return (
-        <Stack justify="center" mt="xl">
-            <Title ta="center" mb="xl" textWrap="wrap">
+        <Stack className={classes.container}>
+            <Title className={classes.title}>
                 {translate("pages.registration.header.preEmphasis")}{" "}
-                <Text span c="primary" inherit>
+                <Text className={classes.titleHighlight} span inherit>
                     {translate("pages.registration.header.emphasised")}
                 </Text>
                 {padWithSpaceIfNotEmpty(translate("pages.registration.header.postEmphasis"))}
                 {parsedUserName}!
             </Title>
 
-            <Paper radius="md" withBorder p="xl" shadow="xl" component={Stack}>
+            <Paper className={classes.formWrapper} withBorder component={Stack}>
                 {children}
             </Paper>
 

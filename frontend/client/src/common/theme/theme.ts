@@ -65,7 +65,7 @@ export const theme = createTheme({
             "#13aa5c",
             "#00924c",
         ],
-        error: [
+        danger: [
             "#ffeaec",
             "#fdd4d6",
             "#f4a7ac",

@@ -1,0 +1,29 @@
+.container {
+  .summaryHeader {
+    font-weight: 600;
+    margin-bottom: var(--mantine-spacing-xl);
+    text-align: center;
+  }
+
+  .summaryDataWrapper {
+    align-items: center;
+    gap: var(--mantine-spacing-xs);
+
+    .userIcon {
+      border-radius: 100%;
+    }
+
+    .userName {
+      text-align: center;
+      font-size: var(--mantine-font-size-lg);
+      margin-top: var(--mantine-spacing-md);
+      font-weight: 500;
+    }
+
+    .userCredentials {
+      text-align: center;
+      color: var(--mantine-color-dimmed);
+      font-size: var(--mantine-font-size-md);
+    }
+  }
+}

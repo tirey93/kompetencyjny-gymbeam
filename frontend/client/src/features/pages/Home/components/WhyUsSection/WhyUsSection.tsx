@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { Badge, Container, Group, SimpleGrid, Text, Title } from "@mantine/core";
+import { Badge, Container, Group, SimpleGrid, Stack, Text, Title } from "@mantine/core";
 import { IconCookie, IconGauge, IconStarFilled, IconUser } from "@tabler/icons-react";
 
-import { FeatureCard } from "../../../../../common/components/FeatureCard/FeatureCard";
-import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
+import { FeatureCard } from "../../../../../common/components/DataDisplay";
+import { useTranslate } from "../../../../../common/i18n";
 
 import classes from "./WhyUsSection.module.scss";
 
@@ -41,17 +41,17 @@ export const WhyUsSection = () => {
     );
 
     return (
-        <Container size="lg" py="xl">
-            <Group w="100%" justify="center">
-                <Title order={2} className={classes.title} ta="center" mt="sm">
+        <Container size="lg">
+            <Stack className={classes.container}>
+                <Title order={2} className={classes.title}>
                     {translate("pages.home.whyUs.title")}
                 </Title>
 
-                <Text c="dimmed" className={classes.description} ta="center" mt="md">
+                <Text c="dimmed" className={classes.description}>
                     {translate("pages.home.whyUs.description")}
                 </Text>
 
-                <Group w="100%" justify="center" m="md">
+                <Group className={classes.awardsContainer}>
                     {awards.map((award) => (
                         <Badge key={award} variant="light" leftSection={<IconStarFilled size={10} />}>
                             {award}
@@ -59,12 +59,12 @@ export const WhyUsSection = () => {
                     ))}
                 </Group>
 
-                <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl">
+                <SimpleGrid cols={{ base: 1, md: 3 }} className={classes.featureCardsContainer}>
                     {cardsContent.map((content) => (
                         <FeatureCard key={content.title} {...content} />
                     ))}
                 </SimpleGrid>
-            </Group>
+            </Stack>
         </Container>
     );
 };

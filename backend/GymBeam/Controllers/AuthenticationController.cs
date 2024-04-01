@@ -1,6 +1,7 @@
 ﻿using GymBeam.Constants;
 using GymBeam.Exceptions;
 using GymBeam.Extensions;
+using GymBeam.Properties;
 using GymBeam.Requests;
 using GymBeam.Response;
 using GymBeam.Utils;
@@ -75,7 +76,7 @@ namespace GymBeam.Controllers
             catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError,
-                    $"Internal Server Error: {ex.Message}");
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
         }
 
@@ -103,7 +104,7 @@ namespace GymBeam.Controllers
             catch (InvalidUserIdException ex)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest,
-                    $"BadRequest: {ex.Message}");
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
             catch (Exception ex)
             {

@@ -21,5 +21,5 @@ export const useUpdateSignedInUser = () => {
                 }
             }
         })();
-    }, []);
+    }, [setUserDetails, userDetails]);
 };

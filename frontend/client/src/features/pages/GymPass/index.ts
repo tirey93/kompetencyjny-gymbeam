@@ -1,0 +1,1 @@
+export { GymPassPage } from "./GymPass";

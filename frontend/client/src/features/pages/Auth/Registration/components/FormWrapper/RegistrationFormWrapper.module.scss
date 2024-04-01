@@ -1,0 +1,21 @@
+.container {
+  justify-content: center;
+  margin-top: var(--mantine-spacing-xl);
+
+  .title {
+    text-align: center;
+    margin-bottom: var(--mantine-spacing-xl);
+    white-space: break-spaces;
+    text-wrap: normal;
+
+    .titleHighlight {
+      color: var(--mantine-color-primary-7);
+    }
+  }
+
+  .formWrapper {
+    padding: var(--mantine-spacing-xl);
+    box-shadow: var(--mantine-shadow-xl);
+    border-radius: var(--mantine-radius-md);
+  }
+}

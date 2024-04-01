@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Group, Text } from "@mantine/core";
 
+import classes from "./Timestamp.module.scss";
+
 export const Timestamp = () => {
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
@@ -10,13 +12,9 @@ export const Timestamp = () => {
     }, []);
 
     return (
-        <Group>
-            <Text fz="xl" fw={700}>
-                {currentDateTime.toLocaleTimeString()}
-            </Text>
-            <Text fz="xl" fw={500} c="dimmed">
-                {currentDateTime.toLocaleDateString()}
-            </Text>
+        <Group className={classes.timestamp}>
+            <Text className={classes.time}>{currentDateTime.toLocaleTimeString()}</Text>
+            <Text className={classes.date}>{currentDateTime.toLocaleDateString()}</Text>
         </Group>
     );
 };

@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 
 import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
-import { ValidationRule } from "../Registration.types";
+import { ValidationRule } from "../Registration";
 
 const MIN_LOGIN_LENGTH = 4;
 const MAX_LOGIN_LENGTH = 64;
