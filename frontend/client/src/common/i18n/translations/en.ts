@@ -30,8 +30,7 @@ export const en: TranslationSource = {
                     description: "Changed reservations permission of user with id {{id}}.",
                 },
                 error: {
-                    title: "Reservation permissions change operation failed.",
-                    description: "Couldn't change reservations permission of user with id {{id}}.",
+                    title: "Failed to modify permissions of user with id {{id}}.",
                 },
             },
         },

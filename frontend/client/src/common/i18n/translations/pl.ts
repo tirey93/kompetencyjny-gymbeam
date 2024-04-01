@@ -30,8 +30,7 @@ export const pl: TranslationSource = {
                     description: "Zmieniono uprawnienia do rezerwacji użytkownika o id: {{id}}.",
                 },
                 error: {
-                    title: "Operacja zmiany uprawnień się nie powiodła.",
-                    description: "Nie udało się zmienić uprawnień użytkownika o id: {{id}}.",
+                    title: "Nie udało się zmienić uprawnień użytkownika o id: {{id}}.",
                 },
             },
         },

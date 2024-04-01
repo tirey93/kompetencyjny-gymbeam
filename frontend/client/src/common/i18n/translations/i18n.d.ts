@@ -8,7 +8,6 @@ export type TranslationSource = {
                 };
                 error: {
                     title: string;
-                    description: string;
                 };
             };
         };

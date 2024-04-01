@@ -47,7 +47,6 @@ export const useChangeReservationsPermission = (): UseChangeUserReservationsPerm
             });
 
             if (!error) {
-                console.log("success");
                 notifications.show({
                     withBorder: true,
                     title: translate("notifications.user.changeReservationsPermission.success.title"),
@@ -60,10 +59,8 @@ export const useChangeReservationsPermission = (): UseChangeUserReservationsPerm
                 const translationKey = mapErrorToErrorTranslationKey(error);
                 notifications.show({
                     withBorder: true,
-                    title: translate("notifications.user.changeReservationsPermission.error.title"),
-                    message: translate("notifications.user.changeReservationsPermission.error.description", {
-                        id: userId,
-                    }),
+                    title: translate("notifications.user.changeReservationsPermission.error.title", { id: userId }),
+                    message: translate(translationKey),
                     color: "danger",
                 });
                 setErrorTranslationKey(translationKey);
