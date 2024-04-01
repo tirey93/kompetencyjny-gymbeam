@@ -28,20 +28,17 @@ export const useSignIn = (): UseSignIn => {
     const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
     const translate = useTranslate();
 
-    const mapErrorToErrorTranslationKey = useCallback(
-        (error: unknown): TranslationKey => {
-            const errorCode = (error as RequestError)?.status ?? null;
+    const mapErrorToErrorTranslationKey = useCallback((error: unknown): TranslationKey => {
+        const errorCode = (error as RequestError)?.status ?? null;
 
-            switch (errorCode) {
-                case 403:
-                    return "apiErrors.auth.signIn.incorrectCredentials";
+        switch (errorCode) {
+            case 403:
+                return "apiErrors.auth.signIn.incorrectCredentials";
 
-                default:
-                    return "apiErrors.auth.signIn.default";
-            }
-        },
-        [translate]
-    );
+            default:
+                return "apiErrors.auth.signIn.default";
+        }
+    }, []);
 
     const signIn = useCallback(
         async (signInRequestBody: SignInRequestBody) => {
