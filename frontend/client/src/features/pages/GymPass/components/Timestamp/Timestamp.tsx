@@ -12,7 +12,7 @@ export const Timestamp = () => {
     }, []);
 
     return (
-        <Group>
+        <Group className={classes.timestamp}>
             <Text className={classes.time}>{currentDateTime.toLocaleTimeString()}</Text>
             <Text className={classes.date}>{currentDateTime.toLocaleDateString()}</Text>
         </Group>

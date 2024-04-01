@@ -49,8 +49,23 @@ export async function request(
             ...DEFAULT_REQUEST_OPTIONS,
             ...mapRequestOptionsToInitRequest(requestOptions ?? {}),
         });
-        const data = await response.json();
-        return { data, error: null };
+
+        if (response.status === 204 && response.ok) {
+            return { error: null, data: null };
+        }
+
+        const result = await response.json();
+
+        if (result.status < 200 || result.status > 299) {
+            const error = {
+                status: result.status,
+                message: result.errors?.toString(),
+            };
+
+            return { data: null, error };
+        }
+
+        return { data: result, error: null };
     } catch (error) {
         return { error, data: null };
     }

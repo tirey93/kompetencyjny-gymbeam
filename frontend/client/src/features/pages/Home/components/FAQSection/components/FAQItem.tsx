@@ -10,7 +10,7 @@ type FAQItemProps = {
 
 export const FAQItem = ({ value, label, description }: FAQItemProps) => {
     return (
-        <Accordion.Item value={value}>
+        <Accordion.Item className={classes.container} value={value}>
             <Accordion.Control>
                 <Text className={classes.question}>{label}</Text>
             </Accordion.Control>

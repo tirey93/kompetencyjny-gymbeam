@@ -65,7 +65,7 @@ export const FAQSection = ({ targetRef }: FAQSectionProps) => {
     );
 
     return (
-        <Container ref={targetRef}>
+        <Container className={classes.container} ref={targetRef}>
             <Title order={2} className={classes.title}>
                 {translate("pages.home.FAQ.header")}
             </Title>
