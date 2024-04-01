@@ -32,6 +32,7 @@ export const useSignIn = (): UseSignIn => {
         const errorCode = (error as RequestError)?.status ?? null;
 
         switch (errorCode) {
+            case 400:
             case 403:
                 return "apiErrors.auth.signIn.incorrectCredentials";
 

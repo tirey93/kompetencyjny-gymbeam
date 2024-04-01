@@ -1,10 +1,12 @@
-.time {
-  font-size: var(--mantine-font-size-xl);
-  font-weight: 700;
-}
+html .timestamp {
+  .time {
+    font-size: var(--mantine-font-size-xl);
+    font-weight: 700;
+  }
 
-.date {
-  font-size: var(--mantine-font-size-xl);
-  font-weight: 700;
-  color: var(--mantine-color-dimmed);
+  .date {
+    font-size: var(--mantine-font-size-xl);
+    font-weight: 700;
+    color: var(--mantine-color-dimmed);
+  }
 }

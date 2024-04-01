@@ -14,7 +14,7 @@ export const GymPassInfo = ({ owner }: GymPassInfoProps) => {
     const translate = useTranslate();
 
     return (
-        <Stack>
+        <Stack className={classes.container}>
             <Box>
                 <Text className={classes.label}>{translate("pages.qr.gymPassDetails.owner")}</Text>
                 <Text>{owner.name}</Text>

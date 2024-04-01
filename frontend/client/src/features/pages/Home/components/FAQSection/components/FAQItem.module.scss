@@ -1,9 +1,11 @@
-.question {
-  font-size: var(--mantine-font-size-sm);
-  font-weight: 500;
-}
+html .container {
+  .question {
+    font-size: var(--mantine-font-size-sm);
+    font-weight: 500;
+  }
 
-.answer {
-  font-size: var(--mantine-font-size-xs);
-  text-align: justify;
+  .answer {
+    font-size: var(--mantine-font-size-xs);
+    text-align: justify;
+  }
 }

@@ -1,4 +1,6 @@
-.label {
-  font-weight: 700;
-  font-size: var(--mantine-font-size-xs);
+html .container {
+  .label {
+    font-weight: 700;
+    font-size: var(--mantine-font-size-xs);
+  }
 }
