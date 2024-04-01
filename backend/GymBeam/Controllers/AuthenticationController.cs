@@ -1,9 +1,11 @@
-﻿using GymBeam.Constants;
+﻿using GymBeam.Commands;
+using GymBeam.Constants;
 using GymBeam.Exceptions;
 using GymBeam.Extensions;
 using GymBeam.Requests;
 using GymBeam.Response;
 using GymBeam.Utils;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
@@ -17,23 +19,27 @@ namespace GymBeam.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        public AuthenticationController(IConfiguration configuration)
+        private readonly IMediator _mediator;
+
+        public AuthenticationController(IConfiguration configuration, IMediator mediator)
         {
             _configuration = configuration;
+            _mediator = mediator;
         }
 
         [HttpPost("Register")]
         [AllowAnonymous]
-        public ActionResult<UserResponse> Register([FromBody] RegisterRequest dto)
+        public async Task<ActionResult<UserResponse>> Register([FromBody] RegisterRequest dto)
         {
-            return new UserResponse
+            var command = new RegisterCommand
             {
-                Id = 34,
-                Name = dto.Username,
                 DisplayName = dto.DisplayName,
-                Role = "user",
-                ReservationDisabled = false
+                Password = dto.Password,
+                Username = dto.Username,
             };
+
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
 
         [HttpPost("Login")]
@@ -88,16 +94,27 @@ namespace GymBeam.Controllers
             int userId;
             try
             {
-                string cookiesUserId = Request.Cookies[Cookies.UserId];
+                if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
+                    throw new InvalidCookieException(Cookies.UserId);
                 if (!int.TryParse(cookiesUserId, out userId))
                     throw new InvalidUserIdException();
 
                 return NoContent();
             }
-            catch (Exception ex)
+            catch (InvalidCookieException ex)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest,
                     $"BadRequest: {ex.Message}");
+            }
+            catch (InvalidUserIdException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    $"BadRequest: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    $"Internal Server Error: {ex.Message}");
             }
         }
     }
