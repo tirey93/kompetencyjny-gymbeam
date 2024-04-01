@@ -1,0 +1,21 @@
+.container {
+  padding: var(--mantine-spacing-md);
+
+  .title {
+    z-index: 1000;
+    top: calc(var(--mantine-spacing-md) + var(--mantine-font-size-md));
+    font-size: var(--mantine-font-size-md);
+    position: absolute;
+    font-weight: 700;
+  }
+
+  .caption {
+    font-size: var(--mantine-font-size-sm);
+    margin-bottom: var(--mantine-spacing-xs);
+    text-align: justify;
+  }
+
+  .buttonsContainer {
+    align-self: flex-end;
+  }
+}

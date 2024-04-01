@@ -1,15 +1,15 @@
 import { useCallback, useMemo, useState } from "react";
-import { notifications } from "@mantine/notifications";
 import { useMutation } from "@tanstack/react-query";
 
 import { useAppOverlayStore } from "../../components/AppOverlay";
 import { useTranslate } from "../../i18n";
 import { TranslationKey } from "../../i18n/translations/i18n";
 import { request, RequestError, SignInRequestBody } from "../../request";
+import { UserDetails } from "../Auth";
 import { useAuthState } from "./useAuthState";
 
 type UseSignIn = {
-    signIn: (signInData: SignInRequestBody) => Promise<void>;
+    signIn: (signInData: SignInRequestBody) => Promise<UserDetails>;
     error: string | null;
     reset: () => void;
 };
@@ -49,12 +49,7 @@ export const useSignIn = (): UseSignIn => {
 
             if (data) {
                 setCurrentUserDetails(data);
-                notifications.show({
-                    title: translate("notifications.auth.signedIn.title"),
-                    message: translate("notifications.auth.signedIn.description", { user: data.displayName }),
-                    color: "success",
-                    withBorder: true,
-                });
+                return data;
             } else {
                 const errorTranslationKey = mapErrorToErrorTranslationKey(error);
                 setErrorTranslationKey(errorTranslationKey);

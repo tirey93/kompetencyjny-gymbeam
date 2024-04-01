@@ -5,29 +5,28 @@ import { useTranslate } from "../../../../../../common/i18n";
 import { TranslationKey } from "../../../../../../common/i18n/translations/i18n";
 import { request, RequestError } from "../../../../../../common/request";
 
-type UseChangeUserReservationsPermission = {
-    changeReservationsPermission: (userId: number, allowReservations: boolean) => Promise<void>;
+type UseDeleteUser = {
+    deleteUser: (userId: number) => Promise<void>;
     error: string | null;
     reset: () => void;
 };
 
-type ChangeReservationsPermissionRequestOptions = {
-    queryParams: { value: string };
+type DeleteUserRequestOptions = {
     urlParams: { userId: string };
 };
 
-const changeReservationsPermissionRequest = (options: ChangeReservationsPermissionRequestOptions) => {
-    return request("ChangeReservationsPermission", {
-        method: "PUT",
+const deleteUserRequest = (options: DeleteUserRequestOptions) => {
+    return request("DeleteUser", {
+        method: "DELETE",
         ...options,
     });
 };
 
-export const useChangeReservationsPermission = (): UseChangeUserReservationsPermission => {
+export const useDeleteUser = (): UseDeleteUser => {
     const translate = useTranslate();
     const [errorTranslationKey, setErrorTranslationKey] = useState<TranslationKey | null>(null);
     const { mutateAsync } = useMutation({
-        mutationFn: changeReservationsPermissionRequest,
+        mutationFn: deleteUserRequest,
     });
 
     const mapErrorToErrorTranslationKey = useCallback((error: unknown): TranslationKey => {
@@ -35,14 +34,13 @@ export const useChangeReservationsPermission = (): UseChangeUserReservationsPerm
 
         switch (errorCode) {
             default:
-                return "apiErrors.user.changeReservationsPermission.default";
+                return "apiErrors.user.delete.default";
         }
     }, []);
 
-    const changeReservationsPermission = useCallback(
-        async (userId: number, reservationsEnabled: boolean) => {
+    const deleteUser = useCallback(
+        async (userId: number) => {
             const { error } = await mutateAsync({
-                queryParams: { value: reservationsEnabled.toString() },
                 urlParams: { userId: userId.toString() },
             });
 
@@ -64,5 +62,5 @@ export const useChangeReservationsPermission = (): UseChangeUserReservationsPerm
         setErrorTranslationKey(null);
     }, []);
 
-    return { changeReservationsPermission, error, reset };
+    return { deleteUser, error, reset };
 };

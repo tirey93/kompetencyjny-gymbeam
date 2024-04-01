@@ -1,12 +1,12 @@
 import { create } from "zustand";
 
-import { UserDetails, UserRole } from "../Auth";
+import { InternalUserRole, UserDetails } from "../Auth";
 
 type AuthState = {
     currentUserDetails: UserDetails | null;
     setCurrentUserDetails: (currentUserDetails: UserDetails) => void;
     clearCurrentUserDetails: () => void;
-    getCurrentUserRole: () => UserRole;
+    getCurrentUserRole: () => InternalUserRole;
 };
 
 export const useAuthState = create<AuthState>((set, getState) => ({

@@ -2,13 +2,16 @@ export type TranslationSource = {
     notifications: {
         user: {
             changeReservationsPermission: {
-                success: {
-                    title: string;
-                    description: string;
-                };
-                error: {
-                    title: string;
-                };
+                title: string;
+                description: string;
+            };
+            changeRole: {
+                title: string;
+                description: string;
+            };
+            delete: {
+                title: string;
+                description: string;
             };
         };
         auth: {
@@ -34,6 +37,12 @@ export type TranslationSource = {
     apiErrors: {
         user: {
             changeReservationsPermission: {
+                default: string;
+            };
+            changeRole: {
+                default: string;
+            };
+            delete: {
                 default: string;
             };
         };

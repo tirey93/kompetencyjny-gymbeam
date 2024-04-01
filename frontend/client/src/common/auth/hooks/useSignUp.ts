@@ -1,15 +1,15 @@
 import { useCallback, useMemo, useState } from "react";
-import { notifications } from "@mantine/notifications";
 import { useMutation } from "@tanstack/react-query";
 
 import { useAppOverlayStore } from "../../components/AppOverlay";
 import { useTranslate } from "../../i18n";
 import { TranslationKey } from "../../i18n/translations/i18n";
 import { request, RequestError, SignUpRequestBody } from "../../request";
+import { UserDetails } from "../Auth";
 import { useAuthState } from "./useAuthState";
 
 type UseSignUp = {
-    signUp: (signUpData: SignUpRequestBody) => Promise<void>;
+    signUp: (signUpData: SignUpRequestBody) => Promise<UserDetails>;
     error: string | null;
     reset: () => void;
 };
@@ -48,12 +48,7 @@ export const useSignUp = (): UseSignUp => {
 
             if (data) {
                 setCurrentUserDetails(data);
-                notifications.show({
-                    title: translate("notifications.auth.signedUp.title"),
-                    message: translate("notifications.auth.signedUp.description"),
-                    color: "success",
-                    withBorder: true,
-                });
+                return data;
             } else {
                 const errorTranslationKey = mapErrorToErrorTranslationKey(error);
                 setErrorTranslationKey(errorTranslationKey);

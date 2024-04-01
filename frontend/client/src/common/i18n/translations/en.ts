@@ -7,6 +7,12 @@ export const en: TranslationSource = {
             changeReservationsPermission: {
                 default: "Failed to change user's reservations permission, something went wrong on our side.",
             },
+            changeRole: {
+                default: "Failed to change user's role, something went wrong on our side.",
+            },
+            delete: {
+                default: "Failed to delete user, something went wrong on our side.",
+            },
         },
         auth: {
             signIn: {
@@ -25,13 +31,16 @@ export const en: TranslationSource = {
     notifications: {
         user: {
             changeReservationsPermission: {
-                success: {
-                    title: "Reservation permissions change operation successful.",
-                    description: "Changed reservations permission of user with id {{id}}.",
-                },
-                error: {
-                    title: "Failed to modify permissions of user with id {{id}}.",
-                },
+                title: "Reservation permissions change operation successful.",
+                description: "Changed reservations permission of user with id {{id}}.",
+            },
+            changeRole: {
+                title: "Role change operation successful.",
+                description: "Changed role of user with id {{id}}.",
+            },
+            delete: {
+                title: "User has been deleted.",
+                description: "Successfully deleted user with id {{id}}.",
             },
         },
         auth: {

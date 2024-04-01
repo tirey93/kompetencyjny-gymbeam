@@ -1,6 +1,6 @@
 import { UserRole } from "../auth/Auth";
 
-export type ApiResourceName = "SignIn" | "SignUp" | "SignOut" | "CurrentUserDetails" | "ChangeReservationsPermission";
+export type ApiResourceName = "SignIn" | "SignUp" | "SignOut" | "CurrentUserDetails" | "ChangeReservationsPermission" | "ChangeRole" | "DeleteUser";
 
 export type RequestResult<TData> = {
     data: TData | null;
@@ -14,7 +14,7 @@ export type RequestError = {
 export type RequestOptions = Partial<{
     body: object;
     method: "POST" | "GET" | "PUT" | "DELETE" | "PATCH";
-    searchParams: Record<string, string>;
+    queryParams: Record<string, string>;
     urlParams: Record<string, string>;
 }>;
 
@@ -29,3 +29,11 @@ export type UserDetailsResponse = {
 export type SignInRequestBody = { username: string; password: string };
 
 export type SignUpRequestBody = { displayName: string; name: string; password: string };
+
+export type ChangeReservationsPermissionQueryParams = { value: string; };
+export type ChangeReservationsPermissionURLParams = { userId: string; };
+
+export type ChangeRoleQueryParams = { role: Exclude<UserRole, "Guest">; };
+export type ChangeRoleURLParams = { userId: string; };
+
+export type DeleteUserURLParams = { userId: string; };
