@@ -34,6 +34,7 @@ export const AppNavigation = ({ children }: PropsWithChildren) => {
             </AppShell.Header>
 
             <AppShell.Navbar className={classes.appNavigationNavbar} withBorder>
+                <Burger className={classes.burger} opened={isNavbarVisible} onClick={toggleNavbar} hiddenFrom="sm" />
                 <SideNavigation onNavigate={closeNavbar} />
             </AppShell.Navbar>
 
