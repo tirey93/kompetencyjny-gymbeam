@@ -86,8 +86,6 @@ namespace GymBeam.Controllers
                     throw new InvalidCookieException(Cookies.UserId);
                 if (!int.TryParse(cookiesUserId, out id))
                     throw new InvalidUserIdException();
-
-                return await Get(id);
             }
             catch (InvalidCookieException ex)
             {
@@ -104,6 +102,8 @@ namespace GymBeam.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError,
                     $"Internal Server Error: {ex.Message}");
             }
+
+            return await Get(id);
         }
 
         [HttpGet("CheckAvailability/ByName/{username}")]
