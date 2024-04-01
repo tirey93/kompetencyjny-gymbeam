@@ -99,17 +99,17 @@ namespace GymBeam.Controllers
             catch (InvalidCookieException ex)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest,
-                    $"BadRequest: {ex.Message}");
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
             }
             catch (InvalidUserIdException ex)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest,
-                    string.Format(Resource.ControllerInternalError, ex.Message));
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
             }
             catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError,
-                    $"Internal Server Error: {ex.Message}");
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
         }
     }

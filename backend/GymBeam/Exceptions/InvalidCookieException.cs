@@ -1,8 +1,10 @@
-﻿namespace GymBeam.Exceptions
+﻿using GymBeam.Properties;
+
+namespace GymBeam.Exceptions
 {
     public class InvalidCookieException : Exception
     {
-        public InvalidCookieException(string cookieName) : base($"Cookie {cookieName} was not found.")
+        public InvalidCookieException(string cookieName) : base(string.Format(Resource.ExceptionCookieIsInvalid, cookieName))
         {
         }
     }

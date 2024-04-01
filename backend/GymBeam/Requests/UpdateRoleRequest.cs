@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using GymBeam.Commands;
+using GymBeam.Properties;
 
 namespace GymBeam.Requests
 {
@@ -17,7 +17,7 @@ namespace GymBeam.Requests
                 .WithMessage(context =>
                 {
                     var rolesList = string.Join(", ", Enum.GetNames(typeof(Domain.Roles)));
-                    return $"Role must be one of: {rolesList}";
+                    return string.Format(Resource.ValidatorRoleFromRolesList, rolesList);
                 });
         }
     }

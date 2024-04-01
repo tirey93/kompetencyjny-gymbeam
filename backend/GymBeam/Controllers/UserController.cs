@@ -5,6 +5,7 @@ using MediatR;
 using GymBeam.Constants;
 using GymBeam.Queries;
 using GymBeam.Response;
+using GymBeam.Properties;
 using GymBeam.Exceptions;
 using GymBeam.Commands;
 using GymBeam.Requests;
@@ -37,12 +38,12 @@ namespace GymBeam.Controllers
             catch (UserNotFoundException ex)
             {
                 return StatusCode((int)HttpStatusCode.NotFound,
-                   $"NotFound: {ex.Message}");
+                    string.Format(Resource.ControllerNotFound, ex.Message));
             }
             catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError,
-                    $"Internal Server Error: {ex.Message}");
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
         }
 
@@ -64,12 +65,12 @@ namespace GymBeam.Controllers
             catch (UserNotFoundException ex)
             {
                 return StatusCode((int)HttpStatusCode.NotFound,
-                    $"NotFound: {ex.Message}");
+                    string.Format(Resource.ControllerNotFound, ex.Message));
             }
             catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError,
-                    $"Internal Server Error: {ex.Message}");
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
         }
 
@@ -90,17 +91,17 @@ namespace GymBeam.Controllers
             catch (InvalidCookieException ex)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest,
-                    $"BadRequest: {ex.Message}");
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
             }
             catch (InvalidUserIdException ex)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest,
-                    $"BadRequest: {ex.Message}");
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
             }
             catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError,
-                    $"Internal Server Error: {ex.Message}");
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
 
             return await Get(id);
@@ -122,7 +123,7 @@ namespace GymBeam.Controllers
             catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError,
-                    $"Internal Server Error: {ex.Message}");
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
         }
 
@@ -147,12 +148,12 @@ namespace GymBeam.Controllers
             catch (UserNotFoundException ex)
             {
                 return StatusCode((int)HttpStatusCode.NotFound,
-                    $"NotFound: {ex.Message}");
+                    string.Format(Resource.ControllerNotFound, ex.Message));
             }
             catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError,
-                    $"Internal Server Error: {ex.Message}");
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
         }
 
@@ -176,12 +177,12 @@ namespace GymBeam.Controllers
             catch (UserNotFoundException ex)
             {
                 return StatusCode((int)HttpStatusCode.NotFound,
-                    $"NotFound: {ex.Message}");
+                    string.Format(Resource.ControllerNotFound, ex.Message));
             }
             catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError,
-                    $"Internal Server Error: {ex.Message}");
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
         }
 
@@ -204,12 +205,12 @@ namespace GymBeam.Controllers
             catch (UserNotFoundException ex)
             {
                 return StatusCode((int)HttpStatusCode.NotFound,
-                    $"NotFound: {ex.Message}");
+                    string.Format(Resource.ControllerNotFound, ex.Message));
             }
             catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError,
-                    $"Internal Server Error: {ex.Message}");
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
         }
     }
