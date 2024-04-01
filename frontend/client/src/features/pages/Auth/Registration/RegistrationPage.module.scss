@@ -1,0 +1,7 @@
+html .container {
+  max-width: 800px;
+  min-height: 800px;
+  margin: auto;
+  justify-content: center;
+  padding: var(--mantine-spacing-xl);
+}

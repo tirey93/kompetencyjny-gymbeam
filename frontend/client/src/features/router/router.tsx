@@ -3,11 +3,12 @@ import { createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import { AppProvider } from "../../AppProvider";
 import { Root } from "../../Root";
-import { NotFoundPage } from "../pages/404/404";
-import { RegistrationPage } from "../pages/Auth/Registration/Registration";
-import { SignInPage } from "../pages/Auth/SignIn/SignIn";
-import { GymPassPage } from "../pages/GymPass/GymPass";
-import { HomePage } from "../pages/Home/Home";
+import { NotFoundPage } from "../pages/404";
+import { AdminDashboardPage } from "../pages/AdminDashboard";
+import { RegistrationPage } from "../pages/Auth/Registration";
+import { SignInPage } from "../pages/Auth/SignIn";
+import { GymPassPage } from "../pages/GymPass";
+import { HomePage } from "../pages/Home";
 import { Routes } from "./Routes";
 
 const APP_PAGES = [
@@ -36,6 +37,14 @@ const APP_PAGES = [
         element: (
             <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={Routes.LOGIN}>
                 <GymPassPage />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: Routes.ADMIN_DASHBOARD,
+        element: (
+            <ProtectedRoute allowedRoles={["Admin"]} redirectUnauthorizedTo={Routes.LOGIN}>
+                <AdminDashboardPage />
             </ProtectedRoute>
         ),
     },

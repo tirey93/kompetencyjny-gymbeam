@@ -1,16 +1,16 @@
 import { Outlet } from "react-router-dom";
 
-import { useUpdateSignedInUser } from "./common/auth/hooks/useUpdateSignedInUser";
-import { AppOverlay } from "./common/components/AppOverlay/AppOverlay";
-import { NavigationShell } from "./features/navigation/Shell/Shell";
+import { useUpdateSignedInUser } from "./common/auth";
+import { AppOverlay } from "./common/components/AppOverlay";
+import { AppNavigation } from "./features/navigation";
 
 export const Root = () => {
     useUpdateSignedInUser();
 
     return (
-        <NavigationShell>
+        <AppNavigation>
             <AppOverlay />
             <Outlet />
-        </NavigationShell>
+        </AppNavigation>
     );
 };

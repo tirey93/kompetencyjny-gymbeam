@@ -1,0 +1,15 @@
+html .informationCard {
+  padding: var(--mantine-spacing-lg);
+
+  .title {
+    font-size: var(--mantine-font-size-lg);
+    font-weight: 700;
+    margin-bottom: var(--mantine-spacing-md);
+  }
+
+  .itemsContainer {
+    gap: var(--mantine-spacing-lg);
+  }
+}
+
+

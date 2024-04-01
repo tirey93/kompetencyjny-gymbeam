@@ -1,0 +1,18 @@
+.appNavigationHeader {
+  padding: var(--mantine-spacing-md);
+  box-shadow: var(--mantine-shadow-sm);
+
+  .headerContentContainer {
+    width: 100%;
+    justify-content: flex-end;
+
+    .burger {
+      --burger-size: var(--mantine-font-size-xl);
+      margin-right: auto;
+    }
+  }
+}
+
+.appNavigationNavbar {
+  padding: var(--mantine-spacing-md);
+}

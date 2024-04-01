@@ -1,0 +1,16 @@
+html .navigationTileTooltip {
+  font-weight: 600;
+  padding-inline: var(--mantine-spacing-md);
+}
+
+html .navigationTile {
+  min-width: calc_rem(50px);
+  min-height: calc_rem(50px);
+  max-width: 30dvmax;
+
+  .iconLabel {
+    margin-left: var(--mantine-spacing-sm);
+    font-size: var(--mantine-font-size-md);
+    font-weight: 700;
+  }
+}

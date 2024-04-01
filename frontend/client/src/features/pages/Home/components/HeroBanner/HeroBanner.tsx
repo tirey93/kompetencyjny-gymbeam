@@ -1,8 +1,8 @@
-import { Button, Container, Group, Image, List, rem, Stack, Text, ThemeIcon, Title } from "@mantine/core";
+import { Button, Container, Group, Image, List, Stack, Text, ThemeIcon, Title } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 
 import picture from "./assets/hero-banner-picture.svg";
-import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
+import { useTranslate } from "../../../../../common/i18n";
 
 import classes from "./HeroBanner.module.scss";
 
@@ -14,27 +14,23 @@ export const HeroBanner = ({ onLearnMoreClick }: HeroBannerProps) => {
     const translate = useTranslate();
 
     return (
-        <Container fluid p="xl" bg="dark">
-            <Group w="100%" align="center" justify="center" p="xl" gap="xl">
-                <Stack className={classes.content}>
-                    <Title fw={800}>
+        <Container className={classes.container} fluid bg="dark">
+            <Group className={classes.group}>
+                <Stack className={classes.textContent}>
+                    <Title className={classes.title}>
                         {translate("pages.home.heroBanner.title.firstLine")} <br />
                         {translate("pages.home.heroBanner.title.secondLine")}{" "}
-                        <Text c="primary" span inherit>
+                        <Text className={classes.titleHighlight} span inherit>
                             {translate("pages.home.heroBanner.title.highlighted")}
                         </Text>{" "}
                     </Title>
-                    <Text c="dimmed" mt="md">
-                        {translate("pages.home.heroBanner.description")}
-                    </Text>
+                    <Text className={classes.description}>{translate("pages.home.heroBanner.description")}</Text>
 
                     <List
-                        mt={30}
-                        spacing="sm"
-                        size="sm"
+                        className={classes.featuresList}
                         icon={
-                            <ThemeIcon size={20} radius="xl">
-                                <IconCheck style={{ width: rem(12), height: rem(12) }} stroke={1.5} />
+                            <ThemeIcon className={classes.checkIcon}>
+                                <IconCheck />
                             </ThemeIcon>
                         }
                     >
@@ -52,7 +48,7 @@ export const HeroBanner = ({ onLearnMoreClick }: HeroBannerProps) => {
                         </List.Item>
                     </List>
 
-                    <Group mt={30}>
+                    <Group className={classes.buttonsWrapper}>
                         <Button size="md" variant="gradient">
                             {translate("pages.home.heroBanner.buttons.getStarted")}
                         </Button>
@@ -61,7 +57,7 @@ export const HeroBanner = ({ onLearnMoreClick }: HeroBannerProps) => {
                         </Button>
                     </Group>
                 </Stack>
-                <Image src={picture} mah={330} ml="xl" visibleFrom="lg" />
+                <Image className={classes.image} src={picture} visibleFrom="lg" />
             </Group>
         </Container>
     );

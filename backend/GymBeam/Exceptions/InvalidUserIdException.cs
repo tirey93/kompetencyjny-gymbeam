@@ -1,8 +1,10 @@
-﻿namespace GymBeam.Exceptions
+﻿using GymBeam.Properties;
+
+namespace GymBeam.Exceptions
 {
     public class InvalidUserIdException : Exception
     {
-        public InvalidUserIdException() : base("User id is invalid.")
+        public InvalidUserIdException() : base(Resource.ExceptionUserIdIsInvalid)
         {
         }
     }

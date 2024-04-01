@@ -1,0 +1,15 @@
+html .container {
+  max-width: 600px;
+  min-height: 80dvh;
+  margin: auto;
+  justify-content: center;
+
+  .grid {
+    margin-inline: auto;
+
+    .qrWrapper {
+      align-items: center;
+      padding-bottom: var(--mantine-spacing-lg);
+    }
+  }
+}

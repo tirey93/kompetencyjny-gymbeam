@@ -1,0 +1,17 @@
+html .container {
+  .buttonsContainer {
+    justify-content: center;
+    margin-top: var(--mantine-spacing-xl);
+
+    .button {
+      min-width: 35%;
+    }
+  }
+
+  .signInLink {
+    align-self: center;
+    width: fit-content;
+    text-align: center;
+    color: var(--mantine-color-info-7);
+  }
+}

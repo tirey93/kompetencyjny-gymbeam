@@ -3,6 +3,11 @@ import { TranslationSource } from "./i18n";
 
 export const pl: TranslationSource = {
     apiErrors: {
+        user: {
+            changeReservationsPermission: {
+                default: "Nie udało się zmienić uprawnień użytkownika, coś poszło nie tak po naszej stronie.",
+            },
+        },
         auth: {
             signIn: {
                 incorrectCredentials: "Nieprawidłowy login lub hasło.",
@@ -18,6 +23,17 @@ export const pl: TranslationSource = {
         },
     },
     notifications: {
+        user: {
+            changeReservationsPermission: {
+                success: {
+                    title: "Operacja zmiany uprawnień powiodła się.",
+                    description: "Zmieniono uprawnienia do rezerwacji użytkownika o id: {{id}}.",
+                },
+                error: {
+                    title: "Nie udało się zmienić uprawnień użytkownika o id: {{id}}.",
+                },
+            },
+        },
         auth: {
             signedIn: {
                 title: "Zalogowano.",
@@ -49,11 +65,75 @@ export const pl: TranslationSource = {
             adminDashboard: "Panel admina",
         },
     },
+    user: {
+        id: "ID",
+        name: "Nazwa",
+        login: "Login",
+        roles: {
+            user: "Użytkownik",
+            admin: "Administrator",
+        },
+    },
     pages: {
+        adminDashboard: {
+            usersPanel: {
+                options: {
+                    delete: "Usuń konto użytkownika",
+                },
+                modals: {
+                    delete: {
+                        buttons: {
+                            confirm: "Potwierdź",
+                            cancel: "Anuluj",
+                        },
+                        title: "Usuwanie użytkownika",
+                        caption: "Ta akcja jest nieodwracalna! Czy na pewno chcesz usunąć tego użytkownika?",
+                    },
+                    changeRole: {
+                        buttons: {
+                            confirm: "Potwierdź",
+                            cancel: "Anuluj",
+                        },
+                        title: "Zmiana roli użytkownika",
+                        caption: 'Czy na pewno chcesz zmienić rolę tego użytkownika na "{{role}}"?',
+                    },
+                    toggleReservations: {
+                        buttons: {
+                            confirm: "Confirm",
+                            cancel: "Cancel",
+                        },
+                        title: "Zmiana uprawnień do rezerwacji",
+                        toggleOnCaption: "Czy na pewno chcesz pozwolić temu użytkownikowi na rezerwowanie zajęć?",
+                        toggleOffCaption:
+                            "Czy na pewno chcesz zablokować temu użytkownikowi możliwość rezerwacji zajęć?",
+                    },
+                },
+                search: {
+                    placeholder: "Wyszukaj użytkownika",
+                },
+                header: {
+                    id: "ID",
+                    user: "Użytkownik",
+                    login: "Login",
+                    role: "Rola",
+                    reservations: "Rezerwacje",
+                    options: "Opcje",
+                },
+                rows: {
+                    reservations: {
+                        on: "Włączone",
+                        off: "Wyłączone",
+                    },
+                    name: "Nazwa",
+                    login: "Login",
+                },
+            },
+        },
+
         qr: {
             gymPassDetails: {
                 owner: "Właściciel",
-                expires: "Ważność",
+                reservationsPermission: "Uprawnienia do rezerwacji",
             },
         },
 

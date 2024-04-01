@@ -2,7 +2,7 @@ import { RefObject, useMemo } from "react";
 import { Accordion, Container, Title } from "@mantine/core";
 
 import { FAQItem } from "./components/FAQItem";
-import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
+import { useTranslate } from "../../../../../common/i18n";
 
 import classes from "./FAQSection.module.scss";
 
@@ -65,12 +65,12 @@ export const FAQSection = ({ targetRef }: FAQSectionProps) => {
     );
 
     return (
-        <Container ref={targetRef}>
-            <Title ta="center" mb="lg" order={2}>
+        <Container className={classes.container} ref={targetRef}>
+            <Title order={2} className={classes.title}>
                 {translate("pages.home.FAQ.header")}
             </Title>
 
-            <Accordion chevronPosition="right" variant="contained" chevronSize={25} classNames={classes}>
+            <Accordion chevronPosition="right" variant="contained" chevronSize={25} classNames={{ item: classes.item }}>
                 {questions.map((question) => (
                     <FAQItem key={question.value} {...question} />
                 ))}

@@ -2,8 +2,8 @@ import { useCallback, useMemo, useState } from "react";
 import { notifications } from "@mantine/notifications";
 import { useMutation } from "@tanstack/react-query";
 
-import { useAppOverlayStore } from "../../components/AppOverlay/hooks/useAppOverlayStore";
-import { useTranslate } from "../../i18n/hooks/useTranslate";
+import { useAppOverlayStore } from "../../components/AppOverlay";
+import { useTranslate } from "../../i18n";
 import { TranslationKey } from "../../i18n/translations/i18n";
 import { request, RequestError, SignInRequestBody } from "../../request";
 import { useAuthState } from "./useAuthState";
@@ -28,20 +28,18 @@ export const useSignIn = (): UseSignIn => {
     const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
     const translate = useTranslate();
 
-    const mapErrorToErrorTranslationKey = useCallback(
-        (error: unknown): TranslationKey => {
-            const errorCode = (error as RequestError)?.status ?? null;
+    const mapErrorToErrorTranslationKey = useCallback((error: unknown): TranslationKey => {
+        const errorCode = (error as RequestError)?.status ?? null;
 
-            switch (errorCode) {
-                case 403:
-                    return "apiErrors.auth.signIn.incorrectCredentials";
+        switch (errorCode) {
+            case 400:
+            case 403:
+                return "apiErrors.auth.signIn.incorrectCredentials";
 
-                default:
-                    return "apiErrors.auth.signIn.default";
-            }
-        },
-        [translate]
-    );
+            default:
+                return "apiErrors.auth.signIn.default";
+        }
+    }, []);
 
     const signIn = useCallback(
         async (signInRequestBody: SignInRequestBody) => {
@@ -50,11 +48,10 @@ export const useSignIn = (): UseSignIn => {
             setIsLoading(false);
 
             if (data) {
-                const { name, displayName, role } = data;
-                setCurrentUserDetails({ name, displayName, role });
+                setCurrentUserDetails(data);
                 notifications.show({
                     title: translate("notifications.auth.signedIn.title"),
-                    message: translate("notifications.auth.signedIn.description", { user: displayName }),
+                    message: translate("notifications.auth.signedIn.description", { user: data.displayName }),
                     color: "success",
                     withBorder: true,
                 });

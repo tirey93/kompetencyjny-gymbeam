@@ -2,9 +2,9 @@ import { useCallback } from "react";
 import { notifications } from "@mantine/notifications";
 import { useMutation } from "@tanstack/react-query";
 
-import { useAppOverlayStore } from "../../components/AppOverlay/hooks/useAppOverlayStore";
-import { useTranslate } from "../../i18n/hooks/useTranslate";
-import { request } from "../../request/request";
+import { useAppOverlayStore } from "../../components/AppOverlay";
+import { useTranslate } from "../../i18n";
+import { request } from "../../request";
 import { useAuthState } from "./useAuthState";
 
 type UseSignOut = {
@@ -33,7 +33,7 @@ export const useSignOut = (): UseSignOut => {
             notifications.show({
                 title: translate("notifications.auth.signingOutFailed.title"),
                 message: translate("notifications.auth.signingOutFailed.description"),
-                color: "error",
+                color: "danger",
                 withBorder: true,
             });
 

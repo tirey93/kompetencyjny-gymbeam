@@ -1,5 +1,7 @@
 import { Accordion, Text } from "@mantine/core";
 
+import classes from "./FAQItem.module.scss";
+
 type FAQItemProps = {
     value: string;
     label: string;
@@ -8,16 +10,12 @@ type FAQItemProps = {
 
 export const FAQItem = ({ value, label, description }: FAQItemProps) => {
     return (
-        <Accordion.Item value={value}>
+        <Accordion.Item className={classes.container} value={value}>
             <Accordion.Control>
-                <Text fz="sm" fw={500}>
-                    {label}
-                </Text>
+                <Text className={classes.question}>{label}</Text>
             </Accordion.Control>
             <Accordion.Panel>
-                <Text fz="sm" ta="justify">
-                    {description}
-                </Text>
+                <Text className={classes.answer}>{description}</Text>
             </Accordion.Panel>
         </Accordion.Item>
     );

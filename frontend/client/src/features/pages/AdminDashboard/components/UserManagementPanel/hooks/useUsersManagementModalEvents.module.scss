@@ -1,0 +1,13 @@
+html .deleteModalTitle {
+  color: var(--mantine-color-danger-7);
+  font-weight: 700;
+}
+
+html .roleModalTitle, .reservationsModalTitle {
+  color: var(--mantine-color-info-7);
+  font-weight: 700;
+}
+
+html .modalCaption {
+  font-size: var(--mantine-font-size-sm);
+}
