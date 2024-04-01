@@ -5,6 +5,7 @@ import { modals } from "@mantine/modals";
 import { UserDetails, UserRole } from "../../../../../../common/auth";
 import { UserShortInfo } from "../../../../../../common/components/User";
 import { useTranslate } from "../../../../../../common/i18n";
+import { useChangeReservationsPermission } from "./useChangeUserReservationsPermission";
 
 import classes from "./useUsersManagementModalEvents.module.scss";
 
@@ -15,6 +16,7 @@ type UseUsersManagementModalEvents = {
 };
 
 export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents => {
+    const { changeReservationsPermission } = useChangeReservationsPermission();
     const translate = useTranslate();
 
     const onUserDelete = useCallback(
@@ -104,10 +106,10 @@ export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents =
                     confirm: translate("pages.adminDashboard.usersPanel.modals.toggleReservations.buttons.confirm"),
                     cancel: translate("pages.adminDashboard.usersPanel.modals.toggleReservations.buttons.cancel"),
                 },
-                onConfirm: () => console.log("User permission changed"),
+                onConfirm: () => changeReservationsPermission(user.id, shouldEnableReservations),
             });
         },
-        [translate]
+        [changeReservationsPermission, translate]
     );
 
     return { onUserDelete, onUserRoleChange, onUserReservationsPermissionToggle };

@@ -3,6 +3,11 @@ import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
     apiErrors: {
+        user: {
+            changeReservationsPermission: {
+                default: "Failed to change user's reservations permission, something went wrong on our side.",
+            },
+        },
         auth: {
             signIn: {
                 incorrectCredentials: "Incorrect login or password.",
@@ -18,6 +23,17 @@ export const en: TranslationSource = {
         },
     },
     notifications: {
+        user: {
+            changeReservationsPermission: {
+                success: {
+                    title: "Reservation permissions change operation successful.",
+                    description: "Changed reservations permission of user with id {{id}}.",
+                },
+                error: {
+                    title: "Failed to modify permissions of user with id {{id}}.",
+                },
+            },
+        },
         auth: {
             signedIn: {
                 title: "You are now signed in.",
