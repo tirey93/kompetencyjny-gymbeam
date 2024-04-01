@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using GymBeam.Properties;
 
 namespace GymBeam.Requests
 {
@@ -13,14 +14,14 @@ namespace GymBeam.Requests
         public LoginRequestValidator()
         {
             RuleFor(loginRequest => loginRequest.Username)
-                .NotEmpty().WithMessage("Username is required.")
-                .MinimumLength(5).WithMessage("Username must be at least 5 characters long.")
-                .MaximumLength(20).WithMessage("Username must not exceed 20 characters.");
+                .NotEmpty().WithMessage(Resource.ValidatorUsernameRequired)
+                .MinimumLength(5).WithMessage(Resource.ValidatorUsernameLonger)
+                .MaximumLength(20).WithMessage(Resource.ValidatorUsernameShorter);
 
             RuleFor(loginRequest => loginRequest.Password)
-                .NotEmpty().WithMessage("Password is required.")
-                .MinimumLength(8).WithMessage("Password must be at least 8 characters long.")
-                .MaximumLength(255).WithMessage("Password must not exceed 255 characters.");
+                .NotEmpty().WithMessage(Resource.ValidatorPasswordRequired)
+                .MinimumLength(5).WithMessage(Resource.ValidatorPasswordLonger)
+                .MaximumLength(255).WithMessage(Resource.ValidatorPasswordShorter);
         }
     }
 }

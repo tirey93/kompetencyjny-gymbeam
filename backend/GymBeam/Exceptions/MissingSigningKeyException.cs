@@ -1,8 +1,10 @@
-﻿namespace GymBeam.Exceptions
+﻿using GymBeam.Properties;
+
+namespace GymBeam.Exceptions
 {
     public class MissingSigningKeyException : Exception
     {
-        public MissingSigningKeyException() : base("JWT signing key is missing.")
+        public MissingSigningKeyException() : base(Resource.ExceptionSigningKeyIsMissing)
         {
         }
     }
