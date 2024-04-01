@@ -114,8 +114,16 @@ namespace GymBeam.Controllers
             {
                 Username = username
             };
-            var result = await _mediator.Send(query);
-            return Ok(result);
+            try
+            {
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    $"Internal Server Error: {ex.Message}");
+            }
         }
 
         [HttpPut("User/{id:int}/Role")]

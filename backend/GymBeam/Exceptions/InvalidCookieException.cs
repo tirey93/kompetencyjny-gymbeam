@@ -1,6 +1,4 @@
-﻿using Domain;
-
-namespace GymBeam.Exceptions
+﻿namespace GymBeam.Exceptions
 {
     public class InvalidCookieException : Exception
     {
