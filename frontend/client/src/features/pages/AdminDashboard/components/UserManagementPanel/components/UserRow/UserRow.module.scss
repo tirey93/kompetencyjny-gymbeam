@@ -1,0 +1,20 @@
+.row {
+  .center {
+    text-align: center;
+  }
+
+  .columnLabel {
+    font-size: var(--mantine-font-size-xs);
+    color: var(--mantine-color-dimmed);
+  }
+
+  .columnValue {
+    font-weight: 500;
+    font-size: var(--mantine-font-size-sm);
+  }
+
+  .columnWithTruncatedValue {
+    max-width: 200px;
+    padding-right: var(--mantine-spacing-md);
+  }
+}

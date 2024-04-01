@@ -1,0 +1,15 @@
+html .userShortInfoContainer {
+  justify-content: center;
+  padding-block: var(--mantine-spacing-md);
+
+  .userDataLabel {
+    font-size: var(--mantine-font-size-xs);
+    color: var(--mantine-color-dimmed);
+  }
+
+  .userDataValue {
+    font-size: var(--mantine-font-size-sm);
+    font-weight: 700;
+    text-align: center;
+  }
+}

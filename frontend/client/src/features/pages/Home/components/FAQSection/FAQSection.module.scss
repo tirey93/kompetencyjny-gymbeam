@@ -1,3 +1,9 @@
+.title {
+  text-align: center;
+  padding-bottom: var(--mantine-spacing-lg);
+  color: var(--mantine-color-primary-6);
+}
+
 .item {
   transition: transform 150ms ease;
   position: relative;
@@ -5,9 +11,8 @@
 
   &[data-active] {
     z-index: 1;
-    transform: scale(1.05);
+    transform: scale(1.02);
     border-radius: var(--mantine-radius-md);
     overflow: hidden;
   }
 }
-

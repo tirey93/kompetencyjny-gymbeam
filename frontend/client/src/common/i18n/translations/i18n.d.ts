@@ -49,11 +49,75 @@ export type TranslationSource = {
         };
     };
 
+    user: {
+        id: string;
+        name: string;
+        login: string;
+        roles: {
+            user: string;
+            admin: string;
+        };
+    };
+
     pages: {
+        adminDashboard: {
+            usersPanel: {
+                options: {
+                    delete: string;
+                };
+                modals: {
+                    delete: {
+                        buttons: {
+                            confirm: string;
+                            cancel: string;
+                        };
+                        title: string;
+                        caption: string;
+                    };
+                    changeRole: {
+                        buttons: {
+                            confirm: string;
+                            cancel: string;
+                        };
+                        title: string;
+                        caption: string;
+                    };
+                    toggleReservations: {
+                        buttons: {
+                            confirm: string;
+                            cancel: string;
+                        };
+                        title: string;
+                        toggleOnCaption: string;
+                        toggleOffCaption: string;
+                    };
+                };
+                search: {
+                    placeholder: string;
+                };
+                header: {
+                    id: string;
+                    user: string;
+                    login: string;
+                    role: string;
+                    reservations: string;
+                    options: string;
+                };
+                rows: {
+                    reservations: {
+                        on: string;
+                        off: string;
+                    };
+                    name: string;
+                    login: string;
+                };
+            };
+        };
+
         qr: {
             gymPassDetails: {
                 owner: string;
-                expires: string;
+                reservationsPermission: string;
             };
         };
 

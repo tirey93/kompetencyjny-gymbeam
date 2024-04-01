@@ -21,6 +21,7 @@ export type UserDetailsResponse = {
     name: string;
     displayName: string;
     role: UserRole;
+    reservationDisabled: boolean;
 };
 
 export type SignInRequestBody = { username: string; password: string };

@@ -1,0 +1,13 @@
+html .columnName {
+  font-weight: 700;
+  font-size: var(--mantine-font-size-sm);
+}
+
+html .sortIcon {
+  width: calc_rem(16px);
+  height: calc_rem(16px);
+}
+
+html .columnHeaderContentWrapper {
+  justify-content: space-between;
+}

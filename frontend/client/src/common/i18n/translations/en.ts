@@ -49,11 +49,74 @@ export const en: TranslationSource = {
             adminDashboard: "Admin Dashboard",
         },
     },
+    user: {
+        id: "ID",
+        name: "Name",
+        login: "Login",
+        roles: {
+            user: "User",
+            admin: "Admin",
+        },
+    },
     pages: {
+        adminDashboard: {
+            usersPanel: {
+                options: {
+                    delete: "Delete user's account",
+                },
+                modals: {
+                    delete: {
+                        buttons: {
+                            confirm: "Confirm",
+                            cancel: "Cancel",
+                        },
+                        title: "Delete user",
+                        caption: "This action is irreversible! Are you sure you want to delete this user?",
+                    },
+                    changeRole: {
+                        buttons: {
+                            confirm: "Confirm",
+                            cancel: "Cancel",
+                        },
+                        title: "Change user role",
+                        caption: 'Are you sure you want to change role of this user to "{{role}}"?',
+                    },
+                    toggleReservations: {
+                        buttons: {
+                            confirm: "Confirm",
+                            cancel: "Cancel",
+                        },
+                        title: "Change reservations permissions",
+                        toggleOnCaption: "Are you sure you want to allow this user to make reservations?",
+                        toggleOffCaption: "Are you sure you want to prevent this user from making any reservations?",
+                    },
+                },
+                search: {
+                    placeholder: "Search for an user",
+                },
+                header: {
+                    id: "ID",
+                    user: "User",
+                    login: "Login",
+                    role: "Role",
+                    reservations: "Reservations",
+                    options: "Options",
+                },
+                rows: {
+                    reservations: {
+                        on: "Enabled",
+                        off: "Disabled",
+                    },
+                    name: "Name",
+                    login: "Login",
+                },
+            },
+        },
+
         qr: {
             gymPassDetails: {
                 owner: "Owner",
-                expires: "Expires",
+                reservationsPermission: "Reservations permission",
             },
         },
 

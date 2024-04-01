@@ -1,0 +1,10 @@
+html .container {
+  .ruleContent {
+    font-weight: 500;
+    font-size: var(--mantine-font-size-sm);
+  }
+
+  .ruleValidityIndicator {
+    border-radius: var(--mantine-radius-xl);
+  }
+}

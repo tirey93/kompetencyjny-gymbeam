@@ -9,9 +9,9 @@ import {
     IconUserPlus,
 } from "@tabler/icons-react";
 
-import { useSignOut } from "../../../../../../common/auth/hooks/useSignOut";
-import { useTranslate } from "../../../../../../common/i18n/hooks/useTranslate";
-import { Routes } from "../../../../../router/Routes";
+import { useSignOut } from "../../../../../../common/auth";
+import { useTranslate } from "../../../../../../common/i18n";
+import { Routes } from "../../../../../router";
 
 type NavigationItem = {
     Icon: typeof IconDashboard;
@@ -43,7 +43,7 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
             adminDashboard: {
                 Icon: IconDashboard,
                 label: translate("navigation.labels.adminDashboard"),
-                route: Routes.NA,
+                route: Routes.ADMIN_DASHBOARD,
             },
             activities: { Icon: IconBarbell, label: translate("navigation.labels.activities"), route: Routes.NA },
             qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: Routes.GYM_PASS },
