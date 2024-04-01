@@ -1,5 +1,17 @@
 export type TranslationSource = {
     notifications: {
+        user: {
+            changeReservationsPermission: {
+                success: {
+                    title: string;
+                    description: string;
+                };
+                error: {
+                    title: string;
+                    description: string;
+                };
+            };
+        };
         auth: {
             signedIn: {
                 title: string;
@@ -21,6 +33,11 @@ export type TranslationSource = {
     };
 
     apiErrors: {
+        user: {
+            changeReservationsPermission: {
+                default: string;
+            };
+        };
         auth: {
             signIn: {
                 incorrectCredentials: string;

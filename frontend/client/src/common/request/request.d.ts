@@ -1,6 +1,6 @@
 import { UserRole } from "../auth/Auth";
 
-export type ApiResourceName = "SignIn" | "SignUp" | "SignOut" | "CurrentUserDetails";
+export type ApiResourceName = "SignIn" | "SignUp" | "SignOut" | "CurrentUserDetails" | "ChangeReservationsPermission";
 
 export type RequestResult<TData> = {
     data: TData | null;
@@ -14,6 +14,8 @@ export type RequestError = {
 export type RequestOptions = Partial<{
     body: object;
     method: "POST" | "GET" | "PUT" | "DELETE" | "PATCH";
+    searchParams: Record<string, string>;
+    urlParams: Record<string, string>;
 }>;
 
 export type UserDetailsResponse = {

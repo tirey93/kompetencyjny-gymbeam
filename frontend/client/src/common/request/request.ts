@@ -14,6 +14,7 @@ const AVAILABLE_API_RESOURCES: Record<ApiResourceName, string> = {
     SignIn: "api/Authentication/Login",
     SignUp: "api/Authentication/Register",
     SignOut: "api/Authentication/Logout",
+    ChangeReservationsPermission: "/User/User/{userId}/ReservationDisabled",
 };
 
 const DEFAULT_REQUEST_OPTIONS: RequestInit = {
@@ -24,28 +25,29 @@ const DEFAULT_REQUEST_OPTIONS: RequestInit = {
     },
 };
 
+export async function request(resource: "CurrentUserDetails"): Promise<RequestResult<UserDetailsResponse>>;
+export async function request(resource: "SignOut", options: { method: "POST" }): Promise<RequestResult<null>>;
 export async function request(
     resource: "SignIn",
     options: { body: SignInRequestBody; method: "POST" }
 ): Promise<RequestResult<UserDetailsResponse>>;
-
 export async function request(
     resource: "SignUp",
     options: { body: SignUpRequestBody; method: "POST" }
 ): Promise<RequestResult<UserDetailsResponse>>;
-
-export async function request(resource: "SignOut", options: { method: "POST" }): Promise<RequestResult<null>>;
-
-export async function request(resource: "CurrentUserDetails"): Promise<RequestResult<UserDetailsResponse>>;
+export async function request(
+    resource: "ChangeReservationsPermission",
+    options: { method: "PUT"; searchParams: { value: string }; urlParams: { userId: string } }
+): Promise<RequestResult<null>>;
 
 export async function request(
     resource: ApiResourceName,
     requestOptions?: RequestOptions
 ): Promise<RequestResult<unknown>> {
-    const endpoint = AVAILABLE_API_RESOURCES[resource];
+    const requestURL = buildFinalURL(resource, requestOptions);
 
     try {
-        const response = await fetch(`${VITE_API_BASE_URL}/${endpoint}`, {
+        const response = await fetch(requestURL, {
             ...DEFAULT_REQUEST_OPTIONS,
             ...mapRequestOptionsToInitRequest(requestOptions ?? {}),
         });
@@ -75,3 +77,16 @@ const mapRequestOptionsToInitRequest = (options: RequestOptions): RequestInit =>
     ...options,
     body: options.body ? JSON.stringify(options.body) : undefined,
 });
+
+const buildFinalURL = (resource: ApiResourceName, options?: Pick<RequestOptions, "searchParams" | "urlParams">) => {
+    let endpoint = AVAILABLE_API_RESOURCES[resource];
+    const searchParams = options?.searchParams ? new URLSearchParams(options.searchParams) : "";
+
+    if (options?.urlParams) {
+        for (const [key, value] of Object.entries(options.urlParams)) {
+            endpoint = endpoint.replace(`{${key}}`, value);
+        }
+    }
+
+    return `${VITE_API_BASE_URL}/${endpoint}?${searchParams}`;
+};
