@@ -4,18 +4,17 @@ import { useMutation } from "@tanstack/react-query";
 
 import { useAppOverlayStore } from "../../components/AppOverlay";
 import { useTranslate } from "../../i18n";
-import { request } from "../../request";
+import { TranslationKey } from "../../i18n/translations/i18n";
+import { request, RequestError } from "../../request";
+import { useRequestErrorHandler } from "../../request/hooks/useRequestErrorHandler";
 import { useAuthState } from "./useAuthState";
 
 type UseSignOut = {
     signOut: () => Promise<void>;
 };
 
-const signOutRequest = () => {
-    return request("SignOut", { method: "POST" });
-};
-
 export const useSignOut = (): UseSignOut => {
+    const { setAndTranslateError } = useRequestErrorHandler();
     const { mutateAsync } = useMutation({
         mutationFn: signOutRequest,
     });
@@ -37,7 +36,7 @@ export const useSignOut = (): UseSignOut => {
                 withBorder: true,
             });
 
-            throw new Error(translate("apiErrors.auth.signOut.default"));
+            throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
         } else {
             clearCurrentUserDetails();
             notifications.show({
@@ -47,7 +46,18 @@ export const useSignOut = (): UseSignOut => {
                 withBorder: true,
             });
         }
-    }, [clearCurrentUserDetails, mutateAsync, setIsLoading, translate]);
+    }, [clearCurrentUserDetails, mutateAsync, setAndTranslateError, setIsLoading, translate]);
 
     return { signOut };
+};
+
+const signOutRequest = () => {
+    return request("SignOut", { method: "POST" });
+};
+
+const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
+    switch (error?.status) {
+        default:
+            return "apiErrors.auth.signOut.default";
+    }
 };

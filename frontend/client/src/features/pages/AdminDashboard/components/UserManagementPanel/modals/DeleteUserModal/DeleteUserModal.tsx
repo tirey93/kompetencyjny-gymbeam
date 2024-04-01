@@ -9,7 +9,7 @@ import { UserShortInfo } from "../../../../../../../common/components/User";
 import { useTranslate } from "../../../../../../../common/i18n";
 import { useDeleteUser } from "../../hooks/useDeleteUser";
 
-import sharedClasses from "../UserMangamenetPanelModals.module.scss";
+import sharedClasses from "../UserManagementPanelModals.module.scss";
 import classes from "./DeleteUserModal.module.scss";
 
 type DeleteUserModalProps = ContextModalProps<{

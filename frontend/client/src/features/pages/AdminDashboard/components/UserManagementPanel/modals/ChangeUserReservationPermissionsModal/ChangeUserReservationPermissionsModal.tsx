@@ -9,7 +9,7 @@ import { UserShortInfo } from "../../../../../../../common/components/User";
 import { useTranslate } from "../../../../../../../common/i18n";
 import { useChangeReservationsPermission } from "../../hooks/useChangeUserReservationsPermission";
 
-import sharedClasses from "../UserMangamenetPanelModals.module.scss";
+import sharedClasses from "../UserManagementPanelModals.module.scss";
 import classes from "./ChangeUserReservationPermissionsModal.module.scss";
 
 type ChangeUserReservationPermissionsModalProps = ContextModalProps<{

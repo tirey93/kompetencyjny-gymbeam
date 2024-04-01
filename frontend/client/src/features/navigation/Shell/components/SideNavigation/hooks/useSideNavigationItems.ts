@@ -36,7 +36,7 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
             signOut: {
                 Icon: IconLogout,
                 label: translate("navigation.labels.signOut"),
-                route: Routes.NA,
+                route: Routes.LOGIN,
                 asyncBeforeRedirect: signOutAsync,
             },
             home: { Icon: IconHome2, label: translate("navigation.labels.home"), route: Routes.ROOT },

@@ -1,9 +1,9 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { useTranslate } from "../../../../../../common/i18n";
 import { TranslationKey } from "../../../../../../common/i18n/translations/i18n";
 import { request, RequestError } from "../../../../../../common/request";
+import { useRequestErrorHandler } from "../../../../../../common/request/hooks/useRequestErrorHandler";
 
 type UseChangeUserReservationsPermission = {
     changeReservationsPermission: (userId: number, allowReservations: boolean) => Promise<void>;
@@ -16,28 +16,11 @@ type ChangeReservationsPermissionRequestOptions = {
     urlParams: { userId: string };
 };
 
-const changeReservationsPermissionRequest = (options: ChangeReservationsPermissionRequestOptions) => {
-    return request("ChangeReservationsPermission", {
-        method: "PUT",
-        ...options,
-    });
-};
-
 export const useChangeReservationsPermission = (): UseChangeUserReservationsPermission => {
-    const translate = useTranslate();
-    const [errorTranslationKey, setErrorTranslationKey] = useState<TranslationKey | null>(null);
+    const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { mutateAsync } = useMutation({
         mutationFn: changeReservationsPermissionRequest,
     });
-
-    const mapErrorToErrorTranslationKey = useCallback((error: unknown): TranslationKey => {
-        const errorCode = (error as RequestError)?.status ?? null;
-
-        switch (errorCode) {
-            default:
-                return "apiErrors.user.changeReservationsPermission.default";
-        }
-    }, []);
 
     const changeReservationsPermission = useCallback(
         async (userId: number, reservationsEnabled: boolean) => {
@@ -47,22 +30,25 @@ export const useChangeReservationsPermission = (): UseChangeUserReservationsPerm
             });
 
             if (error) {
-                const translationKey = mapErrorToErrorTranslationKey(error);
-                setErrorTranslationKey(translationKey);
-                throw new Error(translate(translationKey));
+                throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
             }
         },
-        [mapErrorToErrorTranslationKey, mutateAsync, translate]
+        [mutateAsync, setAndTranslateError]
     );
-
-    const error = useMemo(
-        () => (errorTranslationKey ? translate(errorTranslationKey) : null),
-        [errorTranslationKey, translate]
-    );
-
-    const reset = useCallback(() => {
-        setErrorTranslationKey(null);
-    }, []);
 
     return { changeReservationsPermission, error, reset };
+};
+
+const changeReservationsPermissionRequest = (options: ChangeReservationsPermissionRequestOptions) => {
+    return request("ChangeReservationsPermission", {
+        method: "PUT",
+        ...options,
+    });
+};
+
+const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
+    switch (error?.status) {
+        default:
+            return "apiErrors.user.changeReservationsPermission.default";
+    }
 };

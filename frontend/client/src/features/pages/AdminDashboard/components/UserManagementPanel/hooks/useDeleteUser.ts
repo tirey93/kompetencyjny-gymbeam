@@ -1,9 +1,9 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { useTranslate } from "../../../../../../common/i18n";
 import { TranslationKey } from "../../../../../../common/i18n/translations/i18n";
 import { request, RequestError } from "../../../../../../common/request";
+import { useRequestErrorHandler } from "../../../../../../common/request/hooks/useRequestErrorHandler";
 
 type UseDeleteUser = {
     deleteUser: (userId: number) => Promise<void>;
@@ -23,20 +23,10 @@ const deleteUserRequest = (options: DeleteUserRequestOptions) => {
 };
 
 export const useDeleteUser = (): UseDeleteUser => {
-    const translate = useTranslate();
-    const [errorTranslationKey, setErrorTranslationKey] = useState<TranslationKey | null>(null);
+    const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { mutateAsync } = useMutation({
         mutationFn: deleteUserRequest,
     });
-
-    const mapErrorToErrorTranslationKey = useCallback((error: unknown): TranslationKey => {
-        const errorCode = (error as RequestError)?.status ?? null;
-
-        switch (errorCode) {
-            default:
-                return "apiErrors.user.delete.default";
-        }
-    }, []);
 
     const deleteUser = useCallback(
         async (userId: number) => {
@@ -45,22 +35,18 @@ export const useDeleteUser = (): UseDeleteUser => {
             });
 
             if (error) {
-                const translationKey = mapErrorToErrorTranslationKey(error);
-                setErrorTranslationKey(translationKey);
-                throw new Error(translate(translationKey));
+                throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
             }
         },
-        [mapErrorToErrorTranslationKey, mutateAsync, translate]
+        [mutateAsync, setAndTranslateError]
     );
-
-    const error = useMemo(
-        () => (errorTranslationKey ? translate(errorTranslationKey) : null),
-        [errorTranslationKey, translate]
-    );
-
-    const reset = useCallback(() => {
-        setErrorTranslationKey(null);
-    }, []);
 
     return { deleteUser, error, reset };
+};
+
+const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
+    switch (error?.status) {
+        default:
+            return "apiErrors.user.delete.default";
+    }
 };

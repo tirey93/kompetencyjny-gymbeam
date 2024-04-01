@@ -9,7 +9,7 @@ import { UserShortInfo } from "../../../../../../../common/components/User";
 import { useTranslate } from "../../../../../../../common/i18n";
 import { useChangeUserRole } from "../../hooks/useChangeUserRole";
 
-import sharedClasses from "../UserMangamenetPanelModals.module.scss";
+import sharedClasses from "../UserManagementPanelModals.module.scss";
 import classes from "./ChangeUserRoleModal.module.scss";
 
 type ChangeUserRoleModalProps = ContextModalProps<{

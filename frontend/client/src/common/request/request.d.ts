@@ -4,11 +4,12 @@ export type ApiResourceName = "SignIn" | "SignUp" | "SignOut" | "CurrentUserDeta
 
 export type RequestResult<TData> = {
     data: TData | null;
-    error: unknown | null;
+    error: RequestError | null;
 };
 
 export type RequestError = {
     status?: number;
+    message?: string;
 };
 
 export type RequestOptions = Partial<{

@@ -89,12 +89,12 @@ export async function request(
                 message: result.errors?.toString(),
             };
 
-            return { data: null, error };
+            return { error, data: null };
         }
 
         return { data: result, error: null };
     } catch (error) {
-        return { error, data: null };
+        return { error: { message: error?.toString() }, data: null };
     }
 }
 

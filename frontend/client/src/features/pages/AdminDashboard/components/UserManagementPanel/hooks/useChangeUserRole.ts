@@ -1,10 +1,10 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { UserRole } from "../../../../../../common/auth";
-import { useTranslate } from "../../../../../../common/i18n";
 import { TranslationKey } from "../../../../../../common/i18n/translations/i18n";
 import { request, RequestError } from "../../../../../../common/request";
+import { useRequestErrorHandler } from "../../../../../../common/request/hooks/useRequestErrorHandler";
 
 type UseChangeUserRole = {
     changeRole: (userId: number, newRole: UserRole) => Promise<void>;
@@ -17,28 +17,11 @@ type ChangeUserRoleRequestOptions = {
     urlParams: { userId: string };
 };
 
-const changeUserRoleRequest = (options: ChangeUserRoleRequestOptions) => {
-    return request("ChangeRole", {
-        method: "PUT",
-        ...options,
-    });
-};
-
 export const useChangeUserRole = (): UseChangeUserRole => {
-    const translate = useTranslate();
-    const [errorTranslationKey, setErrorTranslationKey] = useState<TranslationKey | null>(null);
+    const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { mutateAsync } = useMutation({
         mutationFn: changeUserRoleRequest,
     });
-
-    const mapErrorToErrorTranslationKey = useCallback((error: unknown): TranslationKey => {
-        const errorCode = (error as RequestError)?.status ?? null;
-
-        switch (errorCode) {
-            default:
-                return "apiErrors.user.changeRole.default";
-        }
-    }, []);
 
     const changeRole = useCallback(
         async (userId: number, newRole: UserRole) => {
@@ -48,22 +31,25 @@ export const useChangeUserRole = (): UseChangeUserRole => {
             });
 
             if (error) {
-                const translationKey = mapErrorToErrorTranslationKey(error);
-                setErrorTranslationKey(translationKey);
-                throw new Error(translate(translationKey));
+                throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
             }
         },
-        [mapErrorToErrorTranslationKey, mutateAsync, translate]
+        [mutateAsync, setAndTranslateError]
     );
 
-    const error = useMemo(
-        () => (errorTranslationKey ? translate(errorTranslationKey) : null),
-        [errorTranslationKey, translate]
-    );
+    return { changeRole, reset, error };
+};
 
-    const reset = useCallback(() => {
-        setErrorTranslationKey(null);
-    }, []);
+const changeUserRoleRequest = (options: ChangeUserRoleRequestOptions) => {
+    return request("ChangeRole", {
+        method: "PUT",
+        ...options,
+    });
+};
 
-    return { changeRole, error, reset };
+const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
+    switch (error?.status) {
+        default:
+            return "apiErrors.user.changeRole.default";
+    }
 };

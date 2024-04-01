@@ -1,10 +1,10 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { useAppOverlayStore } from "../../components/AppOverlay";
-import { useTranslate } from "../../i18n";
 import { TranslationKey } from "../../i18n/translations/i18n";
 import { request, RequestError, SignUpRequestBody } from "../../request";
+import { useRequestErrorHandler } from "../../request/hooks/useRequestErrorHandler";
 import { UserDetails } from "../Auth";
 import { useAuthState } from "./useAuthState";
 
@@ -14,31 +14,14 @@ type UseSignUp = {
     reset: () => void;
 };
 
-const signUpRequest = (body: SignUpRequestBody) => {
-    return request("SignUp", { body, method: "POST" });
-};
-
 export const useSignUp = (): UseSignUp => {
-    const [errorTranslationKey, setErrorTranslationKey] = useState<TranslationKey | null>(null);
+    const { setAndTranslateError, error, reset } = useRequestErrorHandler();
     const { mutateAsync } = useMutation({
         mutationFn: signUpRequest,
     });
 
     const setCurrentUserDetails = useAuthState((state) => state.setCurrentUserDetails);
     const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
-    const translate = useTranslate();
-
-    const mapErrorToErrorTranslationKey = useCallback((error: unknown): TranslationKey => {
-        const errorCode = (error as RequestError)?.status ?? null;
-
-        switch (errorCode) {
-            case 409:
-                return "apiErrors.auth.signUp.loginTaken";
-
-            default:
-                return "apiErrors.auth.signUp.default";
-        }
-    }, []);
 
     const signUp = useCallback(
         async (signUpRequestBody: SignUpRequestBody) => {
@@ -46,26 +29,29 @@ export const useSignUp = (): UseSignUp => {
             const { data, error } = await mutateAsync(signUpRequestBody);
             setIsLoading(false);
 
-            if (data) {
-                setCurrentUserDetails(data);
-                return data;
-            } else {
-                const errorTranslationKey = mapErrorToErrorTranslationKey(error);
-                setErrorTranslationKey(errorTranslationKey);
-                throw new Error(translate(errorTranslationKey));
+            if (!data) {
+                throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
             }
+
+            setCurrentUserDetails(data);
+            return data;
         },
-        [mapErrorToErrorTranslationKey, mutateAsync, setCurrentUserDetails, setIsLoading, translate]
+        [mutateAsync, setAndTranslateError, setCurrentUserDetails, setIsLoading]
     );
-
-    const error = useMemo(
-        () => (errorTranslationKey ? translate(errorTranslationKey) : null),
-        [errorTranslationKey, translate]
-    );
-
-    const reset = useCallback(() => {
-        setErrorTranslationKey(null);
-    }, []);
 
     return { signUp, error, reset };
+};
+
+const signUpRequest = (body: SignUpRequestBody) => {
+    return request("SignUp", { body, method: "POST" });
+};
+
+const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
+    switch (error?.status) {
+        case 409:
+            return "apiErrors.auth.signUp.loginTaken";
+
+        default:
+            return "apiErrors.auth.signUp.default";
+    }
 };
