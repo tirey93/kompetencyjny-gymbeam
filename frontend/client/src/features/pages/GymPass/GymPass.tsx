@@ -1,4 +1,5 @@
-import { SimpleGrid, Stack } from "@mantine/core";
+import { SimpleGrid, Stack, ThemeIcon } from "@mantine/core";
+import { IconShield } from "@tabler/icons-react";
 
 import { useAuthState } from "../../../common/auth";
 import { GymPassInfo, GymPassQR, Timestamp } from "./components";
@@ -18,6 +19,9 @@ export const GymPassPage = () => {
                 <Stack className={classes.qrWrapper}>
                     <Timestamp />
                     <GymPassQR qrValue={JSON.stringify(currentUserDetails)} />
+                    <ThemeIcon className={classes.validCheck}>
+                        <IconShield className={classes.validCheckIcon} />
+                    </ThemeIcon>
                 </Stack>
                 <GymPassInfo owner={currentUserDetails} />
             </SimpleGrid>

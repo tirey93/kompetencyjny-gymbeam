@@ -10,6 +10,32 @@ html .container {
     .qrWrapper {
       align-items: center;
       padding-bottom: var(--mantine-spacing-lg);
+      position: relative;
+
+      .validCheck {
+        position: absolute;
+        bottom: 0;
+        background-color: var(--mantine-color-dark-7);
+        padding: var(--mantine-spacing-xs);
+        border-radius: 100%;
+        animation: grow 2s infinite alternate;
+
+        .validCheckIcon {
+          stroke-width: 3px;
+          stroke: var(--mantine-color-primary-7);
+          fill: var(--mantine-color-primary-7);
+        }
+      }
+    }
+  }
+
+  @keyframes grow {
+    from {
+      transform: scale(1);
+    }
+
+    to {
+      transform: scale(1.25);
     }
   }
 }

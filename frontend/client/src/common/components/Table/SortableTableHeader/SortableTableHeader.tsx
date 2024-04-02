@@ -31,7 +31,7 @@ const Wrapper = ({ onSort, sorted, reversed, children }: SortableTableHeaderProp
     }
 
     return (
-        <UnstyledButton onClick={onSort}>
+        <UnstyledButton onClick={onSort} className={classes.sortableWrapper}>
             <Group className={classes.columnHeaderContentWrapper}>
                 {children}
                 <Center>

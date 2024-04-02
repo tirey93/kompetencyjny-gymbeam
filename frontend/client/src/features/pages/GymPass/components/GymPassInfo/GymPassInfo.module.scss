@@ -3,4 +3,9 @@ html .container {
     font-weight: 700;
     font-size: var(--mantine-font-size-xs);
   }
+
+  .ownerName {
+    font-size: var(--mantine-font-size-sm);
+    animation: grow 2s infinite alternate;
+  }
 }
