@@ -10,9 +10,9 @@ type ProtectedRouteProps = PropsWithChildren<{
 }>;
 
 export const ProtectedRoute = ({ allowedRoles, children, redirectUnauthorizedTo }: ProtectedRouteProps) => {
-    const currentUserRole = useAuthState((state) => state.currentUserDetails?.role ?? "Guest");
+    const { role } = useAuthState();
 
-    if (!allowedRoles.find((role) => role === currentUserRole)) {
+    if (!allowedRoles.find((allowedRole) => allowedRole === role)) {
         return <Navigate to={redirectUnauthorizedTo} replace />;
     }
 

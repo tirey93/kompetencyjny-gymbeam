@@ -6,11 +6,11 @@ import { useAuthState } from "../hooks/useAuthState";
 type RoleGuardProps = PropsWithChildren<{ allowedRoles: InternalUserRole[] }>;
 
 export const UserRoleGuard = ({ children, allowedRoles }: RoleGuardProps) => {
-    const currentUserRole = useAuthState((state) => state.currentUserDetails?.role ?? "Guest");
+    const { role } = useAuthState();
 
     const shouldDisplayChildren = useMemo(() => {
-        return allowedRoles.includes(currentUserRole);
-    }, [allowedRoles, currentUserRole]);
+        return allowedRoles.includes(role);
+    }, [allowedRoles, role]);
 
     return shouldDisplayChildren ? <>{children}</> : null;
 };

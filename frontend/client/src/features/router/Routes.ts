@@ -4,5 +4,6 @@ export enum Routes {
     LOGIN = "/sign-in",
     GYM_PASS = "/gym-pass",
     ADMIN_DASHBOARD = "/admin-dashboard",
+    ACTIVITIES = "/activities",
     NA = "/na",
 }
