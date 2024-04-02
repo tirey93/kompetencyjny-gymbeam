@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Anchor, Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 
@@ -16,6 +16,7 @@ export const SignInPage = () => {
     const { form } = useSignInForm();
     const { signIn, error, reset } = useSignIn();
     const navigate = useNavigate();
+    const { state: routeState } = useLocation();
 
     const onSubmit = useCallback(async () => {
         if (!form.validate().hasErrors) {
@@ -28,9 +29,10 @@ export const SignInPage = () => {
                 color: "success",
                 withBorder: true,
             });
-            navigate(Routes.ROOT);
+
+            navigate(routeState?.referer ?? Routes.ROOT);
         }
-    }, [form, navigate, signIn, translate]);
+    }, [form, navigate, routeState?.referer, signIn, translate]);
 
     const submitOnEnter = useCallback(
         async (event: React.KeyboardEvent<HTMLInputElement>) => {

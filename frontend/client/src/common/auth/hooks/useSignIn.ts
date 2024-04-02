@@ -20,7 +20,7 @@ export const useSignIn = (): UseSignIn => {
         mutationFn: signInRequest,
     });
 
-    const setCurrentUserDetails = useAuthState((state) => state.setCurrentUserDetails);
+    const { setUser } = useAuthState();
     const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
 
     const signIn = useCallback(
@@ -33,10 +33,10 @@ export const useSignIn = (): UseSignIn => {
                 throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
             }
 
-            setCurrentUserDetails(data);
+            setUser(data);
             return data;
         },
-        [mutateAsync, setAndTranslateError, setCurrentUserDetails, setIsLoading]
+        [mutateAsync, setAndTranslateError, setUser, setIsLoading]
     );
 
     return { signIn, error, reset };

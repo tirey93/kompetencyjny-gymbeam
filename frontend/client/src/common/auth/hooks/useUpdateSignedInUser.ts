@@ -9,22 +9,21 @@ const getUserDetailsRequest = () => {
 };
 
 export const useUpdateSignedInUser = () => {
-    const userDetails = useAuthState((state) => state.currentUserDetails);
-    const setUserDetails = useAuthState((state) => state.setCurrentUserDetails);
+    const { setUser, user } = useAuthState();
     const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
 
     useEffect(() => {
         (async () => {
-            if (!userDetails) {
+            if (!user) {
                 setIsLoading(true);
                 const { data } = await getUserDetailsRequest();
 
                 if (data) {
-                    setUserDetails(data);
+                    setUser(data);
                 }
 
                 setIsLoading(false);
             }
         })();
-    }, [setIsLoading, setUserDetails, userDetails]);
+    }, [setIsLoading, setUser, user]);
 };

@@ -19,7 +19,7 @@ export const useSignOut = (): UseSignOut => {
         mutationFn: signOutRequest,
     });
 
-    const clearCurrentUserDetails = useAuthState((state) => state.clearCurrentUserDetails);
+    const { clearUser } = useAuthState();
     const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
     const translate = useTranslate();
 
@@ -38,7 +38,7 @@ export const useSignOut = (): UseSignOut => {
 
             throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
         } else {
-            clearCurrentUserDetails();
+            clearUser();
             notifications.show({
                 title: translate("notifications.auth.signedOut.title"),
                 message: translate("notifications.auth.signedOut.description"),
@@ -46,7 +46,7 @@ export const useSignOut = (): UseSignOut => {
                 withBorder: true,
             });
         }
-    }, [clearCurrentUserDetails, mutateAsync, setAndTranslateError, setIsLoading, translate]);
+    }, [clearUser, mutateAsync, setAndTranslateError, setIsLoading, translate]);
 
     return { signOut };
 };
