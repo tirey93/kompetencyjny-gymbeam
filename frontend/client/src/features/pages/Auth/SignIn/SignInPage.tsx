@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Anchor, Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
@@ -32,6 +32,15 @@ export const SignInPage = () => {
         }
     }, [form, navigate, signIn, translate]);
 
+    const submitOnEnter = useCallback(
+        async (event: React.KeyboardEvent<HTMLInputElement>) => {
+            if (event.key === "Enter") {
+                await onSubmit();
+            }
+        },
+        [onSubmit]
+    );
+
     return (
         <Stack className={classes.container}>
             <Title className={classes.title}>
@@ -44,12 +53,14 @@ export const SignInPage = () => {
 
             <Paper className={classes.form} withBorder component={Stack}>
                 <TextInput
+                    autoFocus
                     classNames={{
                         label: classes.inputLabel,
                     }}
                     size="md"
                     label={translate("pages.signIn.field.login.label")}
                     placeholder={translate("pages.signIn.field.login.placeholder")}
+                    onKeyDown={submitOnEnter}
                     {...form.getInputProps("login")}
                 />
                 <PasswordInput
@@ -59,6 +70,7 @@ export const SignInPage = () => {
                     size="md"
                     label={translate("pages.signIn.field.password.label")}
                     placeholder={translate("pages.signIn.field.password.placeholder")}
+                    onKeyDown={submitOnEnter}
                     {...form.getInputProps("password")}
                 />
             </Paper>
