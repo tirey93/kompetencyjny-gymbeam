@@ -7,6 +7,12 @@ export const pl: TranslationSource = {
             changeReservationsPermission: {
                 default: "Nie udało się zmienić uprawnień użytkownika, coś poszło nie tak po naszej stronie.",
             },
+            changeRole: {
+                default: "Nie udało się zmienić roli użytkownika, coś poszło nie tak po naszej stronie.",
+            },
+            delete: {
+                default: "Nie udało się usunąć użytkownika, coś poszło nie tak po naszej stronie.",
+            },
         },
         auth: {
             signIn: {
@@ -25,13 +31,16 @@ export const pl: TranslationSource = {
     notifications: {
         user: {
             changeReservationsPermission: {
-                success: {
-                    title: "Operacja zmiany uprawnień powiodła się.",
-                    description: "Zmieniono uprawnienia do rezerwacji użytkownika o id: {{id}}.",
-                },
-                error: {
-                    title: "Nie udało się zmienić uprawnień użytkownika o id: {{id}}.",
-                },
+                title: "Operacja zmiany uprawnień powiodła się.",
+                description: "Zmieniono uprawnienia do rezerwacji użytkownika o id: {{id}}.",
+            },
+            changeRole: {
+                title: "Operacja zmiany roli powiodła się.",
+                description: "Zmieniono rolę użytkownika o id: {{id}}.",
+            },
+            delete: {
+                title: "Operacja usunięcia użytkownika powiodła się.",
+                description: "Bezpowrotnie usunięto użytkownika o id: {{id}}.",
             },
         },
         auth: {

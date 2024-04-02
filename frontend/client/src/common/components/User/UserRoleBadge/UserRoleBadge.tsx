@@ -1,12 +1,12 @@
 import { Badge } from "@mantine/core";
 
-import { UserRole } from "../../../auth";
+import { InternalUserRole } from "../../../auth";
 import { useTranslate } from "../../../i18n";
 
 import classes from "./UserRoleBadge.module.scss";
 
 type UserRoleBadgeProps = {
-    role: UserRole;
+    role: InternalUserRole;
     onClick?: () => unknown;
 };
 

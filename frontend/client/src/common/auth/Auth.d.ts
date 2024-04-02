@@ -1,9 +1,11 @@
-export type UserRole = "Admin" | "User" | "Guest";
+export type UserRole = "Admin" | "User";
+
+export type InternalUserRole = UserRole | "Guest";
 
 export type UserDetails = {
     id: number;
     name: string;
     displayName: string;
-    role: UserRole;
+    role: InternalUserRole;
     reservationDisabled: boolean;
 };

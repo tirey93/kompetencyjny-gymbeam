@@ -1,77 +1,58 @@
-import { useCallback, useMemo, useState } from "react";
-import { notifications } from "@mantine/notifications";
+import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { useAppOverlayStore } from "../../components/AppOverlay";
-import { useTranslate } from "../../i18n";
 import { TranslationKey } from "../../i18n/translations/i18n";
 import { request, RequestError, SignInRequestBody } from "../../request";
+import { useRequestErrorHandler } from "../../request/hooks/useRequestErrorHandler";
+import { UserDetails } from "../Auth";
 import { useAuthState } from "./useAuthState";
 
 type UseSignIn = {
-    signIn: (signInData: SignInRequestBody) => Promise<void>;
+    signIn: (signInData: SignInRequestBody) => Promise<UserDetails>;
     error: string | null;
     reset: () => void;
 };
 
-const signInRequest = (body: SignInRequestBody) => {
-    return request("SignIn", { body, method: "POST" });
-};
-
 export const useSignIn = (): UseSignIn => {
-    const [errorTranslationKey, setErrorTranslationKey] = useState<TranslationKey | null>(null);
+    const { setAndTranslateError, error, reset } = useRequestErrorHandler();
     const { mutateAsync } = useMutation({
         mutationFn: signInRequest,
     });
 
     const setCurrentUserDetails = useAuthState((state) => state.setCurrentUserDetails);
     const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
-    const translate = useTranslate();
-
-    const mapErrorToErrorTranslationKey = useCallback((error: unknown): TranslationKey => {
-        const errorCode = (error as RequestError)?.status ?? null;
-
-        switch (errorCode) {
-            case 400:
-            case 403:
-                return "apiErrors.auth.signIn.incorrectCredentials";
-
-            default:
-                return "apiErrors.auth.signIn.default";
-        }
-    }, []);
 
     const signIn = useCallback(
         async (signInRequestBody: SignInRequestBody) => {
             setIsLoading(true);
-            const { data, error } = await mutateAsync(signInRequestBody);
+            const { error, data } = await mutateAsync(signInRequestBody);
             setIsLoading(false);
 
-            if (data) {
-                setCurrentUserDetails(data);
-                notifications.show({
-                    title: translate("notifications.auth.signedIn.title"),
-                    message: translate("notifications.auth.signedIn.description", { user: data.displayName }),
-                    color: "success",
-                    withBorder: true,
-                });
-            } else {
-                const errorTranslationKey = mapErrorToErrorTranslationKey(error);
-                setErrorTranslationKey(errorTranslationKey);
-                throw new Error(translate(errorTranslationKey));
+            if (!data) {
+                throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
             }
+
+            setCurrentUserDetails(data);
+            return data;
         },
-        [mapErrorToErrorTranslationKey, mutateAsync, setCurrentUserDetails, setIsLoading, translate]
+        [mutateAsync, setAndTranslateError, setCurrentUserDetails, setIsLoading]
     );
-
-    const error = useMemo(
-        () => (errorTranslationKey ? translate(errorTranslationKey) : null),
-        [errorTranslationKey, translate]
-    );
-
-    const reset = useCallback(() => {
-        setErrorTranslationKey(null);
-    }, []);
 
     return { signIn, error, reset };
+};
+
+const signInRequest = (body: SignInRequestBody) => {
+    return request("SignIn", { body, method: "POST" });
+};
+
+const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
+    switch (error?.status) {
+        case 400:
+        case 403:
+            return "apiErrors.auth.signIn.incorrectCredentials";
+
+        default:
+            return "apiErrors.auth.signIn.default";
+    }
 };

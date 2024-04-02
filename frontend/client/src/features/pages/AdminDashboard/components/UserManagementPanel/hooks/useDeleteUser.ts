@@ -5,27 +5,32 @@ import { TranslationKey } from "../../../../../../common/i18n/translations/i18n"
 import { request, RequestError } from "../../../../../../common/request";
 import { useRequestErrorHandler } from "../../../../../../common/request/hooks/useRequestErrorHandler";
 
-type UseChangeUserReservationsPermission = {
-    changeReservationsPermission: (userId: number, allowReservations: boolean) => Promise<void>;
+type UseDeleteUser = {
+    deleteUser: (userId: number) => Promise<void>;
     error: string | null;
     reset: () => void;
 };
 
-type ChangeReservationsPermissionRequestOptions = {
-    queryParams: { value: string };
+type DeleteUserRequestOptions = {
     urlParams: { userId: string };
 };
 
-export const useChangeReservationsPermission = (): UseChangeUserReservationsPermission => {
+const deleteUserRequest = (options: DeleteUserRequestOptions) => {
+    return request("DeleteUser", {
+        method: "DELETE",
+        ...options,
+    });
+};
+
+export const useDeleteUser = (): UseDeleteUser => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { mutateAsync } = useMutation({
-        mutationFn: changeReservationsPermissionRequest,
+        mutationFn: deleteUserRequest,
     });
 
-    const changeReservationsPermission = useCallback(
-        async (userId: number, reservationsEnabled: boolean) => {
+    const deleteUser = useCallback(
+        async (userId: number) => {
             const { error } = await mutateAsync({
-                queryParams: { value: reservationsEnabled.toString() },
                 urlParams: { userId: userId.toString() },
             });
 
@@ -36,19 +41,12 @@ export const useChangeReservationsPermission = (): UseChangeUserReservationsPerm
         [mutateAsync, setAndTranslateError]
     );
 
-    return { changeReservationsPermission, error, reset };
-};
-
-const changeReservationsPermissionRequest = (options: ChangeReservationsPermissionRequestOptions) => {
-    return request("ChangeReservationsPermission", {
-        method: "PUT",
-        ...options,
-    });
+    return { deleteUser, error, reset };
 };
 
 const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
     switch (error?.status) {
         default:
-            return "apiErrors.user.changeReservationsPermission.default";
+            return "apiErrors.user.delete.default";
     }
 };

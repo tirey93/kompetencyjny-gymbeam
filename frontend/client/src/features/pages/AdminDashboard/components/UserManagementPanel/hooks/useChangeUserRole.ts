@@ -1,31 +1,32 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
+import { UserRole } from "../../../../../../common/auth";
 import { TranslationKey } from "../../../../../../common/i18n/translations/i18n";
 import { request, RequestError } from "../../../../../../common/request";
 import { useRequestErrorHandler } from "../../../../../../common/request/hooks/useRequestErrorHandler";
 
-type UseChangeUserReservationsPermission = {
-    changeReservationsPermission: (userId: number, allowReservations: boolean) => Promise<void>;
+type UseChangeUserRole = {
+    changeRole: (userId: number, newRole: UserRole) => Promise<void>;
     error: string | null;
     reset: () => void;
 };
 
-type ChangeReservationsPermissionRequestOptions = {
-    queryParams: { value: string };
+type ChangeUserRoleRequestOptions = {
+    queryParams: { role: UserRole };
     urlParams: { userId: string };
 };
 
-export const useChangeReservationsPermission = (): UseChangeUserReservationsPermission => {
+export const useChangeUserRole = (): UseChangeUserRole => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { mutateAsync } = useMutation({
-        mutationFn: changeReservationsPermissionRequest,
+        mutationFn: changeUserRoleRequest,
     });
 
-    const changeReservationsPermission = useCallback(
-        async (userId: number, reservationsEnabled: boolean) => {
+    const changeRole = useCallback(
+        async (userId: number, newRole: UserRole) => {
             const { error } = await mutateAsync({
-                queryParams: { value: reservationsEnabled.toString() },
+                queryParams: { role: newRole },
                 urlParams: { userId: userId.toString() },
             });
 
@@ -36,11 +37,11 @@ export const useChangeReservationsPermission = (): UseChangeUserReservationsPerm
         [mutateAsync, setAndTranslateError]
     );
 
-    return { changeReservationsPermission, error, reset };
+    return { changeRole, reset, error };
 };
 
-const changeReservationsPermissionRequest = (options: ChangeReservationsPermissionRequestOptions) => {
-    return request("ChangeReservationsPermission", {
+const changeUserRoleRequest = (options: ChangeUserRoleRequestOptions) => {
+    return request("ChangeRole", {
         method: "PUT",
         ...options,
     });
@@ -49,6 +50,6 @@ const changeReservationsPermissionRequest = (options: ChangeReservationsPermissi
 const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
     switch (error?.status) {
         default:
-            return "apiErrors.user.changeReservationsPermission.default";
+            return "apiErrors.user.changeRole.default";
     }
 };

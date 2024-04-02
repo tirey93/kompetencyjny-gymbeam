@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Anchor, Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 
 import { useSignInForm } from "./hooks/useSignInForm";
 import { useSignIn } from "../../../../common/auth";
@@ -19,15 +20,17 @@ export const SignInPage = () => {
     const onSubmit = useCallback(async () => {
         if (!form.validate().hasErrors) {
             const { login, password } = form.values;
+            const user = await signIn({ username: login, password });
 
-            try {
-                await signIn({ username: login, password });
-                navigate(Routes.ROOT);
-            } catch (error) {
-                console.error(error);
-            }
+            notifications.show({
+                title: translate("notifications.auth.signedIn.title"),
+                message: translate("notifications.auth.signedIn.description", { user: user.displayName }),
+                color: "success",
+                withBorder: true,
+            });
+            navigate(Routes.ROOT);
         }
-    }, [form, navigate, signIn]);
+    }, [form, navigate, signIn, translate]);
 
     return (
         <Stack className={classes.container}>

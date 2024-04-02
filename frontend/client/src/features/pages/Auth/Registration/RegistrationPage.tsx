@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stack, Stepper } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
 
 import { useRegistrationForm } from "./hooks/useRegistrationForm";
 import { useSignUp } from "../../../../common/auth";
@@ -48,12 +49,15 @@ export const RegistrationPage = () => {
 
     const submitRegistrationForm = useCallback(async () => {
         const { login: name, password, name: displayName } = form.values;
-        try {
-            await signUp({ name, password, displayName });
-            navigate(Routes.ROOT);
-        } catch (error) {
-            console.error(error);
-        }
+        await signUp({ name, password, displayName });
+
+        notifications.show({
+            title: translate("notifications.auth.signedUp.title"),
+            message: translate("notifications.auth.signedUp.description"),
+            color: "success",
+            withBorder: true,
+        });
+        navigate(Routes.ROOT);
     }, [form.values, navigate, signUp]);
 
     const signUpErrorProps = useMemo(

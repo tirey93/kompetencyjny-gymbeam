@@ -1,5 +1,10 @@
 import {
     ApiResourceName,
+    ChangeReservationsPermissionQueryParams,
+    ChangeReservationsPermissionURLParams,
+    ChangeRoleQueryParams,
+    ChangeRoleURLParams,
+    DeleteUserURLParams,
     RequestOptions,
     RequestResult,
     SignInRequestBody,
@@ -15,6 +20,8 @@ const AVAILABLE_API_RESOURCES: Record<ApiResourceName, string> = {
     SignUp: "api/Authentication/Register",
     SignOut: "api/Authentication/Logout",
     ChangeReservationsPermission: "/User/User/{userId}/ReservationDisabled",
+    ChangeRole: "/User/User/{userId}/Role",
+    DeleteUser: "/User/{userId}",
 };
 
 const DEFAULT_REQUEST_OPTIONS: RequestInit = {
@@ -26,18 +33,36 @@ const DEFAULT_REQUEST_OPTIONS: RequestInit = {
 };
 
 export async function request(resource: "CurrentUserDetails"): Promise<RequestResult<UserDetailsResponse>>;
+
 export async function request(resource: "SignOut", options: { method: "POST" }): Promise<RequestResult<null>>;
+
 export async function request(
     resource: "SignIn",
     options: { body: SignInRequestBody; method: "POST" }
 ): Promise<RequestResult<UserDetailsResponse>>;
+
 export async function request(
     resource: "SignUp",
     options: { body: SignUpRequestBody; method: "POST" }
 ): Promise<RequestResult<UserDetailsResponse>>;
+
 export async function request(
     resource: "ChangeReservationsPermission",
-    options: { method: "PUT"; searchParams: { value: string }; urlParams: { userId: string } }
+    options: {
+        method: "PUT";
+        queryParams: ChangeReservationsPermissionQueryParams;
+        urlParams: ChangeReservationsPermissionURLParams;
+    }
+): Promise<RequestResult<null>>;
+
+export async function request(
+    resource: "ChangeRole",
+    options: { method: "PUT"; queryParams: ChangeRoleQueryParams; urlParams: ChangeRoleURLParams }
+): Promise<RequestResult<null>>;
+
+export async function request(
+    resource: "DeleteUser",
+    options: { method: "DELETE"; urlParams: DeleteUserURLParams }
 ): Promise<RequestResult<null>>;
 
 export async function request(
@@ -64,12 +89,12 @@ export async function request(
                 message: result.errors?.toString(),
             };
 
-            return { data: null, error };
+            return { error, data: null };
         }
 
         return { data: result, error: null };
     } catch (error) {
-        return { error, data: null };
+        return { error: { message: error?.toString() }, data: null };
     }
 }
 
@@ -78,9 +103,9 @@ const mapRequestOptionsToInitRequest = (options: RequestOptions): RequestInit =>
     body: options.body ? JSON.stringify(options.body) : undefined,
 });
 
-const buildFinalURL = (resource: ApiResourceName, options?: Pick<RequestOptions, "searchParams" | "urlParams">) => {
+const buildFinalURL = (resource: ApiResourceName, options?: Pick<RequestOptions, "queryParams" | "urlParams">) => {
     let endpoint = AVAILABLE_API_RESOURCES[resource];
-    const searchParams = options?.searchParams ? new URLSearchParams(options.searchParams) : "";
+    const searchParams = options?.queryParams ? new URLSearchParams(options.queryParams) : "";
 
     if (options?.urlParams) {
         for (const [key, value] of Object.entries(options.urlParams)) {
