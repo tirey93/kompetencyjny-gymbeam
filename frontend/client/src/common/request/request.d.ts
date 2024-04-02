@@ -29,7 +29,7 @@ export type UserDetailsResponse = {
 
 export type SignInRequestBody = { username: string; password: string };
 
-export type SignUpRequestBody = { displayName: string; name: string; password: string };
+export type SignUpRequestBody = { displayName: string; username: string; password: string };
 
 export type ChangeReservationsPermissionQueryParams = { value: string; };
 export type ChangeReservationsPermissionURLParams = { userId: string; };

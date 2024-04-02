@@ -48,8 +48,8 @@ export const RegistrationPage = () => {
     }, [form, goToNextStep]);
 
     const submitRegistrationForm = useCallback(async () => {
-        const { login: name, password, name: displayName } = form.values;
-        await signUp({ name, password, displayName });
+        const { login: username, password, name: displayName } = form.values;
+        await signUp({ username, password, displayName });
 
         notifications.show({
             title: translate("notifications.auth.signedUp.title"),
@@ -58,7 +58,7 @@ export const RegistrationPage = () => {
             withBorder: true,
         });
         navigate(Routes.ROOT);
-    }, [form.values, navigate, signUp]);
+    }, [form.values, navigate, signUp, translate]);
 
     const signUpErrorProps = useMemo(
         () =>
@@ -80,7 +80,7 @@ export const RegistrationPage = () => {
                     allowStepSelect={canSelectStep(0)}
                 >
                     <RegistrationFormWrapper userName={form.values.name} onNextStep={onNextStepNameForm}>
-                        <NameForm form={form} rules={validatedRules} />
+                        <NameForm form={form} rules={validatedRules} onSubmit={onNextStepNameForm} />
                     </RegistrationFormWrapper>
                 </Stepper.Step>
 
@@ -94,7 +94,7 @@ export const RegistrationPage = () => {
                         onPreviousStep={goToPreviousStep}
                         onNextStep={onNextStepPasswordForm}
                     >
-                        <PasswordForm form={form} rules={validatedRules} />
+                        <PasswordForm form={form} rules={validatedRules} onSubmit={onNextStepPasswordForm} />
                     </RegistrationFormWrapper>
                 </Stepper.Step>
 
