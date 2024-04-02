@@ -1,4 +1,4 @@
-.appNavigationHeader {
+html .appNavigationHeader {
   padding: var(--mantine-spacing-md);
   box-shadow: var(--mantine-shadow-sm);
 
@@ -13,6 +13,6 @@
   }
 }
 
-.appNavigationNavbar {
+html .appNavigationNavbar {
   padding: var(--mantine-spacing-md);
 }
