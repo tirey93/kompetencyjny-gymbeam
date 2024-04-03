@@ -11,11 +11,12 @@
 
   .caption {
     font-size: var(--mantine-font-size-sm);
-    margin-bottom: var(--mantine-spacing-xs);
+    margin-bottom: var(--mantine-spacing-lg);
     text-align: justify;
   }
 
   .buttonsContainer {
+    margin-top: var(--mantine-spacing-lg);
     align-self: flex-end;
   }
 }

@@ -2,9 +2,12 @@ import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { useAppOverlayStore } from "../../components/AppOverlay";
-import { TranslationKey } from "../../i18n/translations/i18n";
-import { request, RequestError, SignInRequestBody } from "../../request";
+import { request, SignInRequestBody } from "../../request";
 import { useRequestErrorHandler } from "../../request/hooks/useRequestErrorHandler";
+import {
+    HttpErrorsTranslationsMap,
+    mapErrorToErrorTranslationKey,
+} from "../../request/utils/mapErrorToErrorTranslationKey";
 import { UserDetails } from "../Auth";
 import { useAuthState } from "./useAuthState";
 
@@ -26,15 +29,17 @@ export const useSignIn = (): UseSignIn => {
     const signIn = useCallback(
         async (signInRequestBody: SignInRequestBody) => {
             setIsLoading(true);
-            const { error, data } = await mutateAsync(signInRequestBody);
-            setIsLoading(false);
 
-            if (!data) {
-                throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
+            try {
+                const data = await mutateAsync(signInRequestBody);
+                setUser(data);
+                return data;
+            } catch (error) {
+                const errorTranslation = mapErrorToErrorTranslationKey(error, errorsMap);
+                throw new Error(setAndTranslateError(errorTranslation));
+            } finally {
+                setIsLoading(false);
             }
-
-            setUser(data);
-            return data;
         },
         [mutateAsync, setAndTranslateError, setUser, setIsLoading]
     );
@@ -46,13 +51,10 @@ const signInRequest = (body: SignInRequestBody) => {
     return request("SignIn", { body, method: "POST" });
 };
 
-const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
-    switch (error?.status) {
-        case 400:
-        case 403:
-            return "apiErrors.auth.signIn.incorrectCredentials";
-
-        default:
-            return "apiErrors.auth.signIn.default";
-    }
+const errorsMap: HttpErrorsTranslationsMap = {
+    defaultError: "apiErrors.auth.signIn.default",
+    statusCodesMap: {
+        400: "apiErrors.auth.signIn.incorrectCredentials",
+        403: "apiErrors.auth.signIn.incorrectCredentials",
+    },
 };

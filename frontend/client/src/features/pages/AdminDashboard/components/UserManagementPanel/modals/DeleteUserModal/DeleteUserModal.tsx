@@ -20,6 +20,10 @@ export const DeleteUserModal = ({ innerProps: { user } }: DeleteUserModalProps) 
     const translate = useTranslate();
     const { deleteUser, error, reset } = useDeleteUser();
 
+    const onClose = useCallback(() => {
+        modals.closeAll();
+    }, []);
+
     const handleDeleteUser = useCallback(async () => {
         await deleteUser(user.id);
         notifications.show({
@@ -30,11 +34,8 @@ export const DeleteUserModal = ({ innerProps: { user } }: DeleteUserModalProps) 
             }),
             color: "success",
         });
-    }, [deleteUser, translate, user.id]);
-
-    const onClose = useCallback(() => {
-        modals.closeAll();
-    }, []);
+        onClose();
+    }, [deleteUser, onClose, translate, user.id]);
 
     return (
         <Stack className={sharedClasses.container}>

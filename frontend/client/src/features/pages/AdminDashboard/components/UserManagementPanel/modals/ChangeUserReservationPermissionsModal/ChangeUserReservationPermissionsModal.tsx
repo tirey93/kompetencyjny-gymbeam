@@ -22,6 +22,10 @@ export const ChangeUserReservationPermissionsModal = ({
     const translate = useTranslate();
     const { changeReservationsPermission, error, reset } = useChangeReservationsPermission();
 
+    const onClose = useCallback(() => {
+        modals.closeAll();
+    }, []);
+
     const handleChangePermissions = useCallback(async () => {
         await changeReservationsPermission(user.id, !user.reservationDisabled);
         notifications.show({
@@ -32,11 +36,8 @@ export const ChangeUserReservationPermissionsModal = ({
             }),
             color: "success",
         });
-    }, [changeReservationsPermission, translate, user.id, user.reservationDisabled]);
-
-    const onClose = useCallback(() => {
-        modals.closeAll();
-    }, []);
+        onClose();
+    }, [changeReservationsPermission, onClose, translate, user.id, user.reservationDisabled]);
 
     return (
         <Stack className={sharedClasses.container}>
