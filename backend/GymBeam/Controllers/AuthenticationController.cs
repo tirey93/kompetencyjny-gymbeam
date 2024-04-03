@@ -3,6 +3,7 @@ using GymBeam.Constants;
 using GymBeam.Exceptions;
 using GymBeam.Extensions;
 using GymBeam.Properties;
+using GymBeam.Queries;
 using GymBeam.Requests;
 using GymBeam.Response;
 using GymBeam.Utils;
@@ -45,14 +46,21 @@ namespace GymBeam.Controllers
 
         [HttpPost("Login")]
         [AllowAnonymous]
-        public ActionResult<UserResponse> Login([FromBody] LoginRequest dto)
+        public async Task<ActionResult<UserResponse>> Login([FromBody] LoginRequest dto)
         {
+            var command = new LoginQuery
+            {
+                Password = dto.Password,
+                Username = dto.Username
+            };
+            var response = await _mediator.Send(command);
+            //todo check in try catch for exceptions
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Role, Roles.Admin)
             };
 
-            int userId = 25;
             try
             {
                 var signingKey = Environment.GetEnvironmentVariable(_configuration["JWT:EnvironmentSecretVariableName"]);
@@ -69,7 +77,7 @@ namespace GymBeam.Controllers
 
                 Response.Cookies
                     .AppendToCookie(Cookies.AccessToken, new JwtSecurityTokenHandler().WriteToken(token))
-                    .AppendToCookie(Cookies.UserId, userId.ToString());
+                    .AppendToCookie(Cookies.UserId, response.Id.ToString());
 
                 return new UserResponse
                 {
