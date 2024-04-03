@@ -13,7 +13,7 @@ using System.Security.Claims;
 
 namespace GymBeam.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
