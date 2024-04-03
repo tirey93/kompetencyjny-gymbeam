@@ -127,7 +127,7 @@ namespace GymBeam.Controllers
             }
         }
 
-        [HttpPut("User/{id:int}/Role")]
+        [HttpPut("{id:int}/Role")]
 #if !DEBUG
         [Authorize(Roles = Roles.Admin)]
 #endif
@@ -157,7 +157,7 @@ namespace GymBeam.Controllers
             }
         }
 
-        [HttpPut("User/{id:int}/ReservationDisabled")]
+        [HttpPut("{id:int}/ReservationDisabled")]
 #if !DEBUG
         [Authorize(Roles = Roles.Admin)]
 #endif
