@@ -45,6 +45,9 @@ export type TranslationSource = {
             delete: {
                 default: string;
             };
+            getAll: {
+                default: string;
+            };
         };
         auth: {
             signIn: {
@@ -128,6 +131,7 @@ export type TranslationSource = {
                     reservations: string;
                     options: string;
                 };
+                retryButton: string;
                 rows: {
                     reservations: {
                         on: string;

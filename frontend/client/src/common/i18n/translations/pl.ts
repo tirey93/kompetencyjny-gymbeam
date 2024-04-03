@@ -13,6 +13,9 @@ export const pl: TranslationSource = {
             delete: {
                 default: "Nie udało się usunąć użytkownika, coś poszło nie tak po naszej stronie.",
             },
+            getAll: {
+                default: "Nie udało się pobrać listy użytkowników, coś poszło nie tak po naszej stronie.",
+            },
         },
         auth: {
             signIn: {
@@ -128,6 +131,7 @@ export const pl: TranslationSource = {
                     reservations: "Rezerwacje",
                     options: "Opcje",
                 },
+                retryButton: "Ponów",
                 rows: {
                     reservations: {
                         on: "Włączone",

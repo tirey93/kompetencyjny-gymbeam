@@ -1,9 +1,13 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { TranslationKey } from "../../../../../../common/i18n/translations/i18n";
-import { request, RequestError } from "../../../../../../common/request";
+import { QueryKey, useInvalidateQuery } from "../../../../../../common/apiClient";
+import { request } from "../../../../../../common/request";
 import { useRequestErrorHandler } from "../../../../../../common/request/hooks/useRequestErrorHandler";
+import {
+    HttpErrorsTranslationsMap,
+    mapErrorToErrorTranslationKey,
+} from "../../../../../../common/request/utils/mapErrorToErrorTranslationKey";
 
 type UseChangeUserReservationsPermission = {
     changeReservationsPermission: (userId: number, allowReservations: boolean) => Promise<void>;
@@ -12,25 +16,28 @@ type UseChangeUserReservationsPermission = {
 };
 
 type ChangeReservationsPermissionRequestOptions = {
-    queryParams: { value: string };
+    queryParams: { value: boolean };
     urlParams: { userId: string };
 };
 
 export const useChangeReservationsPermission = (): UseChangeUserReservationsPermission => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
+    const { invalidate } = useInvalidateQuery();
     const { mutateAsync } = useMutation({
         mutationFn: changeReservationsPermissionRequest,
+        onSuccess: () => invalidate(QueryKey.Users),
     });
 
     const changeReservationsPermission = useCallback(
         async (userId: number, reservationsEnabled: boolean) => {
-            const { error } = await mutateAsync({
-                queryParams: { value: reservationsEnabled.toString() },
-                urlParams: { userId: userId.toString() },
-            });
-
-            if (error) {
-                throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
+            try {
+                await mutateAsync({
+                    queryParams: { value: reservationsEnabled },
+                    urlParams: { userId: userId.toString() },
+                });
+            } catch (error) {
+                const errorTranslation = mapErrorToErrorTranslationKey(error, errorsMap);
+                throw new Error(setAndTranslateError(errorTranslation));
             }
         },
         [mutateAsync, setAndTranslateError]
@@ -46,9 +53,7 @@ const changeReservationsPermissionRequest = (options: ChangeReservationsPermissi
     });
 };
 
-const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
-    switch (error?.status) {
-        default:
-            return "apiErrors.user.changeReservationsPermission.default";
-    }
+const errorsMap: HttpErrorsTranslationsMap = {
+    defaultError: "apiErrors.user.changeReservationsPermission.default",
+    statusCodesMap: {},
 };

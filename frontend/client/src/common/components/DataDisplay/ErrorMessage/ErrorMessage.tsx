@@ -3,12 +3,12 @@ import { Alert } from "@mantine/core";
 import { IconExclamationCircle } from "@tabler/icons-react";
 
 type ErrorMessageProps = PropsWithChildren<{
-    onClose: () => void;
+    onClose?: () => void;
 }>;
 
 export const ErrorMessage = ({ children, onClose }: ErrorMessageProps) => {
     return (
-        <Alert color="danger" onClose={onClose} withCloseButton icon={<IconExclamationCircle />}>
+        <Alert color="danger" onClose={onClose} withCloseButton={!!onClose} icon={<IconExclamationCircle />}>
             {children}
         </Alert>
     );

@@ -13,6 +13,9 @@ export const en: TranslationSource = {
             delete: {
                 default: "Failed to delete user, something went wrong on our side.",
             },
+            getAll: {
+                default: "Failed to retrieve users data. Something went wrong on our side.",
+            },
         },
         auth: {
             signIn: {
@@ -127,6 +130,7 @@ export const en: TranslationSource = {
                     reservations: "Reservations",
                     options: "Options",
                 },
+                retryButton: "Retry",
                 rows: {
                     reservations: {
                         on: "Enabled",
