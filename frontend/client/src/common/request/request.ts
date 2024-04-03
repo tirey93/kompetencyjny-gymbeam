@@ -16,13 +16,13 @@ const { VITE_API_BASE_URL } = import.meta.env;
 
 const AVAILABLE_API_RESOURCES: Record<ApiResourceName, string> = {
     CurrentUserDetails: "User/LoggedIn",
-    SignIn: "api/Authentication/Login",
-    SignUp: "api/Authentication/Register",
-    SignOut: "api/Authentication/Logout",
+    SignIn: "Authentication/Login",
+    SignUp: "Authentication/Register",
+    SignOut: "Authentication/Logout",
     ChangeReservationsPermission: "User/User/{userId}/ReservationDisabled",
     ChangeRole: "User/User/{userId}/Role",
     DeleteUser: "User/{userId}",
-    GetAllUsers: "Usesr",
+    GetAllUsers: "User",
 };
 
 const DEFAULT_REQUEST_OPTIONS: RequestInit = {
