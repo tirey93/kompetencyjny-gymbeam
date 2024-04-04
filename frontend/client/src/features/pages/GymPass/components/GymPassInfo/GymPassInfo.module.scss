@@ -5,12 +5,13 @@ html .container {
   align-items: center;
 
   .label {
-    font-weight: 700;
-    text-align: center;
     font-size: var(--mantine-font-size-xs);
+    text-align: center;
+    font-weight: 700;
   }
 
   .ownerName {
     font-size: var(--mantine-font-size-sm);
+    text-align: center;
   }
 }
