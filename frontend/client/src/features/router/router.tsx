@@ -4,6 +4,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import { AppProvider } from "../../AppProvider";
 import { Root } from "../../Root";
 import { NotFoundPage } from "../pages/404";
+import { ActivitiesPage } from "../pages/Activities/ActivitiesPage";
 import { AdminDashboardPage } from "../pages/AdminDashboard";
 import { RegistrationPage } from "../pages/Auth/Registration";
 import { SignInPage } from "../pages/Auth/SignIn";
@@ -37,6 +38,14 @@ const APP_PAGES = [
         element: (
             <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={Routes.LOGIN}>
                 <GymPassPage />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: Routes.ACTIVITIES,
+        element: (
+            <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={Routes.LOGIN}>
+                <ActivitiesPage />
             </ProtectedRoute>
         ),
     },
