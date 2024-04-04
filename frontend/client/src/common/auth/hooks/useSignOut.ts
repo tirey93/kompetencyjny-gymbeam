@@ -4,9 +4,12 @@ import { useMutation } from "@tanstack/react-query";
 
 import { useAppOverlayStore } from "../../components/AppOverlay";
 import { useTranslate } from "../../i18n";
-import { TranslationKey } from "../../i18n/translations/i18n";
-import { request, RequestError } from "../../request";
+import { request } from "../../request";
 import { useRequestErrorHandler } from "../../request/hooks/useRequestErrorHandler";
+import {
+    HttpErrorsTranslationsMap,
+    mapErrorToErrorTranslationKey,
+} from "../../request/utils/mapErrorToErrorTranslationKey";
 import { useAuthState } from "./useAuthState";
 
 type UseSignOut = {
@@ -25,19 +28,9 @@ export const useSignOut = (): UseSignOut => {
 
     const signOut = useCallback(async () => {
         setIsLoading(true);
-        const { error } = await mutateAsync();
-        setIsLoading(false);
 
-        if (error) {
-            notifications.show({
-                title: translate("notifications.auth.signingOutFailed.title"),
-                message: translate("notifications.auth.signingOutFailed.description"),
-                color: "danger",
-                withBorder: true,
-            });
-
-            throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
-        } else {
+        try {
+            await mutateAsync();
             clearUser();
             notifications.show({
                 title: translate("notifications.auth.signedOut.title"),
@@ -45,6 +38,18 @@ export const useSignOut = (): UseSignOut => {
                 color: "success",
                 withBorder: true,
             });
+        } catch (error) {
+            notifications.show({
+                title: translate("notifications.auth.signingOutFailed.title"),
+                message: translate("notifications.auth.signingOutFailed.description"),
+                color: "danger",
+                withBorder: true,
+            });
+
+            const errorTranslation = mapErrorToErrorTranslationKey(error, errorsMap);
+            throw new Error(setAndTranslateError(errorTranslation));
+        } finally {
+            setIsLoading(false);
         }
     }, [clearUser, mutateAsync, setAndTranslateError, setIsLoading, translate]);
 
@@ -55,9 +60,7 @@ const signOutRequest = () => {
     return request("SignOut", { method: "POST" });
 };
 
-const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
-    switch (error?.status) {
-        default:
-            return "apiErrors.auth.signOut.default";
-    }
+const errorsMap: HttpErrorsTranslationsMap = {
+    defaultError: "apiErrors.auth.signOut.default",
+    statusCodesMap: {},
 };

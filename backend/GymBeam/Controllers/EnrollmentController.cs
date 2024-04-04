@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GymBeam.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class EnrollmentController : ControllerBase
     {

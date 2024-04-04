@@ -22,6 +22,10 @@ export const ChangeUserRoleModal = ({ innerProps: { user, newRole } }: ChangeUse
     const translatedRole = newRole === "Admin" ? translate("user.roles.admin") : translate("user.roles.user");
     const { changeRole, error, reset } = useChangeUserRole();
 
+    const onClose = useCallback(() => {
+        modals.closeAll();
+    }, []);
+
     const handleChangeRole = useCallback(async () => {
         await changeRole(user.id, newRole);
         notifications.show({
@@ -32,11 +36,8 @@ export const ChangeUserRoleModal = ({ innerProps: { user, newRole } }: ChangeUse
             }),
             color: "success",
         });
-    }, [changeRole, newRole, translate, user.id]);
-
-    const onClose = useCallback(() => {
-        modals.closeAll();
-    }, []);
+        onClose();
+    }, [changeRole, newRole, onClose, translate, user.id]);
 
     return (
         <Stack className={sharedClasses.container}>

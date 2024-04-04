@@ -16,13 +16,17 @@ export const useUpdateSignedInUser = () => {
         (async () => {
             if (!user) {
                 setIsLoading(true);
-                const { data } = await getUserDetailsRequest();
+                try {
+                    const data = await getUserDetailsRequest();
 
-                if (data) {
-                    setUser(data);
+                    if (data) {
+                        setUser(data);
+                    }
+                } catch (error) {
+                    /* No need to handle this error */
+                } finally {
+                    setIsLoading(false);
                 }
-
-                setIsLoading(false);
             }
         })();
     }, [setIsLoading, setUser, user]);

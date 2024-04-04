@@ -2,9 +2,12 @@ import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { useAppOverlayStore } from "../../components/AppOverlay";
-import { TranslationKey } from "../../i18n/translations/i18n";
-import { request, RequestError, SignUpRequestBody } from "../../request";
+import { request, SignUpRequestBody } from "../../request";
 import { useRequestErrorHandler } from "../../request/hooks/useRequestErrorHandler";
+import {
+    HttpErrorsTranslationsMap,
+    mapErrorToErrorTranslationKey,
+} from "../../request/utils/mapErrorToErrorTranslationKey";
 import { UserDetails } from "../Auth";
 import { useAuthState } from "./useAuthState";
 
@@ -26,15 +29,17 @@ export const useSignUp = (): UseSignUp => {
     const signUp = useCallback(
         async (signUpRequestBody: SignUpRequestBody) => {
             setIsLoading(true);
-            const { data, error } = await mutateAsync(signUpRequestBody);
-            setIsLoading(false);
 
-            if (!data) {
-                throw new Error(setAndTranslateError(mapErrorToErrorTranslationKey(error)));
+            try {
+                const data = await mutateAsync(signUpRequestBody);
+                setUser(data);
+                return data;
+            } catch (error) {
+                const errorTranslation = mapErrorToErrorTranslationKey(error, errorsMap);
+                throw new Error(setAndTranslateError(errorTranslation));
+            } finally {
+                setIsLoading(false);
             }
-
-            setUser(data);
-            return data;
         },
         [mutateAsync, setAndTranslateError, setUser, setIsLoading]
     );
@@ -46,12 +51,9 @@ const signUpRequest = (body: SignUpRequestBody) => {
     return request("SignUp", { body, method: "POST" });
 };
 
-const mapErrorToErrorTranslationKey = (error: RequestError | null): TranslationKey => {
-    switch (error?.status) {
-        case 409:
-            return "apiErrors.auth.signUp.loginTaken";
-
-        default:
-            return "apiErrors.auth.signUp.default";
-    }
+const errorsMap: HttpErrorsTranslationsMap = {
+    defaultError: "apiErrors.auth.signUp.default",
+    statusCodesMap: {
+        409: "apiErrors.auth.signUp.loginTaken",
+    },
 };

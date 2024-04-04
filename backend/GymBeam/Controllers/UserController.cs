@@ -139,7 +139,7 @@ namespace GymBeam.Controllers
             }
         }
 
-        [HttpPut("User/{id:int}/Role")]
+        [HttpPut("{id:int}/Role")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -172,7 +172,7 @@ namespace GymBeam.Controllers
             }
         }
 
-        [HttpPut("User/{id:int}/ReservationDisabled")]
+        [HttpPut("{id:int}/ReservationDisabled")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
