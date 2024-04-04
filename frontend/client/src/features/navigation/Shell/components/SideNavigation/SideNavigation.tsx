@@ -4,6 +4,7 @@ import { NavigationSection } from "./components/NavigationSection";
 import { useSideNavigationItems } from "./hooks/useSideNavigationItems";
 import { UserRoleGuard } from "../../../../../common/auth";
 import { Logo } from "../../../../../common/components/Logo";
+import { LanguageSelect } from "../LanguageToggle/LanguageSelect";
 
 import classes from "./SideNavigation.module.scss";
 
@@ -39,6 +40,8 @@ export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
                 <UserRoleGuard allowedRoles={["Admin", "User"]}>
                     <NavigationSection onNavigate={onNavigate} tiles={[signOut]} />
                 </UserRoleGuard>
+
+                <LanguageSelect />
             </Stack>
         </Stack>
     );
