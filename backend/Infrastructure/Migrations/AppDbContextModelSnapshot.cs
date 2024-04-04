@@ -24,6 +24,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Cron")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Duration")
@@ -32,16 +33,14 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("LeaderId")
+                    b.Property<int?>("LeaderId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("LeaderName")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("LongDescription")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ShortDescription")
@@ -54,6 +53,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LeaderId");
 
                     b.ToTable("Activities");
                 });
@@ -82,6 +83,15 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Domain.Activity", b =>
+                {
+                    b.HasOne("Domain.User", "Leader")
+                        .WithMany()
+                        .HasForeignKey("LeaderId");
+
+                    b.Navigation("Leader");
                 });
 #pragma warning restore 612, 618
         }
