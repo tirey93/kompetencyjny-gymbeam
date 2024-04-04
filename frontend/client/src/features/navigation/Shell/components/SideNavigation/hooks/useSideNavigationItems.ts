@@ -31,6 +31,7 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
 
     return useMemo(
         () => ({
+            home: { Icon: IconHome2, label: translate("navigation.labels.home"), route: Routes.ROOT },
             signIn: { Icon: IconLogin, label: translate("navigation.labels.signIn"), route: Routes.LOGIN },
             signUp: { Icon: IconUserPlus, label: translate("navigation.labels.signUp"), route: Routes.REGISTRATION },
             signOut: {
@@ -39,13 +40,16 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
                 route: Routes.LOGIN,
                 asyncBeforeRedirect: signOutAsync,
             },
-            home: { Icon: IconHome2, label: translate("navigation.labels.home"), route: Routes.ROOT },
             adminDashboard: {
                 Icon: IconDashboard,
                 label: translate("navigation.labels.adminDashboard"),
                 route: Routes.ADMIN_DASHBOARD,
             },
-            activities: { Icon: IconBarbell, label: translate("navigation.labels.activities"), route: Routes.NA },
+            activities: {
+                Icon: IconBarbell,
+                label: translate("navigation.labels.activities"),
+                route: Routes.ACTIVITIES,
+            },
             qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: Routes.GYM_PASS },
         }),
         [signOutAsync, translate]

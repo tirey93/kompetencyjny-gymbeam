@@ -11,7 +11,7 @@ export const GymPassQR = ({ qrValue }: GymPassQRProps) => {
         <QRCodeSVG
             value={qrValue}
             size={256}
-            bgColor={theme.colors?.primary?.[7] ?? "#000000"}
+            bgColor={theme.colors?.secondary?.[7] ?? "#000000"}
             fgColor="#ffffff"
             includeMargin
             style={{
