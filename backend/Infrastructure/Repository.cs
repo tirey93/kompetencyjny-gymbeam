@@ -12,6 +12,7 @@ namespace Infrastructure
         }
 
         public List<User> Users => _appDbContext.Users.ToList();
+        public List<Activity> Activities => _appDbContext.Activities.ToList();
 
         public void Add<T>(T entity) where T : class
         {
