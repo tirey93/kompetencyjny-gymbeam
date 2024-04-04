@@ -41,7 +41,8 @@ namespace GymBeam.QueryHandlers
                 Id = user.Id,
                 Name = user.Name,
                 DisplayName = user.DisplayName,
-                Role = user.Role
+                Role = user.Role,
+                ReservationDisabled = user.ReservationDisabled
             };
             return Task.FromResult(result);
         }
@@ -60,7 +61,8 @@ namespace GymBeam.QueryHandlers
                 Id = x.Id,
                 Name = x.Name,
                 DisplayName = x.DisplayName,
-                Role = x.Role
+                Role = x.Role,
+                ReservationDisabled = x.ReservationDisabled
             }).ToList();
 
             return Task.FromResult<IEnumerable<UserResponse>>(result);
