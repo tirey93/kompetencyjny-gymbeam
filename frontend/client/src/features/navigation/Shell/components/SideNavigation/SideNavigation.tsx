@@ -41,7 +41,7 @@ export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
                     <NavigationSection onNavigate={onNavigate} tiles={[signOut]} />
                 </UserRoleGuard>
 
-                <LanguageSelect />
+                <LanguageSelect className={classes.languageSelect} />
             </Stack>
         </Stack>
     );
