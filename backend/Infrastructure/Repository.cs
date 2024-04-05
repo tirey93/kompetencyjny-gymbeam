@@ -12,10 +12,18 @@ namespace Infrastructure
             _appDbContext = appDbContext;
         }
 
-        public List<User> Users => _appDbContext.Users.ToList();
-        public List<Activity> Activities => _appDbContext.Activities
-            .Include(i => i.Leader)
-            .ToList();
+        public List<User> GetUsers(Func<User, bool>? predicate = null)
+        {
+            if (predicate == null)
+                return _appDbContext.Users.ToList();
+            return _appDbContext.Users.Where(predicate).ToList();
+        }
+        public List<Activity> GetActivities(Func<Activity, bool>? predicate = null)
+        {
+            if (predicate == null)
+                return _appDbContext.Activities.Include(i => i.Leader).ToList();
+            return _appDbContext.Activities.Include(i => i.Leader).Where(predicate).ToList();
+        }
 
         public void Add<T>(T entity) where T : class
         {
