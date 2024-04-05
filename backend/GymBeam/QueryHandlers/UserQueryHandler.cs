@@ -21,14 +21,11 @@ namespace GymBeam.QueryHandlers
         {
             var username = request.Username.ToLower();
 
-            var users = _repository.Users;
-            if (users == null || !users.Any())
+            var existingUsers = _repository.GetUsers(u => u.Name.ToLower() == username);
+            if (existingUsers == null || !existingUsers.Any())
                 return Task.FromResult(true);
 
-            var existingUsers = users.Where(u => u.Name.ToLower() == username);
-            var result = !existingUsers.Any();
-
-            return Task.FromResult(result);
+            return Task.FromResult(false);
         }
 
         public Task<UserResponse> Handle(GetUserQuery request, CancellationToken cancellationToken)
@@ -49,11 +46,11 @@ namespace GymBeam.QueryHandlers
 
         public Task<IEnumerable<UserResponse>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = _repository.Users;
+            var users = _repository.GetUsers();
 
             if (users == null || !users.Any())
             {
-                return Task.FromResult<IEnumerable<UserResponse>>(Enumerable.Empty<UserResponse>());
+                return Task.FromResult(Enumerable.Empty<UserResponse>());
             }
 
             var result = users.Select(x => new UserResponse
