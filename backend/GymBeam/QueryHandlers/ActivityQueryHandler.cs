@@ -28,14 +28,14 @@ namespace GymBeam.QueryHandlers
                 Id = x.Id,
                 Duration = x.Duration,
                 TotalCapacity = x.TotalCapacity,
-                LeaderId = x.Leader?.Id ?? 0,
+                LeaderId = x.Leader?.Id,
                 StartTime = x.StartTime,
                 EndTime = x.EndTime,
                 Name = x.Name,
                 ShortDescription = x.ShortDescription, 
                 LongDescription = x.LongDescription,
                 Cron = x.Cron,
-                LeaderName = x.Leader?.Name ?? "Unknown"
+                LeaderName = x.Leader?.Name
             }).ToList();
 
             return Task.FromResult<IEnumerable<ActivityResponse>>(result);
