@@ -61,6 +61,15 @@ namespace Domain.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activity with ID {0} not found..
+        /// </summary>
+        internal static string ExceptionActivityNotFound {
+            get {
+                return ResourceManager.GetString("ExceptionActivityNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User with ID {0} not found..
         /// </summary>
         internal static string ExceptionUserNotFound {
