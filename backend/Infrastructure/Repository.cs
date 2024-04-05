@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
@@ -12,7 +13,9 @@ namespace Infrastructure
         }
 
         public List<User> Users => _appDbContext.Users.ToList();
-        public List<Activity> Activities => _appDbContext.Activities.ToList();
+        public List<Activity> Activities => _appDbContext.Activities
+            .Include(i => i.Leader)
+            .ToList();
 
         public void Add<T>(T entity) where T : class
         {
