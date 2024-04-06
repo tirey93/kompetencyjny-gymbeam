@@ -18,11 +18,21 @@ namespace Infrastructure
                 return _appDbContext.Users.ToList();
             return _appDbContext.Users.Where(predicate).ToList();
         }
+        public User? GetUser(int id)
+        {
+            return _appDbContext.Users.FirstOrDefault(x => x.Id == id);
+        }
+
         public List<Activity> GetActivities(Func<Activity, bool>? predicate = null)
         {
             if (predicate == null)
                 return _appDbContext.Activities.Include(i => i.Leader).ToList();
             return _appDbContext.Activities.Include(i => i.Leader).Where(predicate).ToList();
+        }
+
+        public Activity? GetActivity(int id)
+        {
+            return _appDbContext.Activities.Include(i => i.Leader).FirstOrDefault(x => x.Id == id);
         }
 
         public void Add<T>(T entity) where T : class
@@ -32,10 +42,6 @@ namespace Infrastructure
         public void Delete<T>(T entity) where T : class
         {
             _appDbContext.Remove(entity);
-        }
-        public T? GetById<T>(int id) where T : class
-        {
-            return _appDbContext.Set<T>().Find(id);
         }
         public async Task SaveChangesAsync()
         {
