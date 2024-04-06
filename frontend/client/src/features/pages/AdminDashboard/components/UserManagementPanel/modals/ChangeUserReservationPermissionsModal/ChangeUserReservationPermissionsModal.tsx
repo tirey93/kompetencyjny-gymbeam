@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { Button, Group, Stack, Text } from "@mantine/core";
 import { ContextModalProps, modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
+import classNames from "classnames";
 
 import { UserDetails } from "../../../../../../../common/auth";
 import { ErrorMessage } from "../../../../../../../common/components/DataDisplay";
@@ -41,7 +42,7 @@ export const ChangeUserReservationPermissionsModal = ({
 
     return (
         <Stack className={sharedClasses.container}>
-            <Text className={`${sharedClasses.title} ${classes.title}`}>
+            <Text className={classNames(sharedClasses.title, classes.title)}>
                 {translate("pages.adminDashboard.usersPanel.modals.toggleReservations.title")}
             </Text>
 

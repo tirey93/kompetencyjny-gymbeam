@@ -1,0 +1,34 @@
+html .scrollContainer {
+  border-radius: var(--mantine-radius-md);
+  overflow: hidden;
+
+  > *:first-child {
+    padding: 0;
+  }
+
+  .table {
+    .headerRow {
+      background: var(--mantine-color-dark-9);
+      box-shadow: var(--mantine-shadow-xl);
+
+      td {
+        padding-block: var(--mantine-spacing-lg);
+        text-align: center;
+
+        .date {
+          font-size: var(--mantine-font-size-sm);
+          font-weight: 600;
+        }
+
+        .weekday {
+          font-size: var(--mantine-font-size-xs);
+          color: var(--mantine-color-secondary-2);
+          text-transform: uppercase;
+          font-weight: 800;
+        }
+      }
+    }
+  }
+}
+
+

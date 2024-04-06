@@ -11,12 +11,12 @@ import {
 
 import { useSignOut } from "../../../../../../common/auth";
 import { useTranslate } from "../../../../../../common/i18n";
-import { Routes } from "../../../../../router";
+import { AppRoute } from "../../../../../router";
 
 type NavigationItem = {
     Icon: typeof IconDashboard;
     label: string;
-    route: Routes;
+    route: AppRoute;
     asyncBeforeRedirect?: () => Promise<unknown>;
 };
 
@@ -31,26 +31,26 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
 
     return useMemo(
         () => ({
-            home: { Icon: IconHome2, label: translate("navigation.labels.home"), route: Routes.ROOT },
-            signIn: { Icon: IconLogin, label: translate("navigation.labels.signIn"), route: Routes.LOGIN },
-            signUp: { Icon: IconUserPlus, label: translate("navigation.labels.signUp"), route: Routes.REGISTRATION },
+            home: { Icon: IconHome2, label: translate("navigation.labels.home"), route: AppRoute.ROOT },
+            signIn: { Icon: IconLogin, label: translate("navigation.labels.signIn"), route: AppRoute.LOGIN },
+            signUp: { Icon: IconUserPlus, label: translate("navigation.labels.signUp"), route: AppRoute.REGISTRATION },
             signOut: {
                 Icon: IconLogout,
                 label: translate("navigation.labels.signOut"),
-                route: Routes.LOGIN,
+                route: AppRoute.LOGIN,
                 asyncBeforeRedirect: signOutAsync,
             },
             adminDashboard: {
                 Icon: IconDashboard,
                 label: translate("navigation.labels.adminDashboard"),
-                route: Routes.ADMIN_DASHBOARD,
+                route: AppRoute.ADMIN_DASHBOARD,
             },
             activities: {
                 Icon: IconBarbell,
                 label: translate("navigation.labels.activities"),
-                route: Routes.ACTIVITIES,
+                route: AppRoute.ACTIVITIES,
             },
-            qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: Routes.GYM_PASS },
+            qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: AppRoute.GYM_PASS },
         }),
         [signOutAsync, translate]
     );

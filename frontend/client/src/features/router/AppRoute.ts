@@ -1,9 +1,9 @@
-export enum Routes {
+export enum AppRoute {
     ROOT = "/",
     REGISTRATION = "/sign-up",
     LOGIN = "/sign-in",
     GYM_PASS = "/gym-pass",
     ADMIN_DASHBOARD = "/admin-dashboard",
     ACTIVITIES = "/activities",
-    NA = "/na",
+    ACTIVITY_DETAILS = "/activities/:id/details",
 }

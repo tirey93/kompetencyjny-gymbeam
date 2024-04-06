@@ -2,6 +2,24 @@
 import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
+    activityCalendar: {
+        item: {
+            participants: {
+                tooltip: "Number of people that already have enrolled: {{participants}}",
+            },
+            enrollment: {
+                label: "Enroll",
+                disabled: {
+                    label: "Can't enroll",
+                    tooltip: {
+                        tooLate: "This activity has already started.",
+                        full: "All slots are taken.",
+                    },
+                },
+            },
+        },
+    },
+
     apiErrors: {
         user: {
             changeReservationsPermission: {

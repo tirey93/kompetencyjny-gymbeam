@@ -1,0 +1,19 @@
+html .row {
+  background: var(--mantine-color-dark-6);
+
+  &:hover {
+    background: var(--mantine-color-dark-5);
+  }
+
+  td {
+    padding-block: var(--mantine-spacing-md);
+    text-align: center;
+
+    .hour {
+      padding-inline: var(--mantine-spacing-sm);
+      font-size: var(--mantine-font-size-sm);
+      white-space: nowrap;
+      font-weight: 700;
+    }
+  }
+}

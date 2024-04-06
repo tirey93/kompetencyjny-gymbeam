@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { Button, Text, Tooltip } from "@mantine/core";
 import { Icon, IconProps } from "@tabler/icons-react";
 
-import { Routes } from "../../../../../router";
+import { AppRoute } from "../../../../../router";
 
 import classes from "./NavigationTile.module.scss";
 
 export type NavigationTileProps = {
-    route: Routes;
+    route: AppRoute;
     label: string;
     Icon: ForwardRefExoticComponent<Omit<IconProps, "ref"> & RefAttributes<Icon>>;
     asyncBeforeRedirect?: () => Promise<unknown>;

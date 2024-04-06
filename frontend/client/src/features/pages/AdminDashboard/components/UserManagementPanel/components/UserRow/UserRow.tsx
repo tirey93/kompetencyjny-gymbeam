@@ -1,4 +1,5 @@
 import { Table, Text } from "@mantine/core";
+import classNames from "classnames";
 
 import { UserDetails } from "../../../../../../../common/auth";
 import { TextWithTooltip } from "../../../../../../../common/components/DataDisplay";
@@ -24,7 +25,7 @@ export const UserRow = ({ userDetails, events }: UserRowProps) => {
     return (
         <Table.Tr className={classes.row}>
             <Table.Td>
-                <Text className={`${classes.columnLabel} ${classes.center}`}>{userDetails.id}</Text>
+                <Text className={classNames(classes.columnLabel, classes.center)}>{userDetails.id}</Text>
             </Table.Td>
 
             <Table.Td>

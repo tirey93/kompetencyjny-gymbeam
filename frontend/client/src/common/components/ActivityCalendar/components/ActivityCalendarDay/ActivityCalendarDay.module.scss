@@ -1,0 +1,11 @@
+.container {
+  vertical-align: top;
+
+  &.disabled {
+    background-color: var(--mantine-color-dark-7);
+  }
+
+  > *:not(:last-child) {
+    margin-bottom: var(--mantine-spacing-sm);
+  }
+}
