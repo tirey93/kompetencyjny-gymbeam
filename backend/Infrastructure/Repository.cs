@@ -47,10 +47,5 @@ namespace Infrastructure
         {
             await _appDbContext.SaveChangesAsync();
         }
-
-        public T GetById<T>(int id) where T : class
-        {
-            throw new NotImplementedException();
-        }
     }
 }
