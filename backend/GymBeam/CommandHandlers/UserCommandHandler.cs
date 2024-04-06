@@ -19,7 +19,7 @@ namespace GymBeam.CommandHandlers
 
         public Task<Unit> Handle(UpdateUserRoleCommand request, CancellationToken cancellationToken)
         {
-            var user = _repository.GetById<User>(request.UserId) 
+            var user = _repository.GetUser(request.UserId) 
                 ?? throw new UserNotFoundException(request.UserId);
 
             user.Role = request.NewRole;
@@ -30,7 +30,7 @@ namespace GymBeam.CommandHandlers
 
         public Task<Unit> Handle(UpdateUserReservationDisabledFlagCommand request, CancellationToken cancellationToken)
         {
-            var user = _repository.GetById<User>(request.UserId)
+            var user = _repository.GetUser(request.UserId)
                 ?? throw new UserNotFoundException(request.UserId);
 
             user.ReservationDisabled = request.NewReservationDisabledFlagValue;
@@ -41,7 +41,7 @@ namespace GymBeam.CommandHandlers
 
         public Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            var user = _repository.GetById<User>(request.UserId)
+            var user = _repository.GetUser(request.UserId)
                 ?? throw new UserNotFoundException(request.UserId);
 
             _repository.Delete(user);

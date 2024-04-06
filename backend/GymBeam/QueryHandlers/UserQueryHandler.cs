@@ -30,7 +30,7 @@ namespace GymBeam.QueryHandlers
 
         public Task<UserResponse> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
-            var user = _repository.GetById<User>(request.UserId)
+            var user = _repository.GetUser(request.UserId)
                 ?? throw new UserNotFoundException(request.UserId);
 
             var result = new UserResponse
