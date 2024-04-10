@@ -2,11 +2,11 @@ import { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 
 import { InternalUserRole, useAuthState } from "../../../../common/auth";
-import { Routes } from "../../Routes";
+import { AppRoute } from "../../AppRoute";
 
 type ProtectedRouteProps = PropsWithChildren<{
     allowedRoles: InternalUserRole[];
-    redirectUnauthorizedTo: Routes;
+    redirectUnauthorizedTo: AppRoute;
 }>;
 
 export const ProtectedRoute = ({ allowedRoles, children, redirectUnauthorizedTo }: ProtectedRouteProps) => {

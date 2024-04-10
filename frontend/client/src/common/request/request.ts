@@ -19,8 +19,8 @@ const AVAILABLE_API_RESOURCES: Record<ApiResourceName, string> = {
     SignIn: "Authentication/Login",
     SignUp: "Authentication/Register",
     SignOut: "Authentication/Logout",
-    ChangeReservationsPermission: "User/User/{userId}/ReservationDisabled",
-    ChangeRole: "User/User/{userId}/Role",
+    ChangeReservationsPermission: "User/{userId}/ReservationDisabled",
+    ChangeRole: "User/{userId}/Role",
     DeleteUser: "User/{userId}",
     GetAllUsers: "User",
 };

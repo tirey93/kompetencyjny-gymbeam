@@ -2,6 +2,24 @@
 import { TranslationSource } from "./i18n";
 
 export const pl: TranslationSource = {
+    activityCalendar: {
+        item: {
+            participants: {
+                tooltip: "Liczba osób które się już zapisały: {{participants}}",
+            },
+            enrollment: {
+                label: "Rezerwuj",
+                disabled: {
+                    label: "Zapisy wyłączone",
+                    tooltip: {
+                        tooLate: "Te zajęcia się już zaczęły.",
+                        full: "Wszystkie miejsca zostały zarezerwowane.",
+                    },
+                },
+            },
+        },
+    },
+
     apiErrors: {
         user: {
             changeReservationsPermission: {

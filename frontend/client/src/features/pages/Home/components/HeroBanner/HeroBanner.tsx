@@ -6,7 +6,7 @@ import { IconCheck } from "@tabler/icons-react";
 import picture from "./assets/hero-banner-picture.svg";
 import { useAuthState } from "../../../../../common/auth";
 import { useTranslate } from "../../../../../common/i18n";
-import { Routes } from "../../../../router";
+import { AppRoute } from "../../../../router";
 
 import classes from "./HeroBanner.module.scss";
 
@@ -21,9 +21,9 @@ export const HeroBanner = ({ onLearnMoreClick }: HeroBannerProps) => {
 
     const handleGetStartedButtonNavigation = useCallback(() => {
         if (isSignedIn) {
-            navigate(Routes.ACTIVITIES);
+            navigate(AppRoute.ACTIVITIES);
         } else {
-            navigate(Routes.LOGIN, { state: { referer: Routes.ACTIVITIES } });
+            navigate(AppRoute.LOGIN, { state: { referer: AppRoute.ACTIVITIES } });
         }
     }, [isSignedIn, navigate]);
 

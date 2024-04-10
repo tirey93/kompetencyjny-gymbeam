@@ -7,7 +7,7 @@ import { useSignInForm } from "./hooks/useSignInForm";
 import { useSignIn } from "../../../../common/auth";
 import { ErrorMessage } from "../../../../common/components/DataDisplay";
 import { useTranslate } from "../../../../common/i18n";
-import { Routes } from "../../../router";
+import { AppRoute } from "../../../router";
 
 import classes from "./SignInPage.module.scss";
 
@@ -30,7 +30,7 @@ export const SignInPage = () => {
                 withBorder: true,
             });
 
-            navigate(routeState?.referer ?? Routes.ROOT);
+            navigate(routeState?.referer ?? AppRoute.ROOT);
         }
     }, [form, navigate, routeState?.referer, signIn, translate]);
 
@@ -83,7 +83,7 @@ export const SignInPage = () => {
                 <Button size="md" variant="gradient" onClick={onSubmit}>
                     {translate("pages.signIn.navigation.submit")}
                 </Button>
-                <Anchor className={classes.signUpLink} onClick={() => navigate(Routes.REGISTRATION)}>
+                <Anchor className={classes.signUpLink} onClick={() => navigate(AppRoute.REGISTRATION)}>
                     {translate("pages.signIn.navigation.signUpLink")}
                 </Anchor>
             </Stack>

@@ -1,0 +1,50 @@
+html .calendarItem {
+  padding: var(--mantine-spacing-sm);
+  background-color: var(--mantine-color-dark-8);
+
+  &.disabled {
+    background-color: var(--mantine-color-dark-9);
+    opacity: 0.5;
+  }
+
+  .name {
+    font-weight: 700;
+    font-size: var(--mantine-font-size-lg);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--mantine-color-secondary-3);
+    }
+  }
+
+  .leader {
+    font-size: var(--mantine-font-size-xs);
+  }
+
+  .duration {
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  .participants {
+    margin-block: var(--mantine-spacing-sm);
+    font-size: var(--mantine-font-size-sm);
+    font-weight: 700;
+
+    .participantsIcon {
+      height: calc(var(--mantine-font-size-sm) * 0.8);
+      stroke-width: 3px;
+    }
+  }
+
+  .joinIcon {
+    width: var(--mantine-font-size-sm);
+  }
+
+  .reservationsDisabled {
+    font-size: var(--mantine-font-size-xs);
+    padding: var(--mantine-spacing-xs);
+    color: var(--mantine-color-dimmed);
+    font-weight: 600;
+  }
+}

@@ -7,7 +7,7 @@ import { notifications } from "@mantine/notifications";
 import { useRegistrationForm } from "./hooks/useRegistrationForm";
 import { useSignUp } from "../../../../common/auth";
 import { useTranslate } from "../../../../common/i18n";
-import { Routes } from "../../../router";
+import { AppRoute } from "../../../router";
 import { NameForm, PasswordForm, RegistrationFormWrapper, SubmitForm } from "./components";
 
 import classes from "./RegistrationPage.module.scss";
@@ -57,7 +57,7 @@ export const RegistrationPage = () => {
             color: "success",
             withBorder: true,
         });
-        navigate(Routes.ROOT);
+        navigate(AppRoute.ROOT);
     }, [form.values, navigate, signUp, translate]);
 
     const signUpErrorProps = useMemo(

@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { Button, Group, Stack, Text } from "@mantine/core";
 import { ContextModalProps, modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
+import classNames from "classnames";
 
 import { UserDetails, UserRole } from "../../../../../../../common/auth";
 import { ErrorMessage } from "../../../../../../../common/components/DataDisplay";
@@ -41,7 +42,7 @@ export const ChangeUserRoleModal = ({ innerProps: { user, newRole } }: ChangeUse
 
     return (
         <Stack className={sharedClasses.container}>
-            <Text className={`${sharedClasses.title} ${classes.title}`}>
+            <Text className={classNames(classes.title, sharedClasses.title)}>
                 {translate("pages.adminDashboard.usersPanel.modals.changeRole.title")}
             </Text>
 

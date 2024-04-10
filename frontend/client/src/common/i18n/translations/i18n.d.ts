@@ -1,4 +1,22 @@
 export type TranslationSource = {
+    activityCalendar: {
+        item: {
+            participants: {
+                tooltip: string;
+            };
+            enrollment: {
+                label: string;
+                disabled: {
+                    label: string;
+                    tooltip: {
+                        tooLate: string;
+                        full: string;
+                    };
+                };
+            };
+        };
+    };
+
     notifications: {
         user: {
             changeReservationsPermission: {

@@ -35,7 +35,7 @@ export const UsersManagementPanel = () => {
     );
 
     return (
-        <Table.ScrollContainer minWidth={800} h={scrollContainerHeight} className={classes.scrollContainer}>
+        <Table.ScrollContainer minWidth={200} h={scrollContainerHeight} className={classes.scrollContainer}>
             <SearchBar
                 placeholder={translate("pages.adminDashboard.usersPanel.search.placeholder")}
                 onSearch={onSearch}
