@@ -5,54 +5,52 @@ import { IconPlus, IconUsers } from "@tabler/icons-react";
 import classNames from "classnames";
 
 import { AppRoute } from "../../../../../features/router";
+import { ActivityInstance } from "../../../../activities/Activities";
 import { useDateTimeLocale } from "../../../../hooks/useDateTimeLocale";
 import { useTranslate } from "../../../../i18n";
 import { TextWithTooltip } from "../../../DataDisplay";
 
 import classes from "./ActivityItemCard.module.scss";
 
-export type ActivityItemCardProps = {
-    startsAt: Date;
-    participants: number;
-    maxParticipants: number;
-    duration: number;
-    name: string;
-    leader: string;
-};
+export type ActivityItemCardProps = Pick<
+    ActivityInstance,
+    "slotsTaken" | "totalCapacity" | "duration" | "startTime" | "name" | "leaderName" | "activityId"
+>;
 
 export const ActivityItemCard = ({
-    participants,
-    maxParticipants,
+    slotsTaken,
+    startTime,
     duration,
-    startsAt,
+    totalCapacity,
     name,
-    leader,
+    leaderName,
+    activityId,
 }: ActivityItemCardProps) => {
     const navigate = useNavigate();
     const translate = useTranslate();
     const { locale } = useDateTimeLocale();
     const localeOptions = { hour: "2-digit", minute: "2-digit" } as const;
-    const endsAt = new Date(startsAt.getTime() + duration * 60000);
-    const hasStartedAlready = startsAt < new Date();
+    const endsAt = new Date(startTime.getTime() + duration * 60000);
+    const hasStartedAlready = startTime < new Date();
 
     const reservationsDisabled = useMemo(
-        () => maxParticipants === participants || hasStartedAlready,
-        [hasStartedAlready, maxParticipants, participants]
+        () => totalCapacity === slotsTaken || hasStartedAlready,
+        [hasStartedAlready, totalCapacity, slotsTaken]
     );
 
     const reservationsColor = useMemo(() => {
-        if (maxParticipants === participants) {
+        if (totalCapacity === slotsTaken) {
             return "danger";
-        } else if (participants / maxParticipants >= 0.75) {
+        } else if (slotsTaken / totalCapacity >= 0.75) {
             return "warning";
         } else {
             return "success";
         }
-    }, [maxParticipants, participants]);
+    }, [totalCapacity, slotsTaken]);
 
     const goToActivityDetails = useCallback(() => {
-        navigate(AppRoute.ACTIVITY_DETAILS.replace(":id", "1"));
-    }, [navigate]);
+        navigate(AppRoute.ACTIVITY_DETAILS.replace(":id", activityId.toString()));
+    }, [activityId, navigate]);
 
     return (
         <Paper className={classNames(classes.calendarItem, { [classes.disabled]: hasStartedAlready })}>
@@ -61,19 +59,19 @@ export const ActivityItemCard = ({
             </Text>
 
             <Text className={classes.duration}>
-                {startsAt.toLocaleTimeString(locale, localeOptions)} -{" "}
+                {startTime.toLocaleTimeString(locale, localeOptions)} -{" "}
                 {endsAt.toLocaleTimeString(locale, localeOptions)}
             </Text>
 
-            <Text className={classes.leader}>{leader}</Text>
+            <Text className={classes.leader}>{leaderName}</Text>
 
             <TextWithTooltip
                 alwaysEnabled
                 c={reservationsColor}
                 className={classes.participants}
-                label={translate("activityCalendar.item.participants.tooltip", { participants })}
+                label={translate("activityCalendar.item.participants.tooltip", { slotsTaken })}
             >
-                {participants} / {maxParticipants}
+                {slotsTaken} / {totalCapacity}
                 <IconUsers className={classes.participantsIcon} />
             </TextWithTooltip>
 

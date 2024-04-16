@@ -11,3 +11,16 @@ export type Activity = {
     leaderName: string;
     cron: string;
 };
+
+export type ActivityInstance = {
+    activityId: number;
+    leaderId: number;
+    slotsTaken: number;
+    totalCapacity: number;
+    startTime: Date;
+    duration: number;
+    name: string;
+    shortDescription: string;
+    longDescription: string;
+    leaderName: string;
+};

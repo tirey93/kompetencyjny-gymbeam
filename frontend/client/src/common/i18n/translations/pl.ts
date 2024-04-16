@@ -5,7 +5,7 @@ export const pl: TranslationSource = {
     activityCalendar: {
         item: {
             participants: {
-                tooltip: "Liczba osób które się już zapisały: {{participants}}",
+                tooltip: "Liczba osób które się już zapisały: {{slotsTaken}}",
             },
             enrollment: {
                 label: "Rezerwuj",
@@ -21,6 +21,16 @@ export const pl: TranslationSource = {
     },
 
     apiErrors: {
+        activitiesInstances: {
+            getAll: {
+                default: "Nie udało się pobrać listy zajęć, coś poszło nie tak po naszej stronie.",
+            },
+        },
+        activities: {
+            getAll: {
+                default: "Nie udało się pobrać listy aktywności, coś poszło nie tak po naszej stronie.",
+            },
+        },
         user: {
             changeReservationsPermission: {
                 default: "Nie udało się zmienić uprawnień użytkownika, coś poszło nie tak po naszej stronie.",
@@ -105,6 +115,13 @@ export const pl: TranslationSource = {
         },
     },
     pages: {
+        activities: {
+            details: {
+                duration: "Czas trwania",
+                capacity: "Limit osób",
+                leader: "Prowadzący",
+            },
+        },
         adminDashboard: {
             usersPanel: {
                 options: {

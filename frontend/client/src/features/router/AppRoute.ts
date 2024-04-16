@@ -6,4 +6,5 @@ export enum AppRoute {
     ADMIN_DASHBOARD = "/admin-dashboard",
     ACTIVITIES = "/activities",
     ACTIVITY_DETAILS = "/activities/:id/details",
+    NOT_FOUND = "/not-found",
 }

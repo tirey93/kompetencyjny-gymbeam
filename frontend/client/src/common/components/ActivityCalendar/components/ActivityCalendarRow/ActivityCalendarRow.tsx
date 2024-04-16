@@ -27,7 +27,7 @@ export const ActivityCalendarRow = ({ hour, days, activities }: ActivityCalendar
         () =>
             days.map((day) => ({
                 activities: [...activities]
-                    .filter((activity) => activity.startsAt.getDate() === day.getDate())
+                    .filter((activity) => activity.startTime.getDate() === day.getDate())
                     .sort((a, b) => (a > b ? 1 : -1)),
                 day: day,
             })),
