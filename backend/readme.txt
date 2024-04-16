@@ -5,4 +5,4 @@ dotnet ef database update --project Infrastructure --startup-project GymBeam
 2. After that in order to update to current db version you need to run:
 dotnet ef database update --project Infrastructure --startup-project GymBeam
 
-djwbandss
+djwbandss11
