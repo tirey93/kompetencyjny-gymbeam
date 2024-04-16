@@ -14,7 +14,7 @@ export const ActivityCalendarCell = ({ activities, disabled }: ActivityCalendarC
     return (
         <Table.Td className={classNames(classes.container, { [classes.disabled]: disabled })}>
             {activities.map((activity) => (
-                <ActivityItemCard key={activity.startsAt.toLocaleTimeString()} {...activity} />
+                <ActivityItemCard key={activity.startTime.toLocaleTimeString()} {...activity} />
             ))}
         </Table.Td>
     );

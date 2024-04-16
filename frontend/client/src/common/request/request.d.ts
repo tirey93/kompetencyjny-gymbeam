@@ -1,6 +1,6 @@
 import { UserRole } from "../auth/Auth";
 
-export type ApiResourceName = "SignIn" | "SignUp" | "SignOut" | "CurrentUserDetails" | "ChangeReservationsPermission" | "ChangeRole" | "DeleteUser" | "GetAllUsers";
+export type ApiResourceName = "SignIn" | "SignUp" | "SignOut" | "CurrentUserDetails" | "ChangeReservationsPermission" | "ChangeRole" | "DeleteUser" | "GetAllUsers" | "GetAllActivities" | "GetActivitiesInstancesByDates";
 
 export type RequestError = {
     status?: number;
@@ -33,3 +33,5 @@ export type ChangeRoleRequestBody = { newRole: Exclude<UserRole, "Guest">; };
 export type ChangeRoleURLParams = { userId: string; };
 
 export type DeleteUserURLParams = { userId: string; };
+
+export type GetActivitiesInstancesByDatesQueryParams = { from: string, to: string };

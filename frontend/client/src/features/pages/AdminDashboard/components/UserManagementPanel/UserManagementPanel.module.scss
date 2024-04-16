@@ -1,8 +1,9 @@
 html .scrollContainer {
-  padding-top: var(--mantine-spacing-xl);
+  border-radius: var(--mantine-radius-md);
+  overflow: hidden;
+  position: relative;
 
   .table {
-    position: relative;
     overflow: hidden;
     border-radius: var(--mantine-radius-md);
     --table-vertical-spacing: var(--mantine-spacing-md);

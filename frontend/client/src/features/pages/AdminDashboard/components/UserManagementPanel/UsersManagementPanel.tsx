@@ -25,7 +25,7 @@ export const UsersManagementPanel = () => {
     const { onUserDelete, onUserRoleChange, onUserReservationsPermissionToggle } = useUsersManagementModalEvents();
     const translate = useTranslate();
     const { height } = useViewportSize();
-    const scrollContainerHeight = height - NAVIGATION_SHELL_TOTAL_HEIGHT;
+    const scrollContainerHeight = height - NAVIGATION_SHELL_TOTAL_HEIGHT - 20;
 
     const onUserRoleChangeInternal = useCallback(
         (user: UserDetails) => {
@@ -35,41 +35,44 @@ export const UsersManagementPanel = () => {
     );
 
     return (
-        <Table.ScrollContainer minWidth={200} h={scrollContainerHeight} className={classes.scrollContainer}>
+        <>
             <SearchBar
                 placeholder={translate("pages.adminDashboard.usersPanel.search.placeholder")}
                 onSearch={onSearch}
             />
 
-            <Table stickyHeader highlightOnHover className={classes.table}>
-                <UserManagementPanelHeader sortBy={sortBy} onSort={onSort} sortDirection={sortDirection} />
-                <Table.Tbody>
-                    {isLoading ? (
-                        <UserRowsLoader />
-                    ) : (
-                        data.map((user) => (
-                            <UserRow
-                                key={user.id}
-                                userDetails={user}
-                                events={{
-                                    onDelete: () => onUserDelete(user),
-                                    onUserRoleChange: () => onUserRoleChangeInternal(user),
-                                    onUserReservationsPermissionToggle: () => onUserReservationsPermissionToggle(user),
-                                }}
-                            />
-                        ))
-                    )}
-                </Table.Tbody>
-            </Table>
+            <Table.ScrollContainer minWidth={200} h={scrollContainerHeight} className={classes.scrollContainer}>
+                <Table stickyHeader highlightOnHover className={classes.table}>
+                    <UserManagementPanelHeader sortBy={sortBy} onSort={onSort} sortDirection={sortDirection} />
+                    <Table.Tbody>
+                        {isLoading ? (
+                            <UserRowsLoader />
+                        ) : (
+                            data.map((user) => (
+                                <UserRow
+                                    key={user.id}
+                                    userDetails={user}
+                                    events={{
+                                        onDelete: () => onUserDelete(user),
+                                        onUserRoleChange: () => onUserRoleChangeInternal(user),
+                                        onUserReservationsPermissionToggle: () =>
+                                            onUserReservationsPermissionToggle(user),
+                                    }}
+                                />
+                            ))
+                        )}
+                    </Table.Tbody>
+                </Table>
 
-            {error && !isLoading && (
-                <Stack className={classes.errorContainer}>
-                    <ErrorMessage>{error}</ErrorMessage>
-                    <Button variant="primary" onClick={refetch}>
-                        {translate("pages.adminDashboard.usersPanel.retryButton")}
-                    </Button>
-                </Stack>
-            )}
-        </Table.ScrollContainer>
+                {error && !isLoading && (
+                    <Stack className={classes.errorContainer}>
+                        <ErrorMessage>{error}</ErrorMessage>
+                        <Button variant="primary" onClick={refetch}>
+                            {translate("pages.adminDashboard.usersPanel.retryButton")}
+                        </Button>
+                    </Stack>
+                )}
+            </Table.ScrollContainer>
+        </>
     );
 };

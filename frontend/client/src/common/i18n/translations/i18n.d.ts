@@ -53,6 +53,16 @@ export type TranslationSource = {
     };
 
     apiErrors: {
+        activitiesInstances: {
+            getAll: {
+                default: string;
+            };
+        };
+        activities: {
+            getAll: {
+                default: string;
+            };
+        };
         user: {
             changeReservationsPermission: {
                 default: string;
@@ -106,6 +116,13 @@ export type TranslationSource = {
     };
 
     pages: {
+        activities: {
+            details: {
+                duration: string;
+                capacity: string;
+                leader: string;
+            };
+        };
         adminDashboard: {
             usersPanel: {
                 options: {

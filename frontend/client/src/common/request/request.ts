@@ -1,3 +1,4 @@
+import { Activity, ActivityInstance } from "../activities/Activities";
 import { UserDetails } from "../auth";
 import {
     ApiResourceName,
@@ -6,6 +7,7 @@ import {
     ChangeRoleRequestBody,
     ChangeRoleURLParams,
     DeleteUserURLParams,
+    GetActivitiesInstancesByDatesQueryParams,
     RequestOptions,
     SignInRequestBody,
     SignUpRequestBody,
@@ -23,6 +25,8 @@ const AVAILABLE_API_RESOURCES: Record<ApiResourceName, string> = {
     ChangeRole: "User/{userId}/Role",
     DeleteUser: "User/{userId}",
     GetAllUsers: "User",
+    GetAllActivities: "Activity",
+    GetActivitiesInstancesByDates: "Enrollment/ByDates",
 };
 
 const DEFAULT_REQUEST_OPTIONS: RequestInit = {
@@ -32,6 +36,13 @@ const DEFAULT_REQUEST_OPTIONS: RequestInit = {
         "Content-Type": "application/json",
     },
 };
+
+export async function request(resource: "GetAllActivities"): Promise<Activity[]>;
+
+export async function request(
+    resource: "GetActivitiesInstancesByDates",
+    options: { queryParams: GetActivitiesInstancesByDatesQueryParams }
+): Promise<ActivityInstance[]>;
 
 export async function request(resource: "GetAllUsers"): Promise<UserDetails[]>;
 

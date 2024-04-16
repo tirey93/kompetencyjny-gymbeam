@@ -1,0 +1,40 @@
+import { ActivityInstance } from "../../../../../activities/Activities";
+
+export const MOCK_ACTIVITIES_INSTANCES: ActivityInstance[] = [
+    {
+        activityId: 1,
+        startTime: new Date("2024-01-01T09:30:00.000Z"),
+        name: "Judo",
+        duration: 50,
+        leaderId: 1,
+        leaderName: "Jan Kowalski",
+        totalCapacity: 24,
+        slotsTaken: 20,
+        longDescription: "",
+        shortDescription: "",
+    },
+    {
+        activityId: 2,
+        startTime: new Date("2024-01-01T10:30:00.000Z"),
+        name: "Yoga",
+        duration: 45,
+        leaderId: 1,
+        leaderName: "Anna Nowak",
+        totalCapacity: 15,
+        slotsTaken: 15,
+        longDescription: "",
+        shortDescription: "",
+    },
+    {
+        activityId: 3,
+        startTime: new Date("2024-01-01T11:00:00.000Z"),
+        name: "BJJ",
+        duration: 60,
+        leaderId: 1,
+        leaderName: "Jan Kowalski",
+        totalCapacity: 20,
+        slotsTaken: 10,
+        longDescription: "",
+        shortDescription: "",
+    },
+];

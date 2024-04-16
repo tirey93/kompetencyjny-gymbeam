@@ -11,7 +11,7 @@ import classes from "./ActivityCalendar.module.scss";
 
 type ActivityCalendarProps = {
     activities: ActivityItemCardProps[];
-    height?: number;
+    height?: number | string;
 };
 
 export const ActivityCalendar = ({ activities, height }: ActivityCalendarProps) => {
@@ -21,7 +21,7 @@ export const ActivityCalendar = ({ activities, height }: ActivityCalendarProps) 
     const rows = useMemo(
         () =>
             hours.map((hour) => ({
-                activities: [...activities].filter((item) => item.startsAt.getHours() === hour),
+                activities: [...activities].filter((item) => item.startTime.getHours() === hour),
                 hour: hour,
             })),
         [activities, hours]

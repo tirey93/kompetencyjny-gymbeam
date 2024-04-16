@@ -5,7 +5,7 @@ export const en: TranslationSource = {
     activityCalendar: {
         item: {
             participants: {
-                tooltip: "Number of people that already have enrolled: {{participants}}",
+                tooltip: "Number of people that already have enrolled: {{slotsTaken}}",
             },
             enrollment: {
                 label: "Enroll",
@@ -21,6 +21,16 @@ export const en: TranslationSource = {
     },
 
     apiErrors: {
+        activitiesInstances: {
+            getAll: {
+                default: "Failed to retrieve list of enrollments. Something went wrong on our side.",
+            },
+        },
+        activities: {
+            getAll: {
+                default: "Failed to retrieve list of activities. Something went wrong on our side.",
+            },
+        },
         user: {
             changeReservationsPermission: {
                 default: "Failed to change user's reservations permission, something went wrong on our side.",
@@ -105,6 +115,13 @@ export const en: TranslationSource = {
         },
     },
     pages: {
+        activities: {
+            details: {
+                duration: "Duration",
+                capacity: "Max participants",
+                leader: "Trainer",
+            },
+        },
         adminDashboard: {
             usersPanel: {
                 options: {
