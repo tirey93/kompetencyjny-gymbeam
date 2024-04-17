@@ -1,12 +1,13 @@
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useCallback } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Anchor, Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 
 import { useSignInForm } from "./hooks/useSignInForm";
 import { useSignIn } from "../../../../common/auth";
 import { ErrorMessage } from "../../../../common/components/DataDisplay";
 import { useTranslate } from "../../../../common/i18n";
-import { Routes } from "../../../router";
+import { AppRoute } from "../../../router";
 
 import classes from "./SignInPage.module.scss";
 
@@ -15,19 +16,32 @@ export const SignInPage = () => {
     const { form } = useSignInForm();
     const { signIn, error, reset } = useSignIn();
     const navigate = useNavigate();
+    const { state: routeState } = useLocation();
 
     const onSubmit = useCallback(async () => {
         if (!form.validate().hasErrors) {
             const { login, password } = form.values;
+            const user = await signIn({ username: login, password });
 
-            try {
-                await signIn({ username: login, password });
-                navigate(Routes.ROOT);
-            } catch (error) {
-                console.error(error);
-            }
+            notifications.show({
+                title: translate("notifications.auth.signedIn.title"),
+                message: translate("notifications.auth.signedIn.description", { user: user.displayName }),
+                color: "success",
+                withBorder: true,
+            });
+
+            navigate(routeState?.referer ?? AppRoute.ROOT);
         }
-    }, [form, navigate, signIn]);
+    }, [form, navigate, routeState?.referer, signIn, translate]);
+
+    const submitOnEnter = useCallback(
+        async (event: React.KeyboardEvent<HTMLInputElement>) => {
+            if (event.key === "Enter") {
+                await onSubmit();
+            }
+        },
+        [onSubmit]
+    );
 
     return (
         <Stack className={classes.container}>
@@ -41,12 +55,14 @@ export const SignInPage = () => {
 
             <Paper className={classes.form} withBorder component={Stack}>
                 <TextInput
+                    autoFocus
                     classNames={{
                         label: classes.inputLabel,
                     }}
                     size="md"
                     label={translate("pages.signIn.field.login.label")}
                     placeholder={translate("pages.signIn.field.login.placeholder")}
+                    onKeyDown={submitOnEnter}
                     {...form.getInputProps("login")}
                 />
                 <PasswordInput
@@ -56,6 +72,7 @@ export const SignInPage = () => {
                     size="md"
                     label={translate("pages.signIn.field.password.label")}
                     placeholder={translate("pages.signIn.field.password.placeholder")}
+                    onKeyDown={submitOnEnter}
                     {...form.getInputProps("password")}
                 />
             </Paper>
@@ -66,7 +83,7 @@ export const SignInPage = () => {
                 <Button size="md" variant="gradient" onClick={onSubmit}>
                     {translate("pages.signIn.navigation.submit")}
                 </Button>
-                <Anchor className={classes.signUpLink} onClick={() => navigate(Routes.REGISTRATION)}>
+                <Anchor className={classes.signUpLink} onClick={() => navigate(AppRoute.REGISTRATION)}>
                     {translate("pages.signIn.navigation.signUpLink")}
                 </Anchor>
             </Stack>

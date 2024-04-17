@@ -4,46 +4,64 @@ import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import { AppProvider } from "../../AppProvider";
 import { Root } from "../../Root";
 import { NotFoundPage } from "../pages/404";
+import { ActivitiesPage } from "../pages/Activities/ActivitiesPage";
+import { ActivityPage } from "../pages/Activity/ActivityPage";
 import { AdminDashboardPage } from "../pages/AdminDashboard";
 import { RegistrationPage } from "../pages/Auth/Registration";
 import { SignInPage } from "../pages/Auth/SignIn";
 import { GymPassPage } from "../pages/GymPass";
 import { HomePage } from "../pages/Home";
-import { Routes } from "./Routes";
+import { AppRoute } from "./AppRoute";
 
 const APP_PAGES = [
     {
-        path: Routes.ROOT,
+        path: AppRoute.ROOT,
         element: <HomePage />,
     },
     {
-        path: Routes.REGISTRATION,
+        path: AppRoute.REGISTRATION,
         element: (
-            <ProtectedRoute allowedRoles={["Guest"]} redirectUnauthorizedTo={Routes.ROOT}>
+            <ProtectedRoute allowedRoles={["Guest"]} redirectUnauthorizedTo={AppRoute.ROOT}>
                 <RegistrationPage />
             </ProtectedRoute>
         ),
     },
     {
-        path: Routes.LOGIN,
+        path: AppRoute.LOGIN,
         element: (
-            <ProtectedRoute allowedRoles={["Guest"]} redirectUnauthorizedTo={Routes.ROOT}>
+            <ProtectedRoute allowedRoles={["Guest"]} redirectUnauthorizedTo={AppRoute.ROOT}>
                 <SignInPage />
             </ProtectedRoute>
         ),
     },
     {
-        path: Routes.GYM_PASS,
+        path: AppRoute.GYM_PASS,
         element: (
-            <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={Routes.LOGIN}>
+            <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
                 <GymPassPage />
             </ProtectedRoute>
         ),
     },
     {
-        path: Routes.ADMIN_DASHBOARD,
+        path: AppRoute.ACTIVITIES,
         element: (
-            <ProtectedRoute allowedRoles={["Admin"]} redirectUnauthorizedTo={Routes.LOGIN}>
+            <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
+                <ActivitiesPage />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: AppRoute.ACTIVITY_DETAILS,
+        element: (
+            <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
+                <ActivityPage />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: AppRoute.ADMIN_DASHBOARD,
+        element: (
+            <ProtectedRoute allowedRoles={["Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
                 <AdminDashboardPage />
             </ProtectedRoute>
         ),
@@ -52,11 +70,11 @@ const APP_PAGES = [
 
 export const router = createBrowserRouter([
     {
-        path: Routes.ROOT,
+        path: AppRoute.ROOT,
         element: <AppProvider />,
         children: [
             {
-                path: Routes.ROOT,
+                path: AppRoute.ROOT,
                 element: <Root />,
                 children: APP_PAGES,
             },

@@ -6,19 +6,20 @@ import classes from "./TextWithTooltip.module.scss";
 
 type TextWithTooltipProps = PropsWithChildren<TextProps> & {
     label?: string | number;
+    alwaysEnabled?: boolean;
 };
 
-export const TextWithTooltip = ({ children, label, ...rest }: TextWithTooltipProps) => {
+export const TextWithTooltip = ({ children, label, alwaysEnabled, ...rest }: TextWithTooltipProps) => {
     const { ref: overflowRef, overflow } = useOverflowDetector();
 
     return (
         <Tooltip
             className={classes.textWithOverflowTooltip}
+            disabled={!alwaysEnabled && !overflow}
             label={label ?? children}
-            disabled={!overflow}
             withArrow
             position="top"
-            color="primary"
+            color="info"
             transitionProps={{ transition: "pop" }}
         >
             <Text ref={overflowRef as RefObject<HTMLParagraphElement>} truncate="end" {...rest}>

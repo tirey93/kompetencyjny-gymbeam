@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+import { useAppOverlayStore } from "../../components/AppOverlay";
 import { request } from "../../request";
 import { useAuthState } from "./useAuthState";
 
@@ -8,18 +9,25 @@ const getUserDetailsRequest = () => {
 };
 
 export const useUpdateSignedInUser = () => {
-    const userDetails = useAuthState((state) => state.currentUserDetails);
-    const setUserDetails = useAuthState((state) => state.setCurrentUserDetails);
+    const { setUser, user } = useAuthState();
+    const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
 
     useEffect(() => {
         (async () => {
-            if (!userDetails) {
-                const { data } = await getUserDetailsRequest();
+            if (!user) {
+                setIsLoading(true);
+                try {
+                    const data = await getUserDetailsRequest();
 
-                if (data) {
-                    setUserDetails(data);
+                    if (data) {
+                        setUser(data);
+                    }
+                } catch (error) {
+                    /* No need to handle this error */
+                } finally {
+                    setIsLoading(false);
                 }
             }
         })();
-    }, [setUserDetails, userDetails]);
+    }, [setIsLoading, setUser, user]);
 };

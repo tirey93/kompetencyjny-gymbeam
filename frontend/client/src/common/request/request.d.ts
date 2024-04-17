@@ -1,20 +1,16 @@
 import { UserRole } from "../auth/Auth";
 
-export type ApiResourceName = "SignIn" | "SignUp" | "SignOut" | "CurrentUserDetails" | "ChangeReservationsPermission";
-
-export type RequestResult<TData> = {
-    data: TData | null;
-    error: unknown | null;
-};
+export type ApiResourceName = "SignIn" | "SignUp" | "SignOut" | "CurrentUserDetails" | "ChangeReservationsPermission" | "ChangeRole" | "DeleteUser" | "GetAllUsers" | "GetAllActivities" | "GetActivitiesInstancesByDates";
 
 export type RequestError = {
     status?: number;
+    message?: string;
 };
 
 export type RequestOptions = Partial<{
     body: object;
     method: "POST" | "GET" | "PUT" | "DELETE" | "PATCH";
-    searchParams: Record<string, string>;
+    queryParams: Record<string, string | number | boolean>;
     urlParams: Record<string, string>;
 }>;
 
@@ -28,4 +24,14 @@ export type UserDetailsResponse = {
 
 export type SignInRequestBody = { username: string; password: string };
 
-export type SignUpRequestBody = { displayName: string; name: string; password: string };
+export type SignUpRequestBody = { displayName: string; username: string; password: string };
+
+export type ChangeReservationsPermissionQueryParams = { value: boolean; };
+export type ChangeReservationsPermissionURLParams = { userId: string; };
+
+export type ChangeRoleRequestBody = { newRole: Exclude<UserRole, "Guest">; };
+export type ChangeRoleURLParams = { userId: string; };
+
+export type DeleteUserURLParams = { userId: string; };
+
+export type GetActivitiesInstancesByDatesQueryParams = { from: string, to: string };

@@ -16,7 +16,7 @@ using System.Security.Claims;
 
 namespace GymBeam.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
@@ -113,6 +113,16 @@ namespace GymBeam.Controllers
             catch (InvalidCookieException ex)
             {
                 return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (InvalidUserIdException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
                     string.Format(Resource.ControllerInternalError, ex.Message));
             }
             catch (InvalidUserIdException ex)

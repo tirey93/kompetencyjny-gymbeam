@@ -1,13 +1,15 @@
-﻿using GymBeam.Requests;
-using GymBeam.Response;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GymBeam.Controllers;
+using System.Net;
+using MediatR;
 using GymBeam.Constants;
 using GymBeam.Queries;
-using MediatR;
-using System.Net;
+using GymBeam.Response;
+using GymBeam.Properties;
 using GymBeam.Exceptions;
+using GymBeam.Commands;
+using GymBeam.Requests;
+using Domain.Exceptions;
 
 namespace GymBeam.Controllers
 {
@@ -22,102 +24,215 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #if !DEBUG
         [Authorize(Roles = Roles.Admin)]
 #endif
         public async Task<ActionResult<IEnumerable<UserResponse>>> Get()
         {
-            var request = new GetAllUsersQuery();
-            var result = await _mediator.Send(request);
-            return Ok(result);
-        }
-
-        [HttpGet("{id:int}")]
-#if !DEBUG
-        [Authorize(Roles = Roles.Admin)]
-#endif
-        public ActionResult<UserResponse> Get(int id)
-        {
-            return new UserResponse
-            {
-                Id = id,
-                Name = "testUsername",
-                DisplayName = "testDisplayName",
-                Role = "User"
-            };
-        }
-
-        [HttpGet("LoggedIn")]
-#if !DEBUG
-        [Authorize(Roles = Roles.User)]
-#endif
-        public ActionResult<UserResponse> GetLoggedIn()
-        {
-            int userId;
             try
             {
-                string cookiesUserId = Request.Cookies[Cookies.UserId];
-                if (!int.TryParse(cookiesUserId, out userId))
-                    throw new InvalidUserIdException();
-
-                return new UserResponse
-                {
-                    Id = userId,
-                    Name = "loggedInUser",
-                    DisplayName = "loggedInUserDisplayName",
-                    Role = "User",
-                    ReservationDisabled = false
-                };
+                var query = new GetAllUsersQuery();
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.BadRequest,
-                    $"BadRequest: {ex.Message}");
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
         }
 
-        [HttpGet("CheckAvailability/ByName/{username}")]
-        [AllowAnonymous]
-        public ActionResult<bool> CheckUsernameAvailability(string username)
-        {
-            bool isUsernameAvailable;
-
-            if (username.ToLower() == "test1" || (username.ToLower() == "test2"))
-            {
-                isUsernameAvailable = true;
-            }
-            else
-            {
-                isUsernameAvailable = false;
-            }
-            return isUsernameAvailable;
-        }
-
-        [HttpPut("User/{id:int}/Role")]
+        [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #if !DEBUG
         [Authorize(Roles = Roles.Admin)]
 #endif
-        public IActionResult ChangeRole(int id, string role)
+        public async Task<ActionResult<UserResponse>> Get(int id)
         {
-            return NoContent();
+            var query = new GetUserQuery
+            {
+                UserId = id
+            };
+            try
+            {
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
         }
 
-        [HttpPut("User/{id:int}/ReservationDisabled")]
-#if !DEBUG
-        [Authorize(Roles = Roles.Admin)]
-#endif
-        public IActionResult ChangeReservationDisabledFlag(int id, bool value)
-        {
-            return NoContent();
-        }
-
-        [HttpDelete("{id:int}")]
+        [HttpGet("LoggedIn")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #if !DEBUG
         [Authorize(Roles = Roles.User)]
 #endif
-        public ActionResult Delete(int id)
+        public async Task<ActionResult<UserResponse>> GetLoggedIn()
         {
-            return NoContent();
+            int id;
+            try
+            {
+                if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
+                    throw new InvalidCookieException(Cookies.UserId);
+                if (!int.TryParse(cookiesUserId, out id))
+                    throw new InvalidUserIdException();
+            }
+            catch (InvalidCookieException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (InvalidUserIdException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
+
+            return await Get(id);
+        }
+
+        [HttpGet("CheckAvailability/ByName/{username}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [AllowAnonymous]
+        public async Task<ActionResult<bool>> CheckUsernameAvailability(string username)
+        {
+            var query = new CheckUsernameAvailabilityQuery
+            {
+                Username = username
+            };
+            try
+            {
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
+        }
+
+        [HttpPut("{id:int}/Role")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+#if !DEBUG
+        [Authorize(Roles = Roles.Admin)]
+#endif
+        public async Task<IActionResult> ChangeRole(int id, [FromBody] UpdateRoleRequest dto)
+        {
+
+            var request = new UpdateUserRoleCommand
+            {
+                UserId = id,
+                NewRole = dto.NewRole
+            };
+
+            try
+            {
+                await _mediator.Send(request);
+                return NoContent();
+            }
+            catch (UserNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
+        }
+
+        [HttpPut("{id:int}/ReservationDisabled")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+#if !DEBUG
+        [Authorize(Roles = Roles.Admin)]
+#endif
+        public async Task<IActionResult> ChangeReservationDisabledFlag(int id, bool value)
+        {
+            var request = new UpdateUserReservationDisabledFlagCommand
+            {
+                UserId = id,
+                NewReservationDisabledFlagValue = value
+            };
+
+            try
+            {
+                await _mediator.Send(request);
+                return NoContent();
+            }
+            catch (UserNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+#if !DEBUG
+        [Authorize(Roles = Roles.User)]
+#endif
+        public async Task<ActionResult> Delete(int id)
+        {
+            var request = new DeleteUserCommand
+            {
+                UserId = id
+            };
+
+            try
+            {
+                await _mediator.Send(request);
+                return NoContent();
+            }
+            catch (UserNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
         }
     }
 }

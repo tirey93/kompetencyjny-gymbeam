@@ -1,8 +1,12 @@
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Container, Group, Image, List, Stack, Text, ThemeIcon, Title } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 
 import picture from "./assets/hero-banner-picture.svg";
+import { useAuthState } from "../../../../../common/auth";
 import { useTranslate } from "../../../../../common/i18n";
+import { AppRoute } from "../../../../router";
 
 import classes from "./HeroBanner.module.scss";
 
@@ -12,6 +16,16 @@ type HeroBannerProps = {
 
 export const HeroBanner = ({ onLearnMoreClick }: HeroBannerProps) => {
     const translate = useTranslate();
+    const navigate = useNavigate();
+    const { isSignedIn } = useAuthState();
+
+    const handleGetStartedButtonNavigation = useCallback(() => {
+        if (isSignedIn) {
+            navigate(AppRoute.ACTIVITIES);
+        } else {
+            navigate(AppRoute.LOGIN, { state: { referer: AppRoute.ACTIVITIES } });
+        }
+    }, [isSignedIn, navigate]);
 
     return (
         <Container className={classes.container} fluid bg="dark">
@@ -49,7 +63,7 @@ export const HeroBanner = ({ onLearnMoreClick }: HeroBannerProps) => {
                     </List>
 
                     <Group className={classes.buttonsWrapper}>
-                        <Button size="md" variant="gradient">
+                        <Button size="md" variant="gradient" onClick={handleGetStartedButtonNavigation}>
                             {translate("pages.home.heroBanner.buttons.getStarted")}
                         </Button>
                         <Button variant="default" size="md" onClick={onLearnMoreClick}>

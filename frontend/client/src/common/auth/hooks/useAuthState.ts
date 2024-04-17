@@ -1,17 +1,23 @@
-import { create } from "zustand";
+import { useMemo } from "react";
 
-import { UserDetails, UserRole } from "../Auth";
+import { InternalUserRole, UserDetails } from "../Auth";
+import { useAuthStore } from "../store/AuthStore";
 
-type AuthState = {
-    currentUserDetails: UserDetails | null;
-    setCurrentUserDetails: (currentUserDetails: UserDetails) => void;
-    clearCurrentUserDetails: () => void;
-    getCurrentUserRole: () => UserRole;
+type UseAuthState = {
+    setUser: (user: UserDetails) => void;
+    clearUser: () => void;
+    role: InternalUserRole;
+    user: UserDetails | null;
+    isSignedIn: boolean;
 };
 
-export const useAuthState = create<AuthState>((set, getState) => ({
-    currentUserDetails: null,
-    getCurrentUserRole: () => getState()?.currentUserDetails?.role ?? "Guest",
-    setCurrentUserDetails: (currentUserDetails) => set({ currentUserDetails }),
-    clearCurrentUserDetails: () => set({ currentUserDetails: null }),
-}));
+export const useAuthState = (): UseAuthState => {
+    const user = useAuthStore((state) => state.currentUserDetails);
+    const clearUser = useAuthStore((state) => state.clearCurrentUserDetails);
+    const setUser = useAuthStore((state) => state.setCurrentUserDetails);
+
+    const role = useMemo(() => user?.role ?? "Guest", [user?.role]);
+    const isSignedIn = useMemo(() => role !== "Guest", [role]);
+
+    return { setUser, clearUser, role, user, isSignedIn };
+};

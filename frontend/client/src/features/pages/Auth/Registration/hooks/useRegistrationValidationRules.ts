@@ -1,16 +1,16 @@
 import { useCallback, useMemo } from "react";
 
-import { useTranslate } from "../../../../../common/i18n/hooks/useTranslate";
+import { useTranslate } from "../../../../../common/i18n";
 import { ValidationRule } from "../Registration";
 
-const MIN_LOGIN_LENGTH = 4;
-const MAX_LOGIN_LENGTH = 64;
+const MIN_LOGIN_LENGTH = 5;
+const MAX_LOGIN_LENGTH = 20;
 
-const MIN_NAME_LENGTH = 2;
-const MAX_NAME_LENGTH = 16;
+const MIN_NAME_LENGTH = 5;
+const MAX_NAME_LENGTH = 20;
 
-const MIN_PASSWORD_LENGTH = 8;
-const MAX_PASSWORD_LENGTH = 64;
+const MIN_PASSWORD_LENGTH = 5;
+const MAX_PASSWORD_LENGTH = 255;
 
 export const useRegistrationValidationRules = () => {
     const translate = useTranslate();
@@ -21,10 +21,6 @@ export const useRegistrationValidationRules = () => {
 
     const validatePasswordMaximumLength = useCallback((password: string) => {
         return password.length <= MAX_PASSWORD_LENGTH;
-    }, []);
-
-    const validatePasswordSpecialCharacters = useCallback((password: string) => {
-        return /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
     }, []);
 
     const validateNameMinimumLength = useCallback((name: string) => {
@@ -63,13 +59,8 @@ export const useRegistrationValidationRules = () => {
                 type: "singleValue",
                 validator: validatePasswordMaximumLength,
             },
-            {
-                rule: translate("pages.registration.field.password.validation.noSpecialCharacters"),
-                type: "singleValue",
-                validator: validatePasswordSpecialCharacters,
-            },
         ];
-    }, [validatePasswordMaximumLength, validatePasswordMinimumLength]);
+    }, [translate, validatePasswordMaximumLength, validatePasswordMinimumLength]);
 
     const nameValidationRules = useMemo((): ValidationRule[] => {
         return [
@@ -84,7 +75,7 @@ export const useRegistrationValidationRules = () => {
                 validator: validateNameMaximumLength,
             },
         ];
-    }, [validateNameMaximumLength, validateNameMinimumLength]);
+    }, [translate, validateNameMaximumLength, validateNameMinimumLength]);
 
     const loginValidationRules = useMemo((): ValidationRule[] => {
         return [
@@ -99,7 +90,7 @@ export const useRegistrationValidationRules = () => {
                 validator: validateLoginMaximumLength,
             },
         ];
-    }, [validateLoginMaximumLength, validateLoginMinimumLength]);
+    }, [translate, validateLoginMaximumLength, validateLoginMinimumLength]);
 
     const confirmPasswordValidationRules = useMemo((): ValidationRule[] => {
         return [
@@ -109,7 +100,7 @@ export const useRegistrationValidationRules = () => {
                 validator: validatePasswordsMatch,
             },
         ];
-    }, [validatePasswordsMatch]);
+    }, [translate, validatePasswordsMatch]);
 
     return useMemo(
         () => ({

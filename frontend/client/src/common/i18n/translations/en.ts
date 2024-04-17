@@ -2,10 +2,47 @@
 import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
+    activityCalendar: {
+        item: {
+            participants: {
+                tooltip: "Number of people that already have enrolled: {{slotsTaken}}",
+            },
+            enrollment: {
+                label: "Enroll",
+                disabled: {
+                    label: "Can't enroll",
+                    tooltip: {
+                        tooLate: "This activity has already started.",
+                        full: "All slots are taken.",
+                    },
+                },
+            },
+        },
+    },
+
     apiErrors: {
+        activitiesInstances: {
+            getAll: {
+                default: "Failed to retrieve list of enrollments. Something went wrong on our side.",
+            },
+        },
+        activities: {
+            getAll: {
+                default: "Failed to retrieve list of activities. Something went wrong on our side.",
+            },
+        },
         user: {
             changeReservationsPermission: {
                 default: "Failed to change user's reservations permission, something went wrong on our side.",
+            },
+            changeRole: {
+                default: "Failed to change user's role, something went wrong on our side.",
+            },
+            delete: {
+                default: "Failed to delete user, something went wrong on our side.",
+            },
+            getAll: {
+                default: "Failed to retrieve users data. Something went wrong on our side.",
             },
         },
         auth: {
@@ -25,13 +62,16 @@ export const en: TranslationSource = {
     notifications: {
         user: {
             changeReservationsPermission: {
-                success: {
-                    title: "Reservation permissions change operation successful.",
-                    description: "Changed reservations permission of user with id {{id}}.",
-                },
-                error: {
-                    title: "Failed to modify permissions of user with id {{id}}.",
-                },
+                title: "Reservation permissions change operation successful.",
+                description: "Changed reservations permission of user with id {{id}}.",
+            },
+            changeRole: {
+                title: "Role change operation successful.",
+                description: "Changed role of user with id {{id}}.",
+            },
+            delete: {
+                title: "User has been deleted.",
+                description: "Successfully deleted user with id {{id}}.",
             },
         },
         auth: {
@@ -75,6 +115,13 @@ export const en: TranslationSource = {
         },
     },
     pages: {
+        activities: {
+            details: {
+                duration: "Duration",
+                capacity: "Max participants",
+                leader: "Trainer",
+            },
+        },
         adminDashboard: {
             usersPanel: {
                 options: {
@@ -118,6 +165,7 @@ export const en: TranslationSource = {
                     reservations: "Reservations",
                     options: "Options",
                 },
+                retryButton: "Retry",
                 rows: {
                     reservations: {
                         on: "Enabled",
@@ -132,7 +180,7 @@ export const en: TranslationSource = {
         qr: {
             gymPassDetails: {
                 owner: "Owner",
-                reservationsPermission: "Reservations permission",
+                reservationsPermission: "Status",
             },
         },
 

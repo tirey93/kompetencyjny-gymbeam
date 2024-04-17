@@ -1,0 +1,63 @@
+.container {
+  border-radius: var(--mantine-radius-xl) var(--mantine-radius-xl) var(--mantine-radius-xl) var(--mantine-radius-xs);
+  box-shadow: var(--mantine-shadow-xl);
+  overflow: hidden;
+
+  .activityName {
+    margin-top: var(--mantine-spacing-md);
+    font-weight: 800;
+    color: var(--mantine-color-primary-7);
+  }
+
+  .description {
+    font-size: var(--mantine-font-size-sm);
+    margin-block: var(--mantine-spacing-md);
+  }
+
+  .header {
+    padding: var(--mantine-spacing-md) var(--mantine-spacing-xl);
+    background-color: var(--mantine-color-dark-8);
+
+    .headerTopRow {
+      justify-content: space-between;
+      align-items: center;
+
+      .searchIcon {
+        padding: var(--mantine-spacing-sm);
+        --ai-size: 34px;
+      }
+    }
+  }
+
+  .footer {
+    padding-block: var(--mantine-spacing-lg);
+    border-top: 1px solid var(--mantine-color-dark-6);
+    background-color: var(--mantine-color-dark-9);
+    justify-content: space-between;
+  }
+
+  .attribute {
+    padding: var(--mantine-spacing-md) var(--mantine-spacing-xl) var(--mantine-spacing-sm);
+
+    .attributeValue {
+      font-size: var(--mantine-font-size-xl);
+      text-align: right;
+      font-weight: 800;
+    }
+
+    .label {
+      font-weight: 800;
+      text-align: right;
+      text-transform: uppercase;
+      font-size: var(--mantine-font-size-xs);
+
+      &:not(.leaderLabel) {
+        color: var(--mantine-color-secondary-6);
+      }
+    }
+
+    .leaderName {
+      color: var(--mantine-color-primary-7);
+    }
+  }
+}

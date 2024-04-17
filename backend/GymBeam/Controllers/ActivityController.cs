@@ -1,9 +1,12 @@
-﻿using GymBeam.Constants;
+﻿using MediatR;
+using GymBeam.Properties;
+using GymBeam.Queries;
 using GymBeam.Requests;
 using GymBeam.Response;
 using GymBeam.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace GymBeam.Controllers
 {
@@ -11,42 +14,27 @@ namespace GymBeam.Controllers
     [Route("[controller]")]
     public class ActivityController : ControllerBase
     {
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult<IEnumerable<ActivityResponse>> Get()
+        private readonly IMediator _mediator;
+        public ActivityController(IMediator mediator)
         {
-
-            return new List<ActivityResponse>
+            _mediator = mediator;
+        }
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<ActivityResponse>>> Get()
+        {
+            try
             {
-                new ActivityResponse
-                {
-                    Id = 4,
-                    Duration = 40,
-                    TotalCapacity = 20,
-                    LeaderId = 2,
-                    StartTime = DateTime.Now.AddDays(2),
-                    EndTime = DateTime.Now.AddDays(31),
-                    Name = "Boks",
-                    ShortDescription = "Short test description.",
-                    LongDescription = "Looooooooooooooong test description.",
-                    Cron = "0 15 * * TUE",
-                    LeaderName = "Leader test name"
-                },
-                new ActivityResponse
-                {
-                    Id = 9,
-                    Duration = 60,
-                    TotalCapacity = 30,
-                    LeaderId = 4,
-                    StartTime = DateTime.Now.AddDays(4),
-                    EndTime = DateTime.Now.AddDays(62),
-                    Name = "Bieznia",
-                    ShortDescription = "Short test description 1.",
-                    LongDescription = "Looooooooooooooong test description 2.",
-                    Cron = "0 12 * * FRI",
-                    LeaderName = "Leader test name 2"
-                }
-            };
+                var query = new GetAllActivitiesQuery();
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
         }
 
         [HttpGet("{id:int}")]

@@ -1,4 +1,18 @@
-.table {
-  --table-vertical-spacing: var(--mantine-spacing-md);
-  margin-top: var(--mantine-spacing-lg);
+html .scrollContainer {
+  border-radius: var(--mantine-radius-md);
+  overflow: hidden;
+  position: relative;
+
+  .table {
+    overflow: hidden;
+    border-radius: var(--mantine-radius-md);
+    --table-vertical-spacing: var(--mantine-spacing-md);
+    margin-top: var(--mantine-spacing-lg);
+  }
+
+  .errorContainer {
+    align-items: center;
+    margin-top: var(--mantine-spacing-lg);
+    gap: var(--mantine-spacing-md);
+  }
 }

@@ -1,6 +1,17 @@
 html .container {
+  padding: var(--mantine-spacing-md);
+  background-color: var(--mantine-color-dark-9);
+  border-top: 3px solid var(--mantine-color-dark-6);
+  align-items: center;
+
   .label {
-    font-weight: 700;
     font-size: var(--mantine-font-size-xs);
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .ownerName {
+    font-size: var(--mantine-font-size-sm);
+    text-align: center;
   }
 }

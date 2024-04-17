@@ -1,14 +1,35 @@
 export type TranslationSource = {
+    activityCalendar: {
+        item: {
+            participants: {
+                tooltip: string;
+            };
+            enrollment: {
+                label: string;
+                disabled: {
+                    label: string;
+                    tooltip: {
+                        tooLate: string;
+                        full: string;
+                    };
+                };
+            };
+        };
+    };
+
     notifications: {
         user: {
             changeReservationsPermission: {
-                success: {
-                    title: string;
-                    description: string;
-                };
-                error: {
-                    title: string;
-                };
+                title: string;
+                description: string;
+            };
+            changeRole: {
+                title: string;
+                description: string;
+            };
+            delete: {
+                title: string;
+                description: string;
             };
         };
         auth: {
@@ -32,8 +53,27 @@ export type TranslationSource = {
     };
 
     apiErrors: {
+        activitiesInstances: {
+            getAll: {
+                default: string;
+            };
+        };
+        activities: {
+            getAll: {
+                default: string;
+            };
+        };
         user: {
             changeReservationsPermission: {
+                default: string;
+            };
+            changeRole: {
+                default: string;
+            };
+            delete: {
+                default: string;
+            };
+            getAll: {
                 default: string;
             };
         };
@@ -76,6 +116,13 @@ export type TranslationSource = {
     };
 
     pages: {
+        activities: {
+            details: {
+                duration: string;
+                capacity: string;
+                leader: string;
+            };
+        };
         adminDashboard: {
             usersPanel: {
                 options: {
@@ -119,6 +166,7 @@ export type TranslationSource = {
                     reservations: string;
                     options: string;
                 };
+                retryButton: string;
                 rows: {
                     reservations: {
                         on: string;

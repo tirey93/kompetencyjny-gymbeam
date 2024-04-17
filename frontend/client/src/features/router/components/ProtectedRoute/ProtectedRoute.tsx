@@ -1,18 +1,18 @@
 import { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 
-import { useAuthState, UserRole } from "../../../../common/auth";
-import { Routes } from "../../Routes";
+import { InternalUserRole, useAuthState } from "../../../../common/auth";
+import { AppRoute } from "../../AppRoute";
 
 type ProtectedRouteProps = PropsWithChildren<{
-    allowedRoles: UserRole[];
-    redirectUnauthorizedTo: Routes;
+    allowedRoles: InternalUserRole[];
+    redirectUnauthorizedTo: AppRoute;
 }>;
 
 export const ProtectedRoute = ({ allowedRoles, children, redirectUnauthorizedTo }: ProtectedRouteProps) => {
-    const getCurrentUserRole = useAuthState((state) => state.getCurrentUserRole);
+    const { role } = useAuthState();
 
-    if (!allowedRoles.find((role) => role === getCurrentUserRole())) {
+    if (!allowedRoles.find((allowedRole) => allowedRole === role)) {
         return <Navigate to={redirectUnauthorizedTo} replace />;
     }
 
