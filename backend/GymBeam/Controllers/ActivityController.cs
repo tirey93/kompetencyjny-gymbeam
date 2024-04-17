@@ -7,6 +7,7 @@ using GymBeam.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Domain.Exceptions;
 using GymBeam.Constants;
 
 namespace GymBeam.Controllers
@@ -39,23 +40,31 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [AllowAnonymous]
-        public ActionResult<ActivityResponse> Get(int id)
+        public async Task<ActionResult<ActivityResponse>> Get(int id)
         {
-            return new ActivityResponse
+            var query = new GetActivityQuery
             {
-                Id = id,
-                Duration = 30,
-                TotalCapacity = 15,
-                LeaderId = 3,
-                StartTime = DateTime.Now.AddDays(5),
-                EndTime = DateTime.Now.AddDays(90),
-                Name = "Karate",
-                ShortDescription = "Short test description 3.",
-                LongDescription = "Looooooooooooooong test description 3.",
-                Cron = "0 15 * * TUE",
-                LeaderName = "Leader test name 3"
+                ActivityId = id
             };
+            try
+            {
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (ActivityNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
         }
 
         [HttpPost]
