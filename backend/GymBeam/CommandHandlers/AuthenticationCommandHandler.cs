@@ -30,7 +30,7 @@ namespace GymBeam.CommandHandlers
                 DisplayName = request.DisplayName,
                 ReservationDisabled = false,
                 HashedPassword = hash,
-                Role = "User", //todo
+                Role = Role.User
             };
             _repository.Add(user);
             _repository.SaveChangesAsync();
@@ -40,7 +40,7 @@ namespace GymBeam.CommandHandlers
                 Id = user.Id,
                 Name = user.Name,
                 DisplayName = user.DisplayName,
-                Role = user.Role,
+                Role = user.Role.ToString(),
                 ReservationDisabled = user.ReservationDisabled,
             });
         }
