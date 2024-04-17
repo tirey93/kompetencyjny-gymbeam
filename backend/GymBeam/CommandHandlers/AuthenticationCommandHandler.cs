@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Exceptions;
 using GymBeam.Commands;
 using GymBeam.Response;
 using GymBeam.Utils;
@@ -18,13 +19,18 @@ namespace GymBeam.CommandHandlers
 
         Task<UserResponse> IRequestHandler<RegisterCommand, UserResponse>.Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
+            var userExists = _repository.GetUsers(x => x.Name == request.Username).FirstOrDefault();
+            if (userExists != null)
+                throw new UserAlreadyExistsException(request.Username);
+
             var hash = ShaHelper.QuickHash(request.Password);
             var user = new User 
             { 
                 Name = request.Username,
                 DisplayName = request.DisplayName,
                 ReservationDisabled = false,
-                Password = hash,
+                HashedPassword = hash,
+                Role = "User", //todo
             };
             _repository.Add(user);
             _repository.SaveChangesAsync();

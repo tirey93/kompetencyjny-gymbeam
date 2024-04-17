@@ -7,6 +7,7 @@ using GymBeam.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using GymBeam.Constants;
 
 namespace GymBeam.Controllers
 {

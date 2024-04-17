@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Exceptions;
 using GymBeam.Queries;
 using GymBeam.Response;
 using GymBeam.Utils;
@@ -18,10 +19,13 @@ namespace GymBeam.QueryHandlers
 
         public Task<UserResponse> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
-            var user = _repository.Users.FirstOrDefault(x => x.Name == request.Username);
-            //todo throw exception
+            var user = _repository.GetUsers(x => x.Name == request.Username).FirstOrDefault()
+                ?? throw new UserNotFoundException(request.Username);
+
             var hash = ShaHelper.QuickHash(request.Password);
-            //todo compare with password throw exception
+            if (hash != user.HashedPassword)
+                throw new PasswordNotMatchException(request.Username);
+
             return Task.FromResult(new UserResponse
             {
                 Id = user.Id,
