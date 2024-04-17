@@ -123,6 +123,7 @@ export type TranslationSource = {
                 leader: string;
             };
         };
+
         adminDashboard: {
             usersPanel: {
                 options: {
@@ -346,6 +347,8 @@ export type TranslationSource = {
                     validation: {
                         tooShort: string;
                         tooLong: string;
+                        taken: string;
+                        unableToCheckAvailability: string;
                     };
                     label: string;
                     placeholder: string;
