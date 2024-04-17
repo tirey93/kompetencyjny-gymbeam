@@ -7,11 +7,11 @@ namespace Domain
     {
         [Key]
         public int Id { get; set; }
-        public int Duration { get; set; }
-        public int TotalCapacity { get; set; }
+        public int? Duration { get; set; }
+        public int? TotalCapacity { get; set; }
         public User Leader { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateTime? StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
         [Required]
         public string Name { get; set; }
         public string ShortDescription { get; set; }
