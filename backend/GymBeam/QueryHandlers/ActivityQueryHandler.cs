@@ -1,11 +1,13 @@
 ﻿using Domain;
+using Domain.Exceptions;
 using GymBeam.Queries;
 using GymBeam.Responses;
 using MediatR;
 
 namespace GymBeam.QueryHandlers
 {
-    public class ActivityQueryHandler : IRequestHandler<GetAllActivitiesQuery, IEnumerable<ActivityResponse>>
+    public class ActivityQueryHandler : IRequestHandler<GetAllActivitiesQuery, IEnumerable<ActivityResponse>>,
+                                        IRequestHandler<GetActivityQuery, ActivityResponse>
     {
         private readonly IRepository _repository;
 
@@ -39,6 +41,28 @@ namespace GymBeam.QueryHandlers
             }).ToList();
 
             return Task.FromResult<IEnumerable<ActivityResponse>>(result);
+        }
+
+        public Task<ActivityResponse> Handle(GetActivityQuery request, CancellationToken cancellationToken)
+        {
+            var activity = _repository.GetActivity(request.ActivityId)
+                ?? throw new ActivityNotFoundException(request.ActivityId);
+
+            var result = new ActivityResponse
+            {
+                Id = activity.Id,
+                Duration = activity.Duration,
+                TotalCapacity = activity.TotalCapacity,
+                LeaderId = activity.Leader?.Id,
+                StartTime = activity.StartTime,
+                EndTime = activity.EndTime,
+                Name = activity.Name,
+                ShortDescription = activity.ShortDescription,
+                LongDescription = activity.LongDescription,
+                Cron = activity.Cron,
+                LeaderName = activity.Leader?.Name
+            };
+            return Task.FromResult(result);
         }
     }
 }
