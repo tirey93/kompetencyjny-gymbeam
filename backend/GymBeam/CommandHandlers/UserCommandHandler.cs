@@ -22,7 +22,7 @@ namespace GymBeam.CommandHandlers
             var user = _repository.GetUser(request.UserId) 
                 ?? throw new UserNotFoundException(request.UserId);
 
-            user.Role = request.NewRole;
+            user.Role = Enum.Parse<Role>(request.NewRole);
             _repository.SaveChangesAsync();
 
             return Task.FromResult(Unit.Value);

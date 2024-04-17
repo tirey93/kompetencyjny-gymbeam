@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public enum Roles
+    public enum Role
     {
         User,
         Admin
