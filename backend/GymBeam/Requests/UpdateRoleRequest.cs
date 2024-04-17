@@ -13,10 +13,10 @@ namespace GymBeam.Requests
         public UpdateRoleRequestValidator()
         {
             RuleFor(x => x.NewRole)
-                .Must(role => Enum.TryParse<Domain.Roles>(role, out _))
+                .Must(role => Enum.TryParse<Domain.Role>(role, out _))
                 .WithMessage(context =>
                 {
-                    var rolesList = string.Join(", ", Enum.GetNames(typeof(Domain.Roles)));
+                    var rolesList = string.Join(", ", Enum.GetNames(typeof(Domain.Role)));
                     return string.Format(Resource.ValidatorRoleFromRolesList, rolesList);
                 });
         }
