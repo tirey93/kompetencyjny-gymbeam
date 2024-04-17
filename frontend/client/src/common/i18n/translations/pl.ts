@@ -341,7 +341,13 @@ export const pl: TranslationSource = {
                 login: {
                     label: "Login",
                     placeholder: "Wpisz swój login",
-                    validation: { tooLong: "Do {{length}} znaków.", tooShort: "Minimum {{length}} znaków." },
+                    validation: {
+                        tooLong: "Do {{length}} znaków.",
+                        tooShort: "Minimum {{length}} znaków.",
+                        taken: "Ten login jest już zajęty.",
+                        unableToCheckAvailability:
+                            "Nie udało się sprawdzić czy login jest zajęty. Spróbuj później, przepraszamy.",
+                    },
                 },
                 name: {
                     label: "Nazwa",

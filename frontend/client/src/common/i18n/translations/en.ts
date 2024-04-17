@@ -338,7 +338,12 @@ export const en: TranslationSource = {
                 login: {
                     label: "Login",
                     placeholder: "Enter your login",
-                    validation: { tooLong: "Up to {{length}} characters.", tooShort: "Minimum {{length}} characters." },
+                    validation: {
+                        tooLong: "Up to {{length}} characters.",
+                        tooShort: "Minimum {{length}} characters.",
+                        taken: "This login is already taken.",
+                        unableToCheckAvailability: "Unable to check login availability. Please try again later, sorry.",
+                    },
                 },
                 name: {
                     label: "Name",

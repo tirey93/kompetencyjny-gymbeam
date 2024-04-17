@@ -1,30 +1,19 @@
 import { Activity, ActivityInstance } from "../activities/Activities";
-import { UserDetails } from "../auth";
-import {
-    ApiResourceName,
-    ChangeReservationsPermissionQueryParams,
-    ChangeReservationsPermissionURLParams,
-    ChangeRoleRequestBody,
-    ChangeRoleURLParams,
-    DeleteUserURLParams,
-    GetActivitiesInstancesByDatesQueryParams,
-    RequestOptions,
-    SignInRequestBody,
-    SignUpRequestBody,
-    UserDetailsResponse,
-} from "./";
+import { UserDetails, UserRole } from "../auth";
+import { ApiResourceName, RequestOptions, SignInRequestBody, SignUpRequestBody, UserDetailsResponse } from "./";
 
 const { VITE_API_BASE_URL } = import.meta.env;
 
 const AVAILABLE_API_RESOURCES: Record<ApiResourceName, string> = {
-    CurrentUserDetails: "User/LoggedIn",
     SignIn: "Authentication/Login",
     SignUp: "Authentication/Register",
     SignOut: "Authentication/Logout",
-    ChangeReservationsPermission: "User/{userId}/ReservationDisabled",
-    ChangeRole: "User/{userId}/Role",
-    DeleteUser: "User/{userId}",
+    CheckUserNameAvailability: "User/CheckAvailability/ByName/{username}",
+    CurrentUserDetails: "User/LoggedIn",
     GetAllUsers: "User",
+    DeleteUser: "User/{userId}",
+    ChangeRole: "User/{userId}/Role",
+    ChangeReservationsPermission: "User/{userId}/ReservationDisabled",
     GetAllActivities: "Activity",
     GetActivitiesInstancesByDates: "Enrollment/ByDates",
 };
@@ -41,7 +30,7 @@ export async function request(resource: "GetAllActivities"): Promise<Activity[]>
 
 export async function request(
     resource: "GetActivitiesInstancesByDates",
-    options: { queryParams: GetActivitiesInstancesByDatesQueryParams }
+    options: { queryParams: { from: string; to: string } }
 ): Promise<ActivityInstance[]>;
 
 export async function request(resource: "GetAllUsers"): Promise<UserDetails[]>;
@@ -49,6 +38,11 @@ export async function request(resource: "GetAllUsers"): Promise<UserDetails[]>;
 export async function request(resource: "CurrentUserDetails"): Promise<UserDetailsResponse>;
 
 export async function request(resource: "SignOut", options: { method: "POST" }): Promise<null>;
+
+export async function request(
+    resource: "CheckUserNameAvailability",
+    options: { urlParams: { username: string } }
+): Promise<boolean>;
 
 export async function request(
     resource: "SignIn",
@@ -64,19 +58,19 @@ export async function request(
     resource: "ChangeReservationsPermission",
     options: {
         method: "PUT";
-        queryParams: ChangeReservationsPermissionQueryParams;
-        urlParams: ChangeReservationsPermissionURLParams;
+        queryParams: { value: boolean };
+        urlParams: { userId: string };
     }
 ): Promise<null>;
 
 export async function request(
     resource: "ChangeRole",
-    options: { method: "PUT"; body: ChangeRoleRequestBody; urlParams: ChangeRoleURLParams }
+    options: { method: "PUT"; body: { newRole: Exclude<UserRole, "Guest"> }; urlParams: { userId: string } }
 ): Promise<null>;
 
 export async function request(
     resource: "DeleteUser",
-    options: { method: "DELETE"; urlParams: DeleteUserURLParams }
+    options: { method: "DELETE"; urlParams: { userId: string } }
 ): Promise<null>;
 
 export async function request(resource: ApiResourceName, requestOptions?: RequestOptions): Promise<unknown> {
