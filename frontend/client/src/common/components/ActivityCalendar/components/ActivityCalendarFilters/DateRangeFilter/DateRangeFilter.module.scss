@@ -1,0 +1,9 @@
+html .container {
+  width: fit-content;
+
+  .icon {
+    height: var(--mantine-font-size-xl);
+    margin-top: calc(var(--mantine-spacing-xs) * -0.25);
+    color: var(--mantine-color-primary-7);
+  }
+}

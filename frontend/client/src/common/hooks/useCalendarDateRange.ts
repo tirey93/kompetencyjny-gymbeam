@@ -1,37 +1,32 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import dayjs from "dayjs";
 
-const INITIAL_DAY_HOUR = 0;
-const NUMBER_OF_HOURS_DISPLAYED = 15;
-const NUMBER_OF_DAYS_DISPLAYED = 7;
+const INITIAL_NUMBER_OF_DAYS = 7;
+const INITIAL_DAY_HOUR = 7;
+const NUMBER_OF_HOURS_DISPLAYED = 17;
+
+export type DateRange = {
+    from: Date;
+    to: Date;
+};
 
 type UseCalendarDateRangeOptions = {
     initialDate?: Date;
     initialHour?: number;
-    numberOfDays?: number;
+    initialNumberOfDays?: number;
     numberOfHours?: number;
 };
 
 export const useCalendarDateRange = ({
-    initialDate,
     initialHour = INITIAL_DAY_HOUR,
-    numberOfDays = NUMBER_OF_DAYS_DISPLAYED,
     numberOfHours = NUMBER_OF_HOURS_DISPLAYED,
 }: UseCalendarDateRangeOptions = {}) => {
-    const startsAt = useMemo(() => {
-        const day = initialDate ?? new Date();
-        day.setHours(0, 0, 0, 0);
-        return day;
-    }, [initialDate]);
+    const [dateRange, setDateRange] = useState<DateRange>(getDefaultDateRange());
 
-    const days = useMemo(
-        () =>
-            Array.from(Array(numberOfDays).keys()).map((idx) => {
-                const d = new Date();
-                d.setDate(startsAt.getDate() + idx);
-                return d;
-            }),
-        [startsAt, numberOfDays]
-    );
+    const days = useMemo(() => {
+        const numberOfDays = dayjs(dateRange.to).diff(dayjs(dateRange.from), "days") + 1;
+        return Array.from(Array(numberOfDays).keys()).map((idx) => dayjs(dateRange.from).add(idx, "days").toDate());
+    }, [dateRange.from, dateRange.to]);
 
     const hours = useMemo(
         () =>
@@ -41,14 +36,11 @@ export const useCalendarDateRange = ({
         [initialHour, numberOfHours]
     );
 
-    const endsAt = useMemo(() => {
-        const day = new Date();
-        day.setDate(startsAt.getDate() + days.length);
-        day.setHours(23, 59, 59);
-        return day;
-    }, [days.length, startsAt]);
+    return { days, hours, dateRange, setDateRange };
+};
 
-    const dateRange = useMemo(() => ({ from: startsAt, to: endsAt }), [endsAt, startsAt]);
-
-    return { days, hours, dateRange };
+const getDefaultDateRange = (): DateRange => {
+    const from = dayjs().startOf("day").toDate();
+    const to = dayjs(from).add(INITIAL_NUMBER_OF_DAYS, "days").toDate();
+    return { from, to };
 };

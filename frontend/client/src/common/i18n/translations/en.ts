@@ -3,6 +3,9 @@ import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
     activityCalendar: {
+        header: {
+            title: "Activities",
+        },
         item: {
             participants: {
                 tooltip: "Number of people that already have enrolled: {{slotsTaken}}",

@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { Table, Text } from "@mantine/core";
+import dayjs from "dayjs";
 
 import { useDateTimeLocale } from "../../../../hooks/useDateTimeLocale";
 import { ActivityCalendarCell } from "../ActivityCalendarDay/ActivityCalendarCell";
@@ -34,15 +35,13 @@ export const ActivityCalendarRow = ({ hour, days, activities }: ActivityCalendar
         [days, activities]
     );
 
-    const isCellFromThePast = useCallback((date: Date, hour: number) => {
-        const day = new Date(date);
-        day.setHours(hour + 1, 0, 0, 0);
-        return day < new Date();
+    const isCellFromThePast = useCallback((_date: Date, _hour: number) => {
+        return dayjs(_date).set("hours", _hour).isBefore(dayjs());
     }, []);
 
     return (
         <Table.Tr className={classes.row}>
-            <Table.Td>
+            <Table.Td className={classes.hourCell}>
                 <Text className={classes.hour}>{localeHour}</Text>
             </Table.Td>
 
