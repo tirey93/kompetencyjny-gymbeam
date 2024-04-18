@@ -18,6 +18,26 @@ export type TranslationSource = {
     };
 
     notifications: {
+        reservations: {
+            add: {
+                success: {
+                    title: string;
+                    description: string;
+                };
+                error: {
+                    title: string;
+                };
+            };
+            remove: {
+                success: {
+                    title: string;
+                    description: string;
+                };
+                error: {
+                    title: string;
+                };
+            };
+        };
         user: {
             changeReservationsPermission: {
                 title: string;
@@ -60,6 +80,14 @@ export type TranslationSource = {
         };
         activities: {
             getAll: {
+                default: string;
+            };
+        };
+        reservations: {
+            add: {
+                default: string;
+            };
+            remove: {
                 default: string;
             };
         };

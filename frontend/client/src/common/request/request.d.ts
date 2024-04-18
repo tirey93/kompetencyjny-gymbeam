@@ -11,7 +11,9 @@ export type ApiResourceName = |
     "GetAllUsers" |
     "GetAllActivities" |
     "GetActivitiesInstancesByDates" |
-    "CheckUserNameAvailability";
+    "CheckUserNameAvailability" |
+    "AddReservation" |
+    "RemoveReservation";
 
 export type RequestError = {
     status?: number;

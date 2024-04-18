@@ -31,6 +31,14 @@ export const en: TranslationSource = {
                 default: "Failed to retrieve list of activities. Something went wrong on our side.",
             },
         },
+        reservations: {
+            add: {
+                default: "Failed to add a reservation. Something went wrong on our side.",
+            },
+            remove: {
+                default: "Failed to remove the reservation. Something went wrong on our side.",
+            },
+        },
         user: {
             changeReservationsPermission: {
                 default: "Failed to change user's reservations permission, something went wrong on our side.",
@@ -60,6 +68,26 @@ export const en: TranslationSource = {
         },
     },
     notifications: {
+        reservations: {
+            add: {
+                success: {
+                    title: "Reservation added.",
+                    description: "Successfully reserved {{activity}} activity.",
+                },
+                error: {
+                    title: "Failed to add reservation.",
+                },
+            },
+            remove: {
+                success: {
+                    title: "Reservation removed.",
+                    description: "Successfully removed reservation of {{activity}} activity..",
+                },
+                error: {
+                    title: "Failed to remove reservation.",
+                },
+            },
+        },
         user: {
             changeReservationsPermission: {
                 title: "Reservation permissions change operation successful.",
