@@ -8,11 +8,7 @@ import { ActivityCalendar } from "../../ActivityCalendar";
 
 import classes from "./ActivityCalendarLoader.module.scss";
 
-type ActivityCalendarLoaderProps = {
-    height?: number | string;
-};
-
-export const ActivityCalendarLoader = ({ height }: ActivityCalendarLoaderProps) => {
+export const ActivityCalendarLoader = () => {
     const preparedMockData = useMemo(() => {
         return Array<ActivityInstance[]>(15)
             .fill(MOCK_ACTIVITIES_INSTANCES)
@@ -33,7 +29,7 @@ export const ActivityCalendarLoader = ({ height }: ActivityCalendarLoaderProps) 
 
     return (
         <Box className={classes.container}>
-            <ActivityCalendar activities={preparedMockData} height={height} />
+            <ActivityCalendar activities={preparedMockData} />
             <LoaderOverlay visible />
         </Box>
     );

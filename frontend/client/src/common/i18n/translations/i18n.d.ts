@@ -1,5 +1,8 @@
 export type TranslationSource = {
     activityCalendar: {
+        header: {
+            title: string;
+        };
         item: {
             participants: {
                 tooltip: string;
