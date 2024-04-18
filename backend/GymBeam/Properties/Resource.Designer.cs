@@ -115,6 +115,24 @@ namespace GymBeam.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cron field is required..
+        /// </summary>
+        public static string ValidatorCronRequired {
+            get {
+                return ResourceManager.GetString("ValidatorCronRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cron must not exceed 255 characters..
+        /// </summary>
+        public static string ValidatorCronShorter {
+            get {
+                return ResourceManager.GetString("ValidatorCronShorter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Display name must be at least 5 characters long..
         /// </summary>
         public static string ValidatorDisplayNameLonger {
@@ -138,6 +156,51 @@ namespace GymBeam.Properties {
         public static string ValidatorDisplayNameShorter {
             get {
                 return ResourceManager.GetString("ValidatorDisplayNameShorter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration must be greater than zero..
+        /// </summary>
+        public static string ValidatorDurationGreaterThanZero {
+            get {
+                return ResourceManager.GetString("ValidatorDurationGreaterThanZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End time must be after start time..
+        /// </summary>
+        public static string ValidatorEndTimeAfterStartTime {
+            get {
+                return ResourceManager.GetString("ValidatorEndTimeAfterStartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Long description must not exceed 4000 characters..
+        /// </summary>
+        public static string ValidatorLongDescriptionShorter {
+            get {
+                return ResourceManager.GetString("ValidatorLongDescriptionShorter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name field is required..
+        /// </summary>
+        public static string ValidatorNameRequired {
+            get {
+                return ResourceManager.GetString("ValidatorNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name must not exceed 255 characters..
+        /// </summary>
+        public static string ValidatorNameShorter {
+            get {
+                return ResourceManager.GetString("ValidatorNameShorter", resourceCulture);
             }
         }
         
@@ -174,6 +237,33 @@ namespace GymBeam.Properties {
         public static string ValidatorRoleFromRolesList {
             get {
                 return ResourceManager.GetString("ValidatorRoleFromRolesList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Short description must not exceed 1000 characters..
+        /// </summary>
+        public static string ValidatorShortDescriptionShorter {
+            get {
+                return ResourceManager.GetString("ValidatorShortDescriptionShorter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start time must be before end time..
+        /// </summary>
+        public static string ValidatorStartTimeBeforeEndTime {
+            get {
+                return ResourceManager.GetString("ValidatorStartTimeBeforeEndTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total capacity must be greater than zero..
+        /// </summary>
+        public static string ValidatorTotalCapacityGreaterThanZero {
+            get {
+                return ResourceManager.GetString("ValidatorTotalCapacityGreaterThanZero", resourceCulture);
             }
         }
         

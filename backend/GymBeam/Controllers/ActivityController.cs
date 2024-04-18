@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Domain.Exceptions;
+using GymBeam.Commands;
 
 namespace GymBeam.Controllers
 {
@@ -67,12 +68,41 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #if !DEBUG
         [Authorize(Roles = Roles.Admin)]
 #endif
-        public IActionResult Post([FromBody] ActivityRequest dto)
+        public async Task<ActionResult> Post([FromBody] ActivityRequest dto)
         {
-            return NoContent();
+            var request = new CreateActivityCommand
+            {
+                Duration = dto.Duration,
+                TotalCapacity = dto.TotalCapacity,
+                LeaderId = dto.LeaderId,
+                StartTime = dto.StartTime,
+                EndTime = dto.EndTime,
+                Name = dto.Name,
+                ShortDescription = dto.ShortDescription,
+                LongDescription = dto.LongDescription,
+                Cron = dto.Cron
+            };
+            try
+            {
+                await _mediator.Send(request);
+                return Ok();
+            }
+            catch (UserNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
         }
 
         [HttpPut("{id:int}")]
