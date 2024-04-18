@@ -1,0 +1,1 @@
+export { ModalsManager } from "./ModalsManager";

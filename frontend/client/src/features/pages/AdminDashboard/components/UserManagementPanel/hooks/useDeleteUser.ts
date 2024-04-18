@@ -21,7 +21,6 @@ type DeleteUserRequestOptions = {
 
 const deleteUserRequest = (options: DeleteUserRequestOptions) => {
     return request("DeleteUser", {
-        method: "DELETE",
         ...options,
     });
 };

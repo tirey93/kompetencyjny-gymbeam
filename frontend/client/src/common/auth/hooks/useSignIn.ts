@@ -48,7 +48,7 @@ export const useSignIn = (): UseSignIn => {
 };
 
 const signInRequest = (body: SignInRequestBody) => {
-    return request("SignIn", { body, method: "POST" });
+    return request("SignIn", { body });
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {

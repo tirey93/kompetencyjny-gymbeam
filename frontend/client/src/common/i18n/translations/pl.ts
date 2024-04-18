@@ -31,6 +31,14 @@ export const pl: TranslationSource = {
                 default: "Nie udało się pobrać listy aktywności, coś poszło nie tak po naszej stronie.",
             },
         },
+        reservations: {
+            add: {
+                default: "Nie udało się dodać rezerwacji, coś poszło nie tak po naszej stronie.",
+            },
+            remove: {
+                default: "Nie udało się usunąć rezerwacji, coś poszło nie tak po naszej stronie.",
+            },
+        },
         user: {
             changeReservationsPermission: {
                 default: "Nie udało się zmienić uprawnień użytkownika, coś poszło nie tak po naszej stronie.",
@@ -60,6 +68,26 @@ export const pl: TranslationSource = {
         },
     },
     notifications: {
+        reservations: {
+            add: {
+                success: {
+                    title: "Dodano rezerwację.",
+                    description: "Pomyślnie zarezerwowano zajęcia: {{activity}}.",
+                },
+                error: {
+                    title: "Nie udało się dodać rezerwacji.",
+                },
+            },
+            remove: {
+                success: {
+                    title: "Usunięto rezerwację.",
+                    description: "Pomyślnie usunięto rezerwację zajęć: {{activity}}.",
+                },
+                error: {
+                    title: "Nie udało się usunąć rezerwacji.",
+                },
+            },
+        },
         user: {
             changeReservationsPermission: {
                 title: "Operacja zmiany uprawnień powiodła się.",
