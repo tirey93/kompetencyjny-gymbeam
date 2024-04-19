@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Group } from "@mantine/core";
 import { DatePickerInput, DatesRangeValue } from "@mantine/dates";
 import { IconCalendar } from "@tabler/icons-react";
@@ -14,6 +14,10 @@ type ActivityCalendarFilters = {
 
 export const DateRangeFilter = ({ value, onChange }: ActivityCalendarFilters) => {
     const [internalDateRange, setInternalDateRange] = useState<DatesRangeValue>([value.from, value.to]);
+
+    useEffect(() => {
+        setInternalDateRange([value.from, value.to]);
+    }, [value]);
 
     const handleDateRangeChange = useCallback(
         (newValue: DatesRangeValue) => {

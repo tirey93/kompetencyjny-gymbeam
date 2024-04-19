@@ -5,7 +5,8 @@ html .calendar {
 
   .calendarHeader {
     padding-block: var(--mantine-spacing-md);
-    gap: var(--mantine-spacing-xl);
+    gap: var(--mantine-spacing-lg) var(--mantine-spacing-xl);
+    justify-content: space-between;
 
     .calendarHeaderTitle {
       font-weight: 700;
@@ -23,6 +24,8 @@ html .calendar {
 
   .scrollContainer {
     height: calc(100dvh - 250px);
+    border-radius: var(--mantine-radius-md);
+    overflow: hidden;
 
     @media (width < $mantine-breakpoint-sm) {
       height: calc(100dvh - 300px);
@@ -33,9 +36,6 @@ html .calendar {
     }
 
     .table {
-      border-radius: var(--mantine-radius-md);
-      overflow: hidden;
-
       .headerRow {
         background: var(--mantine-color-dark-9);
         box-shadow: var(--mantine-shadow-xl);

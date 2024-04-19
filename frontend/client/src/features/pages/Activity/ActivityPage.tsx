@@ -37,8 +37,10 @@ export const ActivityPage = () => {
         <Container className={classes.container}>
             <Stack>
                 <ActivityDetailsCard activity={activity} />
-                {instancesOfActivity && <ActivityCalendar activities={instancesOfActivity} />}
-                {areInstancesLoading && <ActivityCalendarLoader />}
+                {instancesOfActivity && activities && (
+                    <ActivityCalendar activityInstances={instancesOfActivity} activities={activities} />
+                )}
+                {(areInstancesLoading || areActivitiesLoading) && <ActivityCalendarLoader />}
             </Stack>
         </Container>
     );

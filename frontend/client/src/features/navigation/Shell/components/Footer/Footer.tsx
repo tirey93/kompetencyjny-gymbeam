@@ -8,7 +8,7 @@ export const Footer = () => {
     return (
         <Container className={classes.footerContainer} fluid>
             <Group className={classes.footerContentWrapper}>
-                <Logo size="xl" withName />
+                <Logo size="xl" variant="gradient" withName />
             </Group>
         </Container>
     );

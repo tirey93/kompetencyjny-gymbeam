@@ -19,7 +19,7 @@ export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
         <Stack component="nav" className={classes.sideNavigationContainer}>
             <Stack className={classes.sectionWrapper}>
                 <Center className={classes.logoWrapper}>
-                    <Logo logoSize={65} />
+                    <Logo logoSize={65} variant="gradient" />
                 </Center>
 
                 <NavigationSection onNavigate={onNavigate} tiles={[home]} />

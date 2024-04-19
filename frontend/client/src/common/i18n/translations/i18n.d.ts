@@ -1,7 +1,10 @@
 export type TranslationSource = {
     activityCalendar: {
-        header: {
-            title: string;
+        filters: {
+            activity: {
+                placeholder: string;
+                notFound: string;
+            };
         };
         item: {
             participants: {

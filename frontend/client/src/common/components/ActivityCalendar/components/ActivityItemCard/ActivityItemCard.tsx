@@ -62,19 +62,19 @@ export const ActivityItemCard = ({
             await addReservation(1);
             notifications.show({
                 withBorder: true,
+                color: "success",
                 title: translate("notifications.reservations.add.success.title"),
                 message: translate("notifications.reservations.add.success.description", {
                     activity: name,
                 }),
-                color: "success",
             });
         } catch (error) {
             const message = (error as Error)?.message ?? "";
             notifications.show({
                 withBorder: true,
+                color: "danger",
                 title: translate("notifications.reservations.add.error.title"),
                 message,
-                color: "success",
             });
         }
     }, [addReservation, name, translate]);
