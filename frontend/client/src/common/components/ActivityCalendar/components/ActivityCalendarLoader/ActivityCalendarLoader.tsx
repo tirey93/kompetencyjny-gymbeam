@@ -29,7 +29,7 @@ export const ActivityCalendarLoader = () => {
 
     return (
         <Box className={classes.container}>
-            <ActivityCalendar activities={preparedMockData} />
+            <ActivityCalendar activityInstances={preparedMockData} activities={[]} />
             <LoaderOverlay visible />
         </Box>
     );

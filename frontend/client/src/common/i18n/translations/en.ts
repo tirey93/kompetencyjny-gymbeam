@@ -3,8 +3,11 @@ import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
     activityCalendar: {
-        header: {
-            title: "Activities",
+        filters: {
+            activity: {
+                placeholder: "Search for activities",
+                notFound: "No results.",
+            },
         },
         item: {
             participants: {

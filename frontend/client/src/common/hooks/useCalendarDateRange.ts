@@ -2,8 +2,8 @@ import { useMemo, useState } from "react";
 import dayjs from "dayjs";
 
 const INITIAL_NUMBER_OF_DAYS = 7;
-const INITIAL_DAY_HOUR = 7;
-const NUMBER_OF_HOURS_DISPLAYED = 17;
+const INITIAL_DAY_HOUR = 0;
+const NUMBER_OF_HOURS_DISPLAYED = 24;
 
 export type DateRange = {
     from: Date;
