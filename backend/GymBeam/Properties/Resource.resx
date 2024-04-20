@@ -135,6 +135,12 @@
   <data name="ExceptionUserIdIsInvalid" xml:space="preserve">
     <value>User id is invalid.</value>
   </data>
+  <data name="ValidatorCronRequired" xml:space="preserve">
+    <value>Cron field is required.</value>
+  </data>
+  <data name="ValidatorCronShorter" xml:space="preserve">
+    <value>Cron must not exceed 255 characters.</value>
+  </data>
   <data name="ValidatorDisplayNameLonger" xml:space="preserve">
     <value>Display name must be at least 5 characters long.</value>
   </data>
@@ -143,6 +149,21 @@
   </data>
   <data name="ValidatorDisplayNameShorter" xml:space="preserve">
     <value>Display name must not exceed 20 characters.</value>
+  </data>
+  <data name="ValidatorDurationGreaterThanZero" xml:space="preserve">
+    <value>Duration must be greater than zero.</value>
+  </data>
+  <data name="ValidatorEndTimeAfterStartTime" xml:space="preserve">
+    <value>End time must be after start time.</value>
+  </data>
+  <data name="ValidatorLongDescriptionShorter" xml:space="preserve">
+    <value>Long description must not exceed 4000 characters.</value>
+  </data>
+  <data name="ValidatorNameRequired" xml:space="preserve">
+    <value>Name field is required.</value>
+  </data>
+  <data name="ValidatorNameShorter" xml:space="preserve">
+    <value>Name must not exceed 255 characters.</value>
   </data>
   <data name="ValidatorPasswordLonger" xml:space="preserve">
     <value>Password must be at least 5 characters long.</value>
@@ -155,6 +176,15 @@
   </data>
   <data name="ValidatorRoleFromRolesList" xml:space="preserve">
     <value>Role must be one of: {0}</value>
+  </data>
+  <data name="ValidatorShortDescriptionShorter" xml:space="preserve">
+    <value>Short description must not exceed 1000 characters.</value>
+  </data>
+  <data name="ValidatorStartTimeBeforeEndTime" xml:space="preserve">
+    <value>Start time must be before end time.</value>
+  </data>
+  <data name="ValidatorTotalCapacityGreaterThanZero" xml:space="preserve">
+    <value>Total capacity must be greater than zero.</value>
   </data>
   <data name="ValidatorUsernameLonger" xml:space="preserve">
     <value>Username must be at least 5 characters long.</value>
