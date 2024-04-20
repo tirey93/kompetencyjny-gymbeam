@@ -5,7 +5,8 @@ using MediatR;
 
 namespace GymBeam.CommandHandlers
 {
-    public class ActivityCommandHandler : IRequestHandler<CreateActivityCommand, Unit>
+    public class ActivityCommandHandler : IRequestHandler<CreateActivityCommand, Unit>,
+                                          IRequestHandler<DeleteActivityCommand, Unit>
     {
         private readonly IRepository _repository;
 
@@ -38,6 +39,17 @@ namespace GymBeam.CommandHandlers
             };
 
             _repository.Add(activity);
+            _repository.SaveChangesAsync();
+
+            return Task.FromResult(Unit.Value);
+        }
+
+        public Task<Unit> Handle(DeleteActivityCommand request, CancellationToken cancellationToken)
+        {
+            var activity = _repository.GetActivity(request.ActivityId)
+                ?? throw new ActivityNotFoundException(request.ActivityId);
+
+            _repository.Delete(activity);
             _repository.SaveChangesAsync();
 
             return Task.FromResult(Unit.Value);
