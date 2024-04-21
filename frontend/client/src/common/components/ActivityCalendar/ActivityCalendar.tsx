@@ -61,7 +61,7 @@ export const ActivityCalendar = ({ activityInstances, activities, withFilters }:
                 <Table stickyHeader highlightOnHover withColumnBorders className={classes.table}>
                     <Table.Thead>
                         <Table.Tr className={classes.headerRow}>
-                            <Table.Td>
+                            <Table.Td className={classes.dateRangeSwitch}>
                                 <DateRangeSwitch onChange={setDateRange} value={dateRange} />
                             </Table.Td>
 
