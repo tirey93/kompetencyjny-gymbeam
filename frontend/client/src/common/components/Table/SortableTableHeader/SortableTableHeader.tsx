@@ -1,43 +1,39 @@
-import { ReactNode } from "react";
-import { Center, Group, Table, TableThProps, UnstyledButton } from "@mantine/core";
-import { IconChevronDown, IconChevronUp, IconSelector } from "@tabler/icons-react";
+import { Table } from "@mantine/core";
 
-import { TextWithTooltip } from "../../DataDisplay";
+import { SortableTableHeaderCell, SortableTableHeaderCellProps } from "./SortableTableHeaderCell";
 
-import classes from "./SortableTableHeader.module.scss";
+import classes from "../../../../features/pages/AdminDashboard/components/ActivitiesManagementPanel/ActivitiesManagementPanel.module.scss";
 
-export type SortableTableHeaderProps = TableThProps & {
-    children: ReactNode;
-    reversed?: boolean;
-    sorted?: boolean;
-    onSort?: () => unknown;
+export type SortableTableColumnsConfig<TData> = Partial<SortableTableHeaderCellProps> & { column: keyof TData };
+
+type SortableTableHeaderProps<TData> = {
+    columns: SortableTableColumnsConfig<TData>[];
+    sortDirection: "ASC" | "DESC" | null;
+    sortBy: keyof TData | null;
+    onSort: (column: keyof TData) => unknown;
 };
 
-export const SortableTableHeader = ({ children, reversed, sorted, onSort, ...rest }: SortableTableHeaderProps) => {
+export const SortableTableHeader = <TData extends object>({
+    onSort,
+    sortBy,
+    sortDirection,
+    columns,
+}: SortableTableHeaderProps<TData>) => {
     return (
-        <Table.Th {...rest}>
-            <Wrapper reversed={reversed} onSort={onSort} sorted={sorted}>
-                <TextWithTooltip className={classes.columnName}>{children}</TextWithTooltip>
-            </Wrapper>
-        </Table.Th>
-    );
-};
-
-const Wrapper = ({ onSort, sorted, reversed, children }: SortableTableHeaderProps) => {
-    const Icon = sorted ? (reversed ? IconChevronUp : IconChevronDown) : IconSelector;
-
-    if (!onSort) {
-        return <>{children}</>;
-    }
-
-    return (
-        <UnstyledButton onClick={onSort} className={classes.sortableWrapper}>
-            <Group className={classes.columnHeaderContentWrapper}>
-                {children}
-                <Center>
-                    <Icon className={classes.sortIcon} />
-                </Center>
-            </Group>
-        </UnstyledButton>
+        <Table.Thead>
+            <Table.Tr className={classes.tableRow}>
+                {columns.map(({ column, children, disableSort, ...rest }) => (
+                    <SortableTableHeaderCell
+                        onSort={!disableSort ? () => onSort(column) : undefined}
+                        reversed={sortDirection === "DESC"}
+                        sorted={sortBy === column}
+                        key={column.toString()}
+                        {...rest}
+                    >
+                        {children}
+                    </SortableTableHeaderCell>
+                ))}
+            </Table.Tr>
+        </Table.Thead>
     );
 };

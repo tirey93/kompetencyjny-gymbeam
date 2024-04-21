@@ -159,7 +159,11 @@ export type TranslationSource = {
         };
 
         adminDashboard: {
+            activitiesPanel: {
+                tab: string;
+            };
             usersPanel: {
+                tab: string;
                 options: {
                     delete: string;
                 };

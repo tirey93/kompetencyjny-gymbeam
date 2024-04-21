@@ -43,18 +43,18 @@ export const UserRow = ({ userDetails, events }: UserRowProps) => {
             </Table.Td>
 
             <Table.Td className={classes.center}>
-                <UserRoleBadge onClick={events.onUserRoleChange} role={userDetails.role} />
+                <UserRoleBadge onClick={() => events.onUserRoleChange(userDetails)} role={userDetails.role} />
             </Table.Td>
 
             <Table.Td className={classes.center}>
                 <UserReservationsPermissionBadge
-                    onClick={events.onUserReservationsPermissionToggle}
+                    onClick={() => events.onUserReservationsPermissionToggle(userDetails)}
                     disabled={userDetails.reservationDisabled}
                 />
             </Table.Td>
 
             <Table.Td className={classes.center}>
-                <UserManagementOptionsDropdown events={events} />
+                <UserManagementOptionsDropdown events={events} userDetails={userDetails} />
             </Table.Td>
         </Table.Tr>
     );

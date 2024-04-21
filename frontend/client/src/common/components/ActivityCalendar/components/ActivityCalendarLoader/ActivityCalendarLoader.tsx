@@ -10,7 +10,7 @@ import classes from "./ActivityCalendarLoader.module.scss";
 
 export const ActivityCalendarLoader = () => {
     const preparedMockData = useMemo(() => {
-        return Array<ActivityInstance[]>(15)
+        return Array<ActivityInstance[]>(5)
             .fill(MOCK_ACTIVITIES_INSTANCES)
             .flat()
             .map((item, index) => {

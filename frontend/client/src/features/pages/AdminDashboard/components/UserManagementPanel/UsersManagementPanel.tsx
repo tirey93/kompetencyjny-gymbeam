@@ -1,31 +1,33 @@
 import { useCallback } from "react";
 import { Button, Stack, Table } from "@mantine/core";
-import { useViewportSize } from "@mantine/hooks";
 
-import { useAllUsers } from "./hooks/useAllUsers";
 import { UserDetails } from "../../../../../common/auth";
 import { ErrorMessage } from "../../../../../common/components/DataDisplay";
 import { SearchBar } from "../../../../../common/components/DataInput";
+import { SortableTableHeader } from "../../../../../common/components/Table";
+import { useSearchAndSort } from "../../../../../common/hooks";
 import { useTranslate } from "../../../../../common/i18n";
-import { NAVIGATION_SHELL_TOTAL_HEIGHT } from "../../../../navigation/Shell/AppNavigation";
-import { UserManagementPanelHeader, UserRow, UserRowsLoader } from "./components";
-import { useUsersManagementModalEvents, useUsersManagementPanelSortAndSearch } from "./hooks";
+import { UserRow, UserRowsLoader } from "./components";
+import { useAllUsers, useUsersColumnsConfig, useUsersManagementModalEvents } from "./hooks";
 
 import classes from "./UserManagementPanel.module.scss";
 
 export type UserManagementEvents = {
-    onDelete: () => void;
-    onUserRoleChange: () => void;
-    onUserReservationsPermissionToggle: () => void;
+    onDelete: (user: UserDetails) => void;
+    onUserRoleChange: (user: UserDetails) => void;
+    onUserReservationsPermissionToggle: (user: UserDetails) => void;
 };
 
 export const UsersManagementPanel = () => {
-    const { users, error, isLoading, refetch } = useAllUsers();
-    const { sortBy, onSort, sortDirection, data, onSearch } = useUsersManagementPanelSortAndSearch(users ?? []);
-    const { onUserDelete, onUserRoleChange, onUserReservationsPermissionToggle } = useUsersManagementModalEvents();
     const translate = useTranslate();
-    const { height } = useViewportSize();
-    const scrollContainerHeight = height - NAVIGATION_SHELL_TOTAL_HEIGHT - 20;
+    const columns = useUsersColumnsConfig();
+    const { users, error, isLoading, refetch } = useAllUsers();
+    const { onUserDelete, onUserRoleChange, onUserReservationsPermissionToggle } = useUsersManagementModalEvents();
+
+    const { sortBy, onSort, sortDirection, data, onSearch } = useSearchAndSort<UserDetails>({
+        dataToProcess: users ?? [],
+        predicates: ["name", "displayName"],
+    });
 
     const onUserRoleChangeInternal = useCallback(
         (user: UserDetails) => {
@@ -41,9 +43,14 @@ export const UsersManagementPanel = () => {
                 onSearch={onSearch}
             />
 
-            <Table.ScrollContainer minWidth={200} h={scrollContainerHeight} className={classes.scrollContainer}>
+            <Table.ScrollContainer minWidth={200} className={classes.scrollContainer}>
                 <Table stickyHeader highlightOnHover className={classes.table}>
-                    <UserManagementPanelHeader sortBy={sortBy} onSort={onSort} sortDirection={sortDirection} />
+                    <SortableTableHeader
+                        columns={columns}
+                        sortDirection={sortDirection}
+                        sortBy={sortBy}
+                        onSort={onSort}
+                    />
                     <Table.Tbody>
                         {isLoading ? (
                             <UserRowsLoader />
@@ -53,10 +60,9 @@ export const UsersManagementPanel = () => {
                                     key={user.id}
                                     userDetails={user}
                                     events={{
-                                        onDelete: () => onUserDelete(user),
-                                        onUserRoleChange: () => onUserRoleChangeInternal(user),
-                                        onUserReservationsPermissionToggle: () =>
-                                            onUserReservationsPermissionToggle(user),
+                                        onDelete: onUserDelete,
+                                        onUserRoleChange: onUserRoleChangeInternal,
+                                        onUserReservationsPermissionToggle: onUserReservationsPermissionToggle,
                                     }}
                                 />
                             ))

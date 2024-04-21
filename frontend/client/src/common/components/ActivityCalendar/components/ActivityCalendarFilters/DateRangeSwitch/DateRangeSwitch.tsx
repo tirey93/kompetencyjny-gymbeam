@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Group } from "@mantine/core";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import dayjs from "dayjs";
 
@@ -28,7 +28,7 @@ export const DateRangeSwitch = ({ value, onChange }: ActivityCalendarFilters) =>
     }, [calculateNewDateRange, onChange, value]);
 
     return (
-        <>
+        <Group>
             <ActionIcon
                 variant="light"
                 color="secondary"
@@ -40,6 +40,6 @@ export const DateRangeSwitch = ({ value, onChange }: ActivityCalendarFilters) =>
             <ActionIcon variant="light" color="secondary" onClick={incrementDateRange}>
                 <IconChevronRight />
             </ActionIcon>
-        </>
+        </Group>
     );
 };

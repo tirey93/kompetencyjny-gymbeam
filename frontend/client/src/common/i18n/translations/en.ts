@@ -157,7 +157,11 @@ export const en: TranslationSource = {
             },
         },
         adminDashboard: {
+            activitiesPanel: {
+                tab: "Activities",
+            },
             usersPanel: {
+                tab: "Users",
                 options: {
                     delete: "Delete user's account",
                 },
