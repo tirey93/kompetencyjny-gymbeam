@@ -6,5 +6,7 @@
 /GymBeam/obj
 /Domain/bin/Debug/net7.0
 /Infrastructure/bin/Debug/net7.0
+/GymBeam.Tests/bin/Debug/net7.0
+/GymBeam.Tests/obj
 /Domain/obj
 /Infrastructure/obj
