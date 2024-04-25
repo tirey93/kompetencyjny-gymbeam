@@ -1,32 +1,26 @@
 import { Activity, ActivityInstance } from "../activities/Activities";
-import { UserDetails } from "../auth";
-import {
-    ApiResourceName,
-    ChangeReservationsPermissionQueryParams,
-    ChangeReservationsPermissionURLParams,
-    ChangeRoleRequestBody,
-    ChangeRoleURLParams,
-    DeleteUserURLParams,
-    GetActivitiesInstancesByDatesQueryParams,
-    RequestOptions,
-    SignInRequestBody,
-    SignUpRequestBody,
-    UserDetailsResponse,
-} from "./";
+import { UserDetails, UserRole } from "../auth";
+import { ApiResourceName, RequestOptions, SignInRequestBody, SignUpRequestBody, UserDetailsResponse } from "./";
 
 const { VITE_API_BASE_URL } = import.meta.env;
 
-const AVAILABLE_API_RESOURCES: Record<ApiResourceName, string> = {
-    CurrentUserDetails: "User/LoggedIn",
-    SignIn: "Authentication/Login",
-    SignUp: "Authentication/Register",
-    SignOut: "Authentication/Logout",
-    ChangeReservationsPermission: "User/{userId}/ReservationDisabled",
-    ChangeRole: "User/{userId}/Role",
-    DeleteUser: "User/{userId}",
-    GetAllUsers: "User",
-    GetAllActivities: "Activity",
-    GetActivitiesInstancesByDates: "Enrollment/ByDates",
+const AVAILABLE_API_RESOURCES: Record<
+    ApiResourceName,
+    { endpoint: string; method?: "POST" | "GET" | "PUT" | "DELETE" | "PATCH" }
+> = {
+    SignIn: { endpoint: "Authentication/Login", method: "POST" },
+    SignUp: { endpoint: "Authentication/Register", method: "POST" },
+    SignOut: { endpoint: "Authentication/Logout", method: "POST" },
+    CheckUserNameAvailability: { endpoint: "User/CheckAvailability/ByName/{username}" },
+    CurrentUserDetails: { endpoint: "User/LoggedIn" },
+    GetAllUsers: { endpoint: "User" },
+    DeleteUser: { endpoint: "User/{userId}", method: "DELETE" },
+    ChangeRole: { endpoint: "User/{userId}/Role", method: "PUT" },
+    ChangeReservationsPermission: { endpoint: "User/{userId}/ReservationDisabled", method: "PUT" },
+    GetAllActivities: { endpoint: "Activity" },
+    GetActivitiesInstancesByDates: { endpoint: "Enrollment/ByDates" },
+    AddReservation: { endpoint: "Reservation", method: "POST" },
+    RemoveReservation: { endpoint: "Reservation/{id}", method: "DELETE" },
 };
 
 const DEFAULT_REQUEST_OPTIONS: RequestInit = {
@@ -39,51 +33,52 @@ const DEFAULT_REQUEST_OPTIONS: RequestInit = {
 
 export async function request(resource: "GetAllActivities"): Promise<Activity[]>;
 
+export async function request(resource: "AddReservation"): Promise<void>;
+
+export async function request(resource: "RemoveReservation", options: { urlParams: { id: string } }): Promise<void>;
+
 export async function request(
     resource: "GetActivitiesInstancesByDates",
-    options: { queryParams: GetActivitiesInstancesByDatesQueryParams }
+    options: { queryParams: { from: string; to: string } }
 ): Promise<ActivityInstance[]>;
 
 export async function request(resource: "GetAllUsers"): Promise<UserDetails[]>;
 
 export async function request(resource: "CurrentUserDetails"): Promise<UserDetailsResponse>;
 
-export async function request(resource: "SignOut", options: { method: "POST" }): Promise<null>;
+export async function request(resource: "SignOut"): Promise<null>;
 
 export async function request(
-    resource: "SignIn",
-    options: { body: SignInRequestBody; method: "POST" }
-): Promise<UserDetailsResponse>;
+    resource: "CheckUserNameAvailability",
+    options: { urlParams: { username: string } }
+): Promise<boolean>;
 
-export async function request(
-    resource: "SignUp",
-    options: { body: SignUpRequestBody; method: "POST" }
-): Promise<UserDetailsResponse>;
+export async function request(resource: "SignIn", options: { body: SignInRequestBody }): Promise<UserDetailsResponse>;
+
+export async function request(resource: "SignUp", options: { body: SignUpRequestBody }): Promise<UserDetailsResponse>;
 
 export async function request(
     resource: "ChangeReservationsPermission",
     options: {
-        method: "PUT";
-        queryParams: ChangeReservationsPermissionQueryParams;
-        urlParams: ChangeReservationsPermissionURLParams;
+        queryParams: { value: boolean };
+        urlParams: { userId: string };
     }
 ): Promise<null>;
 
 export async function request(
     resource: "ChangeRole",
-    options: { method: "PUT"; body: ChangeRoleRequestBody; urlParams: ChangeRoleURLParams }
+    options: { body: { newRole: Exclude<UserRole, "Guest"> }; urlParams: { userId: string } }
 ): Promise<null>;
 
-export async function request(
-    resource: "DeleteUser",
-    options: { method: "DELETE"; urlParams: DeleteUserURLParams }
-): Promise<null>;
+export async function request(resource: "DeleteUser", options: { urlParams: { userId: string } }): Promise<null>;
 
 export async function request(resource: ApiResourceName, requestOptions?: RequestOptions): Promise<unknown> {
-    const requestURL = buildFinalURL(resource, requestOptions);
+    const { endpoint, ...resourceOptions } = AVAILABLE_API_RESOURCES[resource];
+    const requestURL = buildFinalURL(endpoint, requestOptions);
 
     const response = await fetch(requestURL, {
         ...DEFAULT_REQUEST_OPTIONS,
+        ...resourceOptions,
         ...mapRequestOptionsToInitRequest(requestOptions ?? {}),
     });
 
@@ -105,17 +100,17 @@ const mapRequestOptionsToInitRequest = (options: RequestOptions): RequestInit =>
     body: options.body ? JSON.stringify(options.body) : undefined,
 });
 
-const buildFinalURL = (resource: ApiResourceName, options?: Pick<RequestOptions, "queryParams" | "urlParams">) => {
-    let endpoint = AVAILABLE_API_RESOURCES[resource];
+const buildFinalURL = (endpoint: string, options?: Pick<RequestOptions, "queryParams" | "urlParams">) => {
     const searchParams = options?.queryParams
         ? new URLSearchParams(JSON.parse(JSON.stringify(options.queryParams)))
         : "";
 
+    let parsedEndpoint = endpoint;
     if (options?.urlParams) {
         for (const [key, value] of Object.entries(options.urlParams)) {
-            endpoint = endpoint.replace(`{${key}}`, value);
+            parsedEndpoint = parsedEndpoint.replace(`{${key}}`, value);
         }
     }
 
-    return `${VITE_API_BASE_URL}/${endpoint}?${searchParams}`;
+    return `${VITE_API_BASE_URL}/${parsedEndpoint}?${searchParams}`;
 };

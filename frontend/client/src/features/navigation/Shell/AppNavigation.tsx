@@ -7,7 +7,8 @@ import { Footer, SideNavigation } from "./components";
 import classes from "./AppNavigation.module.scss";
 
 const NAVIGATION_FOOTER_HEIGHT = 80;
-export const NAVIGATION_SHELL_TOTAL_HEIGHT = NAVIGATION_FOOTER_HEIGHT;
+const PAGE_TOP_OFFSET = 40;
+export const NAVIGATION_SHELL_TOTAL_HEIGHT = NAVIGATION_FOOTER_HEIGHT + PAGE_TOP_OFFSET;
 
 export const AppNavigation = ({ children }: PropsWithChildren) => {
     const [isNavbarVisible, { toggle: toggleNavbar, close: closeNavbar }] = useDisclosure(false);
@@ -17,6 +18,7 @@ export const AppNavigation = ({ children }: PropsWithChildren) => {
             withBorder={false}
             layout="alt"
             footer={{ height: NAVIGATION_FOOTER_HEIGHT }}
+            header={{ height: PAGE_TOP_OFFSET }}
             navbar={{ width: 100, breakpoint: "sm", collapsed: { desktop: false, mobile: !isNavbarVisible } }}
         >
             <Burger className={classes.burger} opened={isNavbarVisible} onClick={toggleNavbar} hiddenFrom="sm" />

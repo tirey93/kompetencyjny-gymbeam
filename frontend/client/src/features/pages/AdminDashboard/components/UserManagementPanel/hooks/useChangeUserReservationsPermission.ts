@@ -48,7 +48,6 @@ export const useChangeReservationsPermission = (): UseChangeUserReservationsPerm
 
 const changeReservationsPermissionRequest = (options: ChangeReservationsPermissionRequestOptions) => {
     return request("ChangeReservationsPermission", {
-        method: "PUT",
         ...options,
     });
 };

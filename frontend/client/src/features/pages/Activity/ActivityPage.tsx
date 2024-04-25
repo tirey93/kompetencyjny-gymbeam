@@ -7,7 +7,7 @@ import { useActivities } from "../../../common/activities/hooks/useActivities";
 import { useActivitiesInstances } from "../../../common/activities/hooks/useActivitiesInstances";
 import { ActivityCalendar, ActivityCalendarLoader } from "../../../common/components/ActivityCalendar";
 import { LoaderOverlay } from "../../../common/components/DataDisplay";
-import { useCalendarDateRange } from "../../../common/hooks/useCalendarDateRange";
+import { useCalendarDateRange } from "../../../common/hooks";
 import { AppRoute } from "../../router";
 
 import classes from "../Activities/ActivitiesPage.module.scss";
@@ -37,8 +37,10 @@ export const ActivityPage = () => {
         <Container className={classes.container}>
             <Stack>
                 <ActivityDetailsCard activity={activity} />
-                {instancesOfActivity && <ActivityCalendar activities={instancesOfActivity} />}
-                {areInstancesLoading && <ActivityCalendarLoader />}
+                {instancesOfActivity && activities && (
+                    <ActivityCalendar activityInstances={instancesOfActivity} activities={activities} />
+                )}
+                {(areInstancesLoading || areActivitiesLoading) && <ActivityCalendarLoader />}
             </Stack>
         </Container>
     );

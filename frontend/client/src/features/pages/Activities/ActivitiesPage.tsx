@@ -1,23 +1,23 @@
 import { Container } from "@mantine/core";
-import { useViewportSize } from "@mantine/hooks";
 
+import { useActivities } from "../../../common/activities/hooks/useActivities";
 import { useActivitiesInstances } from "../../../common/activities/hooks/useActivitiesInstances";
 import { ActivityCalendar, ActivityCalendarLoader } from "../../../common/components/ActivityCalendar";
-import { useCalendarDateRange } from "../../../common/hooks/useCalendarDateRange";
-import { NAVIGATION_SHELL_TOTAL_HEIGHT } from "../../navigation/Shell/AppNavigation";
+import { useCalendarDateRange } from "../../../common/hooks";
 
 import classes from "./ActivitiesPage.module.scss";
 
 export const ActivitiesPage = () => {
     const { dateRange } = useCalendarDateRange();
-    const { activitiesInstances, isLoading } = useActivitiesInstances({ dateRange });
-    const { height } = useViewportSize();
-    const calendarHeight = height - NAVIGATION_SHELL_TOTAL_HEIGHT - 20;
+    const { activitiesInstances, isLoading: areInstancesLoading } = useActivitiesInstances({ dateRange });
+    const { activities, isLoading: areActivitiesLoading } = useActivities();
 
     return (
         <Container size="xl" className={classes.container}>
-            {activitiesInstances && <ActivityCalendar activities={activitiesInstances} height={calendarHeight} />}
-            {isLoading && <ActivityCalendarLoader height={calendarHeight} />}
+            {activitiesInstances && activities && (
+                <ActivityCalendar activityInstances={activitiesInstances} activities={activities} withFilters />
+            )}
+            {(areActivitiesLoading || areInstancesLoading) && <ActivityCalendarLoader />}
         </Container>
     );
 };

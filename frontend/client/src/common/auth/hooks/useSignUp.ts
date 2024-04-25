@@ -48,7 +48,7 @@ export const useSignUp = (): UseSignUp => {
 };
 
 const signUpRequest = (body: SignUpRequestBody) => {
-    return request("SignUp", { body, method: "POST" });
+    return request("SignUp", { body });
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {

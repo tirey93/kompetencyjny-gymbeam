@@ -49,7 +49,6 @@ export const useChangeUserRole = (): UseChangeUserRole => {
 
 const changeUserRoleRequest = (options: ChangeUserRoleRequestOptions) => {
     return request("ChangeRole", {
-        method: "PUT",
         ...options,
     });
 };

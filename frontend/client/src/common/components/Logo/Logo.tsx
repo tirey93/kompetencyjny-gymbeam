@@ -6,11 +6,11 @@ import classes from "./Logo.module.scss";
 type LogoProps = {
     logoSize?: "xl" | "md" | "sm" | number;
     size?: "xl" | "md" | "sm";
-    variant?: "gradient" | "default";
+    variant?: "gradient" | "default" | "light";
     withName?: boolean;
 };
 
-export const Logo = ({ logoSize, size = "md", variant = "gradient", withName }: LogoProps) => {
+export const Logo = ({ logoSize, size = "md", variant = "default", withName }: LogoProps) => {
     return (
         <Group className={classes.logo}>
             <ThemeIcon variant={variant} size={logoSize ?? size}>

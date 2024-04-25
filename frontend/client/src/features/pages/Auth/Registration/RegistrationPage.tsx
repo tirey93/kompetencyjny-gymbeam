@@ -1,13 +1,11 @@
-import { useCallback, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useMemo } from "react";
 import { Stack, Stepper } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import { notifications } from "@mantine/notifications";
 
 import { useRegistrationForm } from "./hooks/useRegistrationForm";
+import { useRegistrationFormNavigation } from "./hooks/useRegistrationFormNavigation";
 import { useSignUp } from "../../../../common/auth";
 import { useTranslate } from "../../../../common/i18n";
-import { AppRoute } from "../../../router";
 import { NameForm, PasswordForm, RegistrationFormWrapper, SubmitForm } from "./components";
 
 import classes from "./RegistrationPage.module.scss";
@@ -15,50 +13,17 @@ import classes from "./RegistrationPage.module.scss";
 export const RegistrationPage = () => {
     const verboseSteps = useMediaQuery("(min-width: 60em)");
     const { form, validatedRules } = useRegistrationForm();
-    const translate = useTranslate();
-    const navigate = useNavigate();
     const { signUp, error, reset } = useSignUp();
-    const [step, setStep] = useState(0);
-
-    const goToNextStep = useCallback(() => {
-        setStep((step) => ++step);
-    }, []);
-
-    const goToPreviousStep = useCallback(() => {
-        setStep((step) => --step);
-    }, []);
-
-    const canSelectStep = useCallback(
-        (stepNumber: number) => {
-            return stepNumber <= step;
-        },
-        [step]
-    );
-
-    const onNextStepNameForm = useCallback(() => {
-        if (!form.validateField("name").hasError && !form.validateField("login").hasError) {
-            goToNextStep();
-        }
-    }, [form, goToNextStep]);
-
-    const onNextStepPasswordForm = useCallback(() => {
-        if (!form.validateField("password").hasError && !form.validateField("confirmPassword").hasError) {
-            goToNextStep();
-        }
-    }, [form, goToNextStep]);
-
-    const submitRegistrationForm = useCallback(async () => {
-        const { login: username, password, name: displayName } = form.values;
-        await signUp({ username, password, displayName });
-
-        notifications.show({
-            title: translate("notifications.auth.signedUp.title"),
-            message: translate("notifications.auth.signedUp.description"),
-            color: "success",
-            withBorder: true,
-        });
-        navigate(AppRoute.ROOT);
-    }, [form.values, navigate, signUp, translate]);
+    const {
+        onNextStepPasswordForm,
+        onNextStepNameForm,
+        submitRegistrationForm,
+        canSelectStep,
+        goToPreviousStep,
+        step,
+        setStep,
+    } = useRegistrationFormNavigation({ onSubmit: signUp, registrationForm: form });
+    const translate = useTranslate();
 
     const signUpErrorProps = useMemo(
         () =>

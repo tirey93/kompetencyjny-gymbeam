@@ -34,7 +34,7 @@ export const NameForm = ({ form, rules, onSubmit }: RegistrationFormProps) => {
 
             <TextInput
                 size="md"
-                classNames={{ label: classes.inputLabel }}
+                classNames={{ label: classes.inputLabel, error: classes.error }}
                 label={translate("pages.registration.field.login.label")}
                 placeholder={translate("pages.registration.field.login.placeholder")}
                 onKeyDown={submitOnEnter}

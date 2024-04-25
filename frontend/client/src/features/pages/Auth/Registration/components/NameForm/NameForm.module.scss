@@ -5,3 +5,9 @@ html .inputLabel {
   margin-block: var(--mantine-radius-xs);
   font-weight: 700;
 }
+
+html .error {
+  margin-top:  var(--mantine-radius-md);
+  margin-left:  var(--mantine-radius-xs);
+  font-weight: 500;
+}

@@ -1,5 +1,11 @@
 export type TranslationSource = {
     activityCalendar: {
+        filters: {
+            activity: {
+                placeholder: string;
+                notFound: string;
+            };
+        };
         item: {
             participants: {
                 tooltip: string;
@@ -18,6 +24,26 @@ export type TranslationSource = {
     };
 
     notifications: {
+        reservations: {
+            add: {
+                success: {
+                    title: string;
+                    description: string;
+                };
+                error: {
+                    title: string;
+                };
+            };
+            remove: {
+                success: {
+                    title: string;
+                    description: string;
+                };
+                error: {
+                    title: string;
+                };
+            };
+        };
         user: {
             changeReservationsPermission: {
                 title: string;
@@ -60,6 +86,14 @@ export type TranslationSource = {
         };
         activities: {
             getAll: {
+                default: string;
+            };
+        };
+        reservations: {
+            add: {
+                default: string;
+            };
+            remove: {
                 default: string;
             };
         };
@@ -123,8 +157,13 @@ export type TranslationSource = {
                 leader: string;
             };
         };
+
         adminDashboard: {
+            activitiesPanel: {
+                tab: string;
+            };
             usersPanel: {
+                tab: string;
                 options: {
                     delete: string;
                 };
@@ -346,6 +385,8 @@ export type TranslationSource = {
                     validation: {
                         tooShort: string;
                         tooLong: string;
+                        taken: string;
+                        unableToCheckAvailability: string;
                     };
                     label: string;
                     placeholder: string;

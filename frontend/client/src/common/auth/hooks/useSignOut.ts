@@ -57,7 +57,7 @@ export const useSignOut = (): UseSignOut => {
 };
 
 const signOutRequest = () => {
-    return request("SignOut", { method: "POST" });
+    return request("SignOut");
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {

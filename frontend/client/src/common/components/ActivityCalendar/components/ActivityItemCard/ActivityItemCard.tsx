@@ -1,13 +1,15 @@
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Paper, Text } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import { IconPlus, IconUsers } from "@tabler/icons-react";
 import classNames from "classnames";
 
 import { AppRoute } from "../../../../../features/router";
 import { ActivityInstance } from "../../../../activities/Activities";
-import { useDateTimeLocale } from "../../../../hooks/useDateTimeLocale";
+import { useDateTimeLocale } from "../../../../hooks";
 import { useTranslate } from "../../../../i18n";
+import { useAddReservation } from "../../../../reservations";
 import { TextWithTooltip } from "../../../DataDisplay";
 
 import classes from "./ActivityItemCard.module.scss";
@@ -26,9 +28,12 @@ export const ActivityItemCard = ({
     leaderName,
     activityId,
 }: ActivityItemCardProps) => {
+    const { addReservation, isLoading: isAddReservationLoading } = useAddReservation(); // TODO: Implement add/remove reservation logic properly
+
     const navigate = useNavigate();
     const translate = useTranslate();
     const { locale } = useDateTimeLocale();
+
     const localeOptions = { hour: "2-digit", minute: "2-digit" } as const;
     const endsAt = new Date(startTime.getTime() + duration * 60000);
     const hasStartedAlready = startTime < new Date();
@@ -51,6 +56,28 @@ export const ActivityItemCard = ({
     const goToActivityDetails = useCallback(() => {
         navigate(AppRoute.ACTIVITY_DETAILS.replace(":id", activityId.toString()));
     }, [activityId, navigate]);
+
+    const handleAddReservation = useCallback(async () => {
+        try {
+            await addReservation(1);
+            notifications.show({
+                withBorder: true,
+                color: "success",
+                title: translate("notifications.reservations.add.success.title"),
+                message: translate("notifications.reservations.add.success.description", {
+                    activity: name,
+                }),
+            });
+        } catch (error) {
+            const message = (error as Error)?.message ?? "";
+            notifications.show({
+                withBorder: true,
+                color: "danger",
+                title: translate("notifications.reservations.add.error.title"),
+                message,
+            });
+        }
+    }, [addReservation, name, translate]);
 
     return (
         <Paper className={classNames(classes.calendarItem, { [classes.disabled]: hasStartedAlready })}>
@@ -92,6 +119,8 @@ export const ActivityItemCard = ({
                     size="xs"
                     variant="subtle"
                     color="success"
+                    loading={isAddReservationLoading}
+                    onClick={handleAddReservation}
                     rightSection={<IconPlus className={classes.joinIcon} />}
                 >
                     {translate("activityCalendar.item.enrollment.label")}

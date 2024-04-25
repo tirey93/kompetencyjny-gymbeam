@@ -3,6 +3,12 @@ import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
     activityCalendar: {
+        filters: {
+            activity: {
+                placeholder: "Search for activities",
+                notFound: "No results.",
+            },
+        },
         item: {
             participants: {
                 tooltip: "Number of people that already have enrolled: {{slotsTaken}}",
@@ -29,6 +35,14 @@ export const en: TranslationSource = {
         activities: {
             getAll: {
                 default: "Failed to retrieve list of activities. Something went wrong on our side.",
+            },
+        },
+        reservations: {
+            add: {
+                default: "Failed to add a reservation. Something went wrong on our side.",
+            },
+            remove: {
+                default: "Failed to remove the reservation. Something went wrong on our side.",
             },
         },
         user: {
@@ -60,6 +74,26 @@ export const en: TranslationSource = {
         },
     },
     notifications: {
+        reservations: {
+            add: {
+                success: {
+                    title: "Reservation added.",
+                    description: "Successfully reserved {{activity}} activity.",
+                },
+                error: {
+                    title: "Failed to add reservation.",
+                },
+            },
+            remove: {
+                success: {
+                    title: "Reservation removed.",
+                    description: "Successfully removed reservation of {{activity}} activity..",
+                },
+                error: {
+                    title: "Failed to remove reservation.",
+                },
+            },
+        },
         user: {
             changeReservationsPermission: {
                 title: "Reservation permissions change operation successful.",
@@ -123,7 +157,11 @@ export const en: TranslationSource = {
             },
         },
         adminDashboard: {
+            activitiesPanel: {
+                tab: "Activities",
+            },
             usersPanel: {
+                tab: "Users",
                 options: {
                     delete: "Delete user's account",
                 },
@@ -338,7 +376,12 @@ export const en: TranslationSource = {
                 login: {
                     label: "Login",
                     placeholder: "Enter your login",
-                    validation: { tooLong: "Up to {{length}} characters.", tooShort: "Minimum {{length}} characters." },
+                    validation: {
+                        tooLong: "Up to {{length}} characters.",
+                        tooShort: "Minimum {{length}} characters.",
+                        taken: "This login is already taken.",
+                        unableToCheckAvailability: "Unable to check login availability. Please try again later, sorry.",
+                    },
                 },
                 name: {
                     label: "Name",
