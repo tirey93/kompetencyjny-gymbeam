@@ -9,7 +9,6 @@ using GymBeam.Requests;
 using GymBeam.Response;
 using GymBeam.Utils;
 using MediatR;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
@@ -48,6 +47,7 @@ namespace GymBeam.Controllers
             try
             {
                 var response = await _mediator.Send(command);
+                AppendToCookie(response);
                 return Ok(response);
             }
             catch (UserAlreadyExistsException ex)
@@ -70,35 +70,15 @@ namespace GymBeam.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<UserResponse>> Login([FromBody] LoginRequest dto)
         {
-            var command = new LoginQuery
+            var query = new LoginQuery
             {
                 Password = dto.Password,
                 Username = dto.Username
             };
             try
             {
-                var response = await _mediator.Send(command);
-
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Role, response.Role)
-                };
-
-                var signingKey = Environment.GetEnvironmentVariable(_configuration["JWT:EnvironmentSecretVariableName"]);
-                if (string.IsNullOrEmpty(signingKey))
-                    throw new MissingSigningKeyException();
-
-                var token = JwtHelper.GetJwtToken(
-                    dto.Username,
-                    signingKey,
-                    _configuration["JWT:Issuer"],
-                    _configuration["JWT:Audience"],
-                    TimeSpan.FromMinutes(24*60),
-                    claims.ToArray());
-
-                Response.Cookies
-                    .AppendToCookie(Cookies.AccessToken, new JwtSecurityTokenHandler().WriteToken(token))
-                    .AppendToCookie(Cookies.UserId, response.Id.ToString());
+                var response = await _mediator.Send(query);
+                AppendToCookie(response);
 
                 return Ok(new UserResponse
                 {
@@ -147,6 +127,30 @@ namespace GymBeam.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError,
                     string.Format(Resource.ControllerInternalError, ex.Message));
             }
+        }
+
+        private void AppendToCookie(UserResponse response)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Role, response.Role)
+            };
+
+            var signingKey = Environment.GetEnvironmentVariable(_configuration["JWT:EnvironmentSecretVariableName"]);
+            if (string.IsNullOrEmpty(signingKey))
+                throw new MissingSigningKeyException();
+
+            var token = JwtHelper.GetJwtToken(
+                response.Name,
+                signingKey,
+                _configuration["JWT:Issuer"],
+                _configuration["JWT:Audience"],
+                TimeSpan.FromMinutes(24 * 60),
+                claims.ToArray());
+
+            Response.Cookies
+                .AppendToCookie(Cookies.AccessToken, new JwtSecurityTokenHandler().WriteToken(token))
+                .AppendToCookie(Cookies.UserId, response.Id.ToString());
         }
     }
 }
