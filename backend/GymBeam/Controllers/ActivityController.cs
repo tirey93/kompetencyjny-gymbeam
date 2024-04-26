@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Domain.Exceptions;
 using GymBeam.Commands;
+using GymBeam.Constants;
 
 namespace GymBeam.Controllers
 {

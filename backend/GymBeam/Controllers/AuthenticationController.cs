@@ -1,10 +1,14 @@
-﻿using GymBeam.Constants;
+﻿using Domain.Exceptions;
+using GymBeam.Commands;
+using GymBeam.Constants;
 using GymBeam.Exceptions;
 using GymBeam.Extensions;
 using GymBeam.Properties;
+using GymBeam.Queries;
 using GymBeam.Requests;
 using GymBeam.Response;
 using GymBeam.Utils;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
@@ -18,60 +22,82 @@ namespace GymBeam.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        public AuthenticationController(IConfiguration configuration)
+        private readonly IMediator _mediator;
+
+        public AuthenticationController(IConfiguration configuration, IMediator mediator)
         {
             _configuration = configuration;
+            _mediator = mediator;
         }
 
         [HttpPost("Register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [AllowAnonymous]
-        public ActionResult<UserResponse> Register([FromBody] RegisterRequest dto)
+        public async Task<ActionResult<UserResponse>> Register([FromBody] RegisterRequest dto)
         {
-            return new UserResponse
+            var command = new RegisterCommand
             {
-                Id = 34,
-                Name = dto.Username,
                 DisplayName = dto.DisplayName,
-                Role = "user",
-                ReservationDisabled = false
+                Password = dto.Password,
+                Username = dto.Username,
             };
+
+            try
+            {
+                var response = await _mediator.Send(command);
+                AppendToCookie(response);
+                return Ok(response);
+            }
+            catch (UserAlreadyExistsException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
         }
 
         [HttpPost("Login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [AllowAnonymous]
-        public ActionResult<UserResponse> Login([FromBody] LoginRequest dto)
+        public async Task<ActionResult<UserResponse>> Login([FromBody] LoginRequest dto)
         {
-            var claims = new List<Claim>
+            var query = new LoginQuery
             {
-                new Claim(ClaimTypes.Role, Roles.Admin)
+                Password = dto.Password,
+                Username = dto.Username
             };
-
-            int userId = 25;
             try
             {
-                var signingKey = Environment.GetEnvironmentVariable(_configuration["JWT:EnvironmentSecretVariableName"]);
-                if (string.IsNullOrEmpty(signingKey))
-                    throw new MissingSigningKeyException();
+                var response = await _mediator.Send(query);
+                AppendToCookie(response);
 
-                var token = JwtHelper.GetJwtToken(
-                    dto.Username,
-                    signingKey,
-                    _configuration["JWT:Issuer"],
-                    _configuration["JWT:Audience"],
-                    TimeSpan.FromMinutes(5),
-                    claims.ToArray());
-
-                Response.Cookies
-                    .AppendToCookie(Cookies.AccessToken, new JwtSecurityTokenHandler().WriteToken(token))
-                    .AppendToCookie(Cookies.UserId, userId.ToString());
-
-                return new UserResponse
+                return Ok(new UserResponse
                 {
-                    Id = 25,
-                    Name = dto.Username,
-                    DisplayName = "testDisplayName",
-                    Role = "User"
-                };
+                    Id = response.Id,
+                    Name = response.Name,
+                    DisplayName = response.DisplayName,
+                    Role = response.Role,
+                    ReservationDisabled = response.ReservationDisabled
+                });
+            }
+            catch (UserNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
+            }
+            catch (PasswordNotMatchException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
             }
             catch (Exception ex)
             {
@@ -81,36 +107,50 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost("Logout")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #if !DEBUG
         [Authorize(Roles = Roles.User)]
 #endif
         public IActionResult Logout()
         {
-            int userId;
             try
             {
-                if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
-                    throw new InvalidCookieException(Cookies.UserId);
-                if (!int.TryParse(cookiesUserId, out userId))
-                    throw new InvalidUserIdException();
+                Response.Cookies.Delete(Cookies.UserId);
+                Response.Cookies.Delete(Cookies.AccessToken);
 
                 return NoContent();
-            }
-            catch (InvalidCookieException ex)
-            {
-                return StatusCode((int)HttpStatusCode.BadRequest,
-                    string.Format(Resource.ControllerBadRequest, ex.Message));
-            }
-            catch (InvalidUserIdException ex)
-            {
-                return StatusCode((int)HttpStatusCode.BadRequest,
-                    string.Format(Resource.ControllerBadRequest, ex.Message));
             }
             catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError,
                     string.Format(Resource.ControllerInternalError, ex.Message));
             }
+        }
+
+        private void AppendToCookie(UserResponse response)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Role, response.Role)
+            };
+
+            var signingKey = Environment.GetEnvironmentVariable(_configuration["JWT:EnvironmentSecretVariableName"]);
+            if (string.IsNullOrEmpty(signingKey))
+                throw new MissingSigningKeyException();
+
+            var token = JwtHelper.GetJwtToken(
+                response.Name,
+                signingKey,
+                _configuration["JWT:Issuer"],
+                _configuration["JWT:Audience"],
+                TimeSpan.FromMinutes(24 * 60),
+                claims.ToArray());
+
+            Response.Cookies
+                .AppendToCookie(Cookies.AccessToken, new JwtSecurityTokenHandler().WriteToken(token))
+                .AppendToCookie(Cookies.UserId, response.Id.ToString());
         }
     }
 }
