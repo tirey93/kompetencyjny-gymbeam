@@ -28,7 +28,7 @@ namespace GymBeam.Tests.User
         [Fact]
         public void UpdateUserRole_ShouldSucceed()
         {
-            //Assign
+            //Arrange
             var newRole = Role.User.ToString();
             var userId = 43;
 
@@ -48,7 +48,7 @@ namespace GymBeam.Tests.User
         [Fact]
         public async void UpdateUserRole_WhenUserNotExists_ShouldThrowUserNotFoundException()
         {
-            //Assign
+            //Arrange
             var newRole = Role.User.ToString();
             var userId = 43;
 
@@ -80,6 +80,81 @@ namespace GymBeam.Tests.User
             // Assert
             var act = _userCommandHandler.Invoking(async x => await x.Handle(command, _cancellationTokenSource.Token));
             await act.Should().ThrowExactlyAsync<ArgumentException>();
+        }
+
+        [Fact]
+        public void UpdateUserReservationDisabledFlag_ShouldSucceed()
+        {
+            //Arrange
+            var flag = true;
+            var userId = 43;
+
+            var command = new UpdateUserReservationDisabledFlagCommand
+            {
+                NewReservationDisabledFlagValue = flag,
+                UserId = userId
+            };
+
+            //Act
+            _userCommandHandler.Handle(command, _cancellationTokenSource.Token);
+
+            //Assert
+            _repositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
+        }
+
+        [Fact]
+        public async void UpdateUserReservationDisabledFlag_WhenUserNotExists_ShouldThrowUserNotFoundException()
+        {
+            //Arrange
+            var flag = true;
+            var userId = 43;
+
+            var command = new UpdateUserReservationDisabledFlagCommand
+            {
+                NewReservationDisabledFlagValue = flag,
+                UserId = userId
+            };
+            _repositoryMock.Setup(x => x.GetUser(It.IsAny<int>())).Returns((Domain.User)null);
+
+            // Assert
+            var act = _userCommandHandler.Invoking(async x => await x.Handle(command, _cancellationTokenSource.Token));
+            await act.Should().ThrowExactlyAsync<UserNotFoundException>();
+        }
+
+        [Fact]
+        public void DeleteUser_ShouldSucceed()
+        {
+            //Arrange
+            var userId = 43;
+
+            var command = new DeleteUserCommand
+            {
+                UserId = userId
+            };
+
+            //Act
+            _userCommandHandler.Handle(command, _cancellationTokenSource.Token);
+
+            //Assert
+            _repositoryMock.Verify(x => x.SaveChangesAsync(), Times.Once);
+            _repositoryMock.Verify(x => x.Delete(It.IsAny<Domain.User>()), Times.Once);
+        }
+
+        [Fact]
+        public async void DeleteUser_WhenUserNotExists_ShouldThrowUserNotFoundException()
+        {
+            //Arrange
+            var userId = 43;
+
+            var command = new DeleteUserCommand
+            {
+                UserId = userId
+            };
+            _repositoryMock.Setup(x => x.GetUser(It.IsAny<int>())).Returns((Domain.User)null);
+
+            // Assert
+            var act = _userCommandHandler.Invoking(async x => await x.Handle(command, _cancellationTokenSource.Token));
+            await act.Should().ThrowExactlyAsync<UserNotFoundException>();
         }
     }
 }
