@@ -70,11 +70,38 @@ namespace Domain.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User with name {0} already exists..
+        /// </summary>
+        internal static string ExceptionUserAlreadyExists {
+            get {
+                return ResourceManager.GetString("ExceptionUserAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User with name {0} not found..
+        /// </summary>
+        internal static string ExceptionUserNameNotFound {
+            get {
+                return ResourceManager.GetString("ExceptionUserNameNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User with ID {0} not found..
         /// </summary>
         internal static string ExceptionUserNotFound {
             get {
                 return ResourceManager.GetString("ExceptionUserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password for user name {0} not match..
+        /// </summary>
+        internal static string ExceptionUserPasswordNotMatch {
+            get {
+                return ResourceManager.GetString("ExceptionUserPasswordNotMatch", resourceCulture);
             }
         }
     }
