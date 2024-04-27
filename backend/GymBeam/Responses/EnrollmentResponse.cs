@@ -2,6 +2,7 @@
 {
     public class EnrollmentResponse
     {
+        public int? ReservationId { get; set; }
         public int ActivityId { get; set; }
         public int LeaderId { get; set; }
         public int SlotsTaken { get; set; }
