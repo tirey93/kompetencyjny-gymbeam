@@ -20,6 +20,7 @@ namespace GymBeam.Controllers
             {
                 new EnrollmentResponse
                 {
+                    ReservationId = 2,
                     LeaderId = 2,
                     ActivityId = 45,
                     SlotsTaken = 18,
@@ -42,6 +43,7 @@ namespace GymBeam.Controllers
             {
                 new EnrollmentResponse
                 {
+                    ReservationId = 2,
                     ActivityId = 45,
                     LeaderId = 2,
                     SlotsTaken = 15,
