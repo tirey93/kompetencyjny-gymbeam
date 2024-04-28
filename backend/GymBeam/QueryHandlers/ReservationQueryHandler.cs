@@ -18,7 +18,7 @@ namespace GymBeam.QueryHandlers
         {
             var reservations = _repository.GetReservations();
 
-            if (reservations == null || !reservations.Any())
+            if (reservations == null)
             {
                 return Task.FromResult(Enumerable.Empty<ReservationResponse>());
             }
