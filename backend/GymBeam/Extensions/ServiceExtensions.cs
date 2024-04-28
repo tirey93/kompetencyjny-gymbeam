@@ -61,12 +61,13 @@ namespace GymBeam.Extensions
 
         public static void AddFluentValidation(this IServiceCollection services)
         {
-            services.AddValidatorsFromAssemblyContaining<RegisterRequestValidator>();
-            services.AddValidatorsFromAssemblyContaining<LoginRequestValidator>();
-            services.AddValidatorsFromAssemblyContaining<UpdateRoleRequestValidator>();
-            services.AddValidatorsFromAssemblyContaining<ActivityRequestValidator>();
-            services.AddFluentValidationAutoValidation();
-            services.AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssemblyContaining<RegisterRequestValidator>()
+                .AddValidatorsFromAssemblyContaining<LoginRequestValidator>()
+                .AddValidatorsFromAssemblyContaining<UpdateRoleRequestValidator>()
+                .AddValidatorsFromAssemblyContaining<ActivityRequestValidator>()
+                .AddValidatorsFromAssemblyContaining<ReservationRequestValidator>()
+                .AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters();
         }
     }
 }

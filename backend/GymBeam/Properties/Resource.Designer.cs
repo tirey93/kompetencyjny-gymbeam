@@ -115,6 +115,15 @@ namespace GymBeam.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ActivityId is required..
+        /// </summary>
+        public static string ValidatorActivityIdRequired {
+            get {
+                return ResourceManager.GetString("ValidatorActivityIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cron field is required..
         /// </summary>
         public static string ValidatorCronRequired {
@@ -255,6 +264,15 @@ namespace GymBeam.Properties {
         public static string ValidatorStartTimeBeforeEndTime {
             get {
                 return ResourceManager.GetString("ValidatorStartTimeBeforeEndTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start time is required..
+        /// </summary>
+        public static string ValidatorStartTimeRequired {
+            get {
+                return ResourceManager.GetString("ValidatorStartTimeRequired", resourceCulture);
             }
         }
         

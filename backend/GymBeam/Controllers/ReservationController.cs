@@ -5,6 +5,10 @@ using GymBeam.Response;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using MediatR;
+using GymBeam.Commands;
+using Domain.Exceptions;
+using GymBeam.Constants;
+using GymBeam.Exceptions;
 
 namespace GymBeam.Controllers
 {
@@ -39,12 +43,58 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #if !DEBUG
         [Authorize(Roles = Roles.User)]
 #endif
-        public IActionResult Post([FromBody] ReservationRequest dto)
+        public async Task<ActionResult> Post([FromBody] ReservationRequest dto)
         {
-            return NoContent();
+            int userId;
+            var request = new CreateReservationCommand
+            {
+                ActivityId = dto.ActivityId,
+                StartTime = dto.StartTime
+            };
+            try
+            {
+                if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
+                    throw new InvalidCookieException(Cookies.UserId);
+                if (!int.TryParse(cookiesUserId, out userId))
+                    throw new InvalidUserIdException();
+
+                request.UserId = userId;
+
+                await _mediator.Send(request);
+                return NoContent();
+            }
+            catch (InvalidCookieException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (InvalidUserIdException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (UserNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
+            }
+            catch (ActivityNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
         }
 
         [HttpDelete("{id:int}")]

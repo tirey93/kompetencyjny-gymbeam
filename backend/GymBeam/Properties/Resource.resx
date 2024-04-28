@@ -135,6 +135,9 @@
   <data name="ExceptionUserIdIsInvalid" xml:space="preserve">
     <value>User id is invalid.</value>
   </data>
+  <data name="ValidatorActivityIdRequired" xml:space="preserve">
+    <value>ActivityId is required.</value>
+  </data>
   <data name="ValidatorCronRequired" xml:space="preserve">
     <value>Cron field is required.</value>
   </data>
@@ -182,6 +185,9 @@
   </data>
   <data name="ValidatorStartTimeBeforeEndTime" xml:space="preserve">
     <value>Start time must be before end time.</value>
+  </data>
+  <data name="ValidatorStartTimeRequired" xml:space="preserve">
+    <value>Start time is required.</value>
   </data>
   <data name="ValidatorTotalCapacityGreaterThanZero" xml:space="preserve">
     <value>Total capacity must be greater than zero.</value>
