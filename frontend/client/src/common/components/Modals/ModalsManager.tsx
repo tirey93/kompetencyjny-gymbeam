@@ -3,13 +3,11 @@ import { ModalsProvider } from "@mantine/modals";
 
 import {
     AddActivityModal,
-    DeleteActivityModal,
-} from "../../../features/pages/AdminDashboard/components/ActivitiesManagementPanel/components";
-import {
     ChangeUserReservationPermissionsModal,
     ChangeUserRoleModal,
+    DeleteActivityModal,
     DeleteUserModal,
-} from "../../../features/pages/AdminDashboard/components/UserManagementPanel/modals";
+} from "./modals";
 
 export const CONTEXT_MODALS = {
     toggleUserReservationsPermission: ChangeUserReservationPermissionsModal,

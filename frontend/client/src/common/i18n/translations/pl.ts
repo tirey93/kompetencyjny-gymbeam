@@ -26,6 +26,53 @@ export const pl: TranslationSource = {
         },
     },
 
+    modals: {
+        activities: {
+            delete: {
+                header: "Usuń zajęcia",
+                caption:
+                    "Czy na pewno chcesz usunąć te zajęcia? Wszystkie instancje tych zajęć zostaną usunięte, a rezerwacje przepadną na zawsze.",
+            },
+            add: {
+                header: {
+                    add: "Dodaj zajęcia",
+                    edit: "Edytuj zajęcia",
+                },
+                buttons: {
+                    save: "Zapisz",
+                    cancel: "Anuluj",
+                },
+            },
+        },
+        user: {
+            delete: {
+                buttons: {
+                    confirm: "Potwierdź",
+                    cancel: "Anuluj",
+                },
+                title: "Usuwanie użytkownika",
+                caption: "Ta akcja jest nieodwracalna! Czy na pewno chcesz usunąć tego użytkownika?",
+            },
+            changeRole: {
+                buttons: {
+                    confirm: "Potwierdź",
+                    cancel: "Anuluj",
+                },
+                title: "Zmiana roli użytkownika",
+                caption: 'Czy na pewno chcesz zmienić rolę tego użytkownika na "{{role}}"?',
+            },
+            toggleReservations: {
+                buttons: {
+                    confirm: "Confirm",
+                    cancel: "Cancel",
+                },
+                title: "Zmiana uprawnień",
+                toggleOnCaption: "Czy na pewno chcesz pozwolić temu użytkownikowi na rezerwowanie zajęć?",
+                toggleOffCaption: "Czy na pewno chcesz zablokować temu użytkownikowi możliwość rezerwacji zajęć?",
+            },
+        },
+    },
+
     activityCalendar: {
         filters: {
             activity: {
@@ -160,7 +207,8 @@ export const pl: TranslationSource = {
             qr: "Karnet",
             account: "Konto",
             activities: "Zajęcia",
-            adminDashboard: "Panel admina",
+            usersDashboard: "Zarządzanie użytkownikami",
+            activitiesDashboard: "Zarządzanie zajęciami",
         },
     },
     user: {
@@ -192,79 +240,36 @@ export const pl: TranslationSource = {
                 leader: "Prowadzący",
             },
         },
-        adminDashboard: {
-            activitiesPanel: {
-                tab: "Zajęcia",
-                addNewButton: "Dodaj",
-                deleteModal: {
-                    header: "Usuń zajęcia",
-                    caption:
-                        "Czy na pewno chcesz usunąć te zajęcia? Wszystkie instancje tych zajęć zostaną usunięte, a rezerwacje przepadną na zawsze.",
-                },
-                addModal: {
-                    header: {
-                        add: "Dodaj zajęcia",
-                        edit: "Edytuj zajęcia",
-                    },
-                    buttons: {
-                        save: "Zapisz",
-                        cancel: "Anuluj",
-                    },
-                },
+
+        activitiesDashboard: {
+            tab: "Zajęcia",
+            addNewButton: "Dodaj",
+        },
+
+        usersDashboard: {
+            tab: "Użytkownicy",
+            options: {
+                delete: "Usuń konto użytkownika",
             },
-            usersPanel: {
-                tab: "Użytkownicy",
-                options: {
-                    delete: "Usuń konto użytkownika",
+            search: {
+                placeholder: "Wyszukaj użytkownika",
+            },
+            header: {
+                id: "ID",
+                user: "Użytkownik",
+                login: "Login",
+                role: "Rola",
+                reservations: "Rezerwacje",
+                options: "Opcje",
+            },
+            retryButton: "Ponów",
+            rows: {
+                reservations: {
+                    on: "Włączone",
+                    off: "Wyłączone",
                 },
-                modals: {
-                    delete: {
-                        buttons: {
-                            confirm: "Potwierdź",
-                            cancel: "Anuluj",
-                        },
-                        title: "Usuwanie użytkownika",
-                        caption: "Ta akcja jest nieodwracalna! Czy na pewno chcesz usunąć tego użytkownika?",
-                    },
-                    changeRole: {
-                        buttons: {
-                            confirm: "Potwierdź",
-                            cancel: "Anuluj",
-                        },
-                        title: "Zmiana roli użytkownika",
-                        caption: 'Czy na pewno chcesz zmienić rolę tego użytkownika na "{{role}}"?',
-                    },
-                    toggleReservations: {
-                        buttons: {
-                            confirm: "Confirm",
-                            cancel: "Cancel",
-                        },
-                        title: "Zmiana uprawnień",
-                        toggleOnCaption: "Czy na pewno chcesz pozwolić temu użytkownikowi na rezerwowanie zajęć?",
-                        toggleOffCaption:
-                            "Czy na pewno chcesz zablokować temu użytkownikowi możliwość rezerwacji zajęć?",
-                    },
-                },
-                search: {
-                    placeholder: "Wyszukaj użytkownika",
-                },
-                header: {
-                    id: "ID",
-                    user: "Użytkownik",
-                    login: "Login",
-                    role: "Rola",
-                    reservations: "Rezerwacje",
-                    options: "Opcje",
-                },
-                retryButton: "Ponów",
-                rows: {
-                    reservations: {
-                        on: "Włączone",
-                        off: "Wyłączone",
-                    },
-                    name: "Nazwa",
-                    login: "Login",
-                },
+                name: "Nazwa",
+                login: "Login",
             },
         },
 

@@ -23,6 +23,52 @@ export type TranslationSource = {
         };
     };
 
+    modals: {
+        activities: {
+            delete: {
+                header: string;
+                caption: string;
+            };
+            add: {
+                header: {
+                    add: string;
+                    edit: string;
+                };
+                buttons: {
+                    save: string;
+                    cancel: string;
+                };
+            };
+        };
+        user: {
+            delete: {
+                buttons: {
+                    confirm: string;
+                    cancel: string;
+                };
+                title: string;
+                caption: string;
+            };
+            changeRole: {
+                buttons: {
+                    confirm: string;
+                    cancel: string;
+                };
+                title: string;
+                caption: string;
+            };
+            toggleReservations: {
+                buttons: {
+                    confirm: string;
+                    cancel: string;
+                };
+                title: string;
+                toggleOnCaption: string;
+                toggleOffCaption: string;
+            };
+        };
+    };
+
     activityCalendar: {
         filters: {
             activity: {
@@ -159,7 +205,8 @@ export type TranslationSource = {
             qr: string;
             account: string;
             activities: string;
-            adminDashboard: string;
+            usersDashboard: string;
+            activitiesDashboard: string;
         };
     };
 
@@ -195,77 +242,35 @@ export type TranslationSource = {
             };
         };
 
-        adminDashboard: {
-            activitiesPanel: {
-                tab: string;
-                addNewButton: string;
-                deleteModal: {
-                    header: string;
-                    caption: string;
-                };
-                addModal: {
-                    header: {
-                        add: string;
-                        edit: string;
-                    };
-                    buttons: {
-                        save: string;
-                        cancel: string;
-                    };
-                };
+        activitiesDashboard: {
+            tab: string;
+            addNewButton: string;
+        };
+
+        usersDashboard: {
+            tab: string;
+            options: {
+                delete: string;
             };
-            usersPanel: {
-                tab: string;
-                options: {
-                    delete: string;
+            search: {
+                placeholder: string;
+            };
+            header: {
+                id: string;
+                user: string;
+                login: string;
+                role: string;
+                reservations: string;
+                options: string;
+            };
+            retryButton: string;
+            rows: {
+                reservations: {
+                    on: string;
+                    off: string;
                 };
-                modals: {
-                    delete: {
-                        buttons: {
-                            confirm: string;
-                            cancel: string;
-                        };
-                        title: string;
-                        caption: string;
-                    };
-                    changeRole: {
-                        buttons: {
-                            confirm: string;
-                            cancel: string;
-                        };
-                        title: string;
-                        caption: string;
-                    };
-                    toggleReservations: {
-                        buttons: {
-                            confirm: string;
-                            cancel: string;
-                        };
-                        title: string;
-                        toggleOnCaption: string;
-                        toggleOffCaption: string;
-                    };
-                };
-                search: {
-                    placeholder: string;
-                };
-                header: {
-                    id: string;
-                    user: string;
-                    login: string;
-                    role: string;
-                    reservations: string;
-                    options: string;
-                };
-                retryButton: string;
-                rows: {
-                    reservations: {
-                        on: string;
-                        off: string;
-                    };
-                    name: string;
-                    login: string;
-                };
+                name: string;
+                login: string;
             };
         };
 

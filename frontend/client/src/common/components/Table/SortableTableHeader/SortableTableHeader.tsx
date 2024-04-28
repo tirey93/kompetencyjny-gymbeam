@@ -2,7 +2,7 @@ import { Table } from "@mantine/core";
 
 import { SortableTableHeaderCell, SortableTableHeaderCellProps } from "./SortableTableHeaderCell";
 
-import classes from "../../../../features/pages/AdminDashboard/components/ActivitiesManagementPanel/ActivitiesManagementPanel.module.scss";
+import classes from "./SortableTableHeaderCell.module.scss";
 
 export type SortableTableColumnsConfig<TData> = Partial<SortableTableHeaderCellProps> & { column: keyof TData };
 

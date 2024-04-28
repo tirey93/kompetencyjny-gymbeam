@@ -1,1 +1,1 @@
-export { AppNavigation } from "./Shell/AppNavigation";
+export { AppNavigation } from "./AppNavigation";
