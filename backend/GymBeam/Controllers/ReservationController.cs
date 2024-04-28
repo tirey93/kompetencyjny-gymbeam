@@ -18,6 +18,8 @@ namespace GymBeam.Controllers
             _mediator = mediator;
         }
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
 #if !DEBUG
         [Authorize(Roles = Roles.Admin)]
 #endif
