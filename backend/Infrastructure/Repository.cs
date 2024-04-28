@@ -34,6 +34,19 @@ namespace Infrastructure
         {
             return _appDbContext.Activities.Include(i => i.Leader).FirstOrDefault(x => x.Id == id);
         }
+        public List<Reservation> GetReservations(Func<Reservation, bool>? predicate = null)
+        {
+            if (predicate == null)
+                return _appDbContext.Reservations
+                    .Include(u => u.User)
+                    .Include(a => a.Activity)
+                    .ToList();
+            return _appDbContext.Reservations
+                .Include(u => u.User)
+                .Include(a => a.Activity)
+                .Where(predicate)
+                .ToList();
+        }
 
         public void Add<T>(T entity) where T : class
         {

@@ -1,8 +1,10 @@
-﻿using GymBeam.Constants;
+﻿using GymBeam.Properties;
+using GymBeam.Queries;
 using GymBeam.Requests;
 using GymBeam.Response;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using MediatR;
 
 namespace GymBeam.Controllers
 {
@@ -10,57 +12,30 @@ namespace GymBeam.Controllers
     [Route("[controller]")]
     public class ReservationController : ControllerBase
     {
+        private readonly IMediator _mediator;
+        public ReservationController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
 #if !DEBUG
         [Authorize(Roles = Roles.Admin)]
 #endif
-        public ActionResult<IEnumerable<ReservationResponse>> Get()
+        public async Task<ActionResult<IEnumerable<ReservationResponse>>> Get()
         {
-
-            return new List<ReservationResponse>
+            try
             {
-                new ReservationResponse
-                {
-                    Id = 5,
-                    ActivityId = 1,
-                    ActivityName = "Joga",
-                    Duration = 20,
-                    LeaderName = "testLeaderName",
-                    StartTime = DateTime.Now,
-                    UserId = 56,
-                    UserDisplayName = "testUser1"
-                },
-                new ReservationResponse
-                {
-                    Id = 8,
-                    ActivityId = 2,
-                    ActivityName = "Boks",
-                    Duration = 90,
-                    LeaderName = "testLeaderName2",
-                    StartTime = DateTime.Now.AddHours(2),
-                    UserId = 76,
-                    UserDisplayName = "testUser2"
-                }
-            };
-        }
-
-        [HttpGet("{id:int}")]
-#if !DEBUG
-        [Authorize(Roles = Roles.User)]
-#endif
-        public ActionResult<ReservationResponse> Get(int id)
-        {
-            return new ReservationResponse
+                var query = new GetAllReservationsQuery();
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (Exception ex)
             {
-                Id = id,
-                ActivityId = 6,
-                ActivityName = "Taniec",
-                Duration = 45,
-                LeaderName = "LeaderTanca",
-                StartTime = DateTime.Now.AddDays(2),
-                UserId = 96,
-                UserDisplayName = "testUser3"
-            };
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
         }
 
         [HttpPost]
