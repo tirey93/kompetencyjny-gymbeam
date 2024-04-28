@@ -1,9 +1,14 @@
-import { Box, Table } from "@mantine/core";
+import { Button, Group, Stack, Table } from "@mantine/core";
+import { IconPlus } from "@tabler/icons-react";
 
 import { useActivitiesColumnsConfig } from "./hooks/useActivitiesColumnsConfig";
+import { useActivitiesModalEvents } from "./hooks/useActivitiesModalEvents";
 import { Activity } from "../../../../../common/activities/Activities";
+import { SearchBar } from "../../../../../common/components/DataInput";
 import { SortableTableHeader } from "../../../../../common/components/Table";
 import { useSearchAndSort } from "../../../../../common/hooks";
+import { useTranslate } from "../../../../../common/i18n";
+import { ActivityRow } from "./components";
 
 import classes from "./ActivitiesManagementPanel.module.scss";
 
@@ -23,13 +28,22 @@ const MOCK: Activity = {
 
 export const ActivitiesManagementPanel = () => {
     const columnsConfig = useActivitiesColumnsConfig();
-    const { sortBy, onSort, sortDirection, data } = useSearchAndSort<Activity>({
+    const translate = useTranslate();
+    const { openAddModal, openDeleteModal } = useActivitiesModalEvents();
+
+    const { sortBy, onSort, sortDirection, data, onSearch } = useSearchAndSort<Activity>({
         dataToProcess: [MOCK],
-        predicates: ["name", "leaderName"],
+        predicates: ["name"],
     });
 
     return (
-        <Box className={classes.container}>
+        <Stack className={classes.container}>
+            <Group>
+                <SearchBar placeholder="Test" onSearch={onSearch} className={classes.searchBar} />
+                <Button rightSection={<IconPlus />} variant="light" color="success" onClick={() => openAddModal()}>
+                    {translate("pages.adminDashboard.activitiesPanel.addNewButton")}
+                </Button>
+            </Group>
             <Table.ScrollContainer minWidth={200}>
                 <Table stickyHeader highlightOnHover>
                     <SortableTableHeader
@@ -40,21 +54,16 @@ export const ActivitiesManagementPanel = () => {
                     />
                     <Table.Tbody>
                         {data.map((item) => (
-                            <Table.Tr key={item.id}>
-                                <Table.Td>{item.id}</Table.Td>
-                                <Table.Td>{item.name}</Table.Td>
-                                <Table.Td>{item.startTime.toLocaleTimeString()}</Table.Td>
-                                <Table.Td>{item.endTime.toLocaleTimeString()}</Table.Td>
-                                <Table.Td>{item.totalCapacity}</Table.Td>
-                                <Table.Td>{item.longDescription}</Table.Td>
-                                <Table.Td>{item.shortDescription}</Table.Td>
-                                <Table.Td>{item.leaderName}</Table.Td>
-                                <Table.Td>{item.cron}</Table.Td>
-                            </Table.Tr>
+                            <ActivityRow
+                                key={item.id}
+                                activity={item}
+                                onEdit={openAddModal}
+                                onDelete={openDeleteModal}
+                            />
                         ))}
                     </Table.Tbody>
                 </Table>
             </Table.ScrollContainer>
-        </Box>
+        </Stack>
     );
 };

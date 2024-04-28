@@ -2,6 +2,30 @@
 import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
+    weekday: {
+        monday: {
+            short: "Mon",
+        },
+        tuesday: {
+            short: "Tue",
+        },
+        wednesday: {
+            short: "Wed",
+        },
+        thursday: {
+            short: "Thu",
+        },
+        friday: {
+            short: "Fri",
+        },
+        saturday: {
+            short: "Sat",
+        },
+        sunday: {
+            short: "Sun",
+        },
+    },
+
     activityCalendar: {
         filters: {
             activity: {
@@ -148,6 +172,18 @@ export const en: TranslationSource = {
             admin: "Admin",
         },
     },
+    activity: {
+        id: "ID",
+        name: "Name",
+        duration: "Duration",
+        capacity: "Slots",
+        startTime: "Start time",
+        weekdays: "Weekdays",
+        period: "Period",
+        leader: "Leader",
+        description: "Long description",
+        summary: "Short description",
+    },
     pages: {
         activities: {
             details: {
@@ -159,6 +195,22 @@ export const en: TranslationSource = {
         adminDashboard: {
             activitiesPanel: {
                 tab: "Activities",
+                addNewButton: "Add new",
+                deleteModal: {
+                    header: "Delete activity",
+                    caption:
+                        "Are you sure you want to delete this activity? All instances of this activity will be deleted and all reservations will be lost.",
+                },
+                addModal: {
+                    header: {
+                        add: "Add activity",
+                        edit: "Edit activity",
+                    },
+                    buttons: {
+                        save: "Save",
+                        cancel: "Cancel",
+                    },
+                },
             },
             usersPanel: {
                 tab: "Users",
@@ -187,7 +239,7 @@ export const en: TranslationSource = {
                             confirm: "Confirm",
                             cancel: "Cancel",
                         },
-                        title: "Change reservations permissions",
+                        title: "Change permissions",
                         toggleOnCaption: "Are you sure you want to allow this user to make reservations?",
                         toggleOffCaption: "Are you sure you want to prevent this user from making any reservations?",
                     },

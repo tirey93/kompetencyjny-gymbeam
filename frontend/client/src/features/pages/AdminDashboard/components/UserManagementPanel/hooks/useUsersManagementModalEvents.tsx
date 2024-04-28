@@ -14,6 +14,7 @@ export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents =
         (user: UserDetails) =>
             modals.openContextModal({
                 modal: "deleteUser",
+                withCloseButton: false,
                 centered: true,
                 innerProps: {
                     user,
@@ -27,6 +28,7 @@ export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents =
             modals.openContextModal({
                 modal: "changeUserRole",
                 centered: true,
+                withCloseButton: false,
                 innerProps: {
                     user,
                     newRole,
@@ -40,6 +42,7 @@ export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents =
             modals.openContextModal({
                 modal: "toggleUserReservationsPermission",
                 centered: true,
+                withCloseButton: false,
                 innerProps: {
                     user,
                 },

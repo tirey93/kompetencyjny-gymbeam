@@ -1,17 +1,13 @@
 import { useCallback } from "react";
-import { Button, Group, Stack, Text } from "@mantine/core";
 import { ContextModalProps, modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
-import classNames from "classnames";
 
 import { UserDetails, UserRole } from "../../../../../../../common/auth";
 import { ErrorMessage } from "../../../../../../../common/components/DataDisplay";
+import { Modal } from "../../../../../../../common/components/Modals";
 import { UserShortInfo } from "../../../../../../../common/components/User";
 import { useTranslate } from "../../../../../../../common/i18n";
-import { useChangeUserRole } from "../../hooks/useChangeUserRole";
-
-import sharedClasses from "../UserManagementPanelModals.module.scss";
-import classes from "./ChangeUserRoleModal.module.scss";
+import { useChangeUserRole } from "../../hooks";
 
 type ChangeUserRoleModalProps = ContextModalProps<{
     user: UserDetails;
@@ -41,25 +37,18 @@ export const ChangeUserRoleModal = ({ innerProps: { user, newRole } }: ChangeUse
     }, [changeRole, newRole, onClose, translate, user.id]);
 
     return (
-        <Stack className={sharedClasses.container}>
-            <Text className={classNames(classes.title, sharedClasses.title)}>
-                {translate("pages.adminDashboard.usersPanel.modals.changeRole.title")}
-            </Text>
-
-            <Text className={sharedClasses.caption}>
+        <Modal.Wrapper>
+            <Modal.Title>{translate("pages.adminDashboard.usersPanel.modals.changeRole.title")}</Modal.Title>
+            <Modal.Caption>
                 {translate("pages.adminDashboard.usersPanel.modals.changeRole.caption", { role: translatedRole })}
-            </Text>
-            <UserShortInfo user={user} />
-            {error && <ErrorMessage onClose={reset}>{error}</ErrorMessage>}
+            </Modal.Caption>
 
-            <Group className={sharedClasses.buttonsContainer}>
-                <Button onClick={onClose} variant="default">
-                    {translate("pages.adminDashboard.usersPanel.modals.changeRole.buttons.cancel")}
-                </Button>
-                <Button onClick={handleChangeRole}>
-                    {translate("pages.adminDashboard.usersPanel.modals.changeRole.buttons.confirm")}
-                </Button>
-            </Group>
-        </Stack>
+            <Modal.Body>
+                <UserShortInfo user={user} />
+                {error && <ErrorMessage onClose={reset}>{error}</ErrorMessage>}
+            </Modal.Body>
+
+            <Modal.Footer onSubmit={handleChangeRole} onCancel={onClose} />
+        </Modal.Wrapper>
     );
 };

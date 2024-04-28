@@ -70,7 +70,7 @@ namespace GymBeam.Controllers
                     Id = 25,
                     Name = dto.Username,
                     DisplayName = "testDisplayName",
-                    Role = "User"
+                    Role = "Admin"
                 };
             }
             catch (Exception ex)

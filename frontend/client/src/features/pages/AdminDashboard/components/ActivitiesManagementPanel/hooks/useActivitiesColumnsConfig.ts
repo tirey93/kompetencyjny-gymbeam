@@ -21,6 +21,10 @@ export const useActivitiesColumnsConfig = (): SortableTableColumnsConfig<Activit
             column: "endTime",
         },
         {
+            children: "Duration",
+            column: "duration",
+        },
+        {
             children: "Capacity",
             column: "totalCapacity",
         },

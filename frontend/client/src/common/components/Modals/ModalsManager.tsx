@@ -2,6 +2,10 @@ import { PropsWithChildren } from "react";
 import { ModalsProvider } from "@mantine/modals";
 
 import {
+    AddActivityModal,
+    DeleteActivityModal,
+} from "../../../features/pages/AdminDashboard/components/ActivitiesManagementPanel/components";
+import {
     ChangeUserReservationPermissionsModal,
     ChangeUserRoleModal,
     DeleteUserModal,
@@ -11,6 +15,8 @@ export const CONTEXT_MODALS = {
     toggleUserReservationsPermission: ChangeUserReservationPermissionsModal,
     changeUserRole: ChangeUserRoleModal,
     deleteUser: DeleteUserModal,
+    addActivity: AddActivityModal,
+    deleteActivity: DeleteActivityModal,
 };
 
 export const ModalsManager = ({ children }: PropsWithChildren) => {

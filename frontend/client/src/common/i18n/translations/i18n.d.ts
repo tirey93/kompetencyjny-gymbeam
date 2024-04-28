@@ -1,4 +1,28 @@
 export type TranslationSource = {
+    weekday: {
+        monday: {
+            short: string;
+        };
+        tuesday: {
+            short: string;
+        };
+        wednesday: {
+            short: string;
+        };
+        thursday: {
+            short: string;
+        };
+        friday: {
+            short: string;
+        };
+        saturday: {
+            short: string;
+        };
+        sunday: {
+            short: string;
+        };
+    };
+
     activityCalendar: {
         filters: {
             activity: {
@@ -149,6 +173,19 @@ export type TranslationSource = {
         };
     };
 
+    activity: {
+        id: string;
+        name: string;
+        duration: string;
+        capacity: string;
+        startTime: string;
+        weekdays: string;
+        period: string;
+        leader: string;
+        description: string;
+        summary: string;
+    };
+
     pages: {
         activities: {
             details: {
@@ -161,6 +198,21 @@ export type TranslationSource = {
         adminDashboard: {
             activitiesPanel: {
                 tab: string;
+                addNewButton: string;
+                deleteModal: {
+                    header: string;
+                    caption: string;
+                };
+                addModal: {
+                    header: {
+                        add: string;
+                        edit: string;
+                    };
+                    buttons: {
+                        save: string;
+                        cancel: string;
+                    };
+                };
             };
             usersPanel: {
                 tab: string;

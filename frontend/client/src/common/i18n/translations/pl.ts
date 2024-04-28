@@ -2,6 +2,30 @@
 import { TranslationSource } from "./i18n";
 
 export const pl: TranslationSource = {
+    weekday: {
+        monday: {
+            short: "Pon",
+        },
+        tuesday: {
+            short: "Wt",
+        },
+        wednesday: {
+            short: "Śr",
+        },
+        thursday: {
+            short: "Czw",
+        },
+        friday: {
+            short: "Pt",
+        },
+        saturday: {
+            short: "Sob",
+        },
+        sunday: {
+            short: "Ndz",
+        },
+    },
+
     activityCalendar: {
         filters: {
             activity: {
@@ -148,6 +172,18 @@ export const pl: TranslationSource = {
             admin: "Administrator",
         },
     },
+    activity: {
+        id: "ID",
+        name: "Nazwa",
+        duration: "Czas trwania",
+        capacity: "Miejsca",
+        startTime: "Czas startu",
+        weekdays: "Dni tygodnia",
+        period: "Okres powtarzania",
+        leader: "Trener",
+        description: "Długi opis",
+        summary: "Krótki opis",
+    },
     pages: {
         activities: {
             details: {
@@ -159,6 +195,22 @@ export const pl: TranslationSource = {
         adminDashboard: {
             activitiesPanel: {
                 tab: "Zajęcia",
+                addNewButton: "Dodaj",
+                deleteModal: {
+                    header: "Usuń zajęcia",
+                    caption:
+                        "Czy na pewno chcesz usunąć te zajęcia? Wszystkie instancje tych zajęć zostaną usunięte, a rezerwacje przepadną na zawsze.",
+                },
+                addModal: {
+                    header: {
+                        add: "Dodaj zajęcia",
+                        edit: "Edytuj zajęcia",
+                    },
+                    buttons: {
+                        save: "Zapisz",
+                        cancel: "Anuluj",
+                    },
+                },
             },
             usersPanel: {
                 tab: "Użytkownicy",
@@ -187,7 +239,7 @@ export const pl: TranslationSource = {
                             confirm: "Confirm",
                             cancel: "Cancel",
                         },
-                        title: "Zmiana uprawnień do rezerwacji",
+                        title: "Zmiana uprawnień",
                         toggleOnCaption: "Czy na pewno chcesz pozwolić temu użytkownikowi na rezerwowanie zajęć?",
                         toggleOffCaption:
                             "Czy na pewno chcesz zablokować temu użytkownikowi możliwość rezerwacji zajęć?",

@@ -1,17 +1,13 @@
 import { useCallback } from "react";
-import { Button, Group, Stack, Text } from "@mantine/core";
 import { ContextModalProps, modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
-import classNames from "classnames";
 
 import { UserDetails } from "../../../../../../../common/auth";
 import { ErrorMessage } from "../../../../../../../common/components/DataDisplay";
+import { Modal } from "../../../../../../../common/components/Modals";
 import { UserShortInfo } from "../../../../../../../common/components/User";
 import { useTranslate } from "../../../../../../../common/i18n";
-import { useChangeReservationsPermission } from "../../hooks/useChangeUserReservationsPermission";
-
-import sharedClasses from "../UserManagementPanelModals.module.scss";
-import classes from "./ChangeUserReservationPermissionsModal.module.scss";
+import { useChangeReservationsPermission } from "../../hooks";
 
 type ChangeUserReservationPermissionsModalProps = ContextModalProps<{
     user: UserDetails;
@@ -41,27 +37,20 @@ export const ChangeUserReservationPermissionsModal = ({
     }, [changeReservationsPermission, onClose, translate, user.id, user.reservationDisabled]);
 
     return (
-        <Stack className={sharedClasses.container}>
-            <Text className={classNames(sharedClasses.title, classes.title)}>
-                {translate("pages.adminDashboard.usersPanel.modals.toggleReservations.title")}
-            </Text>
-
-            <Text className={sharedClasses.caption}>
+        <Modal.Wrapper>
+            <Modal.Title>{translate("pages.adminDashboard.usersPanel.modals.toggleReservations.title")}</Modal.Title>
+            <Modal.Caption>
                 {user.reservationDisabled
                     ? translate("pages.adminDashboard.usersPanel.modals.toggleReservations.toggleOnCaption")
                     : translate("pages.adminDashboard.usersPanel.modals.toggleReservations.toggleOffCaption")}
-            </Text>
-            <UserShortInfo user={user} />
-            {error && <ErrorMessage onClose={reset}>{error}</ErrorMessage>}
+            </Modal.Caption>
 
-            <Group className={sharedClasses.buttonsContainer}>
-                <Button onClick={onClose} variant="default">
-                    {translate("pages.adminDashboard.usersPanel.modals.toggleReservations.buttons.cancel")}
-                </Button>
-                <Button onClick={handleChangePermissions}>
-                    {translate("pages.adminDashboard.usersPanel.modals.toggleReservations.buttons.confirm")}
-                </Button>
-            </Group>
-        </Stack>
+            <Modal.Body>
+                <UserShortInfo user={user} />
+                {error && <ErrorMessage onClose={reset}>{error}</ErrorMessage>}
+            </Modal.Body>
+
+            <Modal.Footer onSubmit={handleChangePermissions} onCancel={onClose} />
+        </Modal.Wrapper>
     );
 };
