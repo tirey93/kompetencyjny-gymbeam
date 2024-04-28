@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { Box, Group, Text } from "@mantine/core";
 
-import { UserDetails } from "../../../../auth";
-import { useTranslate } from "../../../../i18n";
+import { UserDetails } from "../../../auth";
+import { useTranslate } from "../../../i18n";
 import { UserAvatar } from "../UserAvatar/UserAvatar";
 
 import classes from "./UserShortInfo.module.scss";

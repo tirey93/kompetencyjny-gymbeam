@@ -1,13 +1,13 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { QueryKey, useInvalidateQuery } from "../../../apiClient";
-import { request } from "../../../request";
-import { useRequestErrorHandler } from "../../../request/hooks/useRequestErrorHandler";
+import { QueryKey, useInvalidateQuery } from "../../apiClient";
+import { request } from "../../request";
+import { useRequestErrorHandler } from "../../request/hooks/useRequestErrorHandler";
 import {
     HttpErrorsTranslationsMap,
     mapErrorToErrorTranslationKey,
-} from "../../../request/utils/mapErrorToErrorTranslationKey";
+} from "../../request/utils/mapErrorToErrorTranslationKey";
 
 type UseChangeUserReservationsPermission = {
     changeReservationsPermission: (userId: number, allowReservations: boolean) => Promise<void>;

@@ -4,6 +4,8 @@ import { IconPlus } from "@tabler/icons-react";
 import { useActivitiesColumnsConfig } from "./hooks/useActivitiesColumnsConfig";
 import { useActivitiesModalEvents } from "./hooks/useActivitiesModalEvents";
 import { Activity } from "../../../common/activities/Activities";
+import { useActivities } from "../../../common/activities/hooks/useActivities";
+import { LoaderOverlay } from "../../../common/components/DataDisplay";
 import { SearchBar } from "../../../common/components/DataInput";
 import { SortableTableHeader } from "../../../common/components/Table";
 import { useSearchAndSort } from "../../../common/hooks";
@@ -12,29 +14,24 @@ import { ActivityRow } from "./components";
 
 import classes from "./ActivitiesDashboardPage.module.scss";
 
-const MOCK: Activity = {
-    name: "Boks",
-    startTime: new Date(),
-    endTime: new Date(),
-    totalCapacity: 30,
-    longDescription: "Test",
-    duration: 50,
-    id: 1,
-    leaderId: 1,
-    leaderName: "Jan Kowalski",
-    shortDescription: "Test",
-    cron: "* * * * *",
-};
-
 export const ActivitiesDashboardPage = () => {
     const columnsConfig = useActivitiesColumnsConfig();
+    const { activities, isLoading, error } = useActivities();
     const translate = useTranslate();
     const { openAddModal, openDeleteModal } = useActivitiesModalEvents();
 
     const { sortBy, onSort, sortDirection, data, onSearch } = useSearchAndSort<Activity>({
-        dataToProcess: [MOCK],
+        dataToProcess: activities ?? [],
         predicates: ["name"],
     });
+
+    if (isLoading) {
+        return <LoaderOverlay />;
+    }
+
+    if (error) {
+        return <>{error}</>;
+    }
 
     return (
         <Container className={classes.container} size="xl">
@@ -44,6 +41,7 @@ export const ActivitiesDashboardPage = () => {
                     {translate("pages.activitiesDashboard.addNewButton")}
                 </Button>
             </Group>
+
             <Table.ScrollContainer minWidth={200}>
                 <Table stickyHeader highlightOnHover>
                     <SortableTableHeader

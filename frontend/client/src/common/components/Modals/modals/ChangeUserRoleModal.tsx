@@ -4,8 +4,9 @@ import { notifications } from "@mantine/notifications";
 
 import { UserDetails, UserRole } from "../../../auth";
 import { useTranslate } from "../../../i18n";
+import { useChangeUserRole } from "../../../users";
 import { ErrorMessage } from "../../DataDisplay";
-import { useChangeUserRole, UserShortInfo } from "../../User";
+import { UserShortInfo } from "../../User";
 import { Modal } from "..";
 
 type ChangeUserRoleModalProps = ContextModalProps<{

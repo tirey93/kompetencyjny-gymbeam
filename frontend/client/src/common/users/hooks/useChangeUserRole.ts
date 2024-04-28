@@ -1,42 +1,39 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { QueryKey, useInvalidateQuery } from "../../../apiClient";
-import { request } from "../../../request";
-import { useRequestErrorHandler } from "../../../request/hooks/useRequestErrorHandler";
+import { QueryKey, useInvalidateQuery } from "../../apiClient";
+import { UserRole } from "../../auth";
+import { request } from "../../request";
+import { useRequestErrorHandler } from "../../request/hooks/useRequestErrorHandler";
 import {
     HttpErrorsTranslationsMap,
     mapErrorToErrorTranslationKey,
-} from "../../../request/utils/mapErrorToErrorTranslationKey";
+} from "../../request/utils/mapErrorToErrorTranslationKey";
 
-type UseDeleteUser = {
-    deleteUser: (userId: number) => Promise<void>;
+type UseChangeUserRole = {
+    changeRole: (userId: number, newRole: UserRole) => Promise<void>;
     error: string | null;
     reset: () => void;
 };
 
-type DeleteUserRequestOptions = {
+type ChangeUserRoleRequestOptions = {
+    body: { newRole: UserRole };
     urlParams: { userId: string };
 };
 
-const deleteUserRequest = (options: DeleteUserRequestOptions) => {
-    return request("DeleteUser", {
-        ...options,
-    });
-};
-
-export const useDeleteUser = (): UseDeleteUser => {
+export const useChangeUserRole = (): UseChangeUserRole => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { invalidate } = useInvalidateQuery();
     const { mutateAsync } = useMutation({
-        mutationFn: deleteUserRequest,
+        mutationFn: changeUserRoleRequest,
         onSuccess: () => invalidate(QueryKey.Users),
     });
 
-    const deleteUser = useCallback(
-        async (userId: number) => {
+    const changeRole = useCallback(
+        async (userId: number, newRole: UserRole) => {
             try {
                 await mutateAsync({
+                    body: { newRole: newRole },
                     urlParams: { userId: userId.toString() },
                 });
             } catch (error) {
@@ -47,10 +44,16 @@ export const useDeleteUser = (): UseDeleteUser => {
         [mutateAsync, setAndTranslateError]
     );
 
-    return { deleteUser, error, reset };
+    return { changeRole, reset, error };
+};
+
+const changeUserRoleRequest = (options: ChangeUserRoleRequestOptions) => {
+    return request("ChangeRole", {
+        ...options,
+    });
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {
-    defaultError: "apiErrors.user.delete.default",
+    defaultError: "apiErrors.user.changeRole.default",
     statusCodesMap: {},
 };

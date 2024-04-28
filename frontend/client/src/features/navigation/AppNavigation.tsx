@@ -27,7 +27,7 @@ export const AppNavigation = ({ children }: PropsWithChildren) => {
                 <SideNavigation onNavigate={closeNavbar} />
             </AppShell.Navbar>
 
-            <AppShell.Main>{children}</AppShell.Main>
+            <AppShell.Main className={classes.outlet}>{children}</AppShell.Main>
 
             <AppShell.Footer className={classes.appNavigationFooter}>
                 <Footer />

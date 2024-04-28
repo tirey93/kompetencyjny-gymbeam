@@ -9,6 +9,21 @@ export type Activity = {
     shortDescription: string;
     longDescription: string;
     leaderName: string;
+    weekdays: string[];
+    startHour: Date;
+};
+
+export type ActivityDTO = {
+    id: number;
+    totalCapacity: number;
+    duration: number;
+    leaderId: number;
+    startTime: string;
+    endTime: string;
+    name: string;
+    shortDescription: string;
+    longDescription: string;
+    leaderName: string;
     cron: string;
 };
 

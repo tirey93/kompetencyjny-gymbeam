@@ -2,13 +2,13 @@ import { useCallback } from "react";
 import { Button, Container, Stack, Table } from "@mantine/core";
 
 import { UserDetails } from "../../../common/auth";
-import { ErrorMessage } from "../../../common/components/DataDisplay";
+import { ErrorMessage, LoaderOverlay } from "../../../common/components/DataDisplay";
 import { SearchBar } from "../../../common/components/DataInput";
 import { SortableTableHeader } from "../../../common/components/Table";
-import { useAllUsers } from "../../../common/components/User";
 import { useSearchAndSort } from "../../../common/hooks";
 import { useTranslate } from "../../../common/i18n";
-import { UserRow, UserRowsLoader } from "./components";
+import { useAllUsers } from "../../../common/users";
+import { UserRow } from "./components";
 import { useUsersColumnsConfig, useUsersManagementModalEvents } from "./hooks";
 
 import classes from "./UsersDashboardPage.module.scss";
@@ -37,10 +37,24 @@ export const UsersDashboardPage = () => {
         [onUserRoleChange]
     );
 
+    if (isLoading) {
+        return <LoaderOverlay />;
+    }
+
+    if (error) {
+        return (
+            <Stack className={classes.errorContainer}>
+                <ErrorMessage>{error}</ErrorMessage>
+                <Button variant="primary" onClick={refetch}>
+                    {translate("pages.usersDashboard.retryButton")}
+                </Button>
+            </Stack>
+        );
+    }
+
     return (
         <Container size="xl">
             <SearchBar placeholder={translate("pages.usersDashboard.search.placeholder")} onSearch={onSearch} />
-
             <Table.ScrollContainer minWidth={200} className={classes.scrollContainer}>
                 <Table stickyHeader highlightOnHover className={classes.table}>
                     <SortableTableHeader
@@ -50,32 +64,19 @@ export const UsersDashboardPage = () => {
                         onSort={onSort}
                     />
                     <Table.Tbody>
-                        {isLoading ? (
-                            <UserRowsLoader />
-                        ) : (
-                            data.map((user) => (
-                                <UserRow
-                                    key={user.id}
-                                    userDetails={user}
-                                    events={{
-                                        onDelete: onUserDelete,
-                                        onUserRoleChange: onUserRoleChangeInternal,
-                                        onUserReservationsPermissionToggle: onUserReservationsPermissionToggle,
-                                    }}
-                                />
-                            ))
-                        )}
+                        {data.map((user) => (
+                            <UserRow
+                                key={user.id}
+                                userDetails={user}
+                                events={{
+                                    onDelete: onUserDelete,
+                                    onUserRoleChange: onUserRoleChangeInternal,
+                                    onUserReservationsPermissionToggle: onUserReservationsPermissionToggle,
+                                }}
+                            />
+                        ))}
                     </Table.Tbody>
                 </Table>
-
-                {error && !isLoading && (
-                    <Stack className={classes.errorContainer}>
-                        <ErrorMessage>{error}</ErrorMessage>
-                        <Button variant="primary" onClick={refetch}>
-                            {translate("pages.usersDashboard.retryButton")}
-                        </Button>
-                    </Stack>
-                )}
             </Table.ScrollContainer>
         </Container>
     );

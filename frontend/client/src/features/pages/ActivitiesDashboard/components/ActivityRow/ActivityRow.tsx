@@ -26,7 +26,9 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
 
             <Table.Td>{activity.startTime.toLocaleDateString(locale)}</Table.Td>
             <Table.Td>{activity.endTime.toLocaleDateString(locale)}</Table.Td>
+            <Table.Td>{activity.startHour.toLocaleTimeString()}</Table.Td>
             <Table.Td>{activity.duration} min</Table.Td>
+            <Table.Td>{activity.weekdays.toString()}</Table.Td>
             <Table.Td>{activity.totalCapacity}</Table.Td>
 
             <Table.Td>
@@ -40,8 +42,6 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
             <Table.Td>
                 <TextWithTooltip>{activity.leaderName}</TextWithTooltip>
             </Table.Td>
-
-            <Table.Td>{activity.cron}</Table.Td>
 
             <Table.Td>
                 <Group className={classes.actionButtons}>

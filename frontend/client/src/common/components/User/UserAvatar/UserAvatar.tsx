@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Avatar } from "@mantine/core";
 
-import { UserDetails } from "../../../../auth";
+import { UserDetails } from "../../../auth";
 
 import classes from "./UserAvatar.module.scss";
 

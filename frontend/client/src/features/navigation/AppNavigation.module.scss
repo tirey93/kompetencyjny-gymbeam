@@ -8,3 +8,8 @@ html .burger {
 html .appNavigationNavbar {
   padding: var(--mantine-spacing-md);
 }
+
+html .outlet {
+  position: relative;
+  z-index: 0;
+}

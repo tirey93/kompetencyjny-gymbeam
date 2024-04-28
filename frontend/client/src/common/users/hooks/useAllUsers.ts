@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { QueryKey } from "../../../apiClient";
-import { UserDetails } from "../../../auth";
-import { request } from "../../../request";
-import { useRequestErrorHandler } from "../../../request/hooks/useRequestErrorHandler";
+import { QueryKey } from "../../apiClient";
+import { UserDetails } from "../../auth";
+import { request } from "../../request";
+import { useRequestErrorHandler } from "../../request/hooks/useRequestErrorHandler";
 import {
     HttpErrorsTranslationsMap,
     mapErrorToErrorTranslationKey,
-} from "../../../request/utils/mapErrorToErrorTranslationKey";
+} from "../../request/utils/mapErrorToErrorTranslationKey";
 
 type UseAllUsers = {
     users: UserDetails[] | null;

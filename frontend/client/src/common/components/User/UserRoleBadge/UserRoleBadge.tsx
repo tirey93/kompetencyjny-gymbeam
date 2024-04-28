@@ -1,7 +1,7 @@
 import { Badge } from "@mantine/core";
 
-import { InternalUserRole } from "../../../../auth";
-import { useTranslate } from "../../../../i18n";
+import { InternalUserRole } from "../../../auth";
+import { useTranslate } from "../../../i18n";
 
 import classes from "./UserRoleBadge.module.scss";
 

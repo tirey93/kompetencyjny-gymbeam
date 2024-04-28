@@ -1,6 +1,6 @@
 import { Badge } from "@mantine/core";
 
-import { useTranslate } from "../../../../i18n";
+import { useTranslate } from "../../../i18n";
 
 import classes from "./UserReservationsPermissionBadge.module.scss";
 

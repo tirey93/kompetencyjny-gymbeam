@@ -4,8 +4,9 @@ import { notifications } from "@mantine/notifications";
 
 import { UserDetails } from "../../../auth";
 import { useTranslate } from "../../../i18n";
+import { useDeleteUser } from "../../../users";
 import { ErrorMessage } from "../../DataDisplay";
-import { useDeleteUser, UserShortInfo } from "../../User";
+import { UserShortInfo } from "../../User";
 import { Modal } from "..";
 
 type DeleteUserModalProps = ContextModalProps<{

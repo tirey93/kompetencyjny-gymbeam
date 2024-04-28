@@ -8,7 +8,7 @@ import {
     HttpErrorsTranslationsMap,
     mapErrorToErrorTranslationKey,
 } from "../../request/utils/mapErrorToErrorTranslationKey";
-import { Activity } from "../Activities";
+import { Activity, ActivityDTO } from "../Activities";
 
 type UseActivities = {
     activities: Activity[] | null;
@@ -26,6 +26,7 @@ export const useActivities = (): UseActivities => {
         isLoading,
     } = useQuery({
         queryFn: getAllActivitiesRequest,
+        select: (items) => items.map(mapActivityDTOToActivity),
         queryKey: [QueryKey.Activities],
     });
 
@@ -45,4 +46,13 @@ const getAllActivitiesRequest = () => {
 const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.activities.getAll.default",
     statusCodesMap: {},
+};
+
+const mapActivityDTOToActivity = (activityDto: ActivityDTO): Activity => {
+    const startTime = new Date(activityDto.startTime);
+    const endTime = new Date(activityDto.endTime);
+    const weekdays = ["Mon"];
+    const startHour = new Date(); // TODO: Hubert - replace mock values
+
+    return { ...activityDto, startTime, endTime, weekdays, startHour };
 };

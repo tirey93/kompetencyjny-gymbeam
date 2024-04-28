@@ -5,7 +5,7 @@ import { Container, Stack } from "@mantine/core";
 import { ActivityDetailsCard } from "./components/ActivityDetailsCard/ActivityDetailsCard";
 import { useActivities } from "../../../common/activities/hooks/useActivities";
 import { useActivitiesInstances } from "../../../common/activities/hooks/useActivitiesInstances";
-import { ActivityCalendar, ActivityCalendarLoader } from "../../../common/components/ActivityCalendar";
+import { ActivityCalendar } from "../../../common/components/ActivityCalendar";
 import { LoaderOverlay } from "../../../common/components/DataDisplay";
 import { useCalendarDateRange } from "../../../common/hooks";
 import { AppRoute } from "../../router";
@@ -25,8 +25,8 @@ export const ActivityPage = () => {
         [activitiesInstances, id]
     );
 
-    if (areActivitiesLoading) {
-        return <LoaderOverlay visible />;
+    if (areActivitiesLoading || areInstancesLoading) {
+        return <LoaderOverlay />;
     }
 
     if (!activity) {
@@ -40,7 +40,6 @@ export const ActivityPage = () => {
                 {instancesOfActivity && activities && (
                     <ActivityCalendar activityInstances={instancesOfActivity} activities={activities} />
                 )}
-                {(areInstancesLoading || areActivitiesLoading) && <ActivityCalendarLoader />}
             </Stack>
         </Container>
     );

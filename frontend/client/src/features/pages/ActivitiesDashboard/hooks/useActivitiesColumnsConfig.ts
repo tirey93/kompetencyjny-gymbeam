@@ -21,8 +21,18 @@ export const useActivitiesColumnsConfig = (): SortableTableColumnsConfig<Activit
             column: "endTime",
         },
         {
+            children: "Start Hour",
+            column: "startHour",
+            disableSort: true,
+        },
+        {
             children: "Duration",
             column: "duration",
+        },
+        {
+            children: "Weekdays",
+            column: "weekdays",
+            disableSort: true,
         },
         {
             children: "Capacity",
@@ -41,11 +51,6 @@ export const useActivitiesColumnsConfig = (): SortableTableColumnsConfig<Activit
         {
             children: "Leader",
             column: "leaderName",
-        },
-        {
-            children: "Cron",
-            column: "cron",
-            disableSort: true,
         },
     ];
 };

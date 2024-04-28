@@ -1,4 +1,4 @@
-import { Activity, ActivityInstance } from "../activities/Activities";
+import { ActivityDTO, ActivityInstance } from "../activities/Activities";
 import { UserDetails, UserRole } from "../auth";
 import { ApiResourceName, RequestOptions, SignInRequestBody, SignUpRequestBody, UserDetailsResponse } from "./";
 
@@ -31,7 +31,7 @@ const DEFAULT_REQUEST_OPTIONS: RequestInit = {
     },
 };
 
-export async function request(resource: "GetAllActivities"): Promise<Activity[]>;
+export async function request(resource: "GetAllActivities"): Promise<ActivityDTO[]>;
 
 export async function request(resource: "AddReservation"): Promise<void>;
 
