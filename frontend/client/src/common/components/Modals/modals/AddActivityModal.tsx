@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Group, NumberInput, Select, Textarea, TextInput } from "@mantine/core";
 import { DatePickerInput, DatesRangeValue, TimeInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
@@ -26,25 +27,36 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
             </Modal.Title>
 
             <Modal.Body>
-                <Group>
-                    <TextInput {...form.getInputProps("name")} label={translate("activity.name")} flex={1} />
+                <Group align="flex-start">
+                    <TextInput required {...form.getInputProps("name")} label={translate("activity.name")} flex={1} />
                     <NumberInput
+                        required
                         {...form.getInputProps("totalCapacity")}
                         label={translate("activity.capacity")}
                         w={80}
                         min={1}
                         max={99}
-                        placeholder="20"
                     />
                 </Group>
-                <Select label={translate("activity.leader")} />
+                <Select required label={translate("activity.leader")} />
 
-                <Group>
-                    <TimeInput {...form.getInputProps("startHour")} label={translate("activity.startTime")} w={100} />
-                    <TimeInput {...form.getInputProps("duration")} label={translate("activity.duration")} w={100} />
+                <Group align="flex-start">
+                    <TimeInput
+                        required
+                        {...form.getInputProps("startHour")}
+                        label={translate("activity.startTime")}
+                        w={100}
+                    />
+                    <TimeInput
+                        required
+                        {...form.getInputProps("duration")}
+                        label={translate("activity.duration")}
+                        w={100}
+                    />
                 </Group>
 
                 <DatePickerInput
+                    required
                     {...form.getInputProps("dateRange")}
                     label={translate("activity.period")}
                     flex={1}
@@ -52,13 +64,13 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
                     minDate={new Date()}
                 />
 
-                <DaysInput {...form.getInputProps("days")} label={translate("activity.days")} />
-                <Textarea {...form.getInputProps("shortDescription")} label={translate("activity.summary")} />
+                <DaysInput required {...form.getInputProps("days")} label={translate("activity.days")} />
+                <Textarea required {...form.getInputProps("shortDescription")} label={translate("activity.summary")} />
                 <Textarea {...form.getInputProps("longDescription")} label={translate("activity.description")} />
             </Modal.Body>
 
             <Modal.Footer
-                onSubmit={() => true}
+                onSubmit={form.validate}
                 submitButton={{
                     color: "success",
                     children: translate("modals.activities.add.buttons.save"),
@@ -69,14 +81,25 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
 };
 
 const useActivityModalForm = (activity?: Activity) => {
-    const startHour = activity?.startHour ? dayjs(activity.startHour).format("HH:mm") : undefined;
+    const startHour = useMemo(
+        () => (activity?.startHour ? dayjs(activity.startHour).format("HH:mm") : undefined),
+        [activity?.startHour]
+    );
 
-    const duration = activity?.duration
-        ? `${Math.floor(activity.duration / 60)}`.padStart(2, "0") + ":" + `${activity.duration % 60}`.padStart(2, "0")
-        : undefined;
+    const dateRange: DatesRangeValue | undefined = useMemo(
+        () => (activity?.startTime && activity.endTime ? [activity.startTime, activity.endTime] : undefined),
+        [activity?.endTime, activity?.startTime]
+    );
 
-    const dateRange: DatesRangeValue | undefined =
-        activity?.startTime && activity.endTime ? [activity.startTime, activity.endTime] : undefined;
+    const duration = useMemo(
+        () =>
+            activity?.duration
+                ? `${Math.floor(activity.duration / 60)}`.padStart(2, "0") +
+                  ":" +
+                  `${activity.duration % 60}`.padStart(2, "0")
+                : undefined,
+        [activity?.duration]
+    );
 
     return useForm({
         initialValues: {
@@ -88,6 +111,16 @@ const useActivityModalForm = (activity?: Activity) => {
             duration,
             startHour,
             dateRange,
+        },
+
+        validate: {
+            name: (value) => !value?.length && "Name is required.",
+            shortDescription: (value) => !value?.length && "ShortDescription is required.",
+            totalCapacity: (value) => !value && "TotalCapacity is required.",
+            days: (value) => !value?.length && "Days are required.",
+            duration: (value) => !value?.length && "Duration is required.",
+            startHour: (value) => !value?.length && "StartHour is required.",
+            dateRange: (value) => (!value || !value[0] || !value[1]) && "DateRange is required.",
         },
     });
 };
