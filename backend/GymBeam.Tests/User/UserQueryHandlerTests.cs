@@ -1,11 +1,9 @@
 ﻿using Domain;
 using Domain.Exceptions;
-using FluentAssertions;
 using GymBeam.CommandHandlers;
 using GymBeam.Commands;
 using GymBeam.Queries;
 using GymBeam.QueryHandlers;
-using Moq;
 using System;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 

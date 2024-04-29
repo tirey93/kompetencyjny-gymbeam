@@ -23,7 +23,7 @@ namespace GymBeam.QueryHandlers
                 ?? throw new UserNotFoundException(request.Username);
 
             var hash = ShaHelper.QuickHash(request.Password);
-            if (hash != user.HashedPassword)
+            if (hash.ToLower() != user.HashedPassword.ToLower())
                 throw new PasswordNotMatchException(request.Username);
 
             return Task.FromResult(new UserResponse
