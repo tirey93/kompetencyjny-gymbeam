@@ -1,9 +1,7 @@
 using Domain;
 using Domain.Exceptions;
-using FluentAssertions;
 using GymBeam.CommandHandlers;
 using GymBeam.Commands;
-using Moq;
 using System.Threading;
 
 namespace GymBeam.Tests.User
