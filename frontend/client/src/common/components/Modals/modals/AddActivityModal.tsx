@@ -18,6 +18,14 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
     const form = useActivityModalForm(activity);
     const translate = useTranslate();
 
+    const MOCK_LEADER_OPTIONS = [
+        { value: "1", label: "AAAA" },
+        { value: "2", label: "BBBB" },
+        { value: "3", label: "CCCC" },
+        { value: "4", label: "DDDD" },
+        { value: "5", label: "EEEE" },
+    ];
+
     return (
         <Modal.Wrapper>
             <Modal.Title>
@@ -38,7 +46,15 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
                         max={99}
                     />
                 </Group>
-                <Select required label={translate("activity.leader")} />
+
+                <Select
+                    data={MOCK_LEADER_OPTIONS}
+                    nothingFoundMessage="No results."
+                    searchable
+                    required
+                    {...form.getInputProps("leaderId")}
+                    label={translate("activity.leader")}
+                />
 
                 <Group align="flex-start">
                     <TimeInput
@@ -106,6 +122,7 @@ const useActivityModalForm = (activity?: Activity) => {
             name: activity?.name,
             longDescription: activity?.longDescription,
             shortDescription: activity?.shortDescription,
+            leaderId: activity?.leaderId.toString(),
             totalCapacity: activity?.totalCapacity,
             days: activity?.days,
             duration,
@@ -121,6 +138,7 @@ const useActivityModalForm = (activity?: Activity) => {
             duration: (value) => !value?.length && "Duration is required.",
             startHour: (value) => !value?.length && "StartHour is required.",
             dateRange: (value) => (!value || !value[0] || !value[1]) && "DateRange is required.",
+            leaderId: (value) => !value && "Leader is required",
         },
     });
 };
