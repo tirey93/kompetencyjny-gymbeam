@@ -7,16 +7,17 @@ import { useTranslate } from "../../../i18n";
 import classes from "./DaysInput.module.scss";
 
 type DaysInputProps = Omit<InputWrapperProps, "className"> & {
-    defaultValue?: Day[];
+    value?: Day[];
+    onChange: (value: string[]) => unknown;
 };
 
-export const DaysInput = ({ defaultValue, ...props }: DaysInputProps) => {
+export const DaysInput = ({ value, onChange, ...inputWrapperProps }: DaysInputProps) => {
     const translate = useTranslate();
 
     return (
-        <Input.Wrapper {...props} className={classes.container}>
+        <Input.Wrapper className={classes.container} {...inputWrapperProps}>
             <Group className={classes.daysWrapper}>
-                <Chip.Group defaultValue={defaultValue} multiple>
+                <Chip.Group value={value} onChange={onChange} multiple>
                     {Object.entries(DAYS_SHORT).map(([value, key]) => (
                         <Chip key={value} variant="outline" color="success" value={value}>
                             {translate(key)}

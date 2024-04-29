@@ -1,5 +1,6 @@
 import { Group, NumberInput, Select, Textarea, TextInput } from "@mantine/core";
 import { DatePickerInput, DatesRangeValue, TimeInput } from "@mantine/dates";
+import { useForm } from "@mantine/form";
 import { ContextModalProps } from "@mantine/modals";
 import dayjs from "dayjs";
 
@@ -13,14 +14,8 @@ type AddActivityModalProps = ContextModalProps<{
 }>;
 
 export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalProps) => {
+    const form = useActivityModalForm(activity);
     const translate = useTranslate();
-
-    const startHour = activity?.startHour ? dayjs(activity.startHour).format("HH:mm") : undefined;
-    const duration = activity?.duration
-        ? `${Math.floor(activity.duration / 60)}`.padStart(2, "0") + ":" + `${activity.duration % 60}`.padStart(2, "0")
-        : undefined;
-    const dateRange: DatesRangeValue | undefined =
-        activity?.startTime && activity.endTime ? [activity.startTime, activity.endTime] : undefined;
 
     return (
         <Modal.Wrapper>
@@ -32,9 +27,9 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
 
             <Modal.Body>
                 <Group>
-                    <TextInput defaultValue={activity?.name} label={translate("activity.name")} flex={1} />
+                    <TextInput {...form.getInputProps("name")} label={translate("activity.name")} flex={1} />
                     <NumberInput
-                        defaultValue={activity?.totalCapacity}
+                        {...form.getInputProps("totalCapacity")}
                         label={translate("activity.capacity")}
                         w={80}
                         min={1}
@@ -45,21 +40,21 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
                 <Select label={translate("activity.leader")} />
 
                 <Group>
-                    <TimeInput defaultValue={startHour} label={translate("activity.startTime")} w={100} />
-                    <TimeInput defaultValue={duration} label={translate("activity.duration")} w={100} />
+                    <TimeInput {...form.getInputProps("startHour")} label={translate("activity.startTime")} w={100} />
+                    <TimeInput {...form.getInputProps("duration")} label={translate("activity.duration")} w={100} />
                 </Group>
 
                 <DatePickerInput
-                    defaultValue={dateRange}
+                    {...form.getInputProps("dateRange")}
                     label={translate("activity.period")}
                     flex={1}
                     type="range"
                     minDate={new Date()}
                 />
 
-                <DaysInput defaultValue={activity?.days} label={translate("activity.days")} />
-                <Textarea defaultValue={activity?.shortDescription} label={translate("activity.summary")} />
-                <Textarea defaultValue={activity?.longDescription} label={translate("activity.description")} />
+                <DaysInput {...form.getInputProps("days")} label={translate("activity.days")} />
+                <Textarea {...form.getInputProps("shortDescription")} label={translate("activity.summary")} />
+                <Textarea {...form.getInputProps("longDescription")} label={translate("activity.description")} />
             </Modal.Body>
 
             <Modal.Footer
@@ -71,4 +66,28 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
             />
         </Modal.Wrapper>
     );
+};
+
+const useActivityModalForm = (activity?: Activity) => {
+    const startHour = activity?.startHour ? dayjs(activity.startHour).format("HH:mm") : undefined;
+
+    const duration = activity?.duration
+        ? `${Math.floor(activity.duration / 60)}`.padStart(2, "0") + ":" + `${activity.duration % 60}`.padStart(2, "0")
+        : undefined;
+
+    const dateRange: DatesRangeValue | undefined =
+        activity?.startTime && activity.endTime ? [activity.startTime, activity.endTime] : undefined;
+
+    return useForm({
+        initialValues: {
+            name: activity?.name,
+            longDescription: activity?.longDescription,
+            shortDescription: activity?.shortDescription,
+            totalCapacity: activity?.totalCapacity,
+            days: activity?.days,
+            duration,
+            startHour,
+            dateRange,
+        },
+    });
 };
