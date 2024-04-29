@@ -1,9 +1,9 @@
 export const DAYS_SHORT = {
-    "0": "weekday.monday.short",
-    "1": "weekday.tuesday.short",
-    "2": "weekday.wednesday.short",
-    "3": "weekday.thursday.short",
-    "4": "weekday.friday.short",
-    "5": "weekday.saturday.short",
-    "6": "weekday.sunday.short",
+    "1": "weekday.monday.short",
+    "2": "weekday.tuesday.short",
+    "3": "weekday.wednesday.short",
+    "4": "weekday.thursday.short",
+    "5": "weekday.friday.short",
+    "6": "weekday.saturday.short",
+    "7": "weekday.sunday.short",
 } as const;

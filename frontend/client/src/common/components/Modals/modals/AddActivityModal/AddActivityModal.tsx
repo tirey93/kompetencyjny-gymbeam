@@ -3,6 +3,7 @@ import { Group, NumberInput, Select, Textarea, TextInput } from "@mantine/core";
 import { DatePickerInput, DatesRangeValue, TimeInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { ContextModalProps } from "@mantine/modals";
+import cronParser, { CronFields } from "cron-parser";
 import dayjs from "dayjs";
 
 import { Modal } from "../../../../../common/components/Modals";
@@ -28,6 +29,27 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
         value: user.id.toString(),
         label: `${user.displayName}`,
     }));
+
+    const generateCronExpression = () => {
+        const { startHour, days } = form.values;
+
+        if (!startHour || !days) {
+            return;
+        }
+
+        const [hh, mm] = startHour.split(":");
+        const baseInterval = cronParser.parseExpression("* * * * *");
+        const fields = JSON.parse(JSON.stringify(baseInterval.fields));
+
+        fields.dayOfWeek = days.map((day) => parseInt(day));
+        fields.hour = [parseInt(hh)];
+        fields.minute = [parseInt(mm)];
+        fields.second = [0];
+
+        return cronParser.fieldsToExpression(fields as CronFields);
+    };
+
+    generateCronExpression();
 
     return (
         <Modal.Wrapper className={classes.container}>
