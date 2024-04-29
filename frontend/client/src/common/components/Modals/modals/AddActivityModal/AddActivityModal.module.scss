@@ -1,0 +1,17 @@
+html .container {
+  .inputsRow {
+    align-items: flex-start;
+
+    .timeInput {
+      width: 100px;
+    }
+
+    .numberInput {
+      width: 80px;
+    }
+  }
+
+  .flexInput {
+    flex-grow: 1;
+  }
+}

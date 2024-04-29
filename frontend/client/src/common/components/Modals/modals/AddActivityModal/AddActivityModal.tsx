@@ -5,29 +5,32 @@ import { useForm } from "@mantine/form";
 import { ContextModalProps } from "@mantine/modals";
 import dayjs from "dayjs";
 
-import { Modal } from "../../../../common/components/Modals";
-import { Activity } from "../../../activities/Activities";
-import { useTranslate } from "../../../i18n";
-import { DaysInput } from "../../DataInput";
+import { Modal } from "../../../../../common/components/Modals";
+import { Activity } from "../../../../activities/Activities";
+import { useTranslate } from "../../../../i18n";
+import { useAllUsers } from "../../../../users";
+import { DaysInput } from "../../../DataInput";
+
+import classes from "./AddActivityModal.module.scss";
 
 type AddActivityModalProps = ContextModalProps<{
     activity?: Activity;
 }>;
 
+const MIN_NUMBER_OF_SLOTS = 2;
+const MAX_NUMBER_OF_SLOTS = 99;
+
 export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalProps) => {
     const form = useActivityModalForm(activity);
     const translate = useTranslate();
-
-    const MOCK_LEADER_OPTIONS = [
-        { value: "1", label: "AAAA" },
-        { value: "2", label: "BBBB" },
-        { value: "3", label: "CCCC" },
-        { value: "4", label: "DDDD" },
-        { value: "5", label: "EEEE" },
-    ];
+    const { users } = useAllUsers();
+    const leaderSelectOptions = (users ?? []).map((user) => ({
+        value: user.id.toString(),
+        label: `${user.displayName}`,
+    }));
 
     return (
-        <Modal.Wrapper>
+        <Modal.Wrapper className={classes.container}>
             <Modal.Title>
                 {activity
                     ? translate("modals.activities.add.header.edit")
@@ -35,39 +38,44 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
             </Modal.Title>
 
             <Modal.Body>
-                <Group align="flex-start">
-                    <TextInput required {...form.getInputProps("name")} label={translate("activity.name")} flex={1} />
+                <Group className={classes.inputsRow}>
+                    <TextInput
+                        required
+                        {...form.getInputProps("name")}
+                        label={translate("activity.name")}
+                        className={classes.flexInput}
+                    />
                     <NumberInput
                         required
                         {...form.getInputProps("totalCapacity")}
                         label={translate("activity.capacity")}
-                        w={80}
-                        min={1}
-                        max={99}
+                        className={classes.numberInput}
+                        min={MIN_NUMBER_OF_SLOTS}
+                        max={MAX_NUMBER_OF_SLOTS}
                     />
                 </Group>
 
                 <Select
-                    data={MOCK_LEADER_OPTIONS}
-                    nothingFoundMessage="No results."
                     searchable
+                    data={leaderSelectOptions}
+                    nothingFoundMessage="No results."
                     required
                     {...form.getInputProps("leaderId")}
                     label={translate("activity.leader")}
                 />
 
-                <Group align="flex-start">
+                <Group className={classes.inputsRow}>
                     <TimeInput
                         required
                         {...form.getInputProps("startHour")}
                         label={translate("activity.startTime")}
-                        w={100}
+                        className={classes.timeInput}
                     />
                     <TimeInput
                         required
                         {...form.getInputProps("duration")}
                         label={translate("activity.duration")}
-                        w={100}
+                        className={classes.timeInput}
                     />
                 </Group>
 
@@ -75,9 +83,8 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
                     required
                     {...form.getInputProps("dateRange")}
                     label={translate("activity.period")}
-                    flex={1}
                     type="range"
-                    minDate={new Date()}
+                    className={classes.flexInput}
                 />
 
                 <DaysInput required {...form.getInputProps("days")} label={translate("activity.days")} />

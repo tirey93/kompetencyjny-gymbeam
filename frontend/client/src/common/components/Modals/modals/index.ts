@@ -1,4 +1,4 @@
-export { AddActivityModal } from "./AddActivityModal";
+export { AddActivityModal } from "./AddActivityModal/AddActivityModal";
 export { ChangeUserReservationPermissionsModal } from "./ChangeUserReservationPermissionsModal";
 export { ChangeUserRoleModal } from "./ChangeUserRoleModal";
 export { DeleteActivityModal } from "./DeleteActivityModal";
