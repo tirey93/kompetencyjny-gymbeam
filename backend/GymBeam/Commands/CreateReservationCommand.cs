@@ -6,6 +6,7 @@ namespace GymBeam.Commands
     {
         public int ActivityId { get; set; }
         public int UserId { get; set; }
+        public int LoggedUserId { get; set; }
         public DateTime StartTime { get; set; }
     }
 }

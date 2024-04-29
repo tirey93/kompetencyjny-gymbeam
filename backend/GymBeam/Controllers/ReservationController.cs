@@ -46,29 +46,35 @@ namespace GymBeam.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status405MethodNotAllowed)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #if !DEBUG
         [Authorize(Roles = Roles.User)]
 #endif
         public async Task<ActionResult> Post([FromBody] ReservationRequest dto)
         {
-            int userId;
             var request = new CreateReservationCommand
             {
                 ActivityId = dto.ActivityId,
+                UserId = dto.UserId,
                 StartTime = dto.StartTime
             };
             try
             {
                 if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
                     throw new InvalidCookieException(Cookies.UserId);
-                if (!int.TryParse(cookiesUserId, out userId))
+                if (!int.TryParse(cookiesUserId, out int userIdFromCookies))
                     throw new InvalidUserIdException();
 
-                request.UserId = userId;
+                request.LoggedUserId = userIdFromCookies;
 
                 await _mediator.Send(request);
                 return NoContent();
+            }
+            catch (AuthenticationFailureException ex)
+            {
+                return StatusCode((int)HttpStatusCode.MethodNotAllowed,
+                    string.Format(Resource.ControllerMethodNotAllowed, ex.Message));
             }
             catch (InvalidCookieException ex)
             {

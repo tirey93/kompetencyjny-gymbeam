@@ -79,6 +79,15 @@ namespace GymBeam.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Method Not Allowed: {0}.
+        /// </summary>
+        public static string ControllerMethodNotAllowed {
+            get {
+                return ResourceManager.GetString("ControllerMethodNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not Found: {0}.
         /// </summary>
         public static string ControllerNotFound {
@@ -111,6 +120,24 @@ namespace GymBeam.Properties {
         public static string ExceptionUserIdIsInvalid {
             get {
                 return ResourceManager.GetString("ExceptionUserIdIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User is not allowed to perform this operation..
+        /// </summary>
+        public static string ExceptionUserNotAllowed {
+            get {
+                return ResourceManager.GetString("ExceptionUserNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to read user role..
+        /// </summary>
+        public static string ExceptionUserRoleNotFound {
+            get {
+                return ResourceManager.GetString("ExceptionUserRoleNotFound", resourceCulture);
             }
         }
         
@@ -282,6 +309,15 @@ namespace GymBeam.Properties {
         public static string ValidatorTotalCapacityGreaterThanZero {
             get {
                 return ResourceManager.GetString("ValidatorTotalCapacityGreaterThanZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User id is required..
+        /// </summary>
+        public static string ValidatorUserIdRequired {
+            get {
+                return ResourceManager.GetString("ValidatorUserIdRequired", resourceCulture);
             }
         }
         
