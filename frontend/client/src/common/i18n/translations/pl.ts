@@ -226,7 +226,7 @@ export const pl: TranslationSource = {
         duration: "Czas trwania",
         capacity: "Miejsca",
         startTime: "Czas startu",
-        weekdays: "Dni tygodnia",
+        days: "Dni tygodnia",
         period: "Okres powtarzania",
         leader: "Trener",
         description: "Długi opis",

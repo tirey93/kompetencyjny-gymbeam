@@ -226,7 +226,7 @@ export type TranslationSource = {
         duration: string;
         capacity: string;
         startTime: string;
-        weekdays: string;
+        days: string;
         period: string;
         leader: string;
         description: string;

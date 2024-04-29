@@ -1,3 +1,5 @@
+export type Day = "0" | "1" | "2" | "3" | "4" | "5" | "6";
+
 export type Activity = {
     id: number;
     totalCapacity: number;
@@ -9,7 +11,7 @@ export type Activity = {
     shortDescription: string;
     longDescription: string;
     leaderName: string;
-    weekdays: string[];
+    days: Day[];
     startHour: Date;
 };
 

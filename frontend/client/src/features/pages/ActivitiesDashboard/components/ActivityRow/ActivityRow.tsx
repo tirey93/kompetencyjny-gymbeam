@@ -2,7 +2,7 @@ import { ActionIcon, Group, Table } from "@mantine/core";
 import { IconPencil, IconTrash } from "@tabler/icons-react";
 
 import { Activity } from "../../../../../common/activities/Activities";
-import { TextWithTooltip } from "../../../../../common/components/DataDisplay";
+import { Days, TextWithTooltip } from "../../../../../common/components/DataDisplay";
 import { useDateTimeLocale } from "../../../../../common/hooks";
 
 import classes from "./ActivityRow.module.scss";
@@ -26,10 +26,18 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
 
             <Table.Td>{activity.startTime.toLocaleDateString(locale)}</Table.Td>
             <Table.Td>{activity.endTime.toLocaleDateString(locale)}</Table.Td>
-            <Table.Td>{activity.startHour.toLocaleTimeString()}</Table.Td>
+            <Table.Td>{activity.startHour.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}</Table.Td>
             <Table.Td>{activity.duration} min</Table.Td>
-            <Table.Td>{activity.weekdays.toString()}</Table.Td>
+
+            <Table.Td>
+                <Days value={activity.days} />
+            </Table.Td>
+
             <Table.Td>{activity.totalCapacity}</Table.Td>
+
+            <Table.Td>
+                <TextWithTooltip>{activity.leaderName}</TextWithTooltip>
+            </Table.Td>
 
             <Table.Td>
                 <TextWithTooltip>{activity.longDescription}</TextWithTooltip>
@@ -37,10 +45,6 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
 
             <Table.Td>
                 <TextWithTooltip>{activity.shortDescription}</TextWithTooltip>
-            </Table.Td>
-
-            <Table.Td>
-                <TextWithTooltip>{activity.leaderName}</TextWithTooltip>
             </Table.Td>
 
             <Table.Td>

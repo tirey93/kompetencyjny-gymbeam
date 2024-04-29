@@ -226,7 +226,7 @@ export const en: TranslationSource = {
         duration: "Duration",
         capacity: "Slots",
         startTime: "Start time",
-        weekdays: "Weekdays",
+        days: "Days",
         period: "Period",
         leader: "Leader",
         description: "Long description",
