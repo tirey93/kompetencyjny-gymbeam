@@ -107,6 +107,9 @@ export const en: TranslationSource = {
             getAll: {
                 default: "Failed to retrieve list of activities. Something went wrong on our side.",
             },
+            delete: {
+                default: "Failed to delete activity. Something went wrong on our side.",
+            },
         },
         reservations: {
             add: {
@@ -145,6 +148,12 @@ export const en: TranslationSource = {
         },
     },
     notifications: {
+        activity: {
+            delete: {
+                title: "Activity deleted.",
+                description: "Successfully deleted activity with id: {{id}}.",
+            },
+        },
         reservations: {
             add: {
                 success: {

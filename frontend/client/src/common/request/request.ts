@@ -18,6 +18,7 @@ const AVAILABLE_API_RESOURCES: Record<
     ChangeRole: { endpoint: "User/{userId}/Role", method: "PUT" },
     ChangeReservationsPermission: { endpoint: "User/{userId}/ReservationDisabled", method: "PUT" },
     GetAllActivities: { endpoint: "Activity" },
+    DeleteActivity: { endpoint: "Activity/{activityId}", method: "DELETE" },
     GetActivitiesInstancesByDates: { endpoint: "Enrollment/ByDates" },
     AddReservation: { endpoint: "Reservation", method: "POST" },
     RemoveReservation: { endpoint: "Reservation/{id}", method: "DELETE" },
@@ -32,6 +33,11 @@ const DEFAULT_REQUEST_OPTIONS: RequestInit = {
 };
 
 export async function request(resource: "GetAllActivities"): Promise<ActivityDTO[]>;
+
+export async function request(
+    resource: "DeleteActivity",
+    options: { urlParams: { activityId: string } }
+): Promise<null>;
 
 export async function request(resource: "AddReservation"): Promise<void>;
 

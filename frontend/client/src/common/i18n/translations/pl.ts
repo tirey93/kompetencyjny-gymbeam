@@ -107,6 +107,9 @@ export const pl: TranslationSource = {
             getAll: {
                 default: "Nie udało się pobrać listy aktywności, coś poszło nie tak po naszej stronie.",
             },
+            delete: {
+                default: "Nie udało się usunąć zajęć, coś poszło nie tak po naszej stronie.",
+            },
         },
         reservations: {
             add: {
@@ -145,6 +148,12 @@ export const pl: TranslationSource = {
         },
     },
     notifications: {
+        activity: {
+            delete: {
+                title: "Usunięto zajęcia.",
+                description: "Pomyślnie usunięto zajęcia o id: {{id}}.",
+            },
+        },
         reservations: {
             add: {
                 success: {

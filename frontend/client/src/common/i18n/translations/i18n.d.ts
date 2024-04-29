@@ -94,6 +94,12 @@ export type TranslationSource = {
     };
 
     notifications: {
+        activity: {
+            delete: {
+                title: string;
+                description: string;
+            };
+        };
         reservations: {
             add: {
                 success: {
@@ -156,6 +162,9 @@ export type TranslationSource = {
         };
         activities: {
             getAll: {
+                default: string;
+            };
+            delete: {
                 default: string;
             };
         };
