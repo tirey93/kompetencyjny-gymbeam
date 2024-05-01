@@ -3,7 +3,9 @@ using Domain.Exceptions;
 using GymBeam.Commands;
 using GymBeam.Properties;
 using MediatR;
-using System.Security.Claims;
+using GymBeam.Utils;
+using GymBeam.Constants;
+using GymBeam.Exceptions;
 
 namespace GymBeam.CommandHandlers
 {
@@ -18,20 +20,17 @@ namespace GymBeam.CommandHandlers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public Task<Unit> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
         {
-            var identity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity 
+            var LoggedUserId = JwtHelper.GetUserIdFromCookies(_httpContextAccessor)
+                ?? throw new InvalidCookieException(Cookies.UserId);
+
+            var userRole = JwtHelper.GetRoleClaimFromCookie(_httpContextAccessor) 
                 ?? throw new AuthenticationFailureException(Resource.ExceptionUserRoleNotFound);
 
-            IEnumerable<Claim> claims = identity.Claims;
-            var roleClaim = claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
-
-            if (roleClaim.Value != Role.Admin.ToString())
+            if (userRole != Role.Admin.ToString() && request.UserId != LoggedUserId)
             {
-                if (request.UserId != request.LoggedUserId)
-                {
-                    throw new AuthenticationFailureException(Resource.ExceptionUserNotAllowed);
-                }
+                throw new AuthenticationFailureException(Resource.ExceptionUserNotAllowed);
             }
 
             var user = _repository.GetUser(request.UserId)
@@ -48,9 +47,9 @@ namespace GymBeam.CommandHandlers
             };
 
             _repository.Add(reservation);
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
-            return Task.FromResult(Unit.Value);
+            return Unit.Value;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using GymBeam.Constants;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -39,5 +40,28 @@ namespace GymBeam.Utils
                 signingCredentials: creds
             );
         }
+
+        public static string GetRoleClaimFromCookie(IHttpContextAccessor httpContextAccessor)
+        {
+            if (httpContextAccessor.HttpContext.User.Identity is not ClaimsIdentity identity)
+                return null;
+
+            IEnumerable<Claim> claims = identity.Claims;
+            var roleClaim = claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+
+            return roleClaim?.Value;
+        }
+
+        public static int? GetUserIdFromCookies(IHttpContextAccessor httpContextAccessor)
+        {
+            if (!httpContextAccessor.HttpContext.Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
+                return null;
+
+            if (!int.TryParse(cookiesUserId, out int userId))
+                return null;
+
+            return userId;
+        }
     }
 }
+

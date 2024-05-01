@@ -61,13 +61,6 @@ namespace GymBeam.Controllers
             };
             try
             {
-                if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
-                    throw new InvalidCookieException(Cookies.UserId);
-                if (!int.TryParse(cookiesUserId, out int userIdFromCookies))
-                    throw new InvalidUserIdException();
-
-                request.LoggedUserId = userIdFromCookies;
-
                 await _mediator.Send(request);
                 return NoContent();
             }
