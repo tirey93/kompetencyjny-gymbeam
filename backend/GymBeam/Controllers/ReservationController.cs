@@ -7,7 +7,6 @@ using System.Net;
 using MediatR;
 using GymBeam.Commands;
 using Domain.Exceptions;
-using GymBeam.Constants;
 using GymBeam.Exceptions;
 
 namespace GymBeam.Controllers
@@ -45,8 +44,8 @@ namespace GymBeam.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status405MethodNotAllowed)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #if !DEBUG
         [Authorize(Roles = Roles.User)]
@@ -66,13 +65,13 @@ namespace GymBeam.Controllers
             }
             catch (ReservationDisabledException ex)
             {
-                return StatusCode((int)HttpStatusCode.MethodNotAllowed,
-                    string.Format(Resource.ControllerMethodNotAllowed, ex.Message));
+                return StatusCode((int)HttpStatusCode.Forbidden,
+                    string.Format(Resource.ControllerForbidden, ex.Message));
             }
             catch (AuthenticationFailureException ex)
             {
-                return StatusCode((int)HttpStatusCode.MethodNotAllowed,
-                    string.Format(Resource.ControllerMethodNotAllowed, ex.Message));
+                return StatusCode((int)HttpStatusCode.Forbidden,
+                    string.Format(Resource.ControllerForbidden, ex.Message));
             }
             catch (InvalidCookieException ex)
             {

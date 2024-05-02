@@ -120,6 +120,9 @@
   <data name="ControllerBadRequest" xml:space="preserve">
     <value>Bad Request: {0}</value>
   </data>
+  <data name="ControllerForbidden" xml:space="preserve">
+    <value>Forbidden: {0}</value>
+  </data>
   <data name="ControllerInternalError" xml:space="preserve">
     <value>Internal Server Error: {0}</value>
   </data>

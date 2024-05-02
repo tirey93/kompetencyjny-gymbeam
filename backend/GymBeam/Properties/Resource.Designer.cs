@@ -70,6 +70,15 @@ namespace GymBeam.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forbidden: {0}.
+        /// </summary>
+        public static string ControllerForbidden {
+            get {
+                return ResourceManager.GetString("ControllerForbidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Internal Server Error: {0}.
         /// </summary>
         public static string ControllerInternalError {
