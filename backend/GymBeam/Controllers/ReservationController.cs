@@ -64,6 +64,11 @@ namespace GymBeam.Controllers
                 await _mediator.Send(request);
                 return NoContent();
             }
+            catch (ReservationDisabledException ex)
+            {
+                return StatusCode((int)HttpStatusCode.MethodNotAllowed,
+                    string.Format(Resource.ControllerMethodNotAllowed, ex.Message));
+            }
             catch (AuthenticationFailureException ex)
             {
                 return StatusCode((int)HttpStatusCode.MethodNotAllowed,
