@@ -48,7 +48,7 @@ namespace GymBeam.QueryHandlers
         {
             var users = _repository.GetUsers();
 
-            if (users == null || !users.Any())
+            if (users == null)
             {
                 return Task.FromResult(Enumerable.Empty<UserResponse>());
             }
@@ -60,9 +60,9 @@ namespace GymBeam.QueryHandlers
                 DisplayName = x.DisplayName,
                 Role = x.Role.ToString(),
                 ReservationDisabled = x.ReservationDisabled
-            }).ToList();
+            });
 
-            return Task.FromResult<IEnumerable<UserResponse>>(result);
+            return Task.FromResult(result);
         }
     }
 }
