@@ -17,37 +17,37 @@ namespace GymBeam.CommandHandlers
             _repository = repository;
         }
 
-        public Task<Unit> Handle(UpdateUserRoleCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateUserRoleCommand request, CancellationToken cancellationToken)
         {
             var user = _repository.GetUser(request.UserId) 
                 ?? throw new UserNotFoundException(request.UserId);
 
             user.Role = Enum.Parse<Role>(request.NewRole);
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
-            return Task.FromResult(Unit.Value);
+            return Unit.Value;
         }
 
-        public Task<Unit> Handle(UpdateUserReservationDisabledFlagCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateUserReservationDisabledFlagCommand request, CancellationToken cancellationToken)
         {
             var user = _repository.GetUser(request.UserId)
                 ?? throw new UserNotFoundException(request.UserId);
 
             user.ReservationDisabled = request.NewReservationDisabledFlagValue;
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
-            return Task.FromResult(Unit.Value);
+            return Unit.Value;
         }
 
-        public Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
             var user = _repository.GetUser(request.UserId)
                 ?? throw new UserNotFoundException(request.UserId);
 
             _repository.Delete(user);
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
-            return Task.FromResult(Unit.Value);
+            return Unit.Value;
         }
     }
 }

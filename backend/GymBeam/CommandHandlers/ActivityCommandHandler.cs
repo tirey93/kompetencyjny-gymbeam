@@ -16,7 +16,7 @@ namespace GymBeam.CommandHandlers
             _repository = repository;
         }
 
-        public Task<Unit> Handle(CreateActivityCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateActivityCommand request, CancellationToken cancellationToken)
         {
             User leader = null;
 
@@ -40,23 +40,23 @@ namespace GymBeam.CommandHandlers
             };
 
             _repository.Add(activity);
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
-            return Task.FromResult(Unit.Value);
+            return Unit.Value;
         }
 
-        public Task<Unit> Handle(DeleteActivityCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteActivityCommand request, CancellationToken cancellationToken)
         {
             var activity = _repository.GetActivity(request.ActivityId)
                 ?? throw new ActivityNotFoundException(request.ActivityId);
 
             _repository.Delete(activity);
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
-            return Task.FromResult(Unit.Value);
+            return Unit.Value;
         }
 
-        public Task<Unit> Handle(UpdateActivityCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateActivityCommand request, CancellationToken cancellationToken)
         {
             var activity = _repository.GetActivity(request.ActivityId)
                 ?? throw new ActivityNotFoundException(request.ActivityId);
@@ -79,9 +79,9 @@ namespace GymBeam.CommandHandlers
             activity.LongDescription = request.LongDescription;
             activity.Cron = request.Cron;
 
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
-            return Task.FromResult(Unit.Value);
+            return Unit.Value;
         }
     }
 }

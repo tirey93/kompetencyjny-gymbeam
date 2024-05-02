@@ -17,7 +17,7 @@ namespace GymBeam.CommandHandlers
             _repository = repository;
         }
 
-        Task<UserResponse> IRequestHandler<RegisterCommand, UserResponse>.Handle(RegisterCommand request, CancellationToken cancellationToken)
+        async Task<UserResponse> IRequestHandler<RegisterCommand, UserResponse>.Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             var userExists = _repository.GetUsers(x => x.Name == request.Username).FirstOrDefault();
             if (userExists != null)
@@ -33,16 +33,16 @@ namespace GymBeam.CommandHandlers
                 Role = Role.User
             };
             _repository.Add(user);
-            _repository.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
 
-            return Task.FromResult(new UserResponse
+            return new UserResponse
             {
                 Id = user.Id,
                 Name = user.Name,
                 DisplayName = user.DisplayName,
                 Role = user.Role.ToString(),
                 ReservationDisabled = user.ReservationDisabled,
-            });
+            };
         }
     }
 }

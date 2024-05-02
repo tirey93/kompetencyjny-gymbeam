@@ -22,13 +22,13 @@ namespace GymBeam.CommandHandlers
 
         public async Task<Unit> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
         {
-            var LoggedUserId = JwtHelper.GetUserIdFromCookies(_httpContextAccessor)
+            var loggedUserId = JwtHelper.GetUserIdFromCookies(_httpContextAccessor)
                 ?? throw new InvalidCookieException(Cookies.UserId);
 
             var userRole = JwtHelper.GetRoleClaimFromCookie(_httpContextAccessor) 
                 ?? throw new AuthenticationFailureException(Resource.ExceptionUserRoleNotFound);
 
-            if (userRole != Role.Admin.ToString() && request.UserId != LoggedUserId)
+            if (userRole != Role.Admin.ToString() && request.UserId != loggedUserId)
             {
                 throw new AuthenticationFailureException(Resource.ExceptionUserNotAllowed);
             }
