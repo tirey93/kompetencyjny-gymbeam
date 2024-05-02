@@ -31,11 +31,11 @@ namespace GymBeam.CommandHandlers
             var userRole = JwtHelper.GetRoleClaimFromCookie(_httpContextAccessor) 
                 ?? throw new AuthenticationFailureException(Resource.ExceptionUserRoleNotFound);
 
-            if ((userRole != Role.Admin.ToString() && request.UserId != loggedUserId) ||
-                 user.ReservationDisabled)
-            {
+            if (userRole != Role.Admin.ToString() && request.UserId != loggedUserId)
                 throw new AuthenticationFailureException(Resource.ExceptionUserNotAllowed);
-            }
+
+            if (user.ReservationDisabled)
+                throw new ReservationDisabledException(user.Id);
 
             var activity = _repository.GetActivity(request.ActivityId)
                 ?? throw new ActivityNotFoundException(request.ActivityId);
