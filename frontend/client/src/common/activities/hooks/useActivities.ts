@@ -8,7 +8,8 @@ import {
     HttpErrorsTranslationsMap,
     mapErrorToErrorTranslationKey,
 } from "../../request/utils/mapErrorToErrorTranslationKey";
-import { Activity, ActivityDTO, Day } from "../Activities";
+import { Activity } from "../Activities";
+import { mapActivityDTOToActivity } from "../utils/activityMappers";
 
 type UseActivities = {
     activities: Activity[] | null;
@@ -46,13 +47,4 @@ const getAllActivitiesRequest = () => {
 const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.activities.getAll.default",
     statusCodesMap: {},
-};
-
-const mapActivityDTOToActivity = (activityDto: ActivityDTO): Activity => {
-    const startTime = new Date(activityDto.startTime);
-    const endTime = new Date(activityDto.endTime);
-    const days: Day[] = ["1", "3", "5"];
-    const startHour = new Date(); // TODO: Hubert - replace mock values
-
-    return { ...activityDto, startTime, endTime, days, startHour };
 };

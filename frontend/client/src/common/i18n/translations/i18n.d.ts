@@ -99,6 +99,14 @@ export type TranslationSource = {
                 title: string;
                 description: string;
             };
+            update: {
+                title: string;
+                description: string;
+            };
+            add: {
+                title: string;
+                description: string;
+            };
         };
         reservations: {
             add: {
@@ -165,6 +173,12 @@ export type TranslationSource = {
                 default: string;
             };
             delete: {
+                default: string;
+            };
+            add: {
+                default: string;
+            };
+            update: {
                 default: string;
             };
         };

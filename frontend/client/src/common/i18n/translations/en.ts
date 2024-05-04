@@ -110,6 +110,12 @@ export const en: TranslationSource = {
             delete: {
                 default: "Failed to delete activity. Something went wrong on our side.",
             },
+            add: {
+                default: "Failed to add activity. Something went wrong on our side.",
+            },
+            update: {
+                default: "Failed to update activity. Something went wrong on our side.",
+            },
         },
         reservations: {
             add: {
@@ -152,6 +158,14 @@ export const en: TranslationSource = {
             delete: {
                 title: "Activity deleted.",
                 description: "Successfully deleted activity with id: {{id}}.",
+            },
+            update: {
+                title: "Activity updated.",
+                description: "Successfully updated activity with id: {{id}}.",
+            },
+            add: {
+                title: "Activity added.",
+                description: "Successfully added activity: {{name}}.",
             },
         },
         reservations: {
