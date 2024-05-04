@@ -62,7 +62,6 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
             !name ||
             !days ||
             !duration ||
-            !longDescription ||
             !shortDescription ||
             !leaderId ||
             !totalCapacity ||
@@ -77,14 +76,14 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
 
         return {
             name: name!,
-            duration: parseInt(durationHours) * 60 + parseInt(durationMinutes),
-            longDescription: longDescription ?? shortDescription!,
-            shortDescription: shortDescription,
+            totalCapacity: totalCapacity,
+            leaderId: parseInt(leaderId),
             startTime: dateRange[0].toISOString(),
             endTime: dateRange[1].toISOString(),
-            leaderId: parseInt(leaderId),
-            totalCapacity: totalCapacity,
+            duration: parseInt(durationHours) * 60 + parseInt(durationMinutes),
             cron: generateCronExpression(startHour, days).stringify(),
+            shortDescription: shortDescription,
+            longDescription: longDescription?.length ? longDescription : shortDescription!,
         };
     }, [form.values]);
 
