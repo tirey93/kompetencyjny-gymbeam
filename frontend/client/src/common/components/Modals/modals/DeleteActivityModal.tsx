@@ -2,8 +2,7 @@ import { useCallback } from "react";
 import { ContextModalProps, modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 
-import { Activity } from "../../../activities/Activities";
-import { useDeleteActivity } from "../../../activities/hooks/useDeleteActivity";
+import { Activity, useDeleteActivity } from "../../../activities";
 import { useTranslate } from "../../../i18n";
 import { ErrorMessage } from "../../DataDisplay";
 import { Modal } from "..";
@@ -15,7 +14,7 @@ type DeleteActivityModalProps = ContextModalProps<{
 export const DeleteActivityModal = ({ innerProps: { activity } }: DeleteActivityModalProps) => {
     const translate = useTranslate();
 
-    const { deleteActivity, error, reset } = useDeleteActivity();
+    const { deleteActivity, error, reset, isLoading } = useDeleteActivity();
 
     const onClose = useCallback(() => {
         modals.closeAll();
@@ -44,6 +43,7 @@ export const DeleteActivityModal = ({ innerProps: { activity } }: DeleteActivity
             <Modal.Caption>{translate("modals.activities.delete.caption")}</Modal.Caption>
             <Modal.Body>{error && <ErrorMessage onClose={reset}>{error}</ErrorMessage>}</Modal.Body>
             <Modal.Footer
+                isLoading={isLoading}
                 submitButton={{ children: "Confirm", color: "danger" }}
                 onSubmit={handleDeleteActivity}
                 onCancel={onClose}

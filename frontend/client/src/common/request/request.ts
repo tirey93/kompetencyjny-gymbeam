@@ -1,4 +1,4 @@
-import { ActivityDTO, ActivityInstance } from "../activities/Activities";
+import { ActivityDTO, ActivityInstance, AddActivityDTO } from "../activities/Activities";
 import { UserDetails, UserRole } from "../auth";
 import { ApiResourceName, RequestOptions, SignInRequestBody, SignUpRequestBody, UserDetailsResponse } from "./";
 
@@ -18,6 +18,8 @@ const AVAILABLE_API_RESOURCES: Record<
     ChangeRole: { endpoint: "User/{userId}/Role", method: "PUT" },
     ChangeReservationsPermission: { endpoint: "User/{userId}/ReservationDisabled", method: "PUT" },
     GetAllActivities: { endpoint: "Activity" },
+    AddActivity: { endpoint: "Activity", method: "POST" },
+    UpdateActivity: { endpoint: "Activity/{activityId}", method: "PUT" },
     DeleteActivity: { endpoint: "Activity/{activityId}", method: "DELETE" },
     GetActivitiesInstancesByDates: { endpoint: "Enrollment/ByDates" },
     AddReservation: { endpoint: "Reservation", method: "POST" },
@@ -33,6 +35,13 @@ const DEFAULT_REQUEST_OPTIONS: RequestInit = {
 };
 
 export async function request(resource: "GetAllActivities"): Promise<ActivityDTO[]>;
+
+export async function request(resource: "AddActivity", options: { body: AddActivityDTO }): Promise<void>;
+
+export async function request(
+    resource: "UpdateActivity",
+    options: { body: ActivityDTO; urlParams: { activityId: string } }
+): Promise<null>;
 
 export async function request(
     resource: "DeleteActivity",

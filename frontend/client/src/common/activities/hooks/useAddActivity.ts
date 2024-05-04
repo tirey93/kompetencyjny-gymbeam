@@ -8,38 +8,31 @@ import {
     HttpErrorsTranslationsMap,
     mapErrorToErrorTranslationKey,
 } from "../../request/utils/mapErrorToErrorTranslationKey";
+import { AddActivityDTO } from "../Activities";
 
-type UseDeleteActivity = {
-    deleteActivity: (activityId: number) => Promise<void>;
+type UseAddActivity = {
+    addActivity: (addActivityDto: AddActivityDTO) => Promise<void>;
     error: string | null;
     isLoading: boolean;
     reset: () => void;
 };
 
-type DeleteActivityRequestOptions = {
-    urlParams: { activityId: string };
+const addActivityRequest = (addActivityDto: AddActivityDTO) => {
+    return request("AddActivity", { body: addActivityDto });
 };
 
-const deleteActivityRequest = (options: DeleteActivityRequestOptions) => {
-    return request("DeleteActivity", {
-        ...options,
-    });
-};
-
-export const useDeleteActivity = (): UseDeleteActivity => {
+export const useAddActivity = (): UseAddActivity => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { invalidate } = useInvalidateQuery();
     const { mutateAsync, isPending } = useMutation({
-        mutationFn: deleteActivityRequest,
+        mutationFn: addActivityRequest,
         onSuccess: () => invalidate(QueryKey.Activities),
     });
 
-    const deleteActivity = useCallback(
-        async (activityId: number) => {
+    const addActivity = useCallback(
+        async (addActivityDto: AddActivityDTO) => {
             try {
-                await mutateAsync({
-                    urlParams: { activityId: activityId.toString() },
-                });
+                await mutateAsync(addActivityDto);
             } catch (error) {
                 const errorTranslation = mapErrorToErrorTranslationKey(error, errorsMap);
                 throw new Error(setAndTranslateError(errorTranslation));
@@ -48,10 +41,10 @@ export const useDeleteActivity = (): UseDeleteActivity => {
         [mutateAsync, setAndTranslateError]
     );
 
-    return { deleteActivity, error, reset, isLoading: isPending };
+    return { addActivity, error, reset, isLoading: isPending };
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {
-    defaultError: "apiErrors.activities.delete.default",
+    defaultError: "apiErrors.activities.add.default",
     statusCodesMap: {},
 };

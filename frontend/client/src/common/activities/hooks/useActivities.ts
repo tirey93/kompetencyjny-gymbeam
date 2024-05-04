@@ -8,7 +8,8 @@ import {
     HttpErrorsTranslationsMap,
     mapErrorToErrorTranslationKey,
 } from "../../request/utils/mapErrorToErrorTranslationKey";
-import { Activity, ActivityDTO, Day } from "../Activities";
+import { Activity, ActivityDTO } from "../Activities";
+import { parseCronExpression } from "../utils/cronExpression";
 
 type UseActivities = {
     activities: Activity[] | null;
@@ -49,10 +50,9 @@ const errorsMap: HttpErrorsTranslationsMap = {
 };
 
 const mapActivityDTOToActivity = (activityDto: ActivityDTO): Activity => {
+    const { days, startHour } = parseCronExpression(activityDto.cron);
     const startTime = new Date(activityDto.startTime);
     const endTime = new Date(activityDto.endTime);
-    const days: Day[] = ["1", "3", "5"];
-    const startHour = new Date(); // TODO: Hubert - replace mock values
 
     return { ...activityDto, startTime, endTime, days, startHour };
 };

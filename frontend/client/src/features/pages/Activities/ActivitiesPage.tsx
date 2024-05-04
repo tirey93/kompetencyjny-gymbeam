@@ -1,7 +1,6 @@
 import { Container } from "@mantine/core";
 
-import { useActivities } from "../../../common/activities/hooks/useActivities";
-import { useActivitiesInstances } from "../../../common/activities/hooks/useActivitiesInstances";
+import { useActivities, useActivitiesInstances } from "../../../common/activities";
 import { ActivityCalendar } from "../../../common/components/ActivityCalendar";
 import { LoaderOverlay } from "../../../common/components/DataDisplay";
 import { useCalendarDateRange } from "../../../common/hooks";

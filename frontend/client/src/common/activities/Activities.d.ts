@@ -1,4 +1,4 @@
-export type Day = "1" | "2" | "3" | "4" | "5" | "6" | "7";
+export type Day = "0" | "1" | "2" | "3" | "4" | "5" | "6";
 
 export type Activity = {
     id: number;
@@ -28,6 +28,8 @@ export type ActivityDTO = {
     leaderName: string;
     cron: string;
 };
+
+export type AddActivityDTO = Omit<ActivityDTO, "id" | "leaderName">;
 
 export type ActivityInstance = {
     activityId: number;

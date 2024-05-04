@@ -1,12 +1,22 @@
+import { useCallback } from "react";
 import { Group, NumberInput, Select, Textarea, TextInput } from "@mantine/core";
 import { DatePickerInput, TimeInput } from "@mantine/dates";
-import { ContextModalProps } from "@mantine/modals";
+import { ContextModalProps, modals } from "@mantine/modals";
+import { notifications } from "@mantine/notifications";
 
 import { useActivityModalForm } from "./hooks/useActivityModalForm";
 import { Modal } from "../../../../../common/components/Modals";
-import { Activity } from "../../../../activities/Activities";
+import {
+    Activity,
+    ActivityDTO,
+    generateCronExpression,
+    useAddActivity,
+    useUpdateActivity,
+} from "../../../../activities";
+import { AddActivityDTO } from "../../../../activities/Activities";
 import { useTranslate } from "../../../../i18n";
 import { useAllUsers } from "../../../../users";
+import { ErrorMessage } from "../../../DataDisplay";
 import { DaysInput } from "../../../DataInput";
 
 import classes from "./AddActivityModal.module.scss";
@@ -22,12 +32,111 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
     const form = useActivityModalForm(activity);
     const translate = useTranslate();
     const { users } = useAllUsers();
+    const { addActivity, isLoading: isAdding, error: addError, reset: resetAdd } = useAddActivity();
+    const { updateActivity, isLoading: isUpdating, error: updateError, reset: resetUpdate } = useUpdateActivity();
 
     const leaderSelectOptions = (users ?? []).map((user) => ({
         // TODO: Hubert - use admins only
         value: user.id.toString(),
         label: `${user.displayName}`,
     }));
+
+    const onClose = useCallback(() => {
+        modals.closeAll();
+    }, []);
+
+    const mapFormValuesToAddActivityDTO = useCallback(() => {
+        const {
+            name,
+            days,
+            duration,
+            longDescription,
+            shortDescription,
+            leaderId,
+            totalCapacity,
+            startHour,
+            dateRange,
+        } = form.values;
+
+        if (
+            !name ||
+            !days ||
+            !duration ||
+            !longDescription ||
+            !shortDescription ||
+            !leaderId ||
+            !totalCapacity ||
+            !startHour ||
+            !dateRange?.[0] ||
+            !dateRange?.[1]
+        ) {
+            return null;
+        }
+
+        const [durationHours, durationMinutes] = duration.split(":");
+
+        return {
+            name: name!,
+            duration: parseInt(durationHours) * 60 + parseInt(durationMinutes),
+            longDescription: longDescription ?? shortDescription!,
+            shortDescription: shortDescription,
+            startTime: dateRange[0].toISOString(),
+            endTime: dateRange[1].toISOString(),
+            leaderId: parseInt(leaderId),
+            totalCapacity: totalCapacity,
+            cron: generateCronExpression(startHour, days).stringify(),
+        };
+    }, [form.values]);
+
+    const handleUpdateActivity = useCallback(
+        async (updatedActivityDTO: ActivityDTO) => {
+            await updateActivity(updatedActivityDTO);
+            notifications.show({
+                withBorder: true,
+                title: translate("notifications.activity.update.title"),
+                message: translate("notifications.activity.update.description", { id: updatedActivityDTO.id }),
+                color: "success",
+            });
+        },
+        [translate, updateActivity]
+    );
+
+    const handleAddActivity = useCallback(
+        async (addActivityDto: AddActivityDTO) => {
+            await addActivity(addActivityDto);
+            notifications.show({
+                withBorder: true,
+                title: translate("notifications.activity.add.title"),
+                message: translate("notifications.activity.add.description", { name: addActivityDto.name }),
+                color: "success",
+            });
+        },
+        [addActivity, translate]
+    );
+
+    const onSubmit = useCallback(async () => {
+        if (form.validate().hasErrors) {
+            return;
+        }
+
+        const addActivityDto = mapFormValuesToAddActivityDTO();
+        if (!addActivityDto) {
+            return;
+        }
+
+        if (activity) {
+            const updatedActivityDTO: ActivityDTO = {
+                id: activity.id,
+                leaderName: activity.leaderName,
+                ...addActivityDto,
+            };
+            await handleUpdateActivity(updatedActivityDTO);
+        } else {
+            await handleAddActivity(addActivityDto);
+        }
+
+        onClose();
+    }, [activity, form, handleAddActivity, handleUpdateActivity, mapFormValuesToAddActivityDTO, onClose]);
 
     return (
         <Modal.Wrapper className={classes.container}>
@@ -90,10 +199,15 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
                 <DaysInput required {...form.getInputProps("days")} label={translate("activity.days")} />
                 <Textarea required {...form.getInputProps("shortDescription")} label={translate("activity.summary")} />
                 <Textarea {...form.getInputProps("longDescription")} label={translate("activity.description")} />
+
+                {addError && <ErrorMessage onClose={resetAdd}>{addError}</ErrorMessage>}
+                {updateError && <ErrorMessage onClose={resetUpdate}>{updateError}</ErrorMessage>}
             </Modal.Body>
 
             <Modal.Footer
-                onSubmit={form.validate}
+                onSubmit={onSubmit}
+                onCancel={onClose}
+                isLoading={isAdding || isUpdating}
                 submitButton={{
                     color: "success",
                     children: translate("modals.activities.add.buttons.save"),

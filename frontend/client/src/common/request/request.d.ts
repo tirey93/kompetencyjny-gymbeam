@@ -10,6 +10,8 @@ export type ApiResourceName = |
     "DeleteUser" |
     "GetAllUsers" |
     "GetAllActivities" |
+    "AddActivity" |
+    "UpdateActivity" |
     "DeleteActivity" |
     "GetActivitiesInstancesByDates" |
     "CheckUserNameAvailability" |

@@ -110,6 +110,12 @@ export const pl: TranslationSource = {
             delete: {
                 default: "Nie udało się usunąć zajęć, coś poszło nie tak po naszej stronie.",
             },
+            add: {
+                default: "Nie udało się dodać zajęć, coś poszło nie tak po naszej stronie.",
+            },
+            update: {
+                default: "Nie udało się zmodyfikować zajęć, coś poszło nie tak po naszej stronie.",
+            },
         },
         reservations: {
             add: {
@@ -152,6 +158,14 @@ export const pl: TranslationSource = {
             delete: {
                 title: "Usunięto zajęcia.",
                 description: "Pomyślnie usunięto zajęcia o id: {{id}}.",
+            },
+            update: {
+                title: "Zaktualizowano zajęcia.",
+                description: "Pomyślnie zaktualizowano zajęcia o id: {{id}}.",
+            },
+            add: {
+                title: "Dodano zajęcia.",
+                description: "Pomyślnie dodano zajęcia: {{name}}.",
             },
         },
         reservations: {
