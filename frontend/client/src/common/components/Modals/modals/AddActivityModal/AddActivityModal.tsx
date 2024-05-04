@@ -1,11 +1,8 @@
-import { useMemo } from "react";
 import { Group, NumberInput, Select, Textarea, TextInput } from "@mantine/core";
-import { DatePickerInput, DatesRangeValue, TimeInput } from "@mantine/dates";
-import { useForm } from "@mantine/form";
+import { DatePickerInput, TimeInput } from "@mantine/dates";
 import { ContextModalProps } from "@mantine/modals";
-import cronParser, { CronFields } from "cron-parser";
-import dayjs from "dayjs";
 
+import { useActivityModalForm } from "./hooks/useActivityModalForm";
 import { Modal } from "../../../../../common/components/Modals";
 import { Activity } from "../../../../activities/Activities";
 import { useTranslate } from "../../../../i18n";
@@ -25,31 +22,12 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
     const form = useActivityModalForm(activity);
     const translate = useTranslate();
     const { users } = useAllUsers();
+
     const leaderSelectOptions = (users ?? []).map((user) => ({
+        // TODO: Hubert - use admins only
         value: user.id.toString(),
         label: `${user.displayName}`,
     }));
-
-    const generateCronExpression = () => {
-        const { startHour, days } = form.values;
-
-        if (!startHour || !days) {
-            return;
-        }
-
-        const [hh, mm] = startHour.split(":");
-        const baseInterval = cronParser.parseExpression("* * * * *");
-        const fields = JSON.parse(JSON.stringify(baseInterval.fields));
-
-        fields.dayOfWeek = days.map((day) => parseInt(day));
-        fields.hour = [parseInt(hh)];
-        fields.minute = [parseInt(mm)];
-        fields.second = [0];
-
-        return cronParser.fieldsToExpression(fields as CronFields);
-    };
-
-    generateCronExpression();
 
     return (
         <Modal.Wrapper className={classes.container}>
@@ -123,51 +101,4 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
             />
         </Modal.Wrapper>
     );
-};
-
-const useActivityModalForm = (activity?: Activity) => {
-    const startHour = useMemo(
-        () => (activity?.startHour ? dayjs(activity.startHour).format("HH:mm") : undefined),
-        [activity?.startHour]
-    );
-
-    const dateRange: DatesRangeValue | undefined = useMemo(
-        () => (activity?.startTime && activity.endTime ? [activity.startTime, activity.endTime] : undefined),
-        [activity?.endTime, activity?.startTime]
-    );
-
-    const duration = useMemo(
-        () =>
-            activity?.duration
-                ? `${Math.floor(activity.duration / 60)}`.padStart(2, "0") +
-                  ":" +
-                  `${activity.duration % 60}`.padStart(2, "0")
-                : undefined,
-        [activity?.duration]
-    );
-
-    return useForm({
-        initialValues: {
-            name: activity?.name,
-            longDescription: activity?.longDescription,
-            shortDescription: activity?.shortDescription,
-            leaderId: activity?.leaderId.toString(),
-            totalCapacity: activity?.totalCapacity,
-            days: activity?.days,
-            duration,
-            startHour,
-            dateRange,
-        },
-
-        validate: {
-            name: (value) => !value?.length && "Name is required.",
-            shortDescription: (value) => !value?.length && "ShortDescription is required.",
-            totalCapacity: (value) => !value && "TotalCapacity is required.",
-            days: (value) => !value?.length && "Days are required.",
-            duration: (value) => !value?.length && "Duration is required.",
-            startHour: (value) => !value?.length && "StartHour is required.",
-            dateRange: (value) => (!value || !value[0] || !value[1]) && "DateRange is required.",
-            leaderId: (value) => !value && "Leader is required",
-        },
-    });
 };

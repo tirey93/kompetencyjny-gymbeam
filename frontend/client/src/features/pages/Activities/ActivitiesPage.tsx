@@ -22,11 +22,11 @@ export const ActivitiesPage = () => {
     }
 
     if (instancesError) {
-        return <>{instancesError}</>;
+        return <>{instancesError}</>; // TODO: Hubert - display proper error message
     }
 
     if (activitiesError) {
-        return <>{activitiesError}</>;
+        return <>{activitiesError}</>; // TODO: Hubert - display proper error message
     }
 
     return (

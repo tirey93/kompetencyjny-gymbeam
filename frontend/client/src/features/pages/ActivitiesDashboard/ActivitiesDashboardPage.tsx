@@ -30,7 +30,7 @@ export const ActivitiesDashboardPage = () => {
     }
 
     if (error) {
-        return <>{error}</>;
+        return <>{error}</>; // TODO: Hubert - display proper error message
     }
 
     return (

@@ -42,6 +42,7 @@ export const UsersDashboardPage = () => {
     }
 
     if (error) {
+        // TODO: Hubert - display proper error message
         return (
             <Stack className={classes.errorContainer}>
                 <ErrorMessage>{error}</ErrorMessage>
