@@ -1,1 +1,0 @@
-export { ActivitiesManagementPanel } from "./ActivitiesManagementPanel";

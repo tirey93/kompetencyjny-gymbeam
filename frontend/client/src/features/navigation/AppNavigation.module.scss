@@ -1,0 +1,15 @@
+html .burger {
+  position: absolute;
+  top: var(--mantine-spacing-md);
+  left: var(--mantine-spacing-md);
+  z-index: 1000;
+}
+
+html .appNavigationNavbar {
+  padding: var(--mantine-spacing-md);
+}
+
+html .outlet {
+  position: relative;
+  z-index: 0;
+}

@@ -1,1 +1,0 @@
-export { UsersManagementPanel } from "./UsersManagementPanel";

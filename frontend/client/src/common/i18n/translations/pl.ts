@@ -2,6 +2,77 @@
 import { TranslationSource } from "./i18n";
 
 export const pl: TranslationSource = {
+    weekday: {
+        monday: {
+            short: "Pon",
+        },
+        tuesday: {
+            short: "Wt",
+        },
+        wednesday: {
+            short: "Śr",
+        },
+        thursday: {
+            short: "Czw",
+        },
+        friday: {
+            short: "Pt",
+        },
+        saturday: {
+            short: "Sob",
+        },
+        sunday: {
+            short: "Ndz",
+        },
+    },
+
+    modals: {
+        activities: {
+            delete: {
+                header: "Usuń zajęcia",
+                caption:
+                    "Czy na pewno chcesz usunąć te zajęcia? Wszystkie instancje tych zajęć zostaną usunięte, a rezerwacje przepadną na zawsze.",
+            },
+            add: {
+                header: {
+                    add: "Dodaj zajęcia",
+                    edit: "Edytuj zajęcia",
+                },
+                buttons: {
+                    save: "Zapisz",
+                    cancel: "Anuluj",
+                },
+            },
+        },
+        user: {
+            delete: {
+                buttons: {
+                    confirm: "Potwierdź",
+                    cancel: "Anuluj",
+                },
+                title: "Usuwanie użytkownika",
+                caption: "Ta akcja jest nieodwracalna! Czy na pewno chcesz usunąć tego użytkownika?",
+            },
+            changeRole: {
+                buttons: {
+                    confirm: "Potwierdź",
+                    cancel: "Anuluj",
+                },
+                title: "Zmiana roli użytkownika",
+                caption: 'Czy na pewno chcesz zmienić rolę tego użytkownika na "{{role}}"?',
+            },
+            toggleReservations: {
+                buttons: {
+                    confirm: "Confirm",
+                    cancel: "Cancel",
+                },
+                title: "Zmiana uprawnień",
+                toggleOnCaption: "Czy na pewno chcesz pozwolić temu użytkownikowi na rezerwowanie zajęć?",
+                toggleOffCaption: "Czy na pewno chcesz zablokować temu użytkownikowi możliwość rezerwacji zajęć?",
+            },
+        },
+    },
+
     activityCalendar: {
         filters: {
             activity: {
@@ -35,6 +106,9 @@ export const pl: TranslationSource = {
         activities: {
             getAll: {
                 default: "Nie udało się pobrać listy aktywności, coś poszło nie tak po naszej stronie.",
+            },
+            delete: {
+                default: "Nie udało się usunąć zajęć, coś poszło nie tak po naszej stronie.",
             },
         },
         reservations: {
@@ -74,6 +148,12 @@ export const pl: TranslationSource = {
         },
     },
     notifications: {
+        activity: {
+            delete: {
+                title: "Usunięto zajęcia.",
+                description: "Pomyślnie usunięto zajęcia o id: {{id}}.",
+            },
+        },
         reservations: {
             add: {
                 success: {
@@ -136,7 +216,8 @@ export const pl: TranslationSource = {
             qr: "Karnet",
             account: "Konto",
             activities: "Zajęcia",
-            adminDashboard: "Panel admina",
+            usersDashboard: "Zarządzanie użytkownikami",
+            activitiesDashboard: "Zarządzanie zajęciami",
         },
     },
     user: {
@@ -148,6 +229,18 @@ export const pl: TranslationSource = {
             admin: "Administrator",
         },
     },
+    activity: {
+        id: "ID",
+        name: "Nazwa",
+        duration: "Czas trwania",
+        capacity: "Miejsca",
+        startTime: "Czas startu",
+        days: "Dni tygodnia",
+        period: "Okres powtarzania",
+        leader: "Trener",
+        description: "Długi opis",
+        summary: "Krótki opis",
+    },
     pages: {
         activities: {
             details: {
@@ -156,63 +249,36 @@ export const pl: TranslationSource = {
                 leader: "Prowadzący",
             },
         },
-        adminDashboard: {
-            activitiesPanel: {
-                tab: "Zajęcia",
+
+        activitiesDashboard: {
+            tab: "Zajęcia",
+            addNewButton: "Dodaj",
+        },
+
+        usersDashboard: {
+            tab: "Użytkownicy",
+            options: {
+                delete: "Usuń konto użytkownika",
             },
-            usersPanel: {
-                tab: "Użytkownicy",
-                options: {
-                    delete: "Usuń konto użytkownika",
+            search: {
+                placeholder: "Wyszukaj użytkownika",
+            },
+            header: {
+                id: "ID",
+                user: "Użytkownik",
+                login: "Login",
+                role: "Rola",
+                reservations: "Rezerwacje",
+                options: "Opcje",
+            },
+            retryButton: "Ponów",
+            rows: {
+                reservations: {
+                    on: "Włączone",
+                    off: "Wyłączone",
                 },
-                modals: {
-                    delete: {
-                        buttons: {
-                            confirm: "Potwierdź",
-                            cancel: "Anuluj",
-                        },
-                        title: "Usuwanie użytkownika",
-                        caption: "Ta akcja jest nieodwracalna! Czy na pewno chcesz usunąć tego użytkownika?",
-                    },
-                    changeRole: {
-                        buttons: {
-                            confirm: "Potwierdź",
-                            cancel: "Anuluj",
-                        },
-                        title: "Zmiana roli użytkownika",
-                        caption: 'Czy na pewno chcesz zmienić rolę tego użytkownika na "{{role}}"?',
-                    },
-                    toggleReservations: {
-                        buttons: {
-                            confirm: "Confirm",
-                            cancel: "Cancel",
-                        },
-                        title: "Zmiana uprawnień do rezerwacji",
-                        toggleOnCaption: "Czy na pewno chcesz pozwolić temu użytkownikowi na rezerwowanie zajęć?",
-                        toggleOffCaption:
-                            "Czy na pewno chcesz zablokować temu użytkownikowi możliwość rezerwacji zajęć?",
-                    },
-                },
-                search: {
-                    placeholder: "Wyszukaj użytkownika",
-                },
-                header: {
-                    id: "ID",
-                    user: "Użytkownik",
-                    login: "Login",
-                    role: "Rola",
-                    reservations: "Rezerwacje",
-                    options: "Opcje",
-                },
-                retryButton: "Ponów",
-                rows: {
-                    reservations: {
-                        on: "Włączone",
-                        off: "Wyłączone",
-                    },
-                    name: "Nazwa",
-                    login: "Login",
-                },
+                name: "Nazwa",
+                login: "Login",
             },
         },
 

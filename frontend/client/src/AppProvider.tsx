@@ -5,7 +5,7 @@ import { Notifications } from "@mantine/notifications";
 import { QueryClientProvider } from "@tanstack/react-query";
 
 import { apiClient } from "./common/apiClient";
-import { ModalsManager } from "./common/components/ModalsManager";
+import { ModalsManager } from "./common/components/Modals";
 import { useDateTimeLocale } from "./common/hooks";
 import { i18n } from "./common/i18n/i18n";
 import { ThemeProvider } from "./common/theme";

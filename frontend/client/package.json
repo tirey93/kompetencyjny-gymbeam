@@ -30,6 +30,7 @@
     "@tiptap/react": "^2.2.4",
     "@tiptap/starter-kit": "^2.2.4",
     "classnames": "^2.5.1",
+    "cron-parser": "^4.9.0",
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.5",
     "embla-carousel-react": "^8.0.0",

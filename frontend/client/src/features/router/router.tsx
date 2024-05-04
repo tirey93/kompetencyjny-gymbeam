@@ -1,16 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AppProvider } from "../../AppProvider";
 import { Root } from "../../Root";
 import { NotFoundPage } from "../pages/404";
-import { ActivitiesPage } from "../pages/Activities/ActivitiesPage";
-import { ActivityPage } from "../pages/Activity/ActivityPage";
-import { AdminDashboardPage } from "../pages/AdminDashboard";
-import { RegistrationPage } from "../pages/Auth/Registration";
-import { SignInPage } from "../pages/Auth/SignIn";
+import { ActivitiesPage } from "../pages/Activities";
+import { ActivitiesDashboardPage } from "../pages/ActivitiesDashboard";
+import { ActivityPage } from "../pages/Activity";
 import { GymPassPage } from "../pages/GymPass";
 import { HomePage } from "../pages/Home";
+import { RegistrationPage } from "../pages/Registration";
+import { SignInPage } from "../pages/SignIn";
+import { UsersDashboardPage } from "../pages/UsersDashboard";
 import { AppRoute } from "./AppRoute";
 
 const APP_PAGES = [
@@ -59,10 +60,18 @@ const APP_PAGES = [
         ),
     },
     {
-        path: AppRoute.ADMIN_DASHBOARD,
+        path: AppRoute.USERS_DASHBOARD,
         element: (
             <ProtectedRoute allowedRoles={["Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
-                <AdminDashboardPage />
+                <UsersDashboardPage />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: AppRoute.ACTIVITIES_DASHBOARD,
+        element: (
+            <ProtectedRoute allowedRoles={["Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
+                <ActivitiesDashboardPage />
             </ProtectedRoute>
         ),
     },

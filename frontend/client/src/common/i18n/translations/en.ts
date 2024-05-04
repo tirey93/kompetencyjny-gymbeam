@@ -2,6 +2,77 @@
 import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
+    weekday: {
+        monday: {
+            short: "Mon",
+        },
+        tuesday: {
+            short: "Tue",
+        },
+        wednesday: {
+            short: "Wed",
+        },
+        thursday: {
+            short: "Thu",
+        },
+        friday: {
+            short: "Fri",
+        },
+        saturday: {
+            short: "Sat",
+        },
+        sunday: {
+            short: "Sun",
+        },
+    },
+
+    modals: {
+        activities: {
+            delete: {
+                header: "Delete activity",
+                caption:
+                    "Are you sure you want to delete this activity? All instances of this activity will be deleted and all reservations will be lost.",
+            },
+            add: {
+                header: {
+                    add: "Add activity",
+                    edit: "Edit activity",
+                },
+                buttons: {
+                    save: "Save",
+                    cancel: "Cancel",
+                },
+            },
+        },
+        user: {
+            delete: {
+                buttons: {
+                    confirm: "Confirm",
+                    cancel: "Cancel",
+                },
+                title: "Delete user",
+                caption: "This action is irreversible! Are you sure you want to delete this user?",
+            },
+            changeRole: {
+                buttons: {
+                    confirm: "Confirm",
+                    cancel: "Cancel",
+                },
+                title: "Change user role",
+                caption: 'Are you sure you want to change role of this user to "{{role}}"?',
+            },
+            toggleReservations: {
+                buttons: {
+                    confirm: "Confirm",
+                    cancel: "Cancel",
+                },
+                title: "Change permissions",
+                toggleOnCaption: "Are you sure you want to allow this user to make reservations?",
+                toggleOffCaption: "Are you sure you want to prevent this user from making any reservations?",
+            },
+        },
+    },
+
     activityCalendar: {
         filters: {
             activity: {
@@ -35,6 +106,9 @@ export const en: TranslationSource = {
         activities: {
             getAll: {
                 default: "Failed to retrieve list of activities. Something went wrong on our side.",
+            },
+            delete: {
+                default: "Failed to delete activity. Something went wrong on our side.",
             },
         },
         reservations: {
@@ -74,6 +148,12 @@ export const en: TranslationSource = {
         },
     },
     notifications: {
+        activity: {
+            delete: {
+                title: "Activity deleted.",
+                description: "Successfully deleted activity with id: {{id}}.",
+            },
+        },
         reservations: {
             add: {
                 success: {
@@ -136,7 +216,8 @@ export const en: TranslationSource = {
             qr: "Gym Ticket",
             account: "Account",
             activities: "Activities",
-            adminDashboard: "Admin Dashboard",
+            usersDashboard: "Users Dashboard",
+            activitiesDashboard: "Activities Dashboard",
         },
     },
     user: {
@@ -148,6 +229,18 @@ export const en: TranslationSource = {
             admin: "Admin",
         },
     },
+    activity: {
+        id: "ID",
+        name: "Name",
+        duration: "Duration",
+        capacity: "Slots",
+        startTime: "Start time",
+        days: "Days",
+        period: "Period",
+        leader: "Leader",
+        description: "Long description",
+        summary: "Short description",
+    },
     pages: {
         activities: {
             details: {
@@ -156,62 +249,36 @@ export const en: TranslationSource = {
                 leader: "Trainer",
             },
         },
-        adminDashboard: {
-            activitiesPanel: {
-                tab: "Activities",
+
+        activitiesDashboard: {
+            tab: "Activities",
+            addNewButton: "Add new",
+        },
+
+        usersDashboard: {
+            tab: "Users",
+            options: {
+                delete: "Delete user's account",
             },
-            usersPanel: {
-                tab: "Users",
-                options: {
-                    delete: "Delete user's account",
+            search: {
+                placeholder: "Search for an user",
+            },
+            header: {
+                id: "ID",
+                user: "User",
+                login: "Login",
+                role: "Role",
+                reservations: "Reservations",
+                options: "Options",
+            },
+            retryButton: "Retry",
+            rows: {
+                reservations: {
+                    on: "Enabled",
+                    off: "Disabled",
                 },
-                modals: {
-                    delete: {
-                        buttons: {
-                            confirm: "Confirm",
-                            cancel: "Cancel",
-                        },
-                        title: "Delete user",
-                        caption: "This action is irreversible! Are you sure you want to delete this user?",
-                    },
-                    changeRole: {
-                        buttons: {
-                            confirm: "Confirm",
-                            cancel: "Cancel",
-                        },
-                        title: "Change user role",
-                        caption: 'Are you sure you want to change role of this user to "{{role}}"?',
-                    },
-                    toggleReservations: {
-                        buttons: {
-                            confirm: "Confirm",
-                            cancel: "Cancel",
-                        },
-                        title: "Change reservations permissions",
-                        toggleOnCaption: "Are you sure you want to allow this user to make reservations?",
-                        toggleOffCaption: "Are you sure you want to prevent this user from making any reservations?",
-                    },
-                },
-                search: {
-                    placeholder: "Search for an user",
-                },
-                header: {
-                    id: "ID",
-                    user: "User",
-                    login: "Login",
-                    role: "Role",
-                    reservations: "Reservations",
-                    options: "Options",
-                },
-                retryButton: "Retry",
-                rows: {
-                    reservations: {
-                        on: "Enabled",
-                        off: "Disabled",
-                    },
-                    name: "Name",
-                    login: "Login",
-                },
+                name: "Name",
+                login: "Login",
             },
         },
 

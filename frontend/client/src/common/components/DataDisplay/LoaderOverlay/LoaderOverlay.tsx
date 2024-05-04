@@ -1,9 +1,9 @@
 import { LoadingOverlay } from "@mantine/core";
 
 type LoaderOverlayProps = {
-    visible: boolean;
+    visible?: boolean;
 };
 
-export const LoaderOverlay = ({ visible }: LoaderOverlayProps) => {
+export const LoaderOverlay = ({ visible = true }: LoaderOverlayProps) => {
     return <LoadingOverlay visible={visible} overlayProps={{ blur: 3 }} loaderProps={{ type: "bars" }} />;
 };
