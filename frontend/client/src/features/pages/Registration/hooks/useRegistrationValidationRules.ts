@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 
 import { useTranslate } from "../../../../common/i18n";
 import { ValidationRule } from "../Registration";
@@ -14,34 +14,6 @@ const MAX_PASSWORD_LENGTH = 255;
 
 export const useRegistrationValidationRules = () => {
     const translate = useTranslate();
-
-    const validatePasswordMinimumLength = useCallback((password: string) => {
-        return password.length >= MIN_PASSWORD_LENGTH;
-    }, []);
-
-    const validatePasswordMaximumLength = useCallback((password: string) => {
-        return password.length <= MAX_PASSWORD_LENGTH;
-    }, []);
-
-    const validateNameMinimumLength = useCallback((name: string) => {
-        return name.length >= MIN_NAME_LENGTH;
-    }, []);
-
-    const validateNameMaximumLength = useCallback((name: string) => {
-        return name.length <= MAX_NAME_LENGTH;
-    }, []);
-
-    const validateLoginMinimumLength = useCallback((login: string) => {
-        return login.length >= MIN_LOGIN_LENGTH;
-    }, []);
-
-    const validateLoginMaximumLength = useCallback((login: string) => {
-        return login.length <= MAX_LOGIN_LENGTH;
-    }, []);
-
-    const validatePasswordsMatch = useCallback((passwords: string[]) => {
-        return passwords[0] === passwords[1];
-    }, []);
 
     const passwordValidationRules = useMemo((): ValidationRule[] => {
         return [
@@ -60,7 +32,7 @@ export const useRegistrationValidationRules = () => {
                 validator: validatePasswordMaximumLength,
             },
         ];
-    }, [translate, validatePasswordMaximumLength, validatePasswordMinimumLength]);
+    }, [translate]);
 
     const nameValidationRules = useMemo((): ValidationRule[] => {
         return [
@@ -75,7 +47,7 @@ export const useRegistrationValidationRules = () => {
                 validator: validateNameMaximumLength,
             },
         ];
-    }, [translate, validateNameMaximumLength, validateNameMinimumLength]);
+    }, [translate]);
 
     const loginValidationRules = useMemo((): ValidationRule[] => {
         return [
@@ -90,7 +62,7 @@ export const useRegistrationValidationRules = () => {
                 validator: validateLoginMaximumLength,
             },
         ];
-    }, [translate, validateLoginMaximumLength, validateLoginMinimumLength]);
+    }, [translate]);
 
     const confirmPasswordValidationRules = useMemo((): ValidationRule[] => {
         return [
@@ -100,7 +72,7 @@ export const useRegistrationValidationRules = () => {
                 validator: validatePasswordsMatch,
             },
         ];
-    }, [translate, validatePasswordsMatch]);
+    }, [translate]);
 
     return useMemo(
         () => ({
@@ -111,4 +83,32 @@ export const useRegistrationValidationRules = () => {
         }),
         [loginValidationRules, nameValidationRules, passwordValidationRules, confirmPasswordValidationRules]
     );
+};
+
+const validatePasswordMinimumLength = (password: string) => {
+    return password.length >= MIN_PASSWORD_LENGTH;
+};
+
+const validatePasswordMaximumLength = (password: string) => {
+    return password.length <= MAX_PASSWORD_LENGTH;
+};
+
+const validateNameMinimumLength = (name: string) => {
+    return name.length >= MIN_NAME_LENGTH;
+};
+
+const validateNameMaximumLength = (name: string) => {
+    return name.length <= MAX_NAME_LENGTH;
+};
+
+const validateLoginMinimumLength = (login: string) => {
+    return login.length >= MIN_LOGIN_LENGTH;
+};
+
+const validateLoginMaximumLength = (login: string) => {
+    return login.length <= MAX_LOGIN_LENGTH;
+};
+
+const validatePasswordsMatch = (passwords: string[]) => {
+    return passwords[0] === passwords[1];
 };

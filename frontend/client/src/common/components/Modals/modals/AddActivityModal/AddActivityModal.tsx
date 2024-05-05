@@ -27,6 +27,9 @@ type AddActivityModalProps = ContextModalProps<{
 
 const MIN_NUMBER_OF_SLOTS = 2;
 const MAX_NUMBER_OF_SLOTS = 99;
+const NAME_MAX_LENGTH = 255;
+const LONG_DESCRIPTION_MAX_LENGTH = 4000;
+const SHORT_DESCRIPTION_MAX_LENGTH = 1000;
 
 export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalProps) => {
     const form = useActivityModalForm(activity);
@@ -84,7 +87,7 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
             duration: parseInt(durationHours) * 60 + parseInt(durationMinutes),
             cron: generateCronExpression(startHour, days).stringify(),
             shortDescription: shortDescription,
-            longDescription: longDescription?.length ? longDescription : shortDescription!,
+            longDescription: longDescription?.length ? longDescription : shortDescription,
         };
     }, [form.values]);
 
@@ -120,6 +123,7 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
         }
 
         const addActivityDto = mapFormValuesToAddActivityDTO();
+
         if (!addActivityDto) {
             return;
         }
@@ -150,6 +154,7 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
                 <Group className={classes.inputsRow}>
                     <TextInput
                         required
+                        maxLength={NAME_MAX_LENGTH}
                         {...form.getInputProps("name")}
                         label={translate("activity.name")}
                         className={classes.flexInput}
@@ -197,8 +202,18 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
                 />
 
                 <DaysInput required {...form.getInputProps("days")} label={translate("activity.days")} />
-                <Textarea required {...form.getInputProps("shortDescription")} label={translate("activity.summary")} />
-                <Textarea {...form.getInputProps("longDescription")} label={translate("activity.description")} />
+
+                <Textarea
+                    required
+                    maxLength={SHORT_DESCRIPTION_MAX_LENGTH}
+                    {...form.getInputProps("shortDescription")}
+                    label={translate("activity.summary")}
+                />
+                <Textarea
+                    maxLength={LONG_DESCRIPTION_MAX_LENGTH}
+                    {...form.getInputProps("longDescription")}
+                    label={translate("activity.description")}
+                />
 
                 {addError && <ErrorMessage onClose={resetAdd}>{addError}</ErrorMessage>}
                 {updateError && <ErrorMessage onClose={resetUpdate}>{updateError}</ErrorMessage>}
