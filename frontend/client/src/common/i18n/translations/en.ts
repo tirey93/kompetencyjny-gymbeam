@@ -57,6 +57,32 @@ export const en: TranslationSource = {
                     confirm: "Save",
                     cancel: "Cancel",
                 },
+                formValidation: {
+                    name: {
+                        required: "Activity name is required.",
+                    },
+                    duration: {
+                        required: "Duration is required.",
+                    },
+                    startHour: {
+                        required: "Start hour is required.",
+                    },
+                    totalCapacity: {
+                        required: "Capacity is required.",
+                    },
+                    shortDescription: {
+                        required: "Provide a short description of activity.",
+                    },
+                    dateRange: {
+                        required: "Date range is required.",
+                    },
+                    leaderId: {
+                        required: "Choose activity leader.",
+                    },
+                    days: {
+                        required: "Select at least 1 day.",
+                    },
+                },
             },
         },
         user: {

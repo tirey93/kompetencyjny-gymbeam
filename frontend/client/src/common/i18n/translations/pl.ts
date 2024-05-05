@@ -57,6 +57,32 @@ export const pl: TranslationSource = {
                     confirm: "Zapisz",
                     cancel: "Anuluj",
                 },
+                formValidation: {
+                    name: {
+                        required: "Nazwa zajęć jest wymagana.",
+                    },
+                    duration: {
+                        required: "Czas trwania jest wymagany.",
+                    },
+                    startHour: {
+                        required: "Godzina rozpoczęcia jest wymagana.",
+                    },
+                    totalCapacity: {
+                        required: "Ilość miejsc jest wymagana.",
+                    },
+                    shortDescription: {
+                        required: "Opisz krótko te zajęcia.",
+                    },
+                    dateRange: {
+                        required: "Podaj okres w którym zajęcia będą się odbywać.",
+                    },
+                    leaderId: {
+                        required: "Wybierz trenera do tych zajęć.",
+                    },
+                    days: {
+                        required: "Wybierz przynajmniej jeden dzień w którym zajęcia będą się odbywać.",
+                    },
+                },
             },
         },
         user: {

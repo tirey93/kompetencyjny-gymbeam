@@ -53,6 +53,32 @@ export type TranslationSource = {
                     confirm: string;
                     cancel: string;
                 };
+                formValidation: {
+                    name: {
+                        required: string;
+                    };
+                    duration: {
+                        required: string;
+                    };
+                    totalCapacity: {
+                        required: string;
+                    };
+                    shortDescription: {
+                        required: string;
+                    };
+                    startHour: {
+                        required: string;
+                    };
+                    dateRange: {
+                        required: string;
+                    };
+                    leaderId: {
+                        required: string;
+                    };
+                    days: {
+                        required: string;
+                    };
+                };
             };
         };
         user: {
