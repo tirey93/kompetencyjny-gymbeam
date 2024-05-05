@@ -280,6 +280,22 @@ export const pl: TranslationSource = {
         activitiesDashboard: {
             tab: "Zajęcia",
             addNewButton: "Dodaj",
+            searchBar: {
+                placeholder: "Szukaj zajęć",
+            },
+            header: {
+                id: "ID",
+                name: "Nazwa",
+                startTime: "Data Początkowa",
+                endTime: "Data Zakończenia",
+                startHour: "Czas Rozpoczęcia",
+                duration: "Czas Trwania",
+                days: "Dni Tygodnia",
+                totalCapacity: "Liczba Miejsc",
+                leaderName: "Trener",
+                longDescription: "Opis",
+                shortDescription: "Podsumowanie",
+            },
         },
 
         usersDashboard: {

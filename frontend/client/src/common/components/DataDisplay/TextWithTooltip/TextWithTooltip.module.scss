@@ -1,4 +1,8 @@
 html .textWithOverflowTooltip {
- padding-inline: var(--mantine-spacing-sm);
+ max-width: 50dvw;
+ white-space: break-spaces;
+}
+
+html .text {
  font: inherit;
 }

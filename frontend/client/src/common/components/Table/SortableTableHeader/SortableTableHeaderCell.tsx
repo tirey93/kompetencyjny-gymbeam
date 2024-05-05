@@ -22,7 +22,7 @@ export const SortableTableHeaderCell = ({
     ...rest
 }: SortableTableHeaderCellProps) => {
     return (
-        <Table.Th {...rest}>
+        <Table.Th {...rest} className={classes.container}>
             <Wrapper reversed={reversed} onSort={onSort} sorted={sorted}>
                 <TextWithTooltip className={classes.columnName}>{children}</TextWithTooltip>
             </Wrapper>

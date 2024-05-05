@@ -280,6 +280,22 @@ export const en: TranslationSource = {
         activitiesDashboard: {
             tab: "Activities",
             addNewButton: "Add new",
+            searchBar: {
+                placeholder: "Search for activity",
+            },
+            header: {
+                id: "ID",
+                name: "Name",
+                startTime: "Start Date",
+                endTime: "End Date",
+                startHour: "Start Hour",
+                duration: "Duration",
+                days: "Repeats on",
+                totalCapacity: "Capacity",
+                leaderName: "Leader",
+                longDescription: "Description",
+                shortDescription: "Summary",
+            },
         },
 
         usersDashboard: {

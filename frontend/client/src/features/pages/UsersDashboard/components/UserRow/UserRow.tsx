@@ -49,7 +49,7 @@ export const UserRow = ({ userDetails, events }: UserRowProps) => {
                 />
             </Table.Td>
 
-            <Table.Td className={classes.center}>
+            <Table.Td className={classNames(classes.center)}>
                 <UserOptionsDropdown events={events} userDetails={userDetails} />
             </Table.Td>
         </Table.Tr>

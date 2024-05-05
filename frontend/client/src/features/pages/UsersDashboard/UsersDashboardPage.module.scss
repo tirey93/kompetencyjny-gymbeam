@@ -4,10 +4,9 @@ html .scrollContainer {
   position: relative;
 
   .table {
-    overflow: hidden;
     border-radius: var(--mantine-radius-md);
-    --table-vertical-spacing: var(--mantine-spacing-md);
     margin-top: var(--mantine-spacing-lg);
+    --table-vertical-spacing: var(--mantine-spacing-md);
   }
 
   .errorContainer {
