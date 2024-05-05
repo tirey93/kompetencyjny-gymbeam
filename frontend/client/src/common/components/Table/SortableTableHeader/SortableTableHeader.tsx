@@ -2,8 +2,6 @@ import { Table } from "@mantine/core";
 
 import { SortableTableHeaderCell, SortableTableHeaderCellProps } from "./SortableTableHeaderCell";
 
-import classes from "./SortableTableHeaderCell.module.scss";
-
 export type SortableTableColumnsConfig<TData> = Partial<SortableTableHeaderCellProps> & { column: keyof TData };
 
 type SortableTableHeaderProps<TData> = {
@@ -21,7 +19,7 @@ export const SortableTableHeader = <TData extends object>({
 }: SortableTableHeaderProps<TData>) => {
     return (
         <Table.Thead>
-            <Table.Tr className={classes.tableRow}>
+            <Table.Tr>
                 {columns.map(({ column, children, disableSort, ...rest }) => (
                     <SortableTableHeaderCell
                         onSort={!disableSort ? () => onSort(column) : undefined}

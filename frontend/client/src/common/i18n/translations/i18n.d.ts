@@ -281,6 +281,22 @@ export type TranslationSource = {
         activitiesDashboard: {
             tab: string;
             addNewButton: string;
+            searchBar: {
+                placeholder: string;
+            };
+            header: {
+                id: string;
+                name: string;
+                startTime: string;
+                endTime: string;
+                startHour: string;
+                duration: string;
+                days: string;
+                totalCapacity: string;
+                leaderName: string;
+                longDescription: string;
+                shortDescription: string;
+            };
         };
 
         usersDashboard: {

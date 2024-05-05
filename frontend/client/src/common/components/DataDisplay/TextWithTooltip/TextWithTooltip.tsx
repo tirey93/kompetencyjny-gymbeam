@@ -14,7 +14,9 @@ export const TextWithTooltip = ({ children, label, alwaysEnabled, ...rest }: Tex
 
     return (
         <Tooltip
-            className={classes.textWithOverflowTooltip}
+            classNames={{
+                tooltip: classes.textWithOverflowTooltip,
+            }}
             disabled={!alwaysEnabled && !overflow}
             label={label ?? children}
             withArrow
@@ -22,7 +24,12 @@ export const TextWithTooltip = ({ children, label, alwaysEnabled, ...rest }: Tex
             color="info"
             transitionProps={{ transition: "pop" }}
         >
-            <Text ref={overflowRef as RefObject<HTMLParagraphElement>} truncate="end" {...rest}>
+            <Text
+                ref={overflowRef as RefObject<HTMLParagraphElement>}
+                truncate="end"
+                className={classes.text}
+                {...rest}
+            >
                 {children}
             </Text>
         </Tooltip>

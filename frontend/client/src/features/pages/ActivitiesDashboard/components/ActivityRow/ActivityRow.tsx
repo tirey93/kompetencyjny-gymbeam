@@ -18,9 +18,9 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
 
     return (
         <Table.Tr key={activity.id} className={classes.row}>
-            <Table.Td>{activity.id}</Table.Td>
+            <Table.Td className={classes.center}>{activity.id}</Table.Td>
 
-            <Table.Td>
+            <Table.Td className={classes.columnWithTruncatedValue}>
                 <TextWithTooltip>{activity.name}</TextWithTooltip>
             </Table.Td>
 
@@ -35,19 +35,19 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
 
             <Table.Td>{activity.totalCapacity}</Table.Td>
 
-            <Table.Td>
+            <Table.Td className={classes.columnWithTruncatedValue}>
                 <TextWithTooltip>{activity.leaderName}</TextWithTooltip>
             </Table.Td>
 
-            <Table.Td>
+            <Table.Td className={classes.columnWithTruncatedValue}>
                 <TextWithTooltip>{activity.longDescription}</TextWithTooltip>
             </Table.Td>
 
-            <Table.Td>
+            <Table.Td className={classes.columnWithTruncatedValue}>
                 <TextWithTooltip>{activity.shortDescription}</TextWithTooltip>
             </Table.Td>
 
-            <Table.Td>
+            <Table.Td className={classes.pinned}>
                 <Group className={classes.actionButtons}>
                     <ActionIcon variant="subtle" color="success" onClick={() => onEdit(activity)}>
                         <IconPencil />

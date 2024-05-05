@@ -1,18 +1,20 @@
 @import "src/_mantine.scss";
 
-html .columnName {
-  font-weight: 700;
-  font-size: var(--mantine-font-size-sm);
-}
-
-html .sortableWrapper {
-  .sortIcon {
-    width: calc_rem(16px);
-    height: calc_rem(16px);
+html .container {
+  .columnName {
+    font-weight: 700;
+    font-size: var(--mantine-font-size-sm);
   }
 
-  .columnHeaderContentWrapper {
-    justify-content: space-between;
-    flex-wrap: nowrap;
+  .sortableWrapper {
+    .sortIcon {
+      width: calc_rem(16px);
+      height: calc_rem(16px);
+    }
+
+    .columnHeaderContentWrapper {
+      justify-content: space-between;
+      flex-wrap: nowrap;
+    }
   }
 }

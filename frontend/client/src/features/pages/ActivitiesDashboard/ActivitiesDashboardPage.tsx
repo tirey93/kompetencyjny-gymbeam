@@ -42,14 +42,18 @@ export const ActivitiesDashboardPage = () => {
     return (
         <Container className={classes.container} size="xl">
             <Group>
-                <SearchBar placeholder="Test" onSearch={onSearch} className={classes.searchBar} />
+                <SearchBar
+                    placeholder={translate("pages.activitiesDashboard.searchBar.placeholder")}
+                    onSearch={onSearch}
+                    className={classes.searchBar}
+                />
                 <Button rightSection={<IconPlus />} variant="light" color="success" onClick={() => openAddModal()}>
                     {translate("pages.activitiesDashboard.addNewButton")}
                 </Button>
             </Group>
 
             <Table.ScrollContainer minWidth={200}>
-                <Table stickyHeader highlightOnHover>
+                <Table stickyHeader highlightOnHover className={classes.table}>
                     <SortableTableHeader
                         columns={columnsConfig}
                         sortDirection={sortDirection}

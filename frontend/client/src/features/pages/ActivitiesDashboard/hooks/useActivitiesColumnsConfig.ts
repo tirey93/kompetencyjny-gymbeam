@@ -1,54 +1,57 @@
-import { Activity } from "../../../../common/activities/Activities";
+import { Activity } from "../../../../common/activities";
 import { SortableTableColumnsConfig } from "../../../../common/components/Table";
+import { useTranslate } from "../../../../common/i18n";
 
 export const useActivitiesColumnsConfig = (): SortableTableColumnsConfig<Activity>[] => {
+    const translate = useTranslate();
+
     return [
         {
-            children: "ID",
+            children: translate("pages.activitiesDashboard.header.id"),
             column: "id",
             ta: "center",
         },
         {
-            children: "Name",
+            children: translate("pages.activitiesDashboard.header.name"),
             column: "name",
         },
         {
-            children: "Start Time",
+            children: translate("pages.activitiesDashboard.header.startTime"),
             column: "startTime",
         },
         {
-            children: "End Time",
+            children: translate("pages.activitiesDashboard.header.endTime"),
             column: "endTime",
         },
         {
-            children: "Start Hour",
+            children: translate("pages.activitiesDashboard.header.startHour"),
             column: "startHour",
             disableSort: true,
         },
         {
-            children: "Duration",
+            children: translate("pages.activitiesDashboard.header.duration"),
             column: "duration",
         },
         {
-            children: "Days",
+            children: translate("pages.activitiesDashboard.header.days"),
             column: "days",
             disableSort: true,
         },
         {
-            children: "Capacity",
+            children: translate("pages.activitiesDashboard.header.totalCapacity"),
             column: "totalCapacity",
         },
         {
-            children: "Leader",
+            children: translate("pages.activitiesDashboard.header.leaderName"),
             column: "leaderName",
         },
         {
-            children: "Description",
+            children: translate("pages.activitiesDashboard.header.longDescription"),
             column: "longDescription",
             disableSort: true,
         },
         {
-            children: "Summary",
+            children: translate("pages.activitiesDashboard.header.shortDescription"),
             column: "shortDescription",
             disableSort: true,
         },
