@@ -1,0 +1,19 @@
+html .container {
+  padding-block: var(--mantine-spacing-xl);
+  gap: var(--mantine-spacing-lg);
+  align-items: center;
+
+  p {
+    text-align: center;
+
+    &.title {
+      font-weight: 700;
+      font-size: var(--mantine-font-size-xl);
+    }
+
+    &.description {
+      font-size: var(--mantine-font-size-sm);
+    }
+  }
+}
+

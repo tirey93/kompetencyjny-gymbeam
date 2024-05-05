@@ -3,6 +3,12 @@ export type TranslationSource = {
         errorScreen: {
             retry: string;
         };
+        table: {
+            noResults: {
+                title: string;
+                addButton: string;
+            };
+        };
         weekday: {
             monday: {
                 short: string;
@@ -285,6 +291,9 @@ export type TranslationSource = {
         activitiesDashboard: {
             tab: string;
             addNewButton: string;
+            noResults: {
+                description: string;
+            };
             searchBar: {
                 placeholder: string;
             };
@@ -311,6 +320,9 @@ export type TranslationSource = {
             search: {
                 placeholder: string;
             };
+            noResults: {
+                description: string;
+            };
             header: {
                 id: string;
                 user: string;
@@ -319,7 +331,6 @@ export type TranslationSource = {
                 reservations: string;
                 options: string;
             };
-            retryButton: string;
             rows: {
                 reservations: {
                     on: string;

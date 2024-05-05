@@ -6,6 +6,12 @@ export const pl: TranslationSource = {
         errorScreen: {
             retry: "Spróbuj ponownie",
         },
+        table: {
+            noResults: {
+                title: "Nic tu nie ma.",
+                addButton: "Dodaj",
+            },
+        },
         weekday: {
             monday: {
                 short: "Pon",
@@ -287,6 +293,9 @@ export const pl: TranslationSource = {
             searchBar: {
                 placeholder: "Szukaj zajęć",
             },
+            noResults: {
+                description: "Nie ma jeszcze dodanych żadnych zajęć. Możesz dodać pierwsze z nich.",
+            },
             header: {
                 id: "ID",
                 name: "Nazwa",
@@ -310,6 +319,9 @@ export const pl: TranslationSource = {
             search: {
                 placeholder: "Wyszukaj użytkownika",
             },
+            noResults: {
+                description: "Nie ma żadnego konta do wyświetlenia, nawet Twojego. Coś musiało pójść nie tak.",
+            },
             header: {
                 id: "ID",
                 user: "Użytkownik",
@@ -318,7 +330,6 @@ export const pl: TranslationSource = {
                 reservations: "Rezerwacje",
                 options: "Opcje",
             },
-            retryButton: "Ponów",
             rows: {
                 reservations: {
                     on: "Włączone",
