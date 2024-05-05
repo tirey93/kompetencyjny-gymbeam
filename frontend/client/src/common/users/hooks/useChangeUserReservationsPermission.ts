@@ -13,6 +13,7 @@ type UseChangeUserReservationsPermission = {
     changeReservationsPermission: (userId: number, allowReservations: boolean) => Promise<void>;
     error: string | null;
     reset: () => void;
+    isLoading: boolean;
 };
 
 type ChangeReservationsPermissionRequestOptions = {
@@ -23,7 +24,7 @@ type ChangeReservationsPermissionRequestOptions = {
 export const useChangeReservationsPermission = (): UseChangeUserReservationsPermission => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { invalidate } = useInvalidateQuery();
-    const { mutateAsync } = useMutation({
+    const { mutateAsync, isPending } = useMutation({
         mutationFn: changeReservationsPermissionRequest,
         onSuccess: () => invalidate(QueryKey.Users),
     });
@@ -43,7 +44,7 @@ export const useChangeReservationsPermission = (): UseChangeUserReservationsPerm
         [mutateAsync, setAndTranslateError]
     );
 
-    return { changeReservationsPermission, error, reset };
+    return { changeReservationsPermission, error, reset, isLoading: isPending };
 };
 
 const changeReservationsPermissionRequest = (options: ChangeReservationsPermissionRequestOptions) => {

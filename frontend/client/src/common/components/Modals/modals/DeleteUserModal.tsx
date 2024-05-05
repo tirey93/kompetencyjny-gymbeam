@@ -15,7 +15,7 @@ type DeleteUserModalProps = ContextModalProps<{
 
 export const DeleteUserModal = ({ innerProps: { user } }: DeleteUserModalProps) => {
     const translate = useTranslate();
-    const { deleteUser, error, reset } = useDeleteUser();
+    const { deleteUser, error, reset, isLoading } = useDeleteUser();
 
     const onClose = useCallback(() => {
         modals.closeAll();
@@ -47,7 +47,11 @@ export const DeleteUserModal = ({ innerProps: { user } }: DeleteUserModalProps) 
             <Modal.Footer
                 onSubmit={handleDeleteUser}
                 onCancel={onClose}
+                isLoading={isLoading}
                 cancelButton={{
+                    children: translate("modals.user.delete.buttons.cancel"),
+                }}
+                submitButton={{
                     color: "danger",
                     children: translate("modals.user.delete.buttons.confirm"),
                 }}

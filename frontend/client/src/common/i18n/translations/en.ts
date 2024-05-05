@@ -37,6 +37,10 @@ export const en: TranslationSource = {
                 header: "Delete activity",
                 caption:
                     "Are you sure you want to delete this activity? All instances of this activity will be deleted and all reservations will be lost.",
+                buttons: {
+                    cancel: "Cancel",
+                    confirm: "Confirm",
+                },
             },
             add: {
                 header: {
@@ -44,7 +48,7 @@ export const en: TranslationSource = {
                     edit: "Edit activity",
                 },
                 buttons: {
-                    save: "Save",
+                    confirm: "Save",
                     cancel: "Cancel",
                 },
             },

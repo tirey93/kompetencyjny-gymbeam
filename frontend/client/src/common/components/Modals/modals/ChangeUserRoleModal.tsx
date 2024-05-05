@@ -17,7 +17,7 @@ type ChangeUserRoleModalProps = ContextModalProps<{
 export const ChangeUserRoleModal = ({ innerProps: { user, newRole } }: ChangeUserRoleModalProps) => {
     const translate = useTranslate();
     const translatedRole = newRole === "Admin" ? translate("user.roles.admin") : translate("user.roles.user");
-    const { changeRole, error, reset } = useChangeUserRole();
+    const { changeRole, error, reset, isLoading } = useChangeUserRole();
 
     const onClose = useCallback(() => {
         modals.closeAll();
@@ -46,7 +46,18 @@ export const ChangeUserRoleModal = ({ innerProps: { user, newRole } }: ChangeUse
                 {error && <ErrorMessage onClose={reset}>{error}</ErrorMessage>}
             </Modal.Body>
 
-            <Modal.Footer onSubmit={handleChangeRole} onCancel={onClose} />
+            <Modal.Footer
+                onSubmit={handleChangeRole}
+                onCancel={onClose}
+                isLoading={isLoading}
+                cancelButton={{
+                    children: translate("modals.user.changeRole.buttons.cancel"),
+                }}
+                submitButton={{
+                    color: "success",
+                    children: translate("modals.user.changeRole.buttons.confirm"),
+                }}
+            />
         </Modal.Wrapper>
     );
 };

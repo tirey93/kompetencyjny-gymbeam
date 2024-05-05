@@ -37,6 +37,10 @@ export const pl: TranslationSource = {
                 header: "Usuń zajęcia",
                 caption:
                     "Czy na pewno chcesz usunąć te zajęcia? Wszystkie instancje tych zajęć zostaną usunięte, a rezerwacje przepadną na zawsze.",
+                buttons: {
+                    confirm: "Potwierdź",
+                    cancel: "Anuluj",
+                },
             },
             add: {
                 header: {
@@ -44,7 +48,7 @@ export const pl: TranslationSource = {
                     edit: "Edytuj zajęcia",
                 },
                 buttons: {
-                    save: "Zapisz",
+                    confirm: "Zapisz",
                     cancel: "Anuluj",
                 },
             },
@@ -68,8 +72,8 @@ export const pl: TranslationSource = {
             },
             toggleReservations: {
                 buttons: {
-                    confirm: "Confirm",
-                    cancel: "Cancel",
+                    confirm: "Potwierdź",
+                    cancel: "Anuluj",
                 },
                 title: "Zmiana uprawnień",
                 toggleOnCaption: "Czy na pewno chcesz pozwolić temu użytkownikowi na rezerwowanie zajęć?",

@@ -8,8 +8,8 @@ type ModalFooterButtonProps = {
 };
 
 type ModalFooterProps = {
-    submitButton?: ModalFooterButtonProps;
-    cancelButton?: ModalFooterButtonProps;
+    submitButton: ModalFooterButtonProps;
+    cancelButton: ModalFooterButtonProps;
     onSubmit: () => unknown;
     onCancel?: () => unknown;
     isLoading?: boolean;
@@ -17,8 +17,8 @@ type ModalFooterProps = {
 
 export const ModalFooter = ({
     isLoading = false,
-    submitButton = { children: "Confirm", color: "success" },
-    cancelButton = { children: "Cancel" },
+    submitButton,
+    cancelButton,
     onCancel,
     onSubmit,
 }: ModalFooterProps) => {

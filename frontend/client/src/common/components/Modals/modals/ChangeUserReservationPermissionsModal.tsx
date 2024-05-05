@@ -17,7 +17,7 @@ export const ChangeUserReservationPermissionsModal = ({
     innerProps: { user },
 }: ChangeUserReservationPermissionsModalProps) => {
     const translate = useTranslate();
-    const { changeReservationsPermission, error, reset } = useChangeReservationsPermission();
+    const { changeReservationsPermission, error, reset, isLoading } = useChangeReservationsPermission();
 
     const onClose = useCallback(() => {
         modals.closeAll();
@@ -50,7 +50,18 @@ export const ChangeUserReservationPermissionsModal = ({
                 {error && <ErrorMessage onClose={reset}>{error}</ErrorMessage>}
             </Modal.Body>
 
-            <Modal.Footer onSubmit={handleChangePermissions} onCancel={onClose} />
+            <Modal.Footer
+                onSubmit={handleChangePermissions}
+                onCancel={onClose}
+                isLoading={isLoading}
+                cancelButton={{
+                    children: translate("modals.user.toggleReservations.buttons.cancel"),
+                }}
+                submitButton={{
+                    color: "success",
+                    children: translate("modals.user.toggleReservations.buttons.confirm"),
+                }}
+            />
         </Modal.Wrapper>
     );
 };
