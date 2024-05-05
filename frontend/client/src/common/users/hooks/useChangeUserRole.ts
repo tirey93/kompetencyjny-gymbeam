@@ -14,6 +14,7 @@ type UseChangeUserRole = {
     changeRole: (userId: number, newRole: UserRole) => Promise<void>;
     error: string | null;
     reset: () => void;
+    isLoading: boolean;
 };
 
 type ChangeUserRoleRequestOptions = {
@@ -24,7 +25,7 @@ type ChangeUserRoleRequestOptions = {
 export const useChangeUserRole = (): UseChangeUserRole => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { invalidate } = useInvalidateQuery();
-    const { mutateAsync } = useMutation({
+    const { mutateAsync, isPending } = useMutation({
         mutationFn: changeUserRoleRequest,
         onSuccess: () => invalidate(QueryKey.Users),
     });
@@ -44,7 +45,7 @@ export const useChangeUserRole = (): UseChangeUserRole => {
         [mutateAsync, setAndTranslateError]
     );
 
-    return { changeRole, reset, error };
+    return { changeRole, reset, error, isLoading: isPending };
 };
 
 const changeUserRoleRequest = (options: ChangeUserRoleRequestOptions) => {

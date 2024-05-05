@@ -210,7 +210,10 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
                 isLoading={isAdding || isUpdating}
                 submitButton={{
                     color: "success",
-                    children: translate("modals.activities.add.buttons.save"),
+                    children: translate("modals.activities.add.buttons.confirm"),
+                }}
+                cancelButton={{
+                    children: translate("modals.activities.add.buttons.cancel"),
                 }}
             />
         </Modal.Wrapper>

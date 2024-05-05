@@ -33,6 +33,10 @@ export type TranslationSource = {
             delete: {
                 header: string;
                 caption: string;
+                buttons: {
+                    cancel: string;
+                    confirm: string;
+                };
             };
             add: {
                 header: {
@@ -40,7 +44,7 @@ export type TranslationSource = {
                     edit: string;
                 };
                 buttons: {
-                    save: string;
+                    confirm: string;
                     cancel: string;
                 };
             };

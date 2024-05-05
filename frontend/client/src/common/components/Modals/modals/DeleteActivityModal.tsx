@@ -44,7 +44,8 @@ export const DeleteActivityModal = ({ innerProps: { activity } }: DeleteActivity
             <Modal.Body>{error && <ErrorMessage onClose={reset}>{error}</ErrorMessage>}</Modal.Body>
             <Modal.Footer
                 isLoading={isLoading}
-                submitButton={{ children: "Confirm", color: "danger" }}
+                submitButton={{ children: translate("modals.activities.delete.buttons.confirm"), color: "danger" }}
+                cancelButton={{ children: translate("modals.activities.delete.buttons.cancel") }}
                 onSubmit={handleDeleteActivity}
                 onCancel={onClose}
             />

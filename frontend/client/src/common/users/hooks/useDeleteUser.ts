@@ -13,6 +13,7 @@ type UseDeleteUser = {
     deleteUser: (userId: number) => Promise<void>;
     error: string | null;
     reset: () => void;
+    isLoading: boolean;
 };
 
 type DeleteUserRequestOptions = {
@@ -28,7 +29,7 @@ const deleteUserRequest = (options: DeleteUserRequestOptions) => {
 export const useDeleteUser = (): UseDeleteUser => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { invalidate } = useInvalidateQuery();
-    const { mutateAsync } = useMutation({
+    const { mutateAsync, isPending } = useMutation({
         mutationFn: deleteUserRequest,
         onSuccess: () => invalidate(QueryKey.Users),
     });
@@ -47,7 +48,7 @@ export const useDeleteUser = (): UseDeleteUser => {
         [mutateAsync, setAndTranslateError]
     );
 
-    return { deleteUser, error, reset };
+    return { deleteUser, error, reset, isLoading: isPending };
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {
