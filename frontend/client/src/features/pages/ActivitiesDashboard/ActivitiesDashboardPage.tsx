@@ -3,9 +3,9 @@ import { IconPlus } from "@tabler/icons-react";
 
 import { useActivitiesColumnsConfig } from "./hooks/useActivitiesColumnsConfig";
 import { useActivitiesModalEvents } from "./hooks/useActivitiesModalEvents";
-import { Activity } from "../../../common/activities/Activities";
-import { useActivities } from "../../../common/activities/hooks/useActivities";
+import { Activity, useActivities } from "../../../common/activities";
 import { LoaderOverlay } from "../../../common/components/DataDisplay";
+import { ErrorScreen } from "../../../common/components/DataDisplay/ErrorScreen/ErrorScreen";
 import { SearchBar } from "../../../common/components/DataInput";
 import { SortableTableHeader } from "../../../common/components/Table";
 import { useSearchAndSort } from "../../../common/hooks";
@@ -16,7 +16,7 @@ import classes from "./ActivitiesDashboardPage.module.scss";
 
 export const ActivitiesDashboardPage = () => {
     const columnsConfig = useActivitiesColumnsConfig();
-    const { activities, isLoading, error } = useActivities();
+    const { activities, isLoading, error, refetch } = useActivities();
     const translate = useTranslate();
     const { openAddModal, openDeleteModal } = useActivitiesModalEvents();
 
@@ -30,7 +30,13 @@ export const ActivitiesDashboardPage = () => {
     }
 
     if (error) {
-        return <>{error}</>; // TODO: Hubert - display proper error message
+        return (
+            <ErrorScreen
+                onRetry={refetch}
+                description={error}
+                title={translate("pages.activities.errorScreen.activities.title")}
+            />
+        );
     }
 
     return (

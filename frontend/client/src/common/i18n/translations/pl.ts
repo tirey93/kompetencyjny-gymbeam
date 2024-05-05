@@ -2,27 +2,32 @@
 import { TranslationSource } from "./i18n";
 
 export const pl: TranslationSource = {
-    weekday: {
-        monday: {
-            short: "Pon",
+    common: {
+        errorScreen: {
+            retry: "Spróbuj ponownie",
         },
-        tuesday: {
-            short: "Wt",
-        },
-        wednesday: {
-            short: "Śr",
-        },
-        thursday: {
-            short: "Czw",
-        },
-        friday: {
-            short: "Pt",
-        },
-        saturday: {
-            short: "Sob",
-        },
-        sunday: {
-            short: "Ndz",
+        weekday: {
+            monday: {
+                short: "Pon",
+            },
+            tuesday: {
+                short: "Wt",
+            },
+            wednesday: {
+                short: "Śr",
+            },
+            thursday: {
+                short: "Czw",
+            },
+            friday: {
+                short: "Pt",
+            },
+            saturday: {
+                short: "Sob",
+            },
+            sunday: {
+                short: "Ndz",
+            },
         },
     },
 
@@ -262,6 +267,14 @@ export const pl: TranslationSource = {
                 capacity: "Limit osób",
                 leader: "Prowadzący",
             },
+            errorScreen: {
+                activities: {
+                    title: "Nie można wyświetlić zajęć.",
+                },
+                instances: {
+                    title: "Nie można wyświetlić zajęć.",
+                },
+            },
         },
 
         activitiesDashboard: {
@@ -293,6 +306,9 @@ export const pl: TranslationSource = {
                 },
                 name: "Nazwa",
                 login: "Login",
+            },
+            errorScreen: {
+                title: "Nie można wyświetlić listy użytkowników.",
             },
         },
 

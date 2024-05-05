@@ -35,11 +35,12 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
     const { addActivity, isLoading: isAdding, error: addError, reset: resetAdd } = useAddActivity();
     const { updateActivity, isLoading: isUpdating, error: updateError, reset: resetUpdate } = useUpdateActivity();
 
-    const leaderSelectOptions = (users ?? []).map((user) => ({
-        // TODO: Hubert - use admins only
-        value: user.id.toString(),
-        label: `${user.displayName}`,
-    }));
+    const leaderSelectOptions = (users ?? [])
+        .filter((user) => user.role === "Admin")
+        .map((user) => ({
+            value: user.id.toString(),
+            label: `${user.displayName}`,
+        }));
 
     const onClose = useCallback(() => {
         modals.closeAll();

@@ -1,25 +1,30 @@
 export type TranslationSource = {
-    weekday: {
-        monday: {
-            short: string;
+    common: {
+        errorScreen: {
+            retry: string;
         };
-        tuesday: {
-            short: string;
-        };
-        wednesday: {
-            short: string;
-        };
-        thursday: {
-            short: string;
-        };
-        friday: {
-            short: string;
-        };
-        saturday: {
-            short: string;
-        };
-        sunday: {
-            short: string;
+        weekday: {
+            monday: {
+                short: string;
+            };
+            tuesday: {
+                short: string;
+            };
+            wednesday: {
+                short: string;
+            };
+            thursday: {
+                short: string;
+            };
+            friday: {
+                short: string;
+            };
+            saturday: {
+                short: string;
+            };
+            sunday: {
+                short: string;
+            };
         };
     };
 
@@ -263,6 +268,14 @@ export type TranslationSource = {
                 capacity: string;
                 leader: string;
             };
+            errorScreen: {
+                activities: {
+                    title: string;
+                };
+                instances: {
+                    title: string;
+                };
+            };
         };
 
         activitiesDashboard: {
@@ -294,6 +307,9 @@ export type TranslationSource = {
                 };
                 name: string;
                 login: string;
+            };
+            errorScreen: {
+                title: string;
             };
         };
 
