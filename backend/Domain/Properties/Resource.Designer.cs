@@ -79,6 +79,15 @@ namespace Domain.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User with ID {0} is blocked from making reservations..
+        /// </summary>
+        internal static string ExceptionUserHasReservationDisabled {
+            get {
+                return ResourceManager.GetString("ExceptionUserHasReservationDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User with name {0} not found..
         /// </summary>
         internal static string ExceptionUserNameNotFound {
