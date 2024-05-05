@@ -50,7 +50,6 @@ export const useActivityModalForm = (activity?: Activity) => {
     });
 
     return useForm({
-        mode: "uncontrolled",
         initialValues: {
             name: activity?.name,
             longDescription: activity?.longDescription,
