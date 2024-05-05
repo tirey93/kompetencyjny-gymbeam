@@ -1,8 +1,9 @@
 import { useCallback } from "react";
-import { Button, Container, Stack, Table } from "@mantine/core";
+import { Container, Table } from "@mantine/core";
 
 import { UserDetails } from "../../../common/auth";
-import { ErrorMessage, LoaderOverlay } from "../../../common/components/DataDisplay";
+import { LoaderOverlay } from "../../../common/components/DataDisplay";
+import { ErrorScreen } from "../../../common/components/DataDisplay/ErrorScreen/ErrorScreen";
 import { SearchBar } from "../../../common/components/DataInput";
 import { SortableTableHeader } from "../../../common/components/Table";
 import { useSearchAndSort } from "../../../common/hooks";
@@ -42,14 +43,12 @@ export const UsersDashboardPage = () => {
     }
 
     if (error) {
-        // TODO: Hubert - display proper error message
         return (
-            <Stack className={classes.errorContainer}>
-                <ErrorMessage>{error}</ErrorMessage>
-                <Button variant="primary" onClick={refetch}>
-                    {translate("pages.usersDashboard.retryButton")}
-                </Button>
-            </Stack>
+            <ErrorScreen
+                onRetry={refetch}
+                description={error}
+                title={translate("pages.usersDashboard.errorScreen.title")}
+            />
         );
     }
 

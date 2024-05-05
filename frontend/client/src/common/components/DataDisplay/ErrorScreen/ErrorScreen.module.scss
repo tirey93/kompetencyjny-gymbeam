@@ -1,0 +1,43 @@
+html .container {
+  height: calc(100dvh - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .card {
+    max-width: 500px;
+    padding: var(--mantine-spacing-xl);
+    overflow: visible;
+
+    .warningIcon {
+      color: var(--mantine-color-warning-7);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: var(--mantine-color-dark-6);
+      border-radius: 100%;
+      padding: var(--mantine-spacing-xs);
+    }
+
+    p {
+      text-align: center;
+
+      &.title {
+        font-weight: 700;
+        font-size: calc(var(--mantine-font-size-xl) * 1.25);
+        margin-bottom: var(--mantine-spacing-md);
+      }
+
+      &.description {
+        font-size: var(--mantine-font-size-md);
+      }
+    }
+
+    .actionButton {
+      margin-top: var(--mantine-spacing-xl);
+    }
+  }
+}
+
