@@ -4,10 +4,9 @@ import { IconPlus } from "@tabler/icons-react";
 import { useActivitiesColumnsConfig } from "./hooks/useActivitiesColumnsConfig";
 import { useActivitiesModalEvents } from "./hooks/useActivitiesModalEvents";
 import { Activity, useActivities } from "../../../common/activities";
-import { LoaderOverlay } from "../../../common/components/DataDisplay";
-import { ErrorScreen } from "../../../common/components/DataDisplay/ErrorScreen/ErrorScreen";
+import { ErrorScreen, LoaderOverlay } from "../../../common/components/DataDisplay";
 import { SearchBar } from "../../../common/components/DataInput";
-import { SortableTableHeader } from "../../../common/components/Table";
+import { NoResultsMessage, SortableTableHeader } from "../../../common/components/Table";
 import { useSearchAndSort } from "../../../common/hooks";
 import { useTranslate } from "../../../common/i18n";
 import { ActivityRow } from "./components";
@@ -72,6 +71,13 @@ export const ActivitiesDashboardPage = () => {
                     </Table.Tbody>
                 </Table>
             </Table.ScrollContainer>
+
+            {!data.length && (
+                <NoResultsMessage
+                    description={translate("pages.activitiesDashboard.noResults.description")}
+                    onAdd={() => openAddModal()}
+                />
+            )}
         </Container>
     );
 };

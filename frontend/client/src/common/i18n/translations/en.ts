@@ -6,6 +6,12 @@ export const en: TranslationSource = {
         errorScreen: {
             retry: "Retry",
         },
+        table: {
+            noResults: {
+                title: "Nothing to display.",
+                addButton: "Add new",
+            },
+        },
         weekday: {
             monday: {
                 short: "Mon",
@@ -284,6 +290,9 @@ export const en: TranslationSource = {
         activitiesDashboard: {
             tab: "Activities",
             addNewButton: "Add new",
+            noResults: {
+                description: "There are no existing activities. Add the first one.",
+            },
             searchBar: {
                 placeholder: "Search for activity",
             },
@@ -310,6 +319,9 @@ export const en: TranslationSource = {
             search: {
                 placeholder: "Search for an user",
             },
+            noResults: {
+                description: "There are no users' accounts to display, not even yours. Something has gone wrong.",
+            },
             header: {
                 id: "ID",
                 user: "User",
@@ -318,7 +330,6 @@ export const en: TranslationSource = {
                 reservations: "Reservations",
                 options: "Options",
             },
-            retryButton: "Retry",
             rows: {
                 reservations: {
                     on: "Enabled",

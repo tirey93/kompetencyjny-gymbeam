@@ -2,10 +2,9 @@ import { useCallback } from "react";
 import { Container, Table } from "@mantine/core";
 
 import { UserDetails } from "../../../common/auth";
-import { LoaderOverlay } from "../../../common/components/DataDisplay";
-import { ErrorScreen } from "../../../common/components/DataDisplay/ErrorScreen/ErrorScreen";
+import { ErrorScreen, LoaderOverlay } from "../../../common/components/DataDisplay";
 import { SearchBar } from "../../../common/components/DataInput";
-import { SortableTableHeader } from "../../../common/components/Table";
+import { NoResultsMessage, SortableTableHeader } from "../../../common/components/Table";
 import { useSearchAndSort } from "../../../common/hooks";
 import { useTranslate } from "../../../common/i18n";
 import { useAllUsers } from "../../../common/users";
@@ -78,6 +77,8 @@ export const UsersDashboardPage = () => {
                     </Table.Tbody>
                 </Table>
             </Table.ScrollContainer>
+
+            {!data.length && <NoResultsMessage description={translate("pages.usersDashboard.noResults.description")} />}
         </Container>
     );
 };
