@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Group, Stack, Table } from "@mantine/core";
 
 import { ActivitiesSelect } from "./components/ActivityCalendarFilters/ActivitiesSelect/ActivitiesSelect";
 import { DateRangeFilter } from "./components/ActivityCalendarFilters/DateRangeFilter/DateRangeFilter";
 import { DateRangeSwitch } from "./components/ActivityCalendarFilters/DateRangeSwitch/DateRangeSwitch";
 import { ActivityCalendarRow } from "./components/ActivityCalendarRow/ActivityCalendarRow";
-import { Activity, ActivityInstance } from "../../activities/Activities";
+import { Activity, ActivityInstance } from "../../activities";
 import { useCalendarDateRange, useDateTimeLocale } from "../../hooks";
 import { TextWithTooltip } from "../DataDisplay";
 import { Logo } from "../Logo";
@@ -20,17 +21,20 @@ type ActivityCalendarProps = {
 
 export const ActivityCalendar = ({ activityInstances, activities, withFilters }: ActivityCalendarProps) => {
     const { days, hours, dateRange, setDateRange } = useCalendarDateRange();
-    const [displayedActivities, setDisplayedActivities] = useState<Activity[]>([]);
     const { locale } = useDateTimeLocale();
+    const { state } = useLocation();
+    const uniqueActivitiesNames = [...new Set(activities.map(({ name }) => name))];
+    const [activityNamesToFilter, setActivityNamesToFilter] = useState<string[]>(
+        state?.filteredActivityName ? [state.filteredActivityName] : []
+    );
 
     const filteredActivityInstances = useMemo(() => {
-        if (!displayedActivities.length) {
+        if (!activityNamesToFilter.length) {
             return activityInstances;
         } else {
-            const displayedActivitiesIds = displayedActivities.map(({ id }) => id);
-            return activityInstances.filter((instance) => displayedActivitiesIds.includes(instance.activityId));
+            return activityInstances.filter((instance) => activityNamesToFilter.includes(instance.name));
         }
-    }, [activityInstances, displayedActivities]);
+    }, [activityInstances, activityNamesToFilter]);
 
     const rows = useMemo(
         () =>
@@ -48,9 +52,9 @@ export const ActivityCalendar = ({ activityInstances, activities, withFilters }:
                     <Logo size="xl" logoSize={35} variant="light" withName />
                     <Group>
                         <ActivitiesSelect
-                            options={activities}
-                            value={displayedActivities}
-                            onChange={setDisplayedActivities}
+                            onChange={setActivityNamesToFilter}
+                            options={uniqueActivitiesNames}
+                            value={activityNamesToFilter}
                         />
                         <DateRangeFilter value={dateRange} onChange={setDateRange} />
                     </Group>

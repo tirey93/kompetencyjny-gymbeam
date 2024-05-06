@@ -1,7 +1,17 @@
 html .row {
   position: relative;
 
+  .cellContentWrapper {
+    gap: var(--mantine-spacing-xs);
+  }
+
+  .columnLabel {
+    font-size: var(--mantine-font-size-xs);
+    color: var(--mantine-color-dimmed);
+  }
+
   .actionButtons {
+    padding: var(--mantine-spacing-sm);
     justify-content: space-around;
     flex-wrap: nowrap;
   }
@@ -21,7 +31,23 @@ html .row {
     padding: var(--mantine-spacing-xs);
     visibility: hidden;
     position: sticky;
-    right: 0;
+    right: -1px;
+  }
+
+  .icon {
+    --ti-size: var(--mantine-font-size-xl);
+    --ai-size: var(--mantine-font-size-xl);
+    margin-top: -2px;
+  }
+
+  .date {
+    &.past {
+      color: var(--mantine-color-danger-2);
+    }
+
+    &.future {
+      color: var(--mantine-color-warning-2);
+    }
   }
 
   .columnWithTruncatedValue {

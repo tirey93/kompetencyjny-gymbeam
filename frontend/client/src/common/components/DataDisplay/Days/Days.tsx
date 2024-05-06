@@ -1,7 +1,7 @@
 import { Badge, Group } from "@mantine/core";
 
-import { Day } from "../../../activities/Activities";
-import { DAYS_SHORT } from "../../../constants";
+import { Day } from "../../../activities";
+import { DAYS } from "../../../constants";
 import { useTranslate } from "../../../i18n";
 
 import classes from "./Days.module.scss";
@@ -16,8 +16,8 @@ export const Days = ({ value }: DaysProps) => {
     return (
         <Group className={classes.container}>
             {value.map((day) => (
-                <Badge key={day} color="dark">
-                    {translate(DAYS_SHORT[day])}
+                <Badge variant="light" key={day} color="accent">
+                    {translate(DAYS[day].long)}
                 </Badge>
             ))}
         </Group>

@@ -15,24 +15,31 @@ export const en: TranslationSource = {
         weekday: {
             monday: {
                 short: "Mon",
+                long: "Monday",
             },
             tuesday: {
                 short: "Tue",
+                long: "Tuesday",
             },
             wednesday: {
                 short: "Wed",
+                long: "Wednesday",
             },
             thursday: {
                 short: "Thu",
+                long: "Thursday",
             },
             friday: {
                 short: "Fri",
+                long: "Friday",
             },
             saturday: {
                 short: "Sat",
+                long: "Saturday",
             },
             sunday: {
                 short: "Sun",
+                long: "Sunday",
             },
         },
     },
@@ -316,6 +323,8 @@ export const en: TranslationSource = {
         activitiesDashboard: {
             tab: "Activities",
             addNewButton: "Add new",
+            expired: "This activity has already expired.",
+            notStarted: "This activity has not started yet.",
             noResults: {
                 description: "There are no existing activities. Add the first one.",
             },

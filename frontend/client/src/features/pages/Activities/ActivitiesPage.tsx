@@ -2,8 +2,7 @@ import { Container } from "@mantine/core";
 
 import { useActivities, useActivitiesInstances } from "../../../common/activities";
 import { ActivityCalendar } from "../../../common/components/ActivityCalendar";
-import { LoaderOverlay } from "../../../common/components/DataDisplay";
-import { ErrorScreen } from "../../../common/components/DataDisplay/ErrorScreen/ErrorScreen";
+import { ErrorScreen, LoaderOverlay } from "../../../common/components/DataDisplay";
 import { useCalendarDateRange } from "../../../common/hooks";
 import { useTranslate } from "../../../common/i18n";
 

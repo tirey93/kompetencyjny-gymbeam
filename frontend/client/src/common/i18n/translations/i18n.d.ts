@@ -12,24 +12,31 @@ export type TranslationSource = {
         weekday: {
             monday: {
                 short: string;
+                long: string;
             };
             tuesday: {
                 short: string;
+                long: string;
             };
             wednesday: {
                 short: string;
+                long: string;
             };
             thursday: {
                 short: string;
+                long: string;
             };
             friday: {
                 short: string;
+                long: string;
             };
             saturday: {
                 short: string;
+                long: string;
             };
             sunday: {
                 short: string;
+                long: string;
             };
         };
     };
@@ -317,6 +324,8 @@ export type TranslationSource = {
         activitiesDashboard: {
             tab: string;
             addNewButton: string;
+            expired: string;
+            notStarted: string;
             noResults: {
                 description: string;
             };
