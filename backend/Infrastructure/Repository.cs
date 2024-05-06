@@ -48,6 +48,14 @@ namespace Infrastructure
                 .ToList();
         }
 
+        public Reservation? GetReservation(int id)
+        {
+            return _appDbContext.Reservations
+                .Include(u => u.User)
+                .Include(a => a.Activity)
+                .FirstOrDefault(x => x.Id == id);
+        }
+
         public void Add<T>(T entity) where T : class
         {
             _appDbContext.Add(entity);
