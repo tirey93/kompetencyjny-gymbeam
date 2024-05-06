@@ -2,6 +2,7 @@ import { PropsWithChildren } from "react";
 import { ModalsProvider } from "@mantine/modals";
 
 import {
+    ActivityDetailsModal,
     AddActivityModal,
     ChangeUserReservationPermissionsModal,
     ChangeUserRoleModal,
@@ -15,6 +16,7 @@ export const CONTEXT_MODALS = {
     deleteUser: DeleteUserModal,
     addActivity: AddActivityModal,
     deleteActivity: DeleteActivityModal,
+    activityDetails: ActivityDetailsModal,
 };
 
 export const ModalsManager = ({ children }: PropsWithChildren) => {

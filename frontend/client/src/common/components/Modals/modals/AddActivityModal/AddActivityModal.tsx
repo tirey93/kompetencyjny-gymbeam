@@ -220,15 +220,15 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
             </Modal.Body>
 
             <Modal.Footer
-                onSubmit={onSubmit}
-                onCancel={onClose}
                 isLoading={isAdding || isUpdating}
                 submitButton={{
                     color: "success",
                     children: translate("modals.activities.add.buttons.confirm"),
+                    onClick: onSubmit,
                 }}
                 cancelButton={{
                     children: translate("modals.activities.add.buttons.cancel"),
+                    onClick: onClose,
                 }}
             />
         </Modal.Wrapper>

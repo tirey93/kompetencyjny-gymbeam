@@ -1,12 +1,11 @@
 import { useCallback, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button, Paper, Text } from "@mantine/core";
+import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { IconPlus, IconUsers } from "@tabler/icons-react";
 import classNames from "classnames";
 
-import { AppRoute } from "../../../../../features/router";
-import { ActivityInstance } from "../../../../activities/Activities";
+import { ActivityInstance } from "../../../../activities";
 import { useDateTimeLocale } from "../../../../hooks";
 import { useTranslate } from "../../../../i18n";
 import { useAddReservation } from "../../../../reservations";
@@ -30,7 +29,6 @@ export const ActivityItemCard = ({
 }: ActivityItemCardProps) => {
     const { addReservation, isLoading: isAddReservationLoading } = useAddReservation(); // TODO: Implement add/remove reservation logic properly
 
-    const navigate = useNavigate();
     const translate = useTranslate();
     const { locale } = useDateTimeLocale();
 
@@ -53,9 +51,16 @@ export const ActivityItemCard = ({
         }
     }, [totalCapacity, slotsTaken]);
 
-    const goToActivityDetails = useCallback(() => {
-        navigate(AppRoute.ACTIVITY_DETAILS.replace(":id", activityId.toString()));
-    }, [activityId, navigate]);
+    const openActivityDetailsModal = useCallback((activityId: number) => {
+        modals.openContextModal({
+            modal: "activityDetails",
+            centered: true,
+            withCloseButton: false,
+            innerProps: {
+                activityId,
+            },
+        });
+    }, []);
 
     const handleAddReservation = useCallback(async () => {
         try {
@@ -81,7 +86,7 @@ export const ActivityItemCard = ({
 
     return (
         <Paper className={classNames(classes.calendarItem, { [classes.disabled]: hasStartedAlready })}>
-            <Text className={classes.name} onClick={goToActivityDetails}>
+            <Text className={classes.name} onClick={() => openActivityDetailsModal(activityId)}>
                 {name}
             </Text>
 

@@ -51,15 +51,15 @@ export const ChangeUserReservationPermissionsModal = ({
             </Modal.Body>
 
             <Modal.Footer
-                onSubmit={handleChangePermissions}
-                onCancel={onClose}
                 isLoading={isLoading}
                 cancelButton={{
                     children: translate("modals.user.toggleReservations.buttons.cancel"),
+                    onClick: onClose,
                 }}
                 submitButton={{
                     color: "success",
                     children: translate("modals.user.toggleReservations.buttons.confirm"),
+                    onClick: handleChangePermissions,
                 }}
             />
         </Modal.Wrapper>
