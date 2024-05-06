@@ -4,9 +4,8 @@ import { ActionIcon, Box, Group, Stack, Text, Title } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import classNames from "classnames";
 
-import { Activity } from "../../../../../common/activities/Activities";
+import { Activity } from "../../../../../common/activities";
 import { useTranslate } from "../../../../../common/i18n";
-import { AppRoute } from "../../../../router";
 
 import classes from "./ActivityDetailsCard.module.scss";
 
@@ -20,8 +19,8 @@ export const ActivityDetailsCard = ({
     const navigate = useNavigate();
     const translate = useTranslate();
 
-    const goToActivitiesList = useCallback(() => {
-        navigate(AppRoute.ACTIVITIES);
+    const goBack = useCallback(() => {
+        navigate(-1);
     }, [navigate]);
 
     return (
@@ -29,12 +28,7 @@ export const ActivityDetailsCard = ({
             <Stack className={classes.header}>
                 <Group className={classes.headerTopRow}>
                     <Title className={classes.activityName}>{name}</Title>
-                    <ActionIcon
-                        variant="light"
-                        color="secondary"
-                        className={classes.searchIcon}
-                        onClick={goToActivitiesList}
-                    >
+                    <ActionIcon variant="light" color="secondary" className={classes.searchIcon} onClick={goBack}>
                         <IconX />
                     </ActionIcon>
                 </Group>

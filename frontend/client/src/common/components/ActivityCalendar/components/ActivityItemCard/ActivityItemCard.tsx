@@ -59,7 +59,7 @@ export const ActivityItemCard = ({
 
     const handleAddReservation = useCallback(async () => {
         try {
-            await addReservation(1);
+            await addReservation(1); // TODO: Handle reservations logic properly
             notifications.show({
                 withBorder: true,
                 color: "success",
@@ -93,7 +93,7 @@ export const ActivityItemCard = ({
             <Text className={classes.leader}>{leaderName}</Text>
 
             <TextWithTooltip
-                alwaysEnabled
+                alwaysVisible
                 c={reservationsColor}
                 className={classes.participants}
                 label={translate("activityCalendar.item.participants.tooltip", { slotsTaken })}
@@ -104,7 +104,7 @@ export const ActivityItemCard = ({
 
             {reservationsDisabled ? (
                 <TextWithTooltip
-                    alwaysEnabled
+                    alwaysVisible
                     className={classes.reservationsDisabled}
                     label={
                         hasStartedAlready

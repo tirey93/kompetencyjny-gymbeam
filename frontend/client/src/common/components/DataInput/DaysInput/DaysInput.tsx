@@ -1,7 +1,7 @@
 import { Chip, Group, Input, InputWrapperProps } from "@mantine/core";
 
-import { Day } from "../../../activities/Activities";
-import { DAYS_SHORT } from "../../../constants";
+import { Day } from "../../../activities";
+import { DAYS } from "../../../constants";
 import { useTranslate } from "../../../i18n";
 
 import classes from "./DaysInput.module.scss";
@@ -18,9 +18,9 @@ export const DaysInput = ({ value, onChange, ...inputWrapperProps }: DaysInputPr
         <Input.Wrapper className={classes.container} {...inputWrapperProps}>
             <Group className={classes.daysWrapper}>
                 <Chip.Group value={value} onChange={onChange} multiple>
-                    {Object.entries(DAYS_SHORT).map(([value, key]) => (
+                    {Object.entries(DAYS).map(([value, key]) => (
                         <Chip key={value} variant="outline" color="success" value={value}>
-                            {translate(key)}
+                            {translate(key.long)}
                         </Chip>
                     ))}
                 </Chip.Group>

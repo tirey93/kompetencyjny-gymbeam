@@ -15,24 +15,31 @@ export const pl: TranslationSource = {
         weekday: {
             monday: {
                 short: "Pon",
+                long: "Poniedziałek",
             },
             tuesday: {
                 short: "Wt",
+                long: "Wtorek",
             },
             wednesday: {
                 short: "Śr",
+                long: "Środa",
             },
             thursday: {
                 short: "Czw",
+                long: "Czwartek",
             },
             friday: {
                 short: "Pt",
+                long: "Piątek",
             },
             saturday: {
                 short: "Sob",
+                long: "Sobota",
             },
             sunday: {
                 short: "Ndz",
+                long: "Niedziela",
             },
         },
     },
@@ -316,6 +323,8 @@ export const pl: TranslationSource = {
         activitiesDashboard: {
             tab: "Zajęcia",
             addNewButton: "Dodaj",
+            expired: "Te zajęcia już wygasły.",
+            notStarted: "Te zajęcia jeszcze się nie odbyły.",
             searchBar: {
                 placeholder: "Szukaj zajęć",
             },

@@ -1,1 +1,1 @@
-export { DAYS_SHORT } from "./DAYS_SHORT";
+export { DAYS } from "./Days";

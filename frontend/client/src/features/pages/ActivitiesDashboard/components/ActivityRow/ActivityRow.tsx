@@ -1,9 +1,14 @@
-import { ActionIcon, Group, Table } from "@mantine/core";
-import { IconPencil, IconTrash } from "@tabler/icons-react";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { ActionIcon, Group, Table, ThemeIcon } from "@mantine/core";
+import { IconHelpSquareRounded, IconPencil, IconSearch, IconTrash } from "@tabler/icons-react";
+import classNames from "classnames";
 
-import { Activity } from "../../../../../common/activities/Activities";
+import { Activity } from "../../../../../common/activities";
 import { Days, TextWithTooltip } from "../../../../../common/components/DataDisplay";
 import { useDateTimeLocale } from "../../../../../common/hooks";
+import { useTranslate } from "../../../../../common/i18n";
+import { AppRoute } from "../../../../router";
 
 import classes from "./ActivityRow.module.scss";
 
@@ -15,17 +20,58 @@ type ActivityRowProps = {
 
 export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) => {
     const { locale } = useDateTimeLocale();
+    const translate = useTranslate();
+    const navigate = useNavigate();
+
+    const isExpired = activity.endTime < new Date();
+    const hasNotStarted = activity.startTime > new Date();
+
+    const searchForActivityInstances = useCallback(() => {
+        navigate(AppRoute.ACTIVITIES, { state: { filteredActivityName: activity.name } });
+    }, [activity.name, navigate]);
 
     return (
         <Table.Tr key={activity.id} className={classes.row}>
-            <Table.Td className={classes.center}>{activity.id}</Table.Td>
+            <Table.Td className={classNames(classes.center, classes.columnLabel)}>{activity.id}</Table.Td>
 
-            <Table.Td className={classes.columnWithTruncatedValue}>
-                <TextWithTooltip>{activity.name}</TextWithTooltip>
+            <Table.Td>
+                <Group className={classes.cellContentWrapper}>
+                    {activity.name}
+                    <ActionIcon onClick={searchForActivityInstances} className={classes.icon} variant="transparent">
+                        <IconSearch />
+                    </ActionIcon>
+                </Group>
             </Table.Td>
 
-            <Table.Td>{activity.startTime.toLocaleDateString(locale)}</Table.Td>
-            <Table.Td>{activity.endTime.toLocaleDateString(locale)}</Table.Td>
+            <Table.Td className={classNames(classes.date, { [classes.future]: hasNotStarted })}>
+                <TextWithTooltip
+                    alwaysVisible={hasNotStarted}
+                    label={translate("pages.activitiesDashboard.notStarted")}
+                >
+                    <Group className={classes.cellContentWrapper}>
+                        {activity.startTime.toLocaleDateString(locale)}
+                        {hasNotStarted && (
+                            <ThemeIcon className={classes.icon} variant="transparent" color="warning">
+                                <IconHelpSquareRounded />
+                            </ThemeIcon>
+                        )}
+                    </Group>
+                </TextWithTooltip>
+            </Table.Td>
+
+            <Table.Td className={classNames(classes.date, { [classes.past]: isExpired })}>
+                <TextWithTooltip alwaysVisible={isExpired} label={translate("pages.activitiesDashboard.expired")}>
+                    <Group className={classes.cellContentWrapper}>
+                        {activity.endTime.toLocaleDateString(locale)}
+                        {isExpired && (
+                            <ThemeIcon className={classes.icon} variant="transparent" color="danger">
+                                <IconHelpSquareRounded />
+                            </ThemeIcon>
+                        )}
+                    </Group>
+                </TextWithTooltip>
+            </Table.Td>
+
             <Table.Td>{activity.startHour.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}</Table.Td>
             <Table.Td>{activity.duration} min</Table.Td>
 
