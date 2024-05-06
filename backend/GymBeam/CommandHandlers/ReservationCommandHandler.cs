@@ -9,7 +9,8 @@ using GymBeam.Exceptions;
 
 namespace GymBeam.CommandHandlers
 {
-    public class ReservationCommandHandler : IRequestHandler<CreateReservationCommand, Unit>
+    public class ReservationCommandHandler : IRequestHandler<CreateReservationCommand, Unit>,
+                                             IRequestHandler<DeleteReservationCommand, Unit>
     {
         private readonly IRepository _repository;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -48,6 +49,26 @@ namespace GymBeam.CommandHandlers
             };
 
             _repository.Add(reservation);
+            await _repository.SaveChangesAsync();
+
+            return Unit.Value;
+        }
+
+        public async Task<Unit> Handle(DeleteReservationCommand request, CancellationToken cancellationToken)
+        {
+            var reservation = _repository.GetReservation(request.ReservationId)
+                ?? throw new ReservationNotFoundException(request.ReservationId);
+
+            var loggedUserId = JwtHelper.GetUserIdFromCookies(_httpContextAccessor)
+                ?? throw new InvalidCookieException(Cookies.UserId);
+
+            var userRole = JwtHelper.GetRoleClaimFromCookie(_httpContextAccessor)
+                ?? throw new AuthenticationFailureException(Resource.ExceptionUserRoleNotFound);
+
+            if (userRole != Role.Admin.ToString() && reservation.User.Id != loggedUserId)
+                throw new AuthenticationFailureException(Resource.ExceptionUserNotAllowed);
+
+            _repository.Delete(reservation);
             await _repository.SaveChangesAsync();
 
             return Unit.Value;

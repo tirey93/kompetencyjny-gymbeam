@@ -70,6 +70,15 @@ namespace Domain.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reservation with ID {0} not found..
+        /// </summary>
+        internal static string ExceptionReservationNotFound {
+            get {
+                return ResourceManager.GetString("ExceptionReservationNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User with name {0} already exists..
         /// </summary>
         internal static string ExceptionUserAlreadyExists {

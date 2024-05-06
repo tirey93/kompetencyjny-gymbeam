@@ -120,6 +120,9 @@
   <data name="ExceptionActivityNotFound" xml:space="preserve">
     <value>Activity with ID {0} not found.</value>
   </data>
+  <data name="ExceptionReservationNotFound" xml:space="preserve">
+    <value>Reservation with ID {0} not found.</value>
+  </data>
   <data name="ExceptionUserAlreadyExists" xml:space="preserve">
     <value>User with name {0} already exists.</value>
   </data>
