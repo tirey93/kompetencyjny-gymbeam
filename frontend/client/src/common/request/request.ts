@@ -1,3 +1,4 @@
+/* eslint sonarjs/no-duplicate-string: 0 */
 import { ActivityDTO, ActivityInstance, AddActivityDTO } from "../activities/Activities";
 import { UserDetails, UserRole } from "../auth";
 import { ApiResourceName, RequestOptions, SignInRequestBody, SignUpRequestBody, UserDetailsResponse } from "./";
@@ -18,6 +19,7 @@ const AVAILABLE_API_RESOURCES: Record<
     ChangeRole: { endpoint: "User/{userId}/Role", method: "PUT" },
     ChangeReservationsPermission: { endpoint: "User/{userId}/ReservationDisabled", method: "PUT" },
     GetAllActivities: { endpoint: "Activity" },
+    GetActivity: { endpoint: "Activity/{activityId}" },
     AddActivity: { endpoint: "Activity", method: "POST" },
     UpdateActivity: { endpoint: "Activity/{activityId}", method: "PUT" },
     DeleteActivity: { endpoint: "Activity/{activityId}", method: "DELETE" },
@@ -35,6 +37,11 @@ const DEFAULT_REQUEST_OPTIONS: RequestInit = {
 };
 
 export async function request(resource: "GetAllActivities"): Promise<ActivityDTO[]>;
+
+export async function request(
+    resource: "GetActivity",
+    options: { urlParams: { activityId: string } }
+): Promise<ActivityDTO>;
 
 export async function request(resource: "AddActivity", options: { body: AddActivityDTO }): Promise<void>;
 

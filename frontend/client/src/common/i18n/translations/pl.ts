@@ -46,6 +46,15 @@ export const pl: TranslationSource = {
 
     modals: {
         activities: {
+            details: {
+                title: {
+                    error: "Ups!",
+                },
+                buttons: {
+                    retry: "Ponów",
+                    close: "Zamknij",
+                },
+            },
             delete: {
                 header: "Usuń zajęcia",
                 caption:
@@ -154,6 +163,9 @@ export const pl: TranslationSource = {
         activities: {
             getAll: {
                 default: "Nie udało się pobrać listy aktywności, coś poszło nie tak po naszej stronie.",
+            },
+            getOne: {
+                default: "Nie udało się pobrać aktywności, coś poszło nie tak po naszej stronie.",
             },
             delete: {
                 default: "Nie udało się usunąć zajęć, coś poszło nie tak po naszej stronie.",

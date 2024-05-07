@@ -1,0 +1,16 @@
+html .container {
+  .group {
+    gap: var(--mantine-spacing-xl);
+  }
+
+  .field {
+    .title {
+      font-size: var(--mantine-font-size-sm);
+      font-weight: 600;
+    }
+
+    .caption {
+      font-size: var(--mantine-font-size-xs);
+    }
+  }
+}
