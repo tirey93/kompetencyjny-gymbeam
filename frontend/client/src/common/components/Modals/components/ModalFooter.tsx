@@ -5,27 +5,20 @@ import classes from "./Modal.module.scss";
 type ModalFooterButtonProps = {
     children: string;
     color?: "danger" | "success";
+    onClick: () => unknown;
 };
 
 type ModalFooterProps = {
-    submitButton: ModalFooterButtonProps;
-    cancelButton: ModalFooterButtonProps;
-    onSubmit: () => unknown;
-    onCancel?: () => unknown;
+    submitButton?: ModalFooterButtonProps;
+    cancelButton?: ModalFooterButtonProps;
     isLoading?: boolean;
 };
 
-export const ModalFooter = ({
-    isLoading = false,
-    submitButton,
-    cancelButton,
-    onCancel,
-    onSubmit,
-}: ModalFooterProps) => {
+export const ModalFooter = ({ isLoading = false, submitButton, cancelButton }: ModalFooterProps) => {
     return (
         <Group className={classes.footer}>
-            <Button variant="default" {...cancelButton} onClick={onCancel} />
-            <Button variant="light" loading={isLoading} {...submitButton} onClick={onSubmit} />
+            {cancelButton && <Button variant="default" {...cancelButton} />}
+            {submitButton && <Button variant="light" loading={isLoading} {...submitButton} />}
         </Group>
     );
 };

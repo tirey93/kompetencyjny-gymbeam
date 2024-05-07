@@ -16,8 +16,8 @@ export const Days = ({ value }: DaysProps) => {
     return (
         <Group className={classes.container}>
             {value.map((day) => (
-                <Badge variant="light" key={day} color="accent">
-                    {translate(DAYS[day].long)}
+                <Badge variant="outline" key={day} color="secondary">
+                    {parseInt(day) + 1} - {translate(DAYS[day].long)}
                 </Badge>
             ))}
         </Group>

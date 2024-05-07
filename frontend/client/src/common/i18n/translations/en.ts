@@ -46,6 +46,15 @@ export const en: TranslationSource = {
 
     modals: {
         activities: {
+            details: {
+                title: {
+                    error: "Oops!",
+                },
+                buttons: {
+                    retry: "Retry",
+                    close: "Close",
+                },
+            },
             delete: {
                 header: "Delete activity",
                 caption:
@@ -154,6 +163,9 @@ export const en: TranslationSource = {
         activities: {
             getAll: {
                 default: "Failed to retrieve list of activities. Something went wrong on our side.",
+            },
+            getOne: {
+                default: "Failed to retrieve activity. Something went wrong on our side.",
             },
             delete: {
                 default: "Failed to delete activity. Something went wrong on our side.",

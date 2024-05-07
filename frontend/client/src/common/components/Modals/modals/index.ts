@@ -1,3 +1,4 @@
+export { ActivityDetailsModal } from "./ActivityDetailsModal/ActivityDetailsModal";
 export { AddActivityModal } from "./AddActivityModal/AddActivityModal";
 export { ChangeUserReservationPermissionsModal } from "./ChangeUserReservationPermissionsModal";
 export { ChangeUserRoleModal } from "./ChangeUserRoleModal";

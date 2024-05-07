@@ -47,15 +47,15 @@ export const ChangeUserRoleModal = ({ innerProps: { user, newRole } }: ChangeUse
             </Modal.Body>
 
             <Modal.Footer
-                onSubmit={handleChangeRole}
-                onCancel={onClose}
                 isLoading={isLoading}
                 cancelButton={{
                     children: translate("modals.user.changeRole.buttons.cancel"),
+                    onClick: onClose,
                 }}
                 submitButton={{
                     color: "success",
                     children: translate("modals.user.changeRole.buttons.confirm"),
+                    onClick: handleChangeRole,
                 }}
             />
         </Modal.Wrapper>

@@ -43,6 +43,15 @@ export type TranslationSource = {
 
     modals: {
         activities: {
+            details: {
+                title: {
+                    error: string;
+                };
+                buttons: {
+                    retry: string;
+                    close: string;
+                };
+            };
             delete: {
                 header: string;
                 caption: string;
@@ -218,6 +227,9 @@ export type TranslationSource = {
         };
         activities: {
             getAll: {
+                default: string;
+            };
+            getOne: {
                 default: string;
             };
             delete: {

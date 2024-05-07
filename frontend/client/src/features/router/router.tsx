@@ -6,7 +6,6 @@ import { Root } from "../../Root";
 import { NotFoundPage } from "../pages/404";
 import { ActivitiesPage } from "../pages/Activities";
 import { ActivitiesDashboardPage } from "../pages/ActivitiesDashboard";
-import { ActivityPage } from "../pages/Activity";
 import { GymPassPage } from "../pages/GymPass";
 import { HomePage } from "../pages/Home";
 import { RegistrationPage } from "../pages/Registration";
@@ -48,14 +47,6 @@ const APP_PAGES = [
         element: (
             <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
                 <ActivitiesPage />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: AppRoute.ACTIVITY_DETAILS,
-        element: (
-            <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
-                <ActivityPage />
             </ProtectedRoute>
         ),
     },

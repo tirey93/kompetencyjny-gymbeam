@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { modals } from "@mantine/modals";
 
-import { Activity } from "../../../../common/activities/Activities";
+import { Activity } from "../../../../common/activities";
 
 type UseActivitiesModalEvents = {
     openAddModal: (activity?: Activity) => unknown;

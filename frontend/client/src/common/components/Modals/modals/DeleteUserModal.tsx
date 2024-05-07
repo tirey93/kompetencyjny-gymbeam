@@ -45,15 +45,15 @@ export const DeleteUserModal = ({ innerProps: { user } }: DeleteUserModalProps) 
             </Modal.Body>
 
             <Modal.Footer
-                onSubmit={handleDeleteUser}
-                onCancel={onClose}
                 isLoading={isLoading}
                 cancelButton={{
                     children: translate("modals.user.delete.buttons.cancel"),
+                    onClick: onClose,
                 }}
                 submitButton={{
                     color: "danger",
                     children: translate("modals.user.delete.buttons.confirm"),
+                    onClick: handleDeleteUser,
                 }}
             />
         </Modal.Wrapper>
