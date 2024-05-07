@@ -17,7 +17,7 @@ namespace GymBeam.CommandHandlers
             _repository = repository;
         }
 
-        async Task<UserResponse> IRequestHandler<RegisterCommand, UserResponse>.Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task<UserResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             var userExists = _repository.GetUsers(x => x.Name == request.Username).FirstOrDefault();
             if (userExists != null)
