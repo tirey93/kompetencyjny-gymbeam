@@ -290,6 +290,7 @@ export type TranslationSource = {
             activities: string;
             usersDashboard: string;
             activitiesDashboard: string;
+            reservations: string;
         };
     };
 
@@ -317,6 +318,12 @@ export type TranslationSource = {
     };
 
     pages: {
+        reservations: {
+            noResults: {
+                description: string;
+                button: string;
+            };
+        };
         activities: {
             details: {
                 duration: string;

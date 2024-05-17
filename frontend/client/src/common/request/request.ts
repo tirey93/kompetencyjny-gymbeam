@@ -24,6 +24,7 @@ const AVAILABLE_API_RESOURCES: Record<
     UpdateActivity: { endpoint: "Activity/{activityId}", method: "PUT" },
     DeleteActivity: { endpoint: "Activity/{activityId}", method: "DELETE" },
     GetActivitiesInstancesByDates: { endpoint: "Enrollment/ByDates" },
+    GetActivitiesInstancesReservedByUser: { endpoint: "Enrollment/ByUserId " },
     AddReservation: { endpoint: "Reservation", method: "POST" },
     RemoveReservation: { endpoint: "Reservation/{id}", method: "DELETE" },
 };
@@ -58,6 +59,8 @@ export async function request(
 export async function request(resource: "AddReservation"): Promise<void>;
 
 export async function request(resource: "RemoveReservation", options: { urlParams: { id: string } }): Promise<void>;
+
+export async function request(resource: "GetActivitiesInstancesReservedByUser"): Promise<ActivityInstance[]>;
 
 export async function request(
     resource: "GetActivitiesInstancesByDates",

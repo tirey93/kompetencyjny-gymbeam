@@ -292,6 +292,7 @@ export const pl: TranslationSource = {
             activities: "Zajęcia",
             usersDashboard: "Zarządzanie użytkownikami",
             activitiesDashboard: "Zarządzanie zajęciami",
+            reservations: "Moje rezerwacje",
         },
     },
     user: {
@@ -316,6 +317,12 @@ export const pl: TranslationSource = {
         summary: "Krótki opis",
     },
     pages: {
+        reservations: {
+            noResults: {
+                description: "Nie masz aktualnie żadnych rezerwacji.",
+                button: "Zobacz nasze zajęcia",
+            },
+        },
         activities: {
             details: {
                 duration: "Czas trwania",

@@ -16,7 +16,7 @@ export const ActivitiesPage = () => {
         isLoading: areInstancesLoading,
         error: instancesError,
         refetch: refetchInstances,
-    } = useActivitiesInstances({ dateRange });
+    } = useActivitiesInstances({ type: "ByDateRange", dateRange });
 
     const {
         activities,

@@ -292,6 +292,7 @@ export const en: TranslationSource = {
             activities: "Activities",
             usersDashboard: "Users Dashboard",
             activitiesDashboard: "Activities Dashboard",
+            reservations: "My reservations",
         },
     },
     user: {
@@ -315,7 +316,14 @@ export const en: TranslationSource = {
         description: "Long description",
         summary: "Short description",
     },
+
     pages: {
+        reservations: {
+            noResults: {
+                description: "You don't have any pending reservations right now.",
+                button: "See available activities",
+            },
+        },
         activities: {
             details: {
                 duration: "Duration",
