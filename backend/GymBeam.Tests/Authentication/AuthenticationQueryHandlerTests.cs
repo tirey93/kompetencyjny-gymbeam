@@ -3,7 +3,6 @@ using Domain.Exceptions;
 using GymBeam.Queries;
 using GymBeam.QueryHandlers;
 using GymBeam.Utils;
-using System;
 
 namespace GymBeam.Tests.Authentication
 {

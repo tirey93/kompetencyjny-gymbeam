@@ -2,7 +2,6 @@ using Domain;
 using Domain.Exceptions;
 using GymBeam.CommandHandlers;
 using GymBeam.Commands;
-using System.Threading;
 
 namespace GymBeam.Tests.User
 {
