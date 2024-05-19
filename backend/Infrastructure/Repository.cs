@@ -48,16 +48,18 @@ namespace Infrastructure
                 .ToList();
         }
         
-        public List<Enrollment> GetEnrollments(DateTime from, DateTime to)
+        public Dictionary<Enrollment, int> GetSlotsTakenForEnrollments(DateTime from, DateTime to)
         {
             return _appDbContext.Reservations
                 .Where(x => x.StartTime >= from && x.StartTime <= to)
                 .GroupBy(r => new { ActivityId = r.Activity.Id, r.StartTime })
-                .Select(g => new Enrollment {
-                    ActivityId = g.Key.ActivityId,
-                    StartTime = g.Key.StartTime,
+                .Select(g => new
+                {
+                    g.Key.ActivityId,
+                    g.Key.StartTime,
                     SlotsTaken = g.Count()
-                }).ToList();
+                })
+                .ToDictionary(x => new Enrollment { ActivityId = x.ActivityId, StartTime = x.StartTime }, y => y.SlotsTaken);
         }
 
         public Reservation? GetReservation(int id)

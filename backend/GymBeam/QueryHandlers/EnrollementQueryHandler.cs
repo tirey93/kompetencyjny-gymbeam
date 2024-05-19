@@ -28,8 +28,7 @@ namespace GymBeam.QueryHandlers
 
             var reservations = _repository.GetReservations(x => x.User.Id == loggedUserId);
 
-            var enrollements = _repository.GetEnrollments(reservations.Min(x => x.StartTime), reservations.Max(x => x.StartTime))
-                .ToDictionary(x => new Enroll { ActivityId = x.ActivityId, StartTime = x.StartTime }, y => y.SlotsTaken);
+            var enrollements = _repository.GetSlotsTakenForEnrollments(reservations.Min(x => x.StartTime), reservations.Max(x => x.StartTime));
 
             var result = reservations.Select(x => new EnrollmentResponse
             {
@@ -49,37 +48,11 @@ namespace GymBeam.QueryHandlers
             return Task.FromResult(result);
         }
 
-        private static int GetSlotsTaken(Reservation reservation, Dictionary<Enroll, int> enrolls)
+        private static int GetSlotsTaken(Reservation reservation, Dictionary<Enrollment, int> enrollments)
         {
-            if(enrolls.TryGetValue(new Enroll { ActivityId = reservation.Activity.Id, StartTime = reservation.StartTime }, out var res))
+            if(enrollments.TryGetValue(new Enrollment { ActivityId = reservation.Activity.Id, StartTime = reservation.StartTime }, out var res))
                 return res;
             return 0;
-        }
-
-        private class Enroll
-        {
-            public int ActivityId { get; set; }
-            public DateTime StartTime { get; set; }
-
-            public override bool Equals(object obj)
-            {
-                if (obj == null || GetType() != obj.GetType())
-                    return false;
-
-                Enroll other = (Enroll)obj;
-                return (ActivityId == other.ActivityId) && (StartTime.Equals(other.StartTime));
-            }
-
-            public override int GetHashCode()
-            {
-                unchecked
-                {
-                    int hash = 17;
-                    hash = hash * 23 + ActivityId.GetHashCode();
-                    hash = hash * 23 + StartTime.GetHashCode();
-                    return hash;
-                }
-            }
         }
 
     }
