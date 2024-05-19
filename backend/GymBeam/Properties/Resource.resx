@@ -171,6 +171,9 @@
   <data name="ValidatorEndTimeAfterStartTime" xml:space="preserve">
     <value>End time must be after start time.</value>
   </data>
+  <data name="ValidatorEnrollmentRangeExceeded" xml:space="preserve">
+    <value>Enrollments range must be less then 7 days.</value>
+  </data>
   <data name="ValidatorLongDescriptionShorter" xml:space="preserve">
     <value>Long description must not exceed 4000 characters.</value>
   </data>

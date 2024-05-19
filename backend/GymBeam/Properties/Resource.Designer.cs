@@ -223,6 +223,15 @@ namespace GymBeam.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enrollments range must be less then 7 days..
+        /// </summary>
+        public static string ValidatorEnrollmentRangeExceeded {
+            get {
+                return ResourceManager.GetString("ValidatorEnrollmentRangeExceeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Long description must not exceed 4000 characters..
         /// </summary>
         public static string ValidatorLongDescriptionShorter {

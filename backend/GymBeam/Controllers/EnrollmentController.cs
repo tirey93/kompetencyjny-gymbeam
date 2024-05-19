@@ -1,7 +1,9 @@
-﻿using GymBeam.Constants;
+﻿using FluentValidation;
+using GymBeam.Constants;
 using GymBeam.Exceptions;
 using GymBeam.Properties;
 using GymBeam.Queries;
+using GymBeam.Requests;
 using GymBeam.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -49,39 +51,36 @@ namespace GymBeam.Controllers
         }
 
         [HttpGet("ByDates")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [AllowAnonymous]
-        public ActionResult<IEnumerable<EnrollmentResponse>> GetByDates(DateTime from, DateTime to)
+        public async Task<ActionResult<List<EnrollmentResponse>>> GetByDates(DateTime from, DateTime to)
         {
-            return new List<EnrollmentResponse>
+            try
             {
-                new EnrollmentResponse
+                var query = new GetEnrollmentsByDatesQuery()
                 {
-                    ReservationId = 2,
-                    ActivityId = 45,
-                    LeaderId = 2,
-                    SlotsTaken = 15,
-                    TotalCapacity = 20,
-                    StartTime = from,
-                    Duration = 40,
-                    Name = "Boks",
-                    ShortDescription = "Short test description.",
-                    LongDescription = "Looooooooooooooong test description.",
-                    LeaderName = "Leader test name"
-                },
-                new EnrollmentResponse
-                {
-                    LeaderId = 2,
-                    ActivityId = 45,
-                    SlotsTaken = 15,
-                    TotalCapacity = 20,
-                    StartTime = to,
-                    Duration = 40,
-                    Name = "Boks",
-                    ShortDescription = "Short test description.",
-                    LongDescription = "Looooooooooooooong test description.",
-                    LeaderName = "Leader test name"
-                },
-            };
+                    From = from,
+                    To = to
+                };
+
+                var validator = new GetEnrollmentsByDatesQueryValidator();
+                validator.ValidateAndThrow(query);
+
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (ValidationException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                   string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
         }
     }
 }
