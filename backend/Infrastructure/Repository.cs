@@ -47,6 +47,18 @@ namespace Infrastructure
                 .Where(predicate)
                 .ToList();
         }
+        
+        public List<Enrollment> GetEnrollments(DateTime from, DateTime to)
+        {
+            return _appDbContext.Reservations
+                .Where(x => x.StartTime >= from && x.StartTime <= to)
+                .GroupBy(r => new { ActivityId = r.Activity.Id, r.StartTime })
+                .Select(g => new Enrollment {
+                    ActivityId = g.Key.ActivityId,
+                    StartTime = g.Key.StartTime,
+                    SlotsTaken = g.Count()
+                }).ToList();
+        }
 
         public Reservation? GetReservation(int id)
         {
