@@ -2,11 +2,7 @@
 using Domain.Exceptions;
 using GymBeam.CommandHandlers;
 using GymBeam.Commands;
-using GymBeam.Queries;
-using GymBeam.QueryHandlers;
 using GymBeam.Utils;
-using System;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace GymBeam.Tests.Authentication
 {
