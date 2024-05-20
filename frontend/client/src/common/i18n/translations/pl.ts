@@ -142,7 +142,12 @@ export const pl: TranslationSource = {
                 tooltip: "Liczba osób które się już zapisały: {{slotsTaken}}",
             },
             enrollment: {
-                label: "Rezerwuj",
+                add: {
+                    label: "Rezerwuj",
+                },
+                delete: {
+                    label: "Rezygnuj",
+                },
                 disabled: {
                     label: "Zapisy wyłączone",
                     tooltip: {

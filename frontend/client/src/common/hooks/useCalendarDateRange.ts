@@ -2,8 +2,8 @@ import { useMemo, useState } from "react";
 import dayjs from "dayjs";
 
 const INITIAL_NUMBER_OF_DAYS = 7;
-const INITIAL_DAY_HOUR = 0;
-const NUMBER_OF_HOURS_DISPLAYED = 24;
+const INITIAL_DAY_HOUR = 8;
+const NUMBER_OF_HOURS_DISPLAYED = 24 - INITIAL_DAY_HOUR;
 
 export type DateRange = {
     from: Date;
@@ -17,10 +17,17 @@ type UseCalendarDateRangeOptions = {
     numberOfHours?: number;
 };
 
+export type UseCalendarDateRange = {
+    days: Date[];
+    hours: number[];
+    dateRange: DateRange;
+    setDateRange: (value: DateRange) => void;
+};
+
 export const useCalendarDateRange = ({
     initialHour = INITIAL_DAY_HOUR,
     numberOfHours = NUMBER_OF_HOURS_DISPLAYED,
-}: UseCalendarDateRangeOptions = {}) => {
+}: UseCalendarDateRangeOptions = {}): UseCalendarDateRange => {
     const [dateRange, setDateRange] = useState<DateRange>(getDefaultDateRange());
 
     const days = useMemo(() => {

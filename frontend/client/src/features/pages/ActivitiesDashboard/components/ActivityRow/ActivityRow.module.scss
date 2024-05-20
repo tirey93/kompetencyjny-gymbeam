@@ -3,6 +3,8 @@ html .row {
 
   .cellContentWrapper {
     gap: var(--mantine-spacing-xs);
+    white-space: nowrap;
+    flex-wrap: nowrap;
   }
 
   .columnLabel {

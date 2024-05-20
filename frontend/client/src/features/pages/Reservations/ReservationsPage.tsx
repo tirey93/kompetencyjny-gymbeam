@@ -6,7 +6,6 @@ import { ReservationItemCard } from "./components/ReservationItemCard/Reservatio
 import { useActivitiesInstances } from "../../../common/activities";
 import { ErrorScreen, LoaderOverlay } from "../../../common/components/DataDisplay";
 import { NoResultsMessage } from "../../../common/components/Table";
-import { useCalendarDateRange } from "../../../common/hooks";
 import { useTranslate } from "../../../common/i18n";
 import { AppRoute } from "../../router";
 
@@ -15,10 +14,9 @@ import classes from "./ReservationsPage.module.scss";
 export const ReservationsPage = () => {
     const translate = useTranslate();
     const navigate = useNavigate();
-    const { dateRange } = useCalendarDateRange();
+
     const { activitiesInstances, isLoading, error, refetch } = useActivitiesInstances({
-        type: "ByDateRange",
-        dateRange,
+        type: "ReservedByUser",
     });
 
     const openActivitiesCalendar = useCallback(() => {

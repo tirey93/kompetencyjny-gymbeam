@@ -42,4 +42,5 @@ export type ActivityInstance = {
     shortDescription: string;
     longDescription: string;
     leaderName: string;
+    reservationId: number | null;
 };

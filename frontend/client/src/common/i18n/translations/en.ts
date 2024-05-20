@@ -142,7 +142,12 @@ export const en: TranslationSource = {
                 tooltip: "Number of people that already have enrolled: {{slotsTaken}}",
             },
             enrollment: {
-                label: "Enroll",
+                add: {
+                    label: "Enroll",
+                },
+                delete: {
+                    label: "Resign",
+                },
                 disabled: {
                     label: "Can't enroll",
                     tooltip: {

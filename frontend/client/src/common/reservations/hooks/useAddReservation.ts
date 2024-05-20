@@ -8,9 +8,10 @@ import {
     HttpErrorsTranslationsMap,
     mapErrorToErrorTranslationKey,
 } from "../../request/utils/mapErrorToErrorTranslationKey";
+import { AddReservationDTO } from "../Reservations";
 
 type UseAddReservation = {
-    addReservation: (activityInstanceId: number) => Promise<void>;
+    addReservation: (body: AddReservationDTO) => Promise<void>;
     isLoading: boolean;
     error: string | null;
     reset: () => void;
@@ -25,9 +26,9 @@ export const useAddReservation = (): UseAddReservation => {
     });
 
     const addReservation = useCallback(
-        async (activityInstanceId: number) => {
+        async (body: AddReservationDTO) => {
             try {
-                await mutateAsync(activityInstanceId);
+                await mutateAsync(body);
             } catch (error) {
                 const errorTranslation = mapErrorToErrorTranslationKey(error, errorsMap);
                 throw new Error(setAndTranslateError(errorTranslation));
@@ -39,8 +40,8 @@ export const useAddReservation = (): UseAddReservation => {
     return { addReservation, error, reset, isLoading };
 };
 
-const addReservationRequest = (_activityInstanceId: number) => {
-    return request("AddReservation");
+const addReservationRequest = (body: AddReservationDTO) => {
+    return request("AddReservation", { body });
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {

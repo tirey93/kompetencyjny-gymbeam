@@ -138,7 +138,12 @@ export type TranslationSource = {
                 tooltip: string;
             };
             enrollment: {
-                label: string;
+                add: {
+                    label: string;
+                };
+                delete: {
+                    label: string;
+                };
                 disabled: {
                     label: string;
                     tooltip: {
