@@ -1,5 +1,14 @@
-.container {
+html .container {
   padding-block: var(--mantine-spacing-md);
   justify-content: center;
   margin: auto;
+
+  .reservationsGroup {
+    margin-bottom: var(--mantine-spacing-xl);
+    gap: var(--mantine-spacing-xs);
+
+    .divider {
+
+    }
+  }
 }

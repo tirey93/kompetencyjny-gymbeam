@@ -1,11 +1,12 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container } from "@mantine/core";
+import { Container, Divider, Group, Stack, Title } from "@mantine/core";
 
+import { ReservationItemCard } from "./components/ReservationItemCard/ReservationItemCard";
 import { useActivitiesInstances } from "../../../common/activities";
-import { ActivityItemCard } from "../../../common/components/ActivityCalendar/components/ActivityItemCard/ActivityItemCard";
 import { ErrorScreen, LoaderOverlay } from "../../../common/components/DataDisplay";
 import { NoResultsMessage } from "../../../common/components/Table";
+import { useCalendarDateRange } from "../../../common/hooks";
 import { useTranslate } from "../../../common/i18n";
 import { AppRoute } from "../../router";
 
@@ -14,7 +15,11 @@ import classes from "./ReservationsPage.module.scss";
 export const ReservationsPage = () => {
     const translate = useTranslate();
     const navigate = useNavigate();
-    const { activitiesInstances, isLoading, error, refetch } = useActivitiesInstances({ type: "ReservedByUser" });
+    const { dateRange } = useCalendarDateRange();
+    const { activitiesInstances, isLoading, error, refetch } = useActivitiesInstances({
+        type: "ByDateRange",
+        dateRange,
+    });
 
     const openActivitiesCalendar = useCallback(() => {
         navigate(AppRoute.ACTIVITIES);
@@ -34,10 +39,37 @@ export const ReservationsPage = () => {
         );
     }
 
-    // TODO: Change endpoint, structure the data in better way
+    // TODO: Change endpoint, structure the data in better way, do not use ActivityItemCard
     return (
         <Container size="xl" className={classes.container}>
-            {activitiesInstances?.map((activity) => <ActivityItemCard key={activity.activityId} {...activity} />)}
+            <Title order={4}>Your reservations</Title>
+
+            <Stack className={classes.reservationsGroup}>
+                <Divider className={classes.divider} label="Today" />
+                <Group>
+                    {activitiesInstances?.map((activity) => (
+                        <ReservationItemCard key={activity.activityId} {...activity} />
+                    ))}
+                </Group>
+            </Stack>
+
+            <Stack className={classes.reservationsGroup}>
+                <Divider className={classes.divider} label="This week" />
+                <Group>
+                    {activitiesInstances?.map((activity) => (
+                        <ReservationItemCard key={activity.activityId} {...activity} />
+                    ))}
+                </Group>
+            </Stack>
+
+            <Stack className={classes.reservationsGroup}>
+                <Divider className={classes.divider} label="Other upcoming activities" />
+                <Group>
+                    {activitiesInstances?.map((activity) => (
+                        <ReservationItemCard key={activity.activityId} {...activity} />
+                    ))}
+                </Group>
+            </Stack>
 
             {!activitiesInstances?.length && (
                 <NoResultsMessage
