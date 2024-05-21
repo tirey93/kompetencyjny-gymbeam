@@ -1,15 +1,10 @@
 ﻿
 using Domain;
-using Domain.Exceptions;
-using FluentAssertions;
-using GymBeam.CommandHandlers;
 using GymBeam.Constants;
 using GymBeam.Exceptions;
 using GymBeam.Queries;
 using GymBeam.QueryHandlers;
 using Microsoft.AspNetCore.Http;
-using System.Xml.Linq;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace GymBeam.Tests.Enrollment
 {
@@ -35,9 +30,9 @@ namespace GymBeam.Tests.Enrollment
             //Arrange
             SetupHttpAccessor("78");
 
-            var activities = new List<Activity>
+            var activities = new List<Domain.Activity>
             {
-                new Activity
+                new Domain.Activity
                 {
                     Id = 1,
                     Leader = new Domain.User
@@ -51,7 +46,7 @@ namespace GymBeam.Tests.Enrollment
                     ShortDescription = "Short Box",
                     LongDescription = "Long Box Description"
                 },
-                new Activity
+                new Domain.Activity
                 {
                     Id = 2,
                     Leader = new Domain.User
@@ -175,9 +170,9 @@ namespace GymBeam.Tests.Enrollment
         {
             //Arrange
             SetupHttpAccessor(null);
-            var activities = new List<Activity>
+            var activities = new List<Domain.Activity>
             {
-                new Activity
+                new Domain.Activity
                 {
                     Id = 1,
                     Leader = new Domain.User
@@ -192,7 +187,7 @@ namespace GymBeam.Tests.Enrollment
                     LongDescription = "Long Box Description",
                     Cron = "0 12,14,16 * * *"
                 },
-                new Activity
+                new Domain.Activity
                 {
                     Id = 2,
                     Leader = new Domain.User
@@ -218,7 +213,7 @@ namespace GymBeam.Tests.Enrollment
                 { new Domain.Enrollment {ActivityId = activities[1].Id, StartTime = new DateTime(2024, 7, 11, 15, 0, 0)}, 9 },
             };
 
-            _repositoryMock.Setup(x => x.GetActivities(It.IsAny<Func<Activity, bool>>())).Returns(activities);
+            _repositoryMock.Setup(x => x.GetActivities(It.IsAny<Func<Domain.Activity, bool>>())).Returns(activities);
             _repositoryMock.Setup(x => x.GetSlotsTakenForEnrollments(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(slotsTakenDict);
 
             var query = new GetEnrollmentsByDatesQuery
@@ -350,9 +345,9 @@ namespace GymBeam.Tests.Enrollment
         {
             //Arrange
             SetupHttpAccessor("78");
-            var activities = new List<Activity>
+            var activities = new List<Domain.Activity>
             {
-                new Activity
+                new Domain.Activity
                 {
                     Id = 1,
                     Leader = new Domain.User
@@ -387,7 +382,7 @@ namespace GymBeam.Tests.Enrollment
             };
 
             _repositoryMock.Setup(x => x.GetReservations(It.IsAny<Func<Reservation, bool>>())).Returns(reservations);
-            _repositoryMock.Setup(x => x.GetActivities(It.IsAny<Func<Activity, bool>>())).Returns(activities);
+            _repositoryMock.Setup(x => x.GetActivities(It.IsAny<Func<Domain.Activity, bool>>())).Returns(activities);
             _repositoryMock.Setup(x => x.GetSlotsTakenForEnrollments(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(slotsTakenDict);
 
             var query = new GetEnrollmentsByDatesQuery
