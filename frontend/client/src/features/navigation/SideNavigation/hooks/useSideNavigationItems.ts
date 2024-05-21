@@ -3,6 +3,7 @@ import {
     IconCalendarEvent,
     IconDashboard,
     IconHome2,
+    IconListCheck,
     IconLogin,
     IconLogout,
     IconQrcode,
@@ -22,7 +23,15 @@ type NavigationItem = {
 };
 
 type UseSideNavigationItems = Record<
-    "signIn" | "signUp" | "signOut" | "home" | "usersDashboard" | "activitiesDashboard" | "activities" | "qr",
+    | "signIn"
+    | "signUp"
+    | "signOut"
+    | "home"
+    | "usersDashboard"
+    | "activitiesDashboard"
+    | "activities"
+    | "qr"
+    | "reservations",
     NavigationItem
 >;
 
@@ -55,6 +64,11 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
                 Icon: IconCalendarEvent,
                 label: translate("navigation.labels.activities"),
                 route: AppRoute.ACTIVITIES,
+            },
+            reservations: {
+                Icon: IconListCheck,
+                label: translate("navigation.labels.reservations"),
+                route: AppRoute.RESERVATIONS,
             },
             qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: AppRoute.GYM_PASS },
         }),

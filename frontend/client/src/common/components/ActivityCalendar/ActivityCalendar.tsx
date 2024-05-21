@@ -7,20 +7,29 @@ import { DateRangeFilter } from "./components/ActivityCalendarFilters/DateRangeF
 import { DateRangeSwitch } from "./components/ActivityCalendarFilters/DateRangeSwitch/DateRangeSwitch";
 import { ActivityCalendarRow } from "./components/ActivityCalendarRow/ActivityCalendarRow";
 import { Activity, ActivityInstance } from "../../activities";
-import { useCalendarDateRange, useDateTimeLocale } from "../../hooks";
-import { TextWithTooltip } from "../DataDisplay";
+import { useDateTimeLocale } from "../../hooks";
+import { UseCalendarDateRange } from "../../hooks/useCalendarDateRange";
+import { LoaderOverlay, TextWithTooltip } from "../DataDisplay";
 import { Logo } from "../Logo";
 
 import classes from "./ActivityCalendar.module.scss";
 
 type ActivityCalendarProps = {
     activityInstances: ActivityInstance[];
+    dateRangeOptions: UseCalendarDateRange;
     activities: Activity[];
     withFilters?: boolean;
+    isLoading?: boolean;
 };
 
-export const ActivityCalendar = ({ activityInstances, activities, withFilters }: ActivityCalendarProps) => {
-    const { days, hours, dateRange, setDateRange } = useCalendarDateRange();
+export const ActivityCalendar = ({
+    activityInstances,
+    activities,
+    withFilters,
+    dateRangeOptions,
+    isLoading,
+}: ActivityCalendarProps) => {
+    const { days, hours, dateRange, setDateRange } = dateRangeOptions;
     const { locale } = useDateTimeLocale();
     const { state } = useLocation();
     const uniqueActivitiesNames = [...new Set(activities.map(({ name }) => name))];
@@ -63,6 +72,8 @@ export const ActivityCalendar = ({ activityInstances, activities, withFilters }:
 
             <Table.ScrollContainer minWidth={600} className={classes.scrollContainer}>
                 <Table stickyHeader highlightOnHover withColumnBorders className={classes.table}>
+                    {isLoading && <LoaderOverlay />}
+
                     <Table.Thead>
                         <Table.Tr className={classes.headerRow}>
                             <Table.Td className={classes.dateRangeSwitch}>

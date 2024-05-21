@@ -15,6 +15,7 @@ export type ApiResourceName = |
     "UpdateActivity" |
     "DeleteActivity" |
     "GetActivitiesInstancesByDates" |
+    "GetActivitiesInstancesReservedByUser" |
     "CheckUserNameAvailability" |
     "AddReservation" |
     "RemoveReservation";

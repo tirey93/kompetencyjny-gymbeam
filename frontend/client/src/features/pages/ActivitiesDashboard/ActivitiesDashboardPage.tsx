@@ -75,7 +75,7 @@ export const ActivitiesDashboardPage = () => {
             {!data.length && (
                 <NoResultsMessage
                     description={translate("pages.activitiesDashboard.noResults.description")}
-                    onAdd={() => openAddModal()}
+                    onActionButtonClick={() => openAddModal()}
                 />
             )}
         </Container>

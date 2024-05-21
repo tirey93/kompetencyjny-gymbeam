@@ -13,7 +13,7 @@ type SideNavigationProps = {
 };
 
 export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
-    const { qr, signOut, signIn, signUp, home, usersDashboard, activitiesDashboard, activities } =
+    const { qr, signOut, signIn, signUp, home, usersDashboard, activitiesDashboard, activities, reservations } =
         useSideNavigationItems();
 
     return (
@@ -26,7 +26,7 @@ export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
                 <NavigationSection onNavigate={onNavigate} tiles={[home]} />
 
                 <UserRoleGuard allowedRoles={["Admin", "User"]}>
-                    <NavigationSection onNavigate={onNavigate} tiles={[activities, qr]} />
+                    <NavigationSection onNavigate={onNavigate} tiles={[activities, reservations, qr]} />
                 </UserRoleGuard>
 
                 <UserRoleGuard allowedRoles={["Admin"]}>

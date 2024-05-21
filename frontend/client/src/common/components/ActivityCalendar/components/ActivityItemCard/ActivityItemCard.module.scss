@@ -27,6 +27,8 @@ html .calendarItem {
   }
 
   .participants {
+    width: fit-content;
+    margin-inline: auto;
     margin-block: var(--mantine-spacing-sm);
     font-size: var(--mantine-font-size-sm);
     font-weight: 700;
@@ -37,7 +39,7 @@ html .calendarItem {
     }
   }
 
-  .joinIcon {
+  .reservationButtonIcon {
     width: var(--mantine-font-size-sm);
   }
 

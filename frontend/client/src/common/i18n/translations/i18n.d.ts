@@ -138,7 +138,12 @@ export type TranslationSource = {
                 tooltip: string;
             };
             enrollment: {
-                label: string;
+                add: {
+                    label: string;
+                };
+                delete: {
+                    label: string;
+                };
                 disabled: {
                     label: string;
                     tooltip: {
@@ -290,6 +295,7 @@ export type TranslationSource = {
             activities: string;
             usersDashboard: string;
             activitiesDashboard: string;
+            reservations: string;
         };
     };
 
@@ -317,6 +323,20 @@ export type TranslationSource = {
     };
 
     pages: {
+        reservations: {
+            noResults: {
+                description: string;
+                button: string;
+            };
+            header: string;
+            link: string;
+            sections: {
+                today: string;
+                incoming: string;
+                others: string;
+                empty: string;
+            };
+        };
         activities: {
             details: {
                 duration: string;
