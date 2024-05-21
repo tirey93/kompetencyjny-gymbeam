@@ -61,21 +61,21 @@ namespace GymBeam.Tests.Enrollment
                     LongDescription = "Long Dance Description"
                 }
             };
-            var reservations = new List<Reservation>
+            var reservations = new List<Domain.Reservation>
             {
-                new Reservation
+                new Domain.Reservation
                 {
                     Id = 1,
                     StartTime = new DateTime(2024, 10, 25, 16, 0 , 0),
                     Activity = activities[0]
                 },
-                new Reservation
+                new Domain.Reservation
                 {
                     Id = 2,
                     StartTime = new DateTime(2024, 10, 25, 18, 0 , 0),
                     Activity = activities[0]
                 },
-                new Reservation
+                new Domain.Reservation
                 {
                     Id = 3,
                     StartTime = new DateTime(2024, 10, 25, 16, 0 , 0),
@@ -89,7 +89,7 @@ namespace GymBeam.Tests.Enrollment
                 { new Domain.Enrollment {ActivityId = activities[0].Id, StartTime = reservations[0].StartTime}, 2 },
                 { new Domain.Enrollment {ActivityId = activities[1].Id, StartTime = reservations[2].StartTime}, 3 }
             };
-            _repositoryMock.Setup(x => x.GetReservations(It.IsAny<Func<Reservation, bool>>())).Returns(reservations);
+            _repositoryMock.Setup(x => x.GetReservations(It.IsAny<Func<Domain.Reservation, bool>>())).Returns(reservations);
             _repositoryMock.Setup(x => x.GetSlotsTakenForEnrollments(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(slotsTakenDict);
 
             var query = new GetEnrollementsLoggedUserQuery();
@@ -370,9 +370,9 @@ namespace GymBeam.Tests.Enrollment
                 { new Domain.Enrollment {ActivityId = activities[0].Id, StartTime = new DateTime(2024, 7, 11, 14, 0, 0)}, 3 }
             };
 
-            var reservations = new List<Reservation>
+            var reservations = new List<Domain.Reservation>
             {
-                new Reservation
+                new Domain.Reservation
                 {
                     Id = 1,
                     StartTime = new DateTime(2024, 7, 11, 12, 0, 0),
@@ -381,7 +381,7 @@ namespace GymBeam.Tests.Enrollment
 
             };
 
-            _repositoryMock.Setup(x => x.GetReservations(It.IsAny<Func<Reservation, bool>>())).Returns(reservations);
+            _repositoryMock.Setup(x => x.GetReservations(It.IsAny<Func<Domain.Reservation, bool>>())).Returns(reservations);
             _repositoryMock.Setup(x => x.GetActivities(It.IsAny<Func<Domain.Activity, bool>>())).Returns(activities);
             _repositoryMock.Setup(x => x.GetSlotsTakenForEnrollments(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(slotsTakenDict);
 
