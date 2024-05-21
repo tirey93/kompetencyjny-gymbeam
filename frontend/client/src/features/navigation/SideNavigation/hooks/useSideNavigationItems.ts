@@ -3,6 +3,7 @@ import {
     IconCalendarEvent,
     IconDashboard,
     IconHome2,
+    IconListCheck,
     IconLogin,
     IconLogout,
     IconQrcode,
@@ -65,7 +66,7 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
                 route: AppRoute.ACTIVITIES,
             },
             reservations: {
-                Icon: IconCalendarEvent,
+                Icon: IconListCheck,
                 label: translate("navigation.labels.reservations"),
                 route: AppRoute.RESERVATIONS,
             },

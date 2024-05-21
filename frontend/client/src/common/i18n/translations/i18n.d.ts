@@ -328,6 +328,14 @@ export type TranslationSource = {
                 description: string;
                 button: string;
             };
+            header: string;
+            link: string;
+            sections: {
+                today: string;
+                incoming: string;
+                others: string;
+                empty: string;
+            };
         };
         activities: {
             details: {

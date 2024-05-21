@@ -1,9 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Divider, Group, Stack, Title } from "@mantine/core";
+import { Anchor, Container, Title } from "@mantine/core";
+import dayjs from "dayjs";
 
-import { ReservationItemCard } from "./components/ReservationItemCard/ReservationItemCard";
-import { useActivitiesInstances } from "../../../common/activities";
+import { ReservationsSection } from "./components/ReservationsSection/ReservationsSection";
+import { ActivityInstance, useActivitiesInstances } from "../../../common/activities";
 import { ErrorScreen, LoaderOverlay } from "../../../common/components/DataDisplay";
 import { NoResultsMessage } from "../../../common/components/Table";
 import { useTranslate } from "../../../common/i18n";
@@ -18,6 +19,29 @@ export const ReservationsPage = () => {
     const { activitiesInstances, isLoading, error, refetch } = useActivitiesInstances({
         type: "ReservedByUser",
     });
+
+    const organizedActivitiesInstances = useMemo(() => {
+        const today: ActivityInstance[] = [];
+        const nextWeek: ActivityInstance[] = [];
+        const rest: ActivityInstance[] = [];
+
+        const endOfToday = dayjs().endOf("day");
+        const endOfWeek = endOfToday.add(6, "days");
+
+        activitiesInstances?.forEach((instance) => {
+            const startDate = dayjs(instance.startTime);
+
+            if (startDate.isBefore(endOfToday)) {
+                today.push(instance);
+            } else if (startDate.isBefore(endOfWeek)) {
+                nextWeek.push(instance);
+            } else {
+                rest.push(instance);
+            }
+        });
+
+        return { today, nextWeek, rest };
+    }, [activitiesInstances]);
 
     const openActivitiesCalendar = useCallback(() => {
         navigate(AppRoute.ACTIVITIES);
@@ -37,44 +61,34 @@ export const ReservationsPage = () => {
         );
     }
 
-    // TODO: Change endpoint, structure the data in better way, do not use ActivityItemCard
     return (
         <Container size="xl" className={classes.container}>
-            <Title order={4}>Your reservations</Title>
+            <Title order={4}>{translate("pages.reservations.header")}</Title>
+            <Anchor className={classes.link} onClick={openActivitiesCalendar}>
+                {translate("pages.reservations.link")}
+            </Anchor>
 
-            <Stack className={classes.reservationsGroup}>
-                <Divider className={classes.divider} label="Today" />
-                <Group>
-                    {activitiesInstances?.map((activity) => (
-                        <ReservationItemCard key={activity.activityId} {...activity} />
-                    ))}
-                </Group>
-            </Stack>
-
-            <Stack className={classes.reservationsGroup}>
-                <Divider className={classes.divider} label="This week" />
-                <Group>
-                    {activitiesInstances?.map((activity) => (
-                        <ReservationItemCard key={activity.activityId} {...activity} />
-                    ))}
-                </Group>
-            </Stack>
-
-            <Stack className={classes.reservationsGroup}>
-                <Divider className={classes.divider} label="Other upcoming activities" />
-                <Group>
-                    {activitiesInstances?.map((activity) => (
-                        <ReservationItemCard key={activity.activityId} {...activity} />
-                    ))}
-                </Group>
-            </Stack>
-
-            {!activitiesInstances?.length && (
+            {!activitiesInstances?.length ? (
                 <NoResultsMessage
                     description={translate("pages.reservations.noResults.description")}
                     actionButtonLabel={translate("pages.reservations.noResults.button")}
                     onActionButtonClick={openActivitiesCalendar}
                 />
+            ) : (
+                <>
+                    <ReservationsSection
+                        items={organizedActivitiesInstances.today}
+                        label={translate("pages.reservations.sections.today")}
+                    />
+                    <ReservationsSection
+                        items={organizedActivitiesInstances.nextWeek}
+                        label={translate("pages.reservations.sections.incoming")}
+                    />
+                    <ReservationsSection
+                        items={organizedActivitiesInstances.rest}
+                        label={translate("pages.reservations.sections.others")}
+                    />
+                </>
             )}
         </Container>
     );

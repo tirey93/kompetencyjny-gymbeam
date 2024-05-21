@@ -3,12 +3,7 @@ html .container {
   justify-content: center;
   margin: auto;
 
-  .reservationsGroup {
-    margin-bottom: var(--mantine-spacing-xl);
-    gap: var(--mantine-spacing-xs);
-
-    .divider {
-
-    }
+  .link {
+    font-size: var(--mantine-font-size-sm);
   }
 }

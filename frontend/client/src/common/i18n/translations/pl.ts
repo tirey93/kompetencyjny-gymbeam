@@ -327,6 +327,14 @@ export const pl: TranslationSource = {
                 description: "Nie masz aktualnie żadnych rezerwacji.",
                 button: "Zobacz nasze zajęcia",
             },
+            header: "Twoje rezerwacje",
+            link: "Sprawdź kalendarz wydarzeń",
+            sections: {
+                today: "Dzisiaj",
+                incoming: "W najbliższych dniach",
+                others: "Pozostałe",
+                empty: "Brak rezerwacji.",
+            },
         },
         activities: {
             details: {

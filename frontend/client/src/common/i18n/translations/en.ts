@@ -328,6 +328,14 @@ export const en: TranslationSource = {
                 description: "You don't have any pending reservations right now.",
                 button: "See available activities",
             },
+            header: "Your reservations",
+            link: "Check our activity calendar",
+            sections: {
+                today: "Today",
+                incoming: "In incoming days",
+                others: "Your other reservations",
+                empty: "No reservations.",
+            },
         },
         activities: {
             details: {
