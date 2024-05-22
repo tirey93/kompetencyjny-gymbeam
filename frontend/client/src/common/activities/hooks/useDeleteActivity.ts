@@ -53,5 +53,7 @@ export const useDeleteActivity = (): UseDeleteActivity => {
 
 const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.activities.delete.default",
-    statusCodesMap: {},
+    statusCodesMap: {
+        404: "apiErrors.activities.delete.notFound",
+    },
 };

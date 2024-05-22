@@ -56,5 +56,7 @@ const changeUserRoleRequest = (options: ChangeUserRoleRequestOptions) => {
 
 const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.user.changeRole.default",
-    statusCodesMap: {},
+    statusCodesMap: {
+        404: "apiErrors.user.changeRole.notFound",
+    },
 };

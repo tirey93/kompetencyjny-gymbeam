@@ -239,31 +239,40 @@ export type TranslationSource = {
             };
             delete: {
                 default: string;
+                notFound: string;
             };
             add: {
                 default: string;
             };
             update: {
                 default: string;
+                notFound: string;
             };
         };
         reservations: {
             add: {
                 default: string;
+                forbidden: string;
+                notFound: string;
             };
             remove: {
                 default: string;
+                forbidden: string;
+                notFound: string;
             };
         };
         user: {
             changeReservationsPermission: {
                 default: string;
+                notFound: string;
             };
             changeRole: {
                 default: string;
+                notFound: string;
             };
             delete: {
                 default: string;
+                notFound: string;
             };
             getAll: {
                 default: string;

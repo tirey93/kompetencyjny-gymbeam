@@ -4,7 +4,7 @@ import { IconMinus, IconPlus } from "@tabler/icons-react";
 import { useTranslate } from "../../../../i18n";
 import { TextWithTooltip } from "../../../DataDisplay";
 
-import classes from "./ActivityItemCard.module.scss";
+import classes from "./ReservationButton.module.scss";
 
 type ReservationButtonProps = {
     isFull: boolean;

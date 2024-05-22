@@ -55,6 +55,6 @@ const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.auth.signIn.default",
     statusCodesMap: {
         400: "apiErrors.auth.signIn.incorrectCredentials",
-        403: "apiErrors.auth.signIn.incorrectCredentials",
+        404: "apiErrors.auth.signIn.incorrectCredentials",
     },
 };

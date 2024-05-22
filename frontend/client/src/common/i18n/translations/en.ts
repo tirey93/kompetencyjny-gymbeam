@@ -174,31 +174,40 @@ export const en: TranslationSource = {
             },
             delete: {
                 default: "Failed to delete activity. Something went wrong on our side.",
+                notFound: "Activity you've tried to delete does not exist anymore.",
             },
             add: {
                 default: "Failed to add activity. Something went wrong on our side.",
             },
             update: {
                 default: "Failed to update activity. Something went wrong on our side.",
+                notFound: "Activity you've tried to update does not exist anymore.",
             },
         },
         reservations: {
             add: {
                 default: "Failed to add a reservation. Something went wrong on our side.",
+                forbidden: "You are not allowed to reserve this activity.",
+                notFound: "Couldn't find activity you want to reserve.",
             },
             remove: {
                 default: "Failed to remove the reservation. Something went wrong on our side.",
+                forbidden: "You are not allowed to remove this reservation.",
+                notFound: "Reservation you've tried to remove does not exist anymore.",
             },
         },
         user: {
             changeReservationsPermission: {
                 default: "Failed to change user's reservations permission, something went wrong on our side.",
+                notFound: "User you wanted to modify does not exist.",
             },
             changeRole: {
                 default: "Failed to change user's role, something went wrong on our side.",
+                notFound: "User you wanted to modify does not exist.",
             },
             delete: {
                 default: "Failed to delete user, something went wrong on our side.",
+                notFound: "User you wanted to delete does not exist.",
             },
             getAll: {
                 default: "Failed to retrieve users data. Something went wrong on our side.",
@@ -246,7 +255,7 @@ export const en: TranslationSource = {
             remove: {
                 success: {
                     title: "Reservation removed.",
-                    description: "Successfully removed reservation of {{activity}} activity..",
+                    description: "Successfully removed reservation of {{activity}} activity.",
                 },
                 error: {
                     title: "Failed to remove reservation.",

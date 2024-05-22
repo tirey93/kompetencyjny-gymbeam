@@ -34,21 +34,10 @@ export const ReservationItemCard = ({
     const localeOptions = { hour: "2-digit", minute: "2-digit" } as const;
     const endsAt = new Date(startTime.getTime() + duration * 60000);
 
-    const openActivityDetailsModal = useCallback((activityId: number) => {
-        modals.openContextModal({
-            modal: "activityDetails",
-            centered: true,
-            withCloseButton: false,
-            innerProps: {
-                activityId,
-            },
-        });
-    }, []);
-
     const handleRemoveReservation = useCallback(async () => {
         try {
             if (!reservationId) {
-                return; // TODO: This should never happen, find a cleaner way to handle this
+                throw new Error();
             }
 
             await removeReservation(reservationId);
@@ -71,6 +60,17 @@ export const ReservationItemCard = ({
             });
         }
     }, [name, removeReservation, reservationId, translate]);
+
+    const openActivityDetailsModal = useCallback((activityId: number) => {
+        modals.openContextModal({
+            modal: "activityDetails",
+            centered: true,
+            withCloseButton: false,
+            innerProps: {
+                activityId,
+            },
+        });
+    }, []);
 
     return (
         <Paper className={classNames(classes.reservationItem)}>

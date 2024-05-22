@@ -66,7 +66,7 @@ export const ActivityItemCard = ({
     const handleRemoveReservation = useCallback(async () => {
         try {
             if (!reservationId) {
-                return; // TODO: This should never happen, find a cleaner way to handle this
+                throw new Error();
             }
 
             await removeReservation(reservationId);
@@ -93,7 +93,7 @@ export const ActivityItemCard = ({
     const handleAddReservation = useCallback(async () => {
         try {
             if (!user) {
-                return; // TODO: This should never happen, find a cleaner way to handle this
+                throw new Error();
             }
 
             await addReservation({ activityId, userId: user.id, startTime: startTime.toISOString() });

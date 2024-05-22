@@ -45,5 +45,8 @@ const removeReservationRequest = (reservationId: number) => {
 
 const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.reservations.remove.default",
-    statusCodesMap: {},
+    statusCodesMap: {
+        403: "apiErrors.reservations.remove.forbidden",
+        404: "apiErrors.reservations.remove.notFound",
+    },
 };

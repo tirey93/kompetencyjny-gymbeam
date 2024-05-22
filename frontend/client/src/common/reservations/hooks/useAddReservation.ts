@@ -46,5 +46,8 @@ const addReservationRequest = (body: AddReservationDTO) => {
 
 const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.reservations.add.default",
-    statusCodesMap: {},
+    statusCodesMap: {
+        403: "apiErrors.reservations.add.forbidden",
+        404: "apiErrors.reservations.add.notFound",
+    },
 };

@@ -38,15 +38,4 @@ html .calendarItem {
       stroke-width: 3px;
     }
   }
-
-  .reservationButtonIcon {
-    width: var(--mantine-font-size-sm);
-  }
-
-  .reservationsDisabled {
-    font-size: var(--mantine-font-size-xs);
-    padding: var(--mantine-spacing-xs);
-    color: var(--mantine-color-dimmed);
-    font-weight: 600;
-  }
 }
