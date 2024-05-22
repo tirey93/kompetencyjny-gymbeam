@@ -19,9 +19,9 @@ namespace GymBeam.Queries
                 .LessThan(enrollmentQuery => enrollmentQuery.To)
                 .WithMessage(Resource.ValidatorStartTimeBeforeEndTime);
 
-            RuleFor(enrollmentQuery => enrollmentQuery.To)
-                .LessThan(enrollmentQuery => enrollmentQuery.From.AddDays(7).AddSeconds(1))
-                .WithMessage(Resource.ValidatorEnrollmentRangeExceeded);
+//             RuleFor(enrollmentQuery => enrollmentQuery.To)
+//                 .LessThan(enrollmentQuery => enrollmentQuery.From.AddDays(7).AddSeconds(1))
+//                 .WithMessage(Resource.ValidatorEnrollmentRangeExceeded);
         }
     }
 }
