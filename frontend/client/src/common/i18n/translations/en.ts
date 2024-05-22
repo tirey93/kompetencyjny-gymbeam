@@ -153,6 +153,7 @@ export const en: TranslationSource = {
                     tooltip: {
                         tooLate: "This activity has already started.",
                         full: "All slots are taken.",
+                        notAllowed: "You are not allowed to enroll.",
                     },
                 },
             },

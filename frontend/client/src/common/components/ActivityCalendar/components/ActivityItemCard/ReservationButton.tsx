@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Button } from "@mantine/core";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 
@@ -12,6 +13,7 @@ type ReservationButtonProps = {
     isAlreadyReserved: boolean;
     onReservation: () => unknown;
     onCancellation: () => unknown;
+    isUserPermittedToEnroll: boolean;
     isLoading: boolean;
 };
 
@@ -22,8 +24,19 @@ export const ReservationButton = ({
     onCancellation,
     hasStartedAlready,
     isLoading,
+    isUserPermittedToEnroll,
 }: ReservationButtonProps) => {
     const translate = useTranslate();
+
+    const disabledButtonLabel = useMemo(() => {
+        if (isFull) {
+            return translate("activityCalendar.item.enrollment.disabled.tooltip.full");
+        } else if (hasStartedAlready) {
+            return translate("activityCalendar.item.enrollment.disabled.tooltip.tooLate");
+        } else if (!isUserPermittedToEnroll) {
+            return translate("activityCalendar.item.enrollment.disabled.tooltip.notAllowed");
+        }
+    }, [hasStartedAlready, isFull, isUserPermittedToEnroll, translate]);
 
     if (!hasStartedAlready && isAlreadyReserved) {
         return (
@@ -40,17 +53,9 @@ export const ReservationButton = ({
         );
     }
 
-    if (isFull || hasStartedAlready) {
+    if (isFull || hasStartedAlready || !isUserPermittedToEnroll) {
         return (
-            <TextWithTooltip
-                alwaysVisible
-                className={classes.reservationsDisabled}
-                label={
-                    hasStartedAlready
-                        ? translate("activityCalendar.item.enrollment.disabled.tooltip.tooLate")
-                        : translate("activityCalendar.item.enrollment.disabled.tooltip.full")
-                }
-            >
+            <TextWithTooltip alwaysVisible className={classes.reservationsDisabled} label={disabledButtonLabel}>
                 {translate("activityCalendar.item.enrollment.disabled.label")}
             </TextWithTooltip>
         );

@@ -149,6 +149,7 @@ export type TranslationSource = {
                     tooltip: {
                         tooLate: string;
                         full: string;
+                        notAllowed: string;
                     };
                 };
             };

@@ -153,6 +153,7 @@ export const pl: TranslationSource = {
                     tooltip: {
                         tooLate: "Te zajęcia się już zaczęły.",
                         full: "Wszystkie miejsca zostały zarezerwowane.",
+                        notAllowed: "Nie masz uprawnień do rezerwacji.",
                     },
                 },
             },

@@ -146,6 +146,7 @@ export const ActivityItemCard = ({
                 isAlreadyReserved={!!reservationId}
                 isLoading={isAddReservationLoading || isRemoveReservationLoading}
                 hasStartedAlready={hasStartedAlready}
+                isUserPermittedToEnroll={!user?.reservationDisabled}
                 isFull={isFull}
             />
         </Paper>
