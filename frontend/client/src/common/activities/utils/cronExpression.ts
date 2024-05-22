@@ -8,9 +8,13 @@ export const generateCronExpression = (startTimeString: string, days: Day[]) => 
     const baseInterval = cronParser.parseExpression("* * * * *");
     const fields = JSON.parse(JSON.stringify(baseInterval.fields));
 
+    const startTimeInMinutes = parseInt(hour) * 60 + parseInt(minute) + new Date().getTimezoneOffset();
+    const adjustedHour = Math.floor(startTimeInMinutes / 60);
+    const adjustedMinute = startTimeInMinutes % 60;
+
     fields.dayOfWeek = days.map((day) => parseInt(day));
-    fields.hour = [parseInt(hour)];
-    fields.minute = [parseInt(minute)];
+    fields.hour = [adjustedHour];
+    fields.minute = [adjustedMinute];
 
     return cronParser.fieldsToExpression(fields as CronFields);
 };
@@ -20,9 +24,9 @@ export const parseCronExpression = (cronExp: string) => {
     const fields = JSON.parse(JSON.stringify(interval.fields));
 
     const days = fields.dayOfWeek.map((day: number) => day.toString());
-    const hour = fields.hour[0];
-    const minute = fields.minute[0];
-    const startHour = dayjs(0).set("minute", minute).set("hour", hour).toDate();
+    const startHour = dayjs(interval.next().toDate())
+        .add(-1 * new Date().getTimezoneOffset(), "minutes")
+        .toDate();
 
     return { days, startHour };
 };

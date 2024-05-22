@@ -74,7 +74,7 @@ export const ActivityDetailsModal = ({ innerProps: { activityId } }: ActivityDet
                                 <Box className={classes.field}>
                                     <Text className={classes.title}>{translate("activity.startTime")}</Text>
                                     <Text className={classes.caption}>
-                                        {activity.startTime.toLocaleTimeString(locale, {
+                                        {activity.startHour.toLocaleTimeString(locale, {
                                             hour: "2-digit",
                                             minute: "2-digit",
                                         })}

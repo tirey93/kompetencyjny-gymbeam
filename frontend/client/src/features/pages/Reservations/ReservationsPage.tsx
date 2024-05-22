@@ -28,17 +28,19 @@ export const ReservationsPage = () => {
         const endOfToday = dayjs().endOf("day");
         const endOfWeek = endOfToday.add(6, "days");
 
-        activitiesInstances?.forEach((instance) => {
-            const startDate = dayjs(instance.startTime);
+        activitiesInstances
+            ?.sort((a, b) => dayjs(a.startTime).diff(dayjs(b.startTime), "seconds"))
+            ?.forEach((instance) => {
+                const startDate = dayjs(instance.startTime);
 
-            if (startDate.isBefore(endOfToday)) {
-                today.push(instance);
-            } else if (startDate.isBefore(endOfWeek)) {
-                nextWeek.push(instance);
-            } else {
-                rest.push(instance);
-            }
-        });
+                if (startDate.isBefore(endOfToday)) {
+                    today.push(instance);
+                } else if (startDate.isBefore(endOfWeek)) {
+                    nextWeek.push(instance);
+                } else {
+                    rest.push(instance);
+                }
+            });
 
         return { today, nextWeek, rest };
     }, [activitiesInstances]);

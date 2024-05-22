@@ -21,7 +21,7 @@ export const ReservationsSection = ({ items, label }: ReservationsSectionProps) 
             {items.length ? (
                 <Group>
                     {items.map((activity) => (
-                        <ReservationItemCard key={activity.activityId} {...activity} />
+                        <ReservationItemCard key={activity.reservationId} {...activity} />
                     ))}
                 </Group>
             ) : (
