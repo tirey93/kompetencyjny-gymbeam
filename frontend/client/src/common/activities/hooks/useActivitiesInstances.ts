@@ -17,14 +17,21 @@ type UseActivitiesInstances = {
     refetch: () => Promise<unknown>;
 };
 
-type UseActivitiesInstancesOptions = {
+type UseActivitiesInstancesOptions = UseActivitiesInstancesByDateRange | UseActivitiesInstancesReservedByUser;
+
+type UseActivitiesInstancesByDateRange = {
+    type: "ByDateRange";
     dateRange: {
         from: Date;
         to: Date;
     };
 };
 
-export const useActivitiesInstances = ({ dateRange }: UseActivitiesInstancesOptions): UseActivitiesInstances => {
+type UseActivitiesInstancesReservedByUser = {
+    type: "ReservedByUser";
+};
+
+export const useActivitiesInstances = (options: UseActivitiesInstancesOptions): UseActivitiesInstances => {
     const { error, setAndTranslateError } = useRequestErrorHandler();
     const {
         data,
@@ -32,9 +39,12 @@ export const useActivitiesInstances = ({ dateRange }: UseActivitiesInstancesOpti
         refetch,
         isLoading,
     } = useQuery({
-        queryFn: () => getActivitiesInstancesRequests(dateRange),
+        queryFn: () =>
+            options.type === "ByDateRange"
+                ? getActivitiesInstancesByDateRangeRequest(options.dateRange)
+                : getActivitiesInstancesReservedByUser(),
         select: mapResponse,
-        queryKey: [QueryKey.Enrollments, dateRange],
+        queryKey: [QueryKey.Enrollments, options],
     });
 
     useEffect(() => {
@@ -46,10 +56,14 @@ export const useActivitiesInstances = ({ dateRange }: UseActivitiesInstancesOpti
     return { activitiesInstances: data ?? null, error, isLoading, refetch };
 };
 
-const getActivitiesInstancesRequests = ({ from, to }: { from: Date; to: Date }) => {
+const getActivitiesInstancesByDateRangeRequest = ({ from, to }: { from: Date; to: Date }) => {
     return request("GetActivitiesInstancesByDates", {
         queryParams: { from: from.toISOString(), to: to.toISOString() },
     });
+};
+
+const getActivitiesInstancesReservedByUser = () => {
+    return request("GetActivitiesInstancesReservedByUser");
 };
 
 const mapResponse = (data: ActivityInstance[]) =>

@@ -1,21 +1,23 @@
 import { useCallback, useMemo } from "react";
-import { Button, Paper, Text } from "@mantine/core";
+import { Paper, Text } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
-import { IconPlus, IconUsers } from "@tabler/icons-react";
+import { IconUsers } from "@tabler/icons-react";
 import classNames from "classnames";
 
 import { ActivityInstance } from "../../../../activities";
+import { useAuthState } from "../../../../auth";
 import { useDateTimeLocale } from "../../../../hooks";
 import { useTranslate } from "../../../../i18n";
-import { useAddReservation } from "../../../../reservations";
+import { useAddReservation, useRemoveReservation } from "../../../../reservations";
 import { TextWithTooltip } from "../../../DataDisplay";
+import { ReservationButton } from "./ReservationButton";
 
 import classes from "./ActivityItemCard.module.scss";
 
 export type ActivityItemCardProps = Pick<
     ActivityInstance,
-    "slotsTaken" | "totalCapacity" | "duration" | "startTime" | "name" | "leaderName" | "activityId"
+    "slotsTaken" | "totalCapacity" | "duration" | "startTime" | "name" | "leaderName" | "activityId" | "reservationId"
 >;
 
 export const ActivityItemCard = ({
@@ -26,8 +28,11 @@ export const ActivityItemCard = ({
     name,
     leaderName,
     activityId,
+    reservationId,
 }: ActivityItemCardProps) => {
-    const { addReservation, isLoading: isAddReservationLoading } = useAddReservation(); // TODO: Implement add/remove reservation logic properly
+    const user = useAuthState().user;
+    const { addReservation, isLoading: isAddReservationLoading } = useAddReservation();
+    const { removeReservation, isLoading: isRemoveReservationLoading } = useRemoveReservation();
 
     const translate = useTranslate();
     const { locale } = useDateTimeLocale();
@@ -35,11 +40,7 @@ export const ActivityItemCard = ({
     const localeOptions = { hour: "2-digit", minute: "2-digit" } as const;
     const endsAt = new Date(startTime.getTime() + duration * 60000);
     const hasStartedAlready = startTime < new Date();
-
-    const reservationsDisabled = useMemo(
-        () => totalCapacity === slotsTaken || hasStartedAlready,
-        [hasStartedAlready, totalCapacity, slotsTaken]
-    );
+    const isFull = totalCapacity === slotsTaken;
 
     const reservationsColor = useMemo(() => {
         if (totalCapacity === slotsTaken) {
@@ -62,9 +63,41 @@ export const ActivityItemCard = ({
         });
     }, []);
 
+    const handleRemoveReservation = useCallback(async () => {
+        try {
+            if (!reservationId) {
+                return; // TODO: This should never happen, find a cleaner way to handle this
+            }
+
+            await removeReservation(reservationId);
+
+            notifications.show({
+                withBorder: true,
+                color: "success",
+                title: translate("notifications.reservations.remove.success.title"),
+                message: translate("notifications.reservations.remove.success.description", {
+                    activity: name,
+                }),
+            });
+        } catch (error) {
+            const message = (error as Error)?.message ?? "";
+            notifications.show({
+                withBorder: true,
+                color: "danger",
+                title: translate("notifications.reservations.remove.error.title"),
+                message,
+            });
+        }
+    }, [name, removeReservation, reservationId, translate]);
+
     const handleAddReservation = useCallback(async () => {
         try {
-            await addReservation(1); // TODO: Handle reservations logic properly
+            if (!user) {
+                return; // TODO: This should never happen, find a cleaner way to handle this
+            }
+
+            await addReservation({ activityId, userId: user.id, startTime: startTime.toISOString() });
+
             notifications.show({
                 withBorder: true,
                 color: "success",
@@ -82,7 +115,7 @@ export const ActivityItemCard = ({
                 message,
             });
         }
-    }, [addReservation, name, translate]);
+    }, [activityId, addReservation, name, startTime, translate, user]);
 
     return (
         <Paper className={classNames(classes.calendarItem, { [classes.disabled]: hasStartedAlready })}>
@@ -107,30 +140,14 @@ export const ActivityItemCard = ({
                 <IconUsers className={classes.participantsIcon} />
             </TextWithTooltip>
 
-            {reservationsDisabled ? (
-                <TextWithTooltip
-                    alwaysVisible
-                    className={classes.reservationsDisabled}
-                    label={
-                        hasStartedAlready
-                            ? translate("activityCalendar.item.enrollment.disabled.tooltip.tooLate")
-                            : translate("activityCalendar.item.enrollment.disabled.tooltip.full")
-                    }
-                >
-                    {translate("activityCalendar.item.enrollment.disabled.label")}
-                </TextWithTooltip>
-            ) : (
-                <Button
-                    size="xs"
-                    variant="subtle"
-                    color="success"
-                    loading={isAddReservationLoading}
-                    onClick={handleAddReservation}
-                    rightSection={<IconPlus className={classes.joinIcon} />}
-                >
-                    {translate("activityCalendar.item.enrollment.label")}
-                </Button>
-            )}
+            <ReservationButton
+                onReservation={handleAddReservation}
+                onCancellation={handleRemoveReservation}
+                isAlreadyReserved={!!reservationId}
+                isLoading={isAddReservationLoading || isRemoveReservationLoading}
+                hasStartedAlready={hasStartedAlready}
+                isFull={isFull}
+            />
         </Paper>
     );
 };

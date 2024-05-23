@@ -6,5 +6,6 @@ export enum AppRoute {
     USERS_DASHBOARD = "/users-dashboard",
     ACTIVITIES_DASHBOARD = "/activities-dashboard",
     ACTIVITIES = "/activities",
+    RESERVATIONS = "/reservations",
     NOT_FOUND = "/not-found",
 }

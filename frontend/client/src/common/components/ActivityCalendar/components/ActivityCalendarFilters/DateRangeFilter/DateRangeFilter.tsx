@@ -20,17 +20,15 @@ export const DateRangeFilter = ({ value, onChange }: ActivityCalendarFilters) =>
     }, [value]);
 
     const handleDateRangeChange = useCallback(
-        (newValue: DatesRangeValue) => {
-            const [from, to] = newValue;
-
-            if (from) {
-                setInternalDateRange(newValue);
+        ([from, to]: DatesRangeValue) => {
+            if (!from) {
+                return setInternalDateRange([value.from, value.to]);
             } else {
-                setInternalDateRange([value.from, value.to]);
-            }
+                setInternalDateRange([from, to]);
 
-            if (from && to) {
-                onChange({ from, to });
+                if (to) {
+                    onChange({ from, to });
+                }
             }
         },
         [onChange, value.from, value.to]

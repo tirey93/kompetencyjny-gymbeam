@@ -142,7 +142,12 @@ export const en: TranslationSource = {
                 tooltip: "Number of people that already have enrolled: {{slotsTaken}}",
             },
             enrollment: {
-                label: "Enroll",
+                add: {
+                    label: "Enroll",
+                },
+                delete: {
+                    label: "Resign",
+                },
                 disabled: {
                     label: "Can't enroll",
                     tooltip: {
@@ -292,6 +297,7 @@ export const en: TranslationSource = {
             activities: "Activities",
             usersDashboard: "Users Dashboard",
             activitiesDashboard: "Activities Dashboard",
+            reservations: "My reservations",
         },
     },
     user: {
@@ -315,7 +321,22 @@ export const en: TranslationSource = {
         description: "Long description",
         summary: "Short description",
     },
+
     pages: {
+        reservations: {
+            noResults: {
+                description: "You don't have any pending reservations right now.",
+                button: "See available activities",
+            },
+            header: "Your reservations",
+            link: "Check our activity calendar",
+            sections: {
+                today: "Today",
+                incoming: "In incoming days",
+                others: "Your other reservations",
+                empty: "No reservations.",
+            },
+        },
         activities: {
             details: {
                 duration: "Duration",

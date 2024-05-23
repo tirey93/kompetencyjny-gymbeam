@@ -9,6 +9,7 @@ import { ActivitiesDashboardPage } from "../pages/ActivitiesDashboard";
 import { GymPassPage } from "../pages/GymPass";
 import { HomePage } from "../pages/Home";
 import { RegistrationPage } from "../pages/Registration";
+import { ReservationsPage } from "../pages/Reservations/ReservationsPage";
 import { SignInPage } from "../pages/SignIn";
 import { UsersDashboardPage } from "../pages/UsersDashboard";
 import { AppRoute } from "./AppRoute";
@@ -63,6 +64,14 @@ const APP_PAGES = [
         element: (
             <ProtectedRoute allowedRoles={["Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
                 <ActivitiesDashboardPage />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: AppRoute.RESERVATIONS,
+        element: (
+            <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
+                <ReservationsPage />
             </ProtectedRoute>
         ),
     },

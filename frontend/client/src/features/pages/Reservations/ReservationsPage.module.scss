@@ -1,0 +1,9 @@
+html .container {
+  padding-block: var(--mantine-spacing-md);
+  justify-content: center;
+  margin: auto;
+
+  .link {
+    font-size: var(--mantine-font-size-sm);
+  }
+}

@@ -7,10 +7,11 @@ import classes from "./NoResultsMessage.module.scss";
 
 type NoResultsMessageProps = {
     description: string;
-    onAdd?: () => unknown;
+    onActionButtonClick?: () => unknown;
+    actionButtonLabel?: string;
 };
 
-export const NoResultsMessage = ({ description, onAdd }: NoResultsMessageProps) => {
+export const NoResultsMessage = ({ description, onActionButtonClick, actionButtonLabel }: NoResultsMessageProps) => {
     const translate = useTranslate();
 
     return (
@@ -19,9 +20,14 @@ export const NoResultsMessage = ({ description, onAdd }: NoResultsMessageProps) 
                 <Text className={classes.title}>{translate("common.table.noResults.title")}</Text>
                 <Text className={classes.description}>{description}</Text>
             </Box>
-            {onAdd && (
-                <Button color="success" className={classes.actionButton} onClick={onAdd} rightSection={<IconPlus />}>
-                    {translate("common.table.noResults.addButton")}
+            {onActionButtonClick && (
+                <Button
+                    color="success"
+                    className={classes.actionButton}
+                    onClick={onActionButtonClick}
+                    rightSection={<IconPlus />}
+                >
+                    {actionButtonLabel ?? translate("common.table.noResults.addButton")}
                 </Button>
             )}
         </Stack>

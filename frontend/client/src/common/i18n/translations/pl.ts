@@ -142,7 +142,12 @@ export const pl: TranslationSource = {
                 tooltip: "Liczba osób które się już zapisały: {{slotsTaken}}",
             },
             enrollment: {
-                label: "Rezerwuj",
+                add: {
+                    label: "Rezerwuj",
+                },
+                delete: {
+                    label: "Rezygnuj",
+                },
                 disabled: {
                     label: "Zapisy wyłączone",
                     tooltip: {
@@ -292,6 +297,7 @@ export const pl: TranslationSource = {
             activities: "Zajęcia",
             usersDashboard: "Zarządzanie użytkownikami",
             activitiesDashboard: "Zarządzanie zajęciami",
+            reservations: "Moje rezerwacje",
         },
     },
     user: {
@@ -316,6 +322,20 @@ export const pl: TranslationSource = {
         summary: "Krótki opis",
     },
     pages: {
+        reservations: {
+            noResults: {
+                description: "Nie masz aktualnie żadnych rezerwacji.",
+                button: "Zobacz nasze zajęcia",
+            },
+            header: "Twoje rezerwacje",
+            link: "Sprawdź kalendarz wydarzeń",
+            sections: {
+                today: "Dzisiaj",
+                incoming: "W najbliższych dniach",
+                others: "Pozostałe",
+                empty: "Brak rezerwacji.",
+            },
+        },
         activities: {
             details: {
                 duration: "Czas trwania",

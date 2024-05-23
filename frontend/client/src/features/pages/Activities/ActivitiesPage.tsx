@@ -10,13 +10,14 @@ import classes from "./ActivitiesPage.module.scss";
 
 export const ActivitiesPage = () => {
     const translate = useTranslate();
-    const { dateRange } = useCalendarDateRange();
+    const dateRangeOptions = useCalendarDateRange();
+
     const {
         activitiesInstances,
         isLoading: areInstancesLoading,
         error: instancesError,
         refetch: refetchInstances,
-    } = useActivitiesInstances({ dateRange });
+    } = useActivitiesInstances({ type: "ByDateRange", dateRange: dateRangeOptions.dateRange });
 
     const {
         activities,
@@ -25,7 +26,7 @@ export const ActivitiesPage = () => {
         refetch: refetchActivities,
     } = useActivities();
 
-    if (areActivitiesLoading || areInstancesLoading) {
+    if (areActivitiesLoading) {
         return <LoaderOverlay />;
     }
 
@@ -51,8 +52,14 @@ export const ActivitiesPage = () => {
 
     return (
         <Container size="xl" className={classes.container}>
-            {activitiesInstances && activities && (
-                <ActivityCalendar activityInstances={activitiesInstances} activities={activities} withFilters />
+            {activities && (
+                <ActivityCalendar
+                    isLoading={areInstancesLoading}
+                    activityInstances={activitiesInstances ?? []}
+                    activities={activities}
+                    dateRangeOptions={dateRangeOptions}
+                    withFilters
+                />
             )}
         </Container>
     );
