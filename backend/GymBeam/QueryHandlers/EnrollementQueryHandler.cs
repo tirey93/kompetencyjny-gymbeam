@@ -31,6 +31,10 @@ namespace GymBeam.QueryHandlers
 
             var reservations = _repository.GetReservations(x => x.User.Id == loggedUserId);
 
+            if (reservations == null || !reservations.Any())
+            {
+                return Task.FromResult(Enumerable.Empty<EnrollmentResponse>());
+            }
             var enrollements = _repository.GetSlotsTakenForEnrollments(reservations.Min(x => x.StartTime), reservations.Max(x => x.StartTime));
 
             var result = reservations.Select(x => new EnrollmentResponse
