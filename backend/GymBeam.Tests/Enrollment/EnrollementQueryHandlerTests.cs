@@ -140,6 +140,28 @@ namespace GymBeam.Tests.Enrollment
         }
 
         [Fact]
+        public async Task GetEnrollementsLoggedUserQuery_WhenNoReservations_ShouldReturnResponse()
+        {
+            //Arrange
+            SetupHttpAccessor("78");
+
+            var activities = new List<Domain.Activity>();
+            var reservations = new List<Domain.Reservation>();
+
+            _repositoryMock.Setup(x => x.GetReservations(It.IsAny<Func<Domain.Reservation, bool>>())).Returns(reservations);
+
+            var query = new GetEnrollementsLoggedUserQuery();
+
+            //Act
+            var result = (await _enrollmentQueryHandler.Handle(query, _cancellationTokenSource.Token)).ToList();
+
+            //Assert
+
+            result.Should().NotBeNull();
+            result.Should().HaveCount(0);;
+        }
+
+        [Fact]
         public async Task GetEnrollementsLoggedUserQuery_WhenLoggedUserNull_ShouldThrowInvalidCookieException()
         {
             //Arrange
@@ -338,6 +360,30 @@ namespace GymBeam.Tests.Enrollment
             result[8].Duration.Should().Be(90);
             result[8].Name.Should().BeEquivalentTo("Dance");
             result[8].ShortDescription.Should().BeEquivalentTo("Short Dance");
+        }
+
+        [Fact]
+        public async Task GetEnrollmentsByDatesQuery_WhenNoActivities_ShouldReturnList()
+        {
+            //Arrange
+            SetupHttpAccessor(null);
+            var activities = new List<Domain.Activity>();
+
+            _repositoryMock.Setup(x => x.GetActivities(It.IsAny<Func<Domain.Activity, bool>>())).Returns(activities);
+
+            var query = new GetEnrollmentsByDatesQuery
+            {
+                From = new DateTime(2024, 7, 10, 15, 0, 0),
+                To = new DateTime(2024, 7, 12, 16, 0, 0),
+            };
+
+            //Act
+            var result = (await _enrollmentQueryHandler.Handle(query, _cancellationTokenSource.Token)).ToList();
+
+            //Assert
+
+            result.Should().NotBeNull();
+            result.Should().HaveCount(0);
         }
 
         [Fact]
