@@ -1,6 +1,11 @@
-html .reservationsGroup {
+html .container {
   margin-bottom: var(--mantine-spacing-xl);
   gap: var(--mantine-spacing-xs);
+
+  .reservationsGroup {
+    max-height: 30vh;
+    overflow-y: auto;
+  }
 
   .emptyMessage {
     color: var(--mantine-color-dimmed);

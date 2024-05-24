@@ -8,6 +8,7 @@ import {
     ChangeUserRoleModal,
     DeleteActivityModal,
     DeleteUserModal,
+    ReservationsModal,
 } from "./modals";
 
 export const CONTEXT_MODALS = {
@@ -17,6 +18,7 @@ export const CONTEXT_MODALS = {
     addActivity: AddActivityModal,
     deleteActivity: DeleteActivityModal,
     activityDetails: ActivityDetailsModal,
+    showReservations: ReservationsModal,
 };
 
 export const ModalsManager = ({ children }: PropsWithChildren) => {

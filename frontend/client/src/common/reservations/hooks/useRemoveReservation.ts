@@ -21,7 +21,7 @@ export const useRemoveReservation = (): UseRemoveReservation => {
     const { invalidate } = useInvalidateQuery();
     const { mutateAsync, isPending: isLoading } = useMutation({
         mutationFn: removeReservationRequest,
-        onSuccess: () => invalidate(QueryKey.Enrollments),
+        onSuccess: () => invalidate(QueryKey.Enrollments, QueryKey.Reservations),
     });
 
     const removeReservation = useCallback(

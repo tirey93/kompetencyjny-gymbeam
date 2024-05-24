@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Anchor, Container, Title } from "@mantine/core";
 import dayjs from "dayjs";
 
-import { ReservationsSection } from "./components/ReservationsSection/ReservationsSection";
 import { ActivityInstance, useActivitiesInstances } from "../../../common/activities";
 import { ErrorScreen, LoaderOverlay } from "../../../common/components/DataDisplay";
 import { NoResultsMessage } from "../../../common/components/Table";
 import { useTranslate } from "../../../common/i18n";
+import { ReservationItemCard, ReservationsSection } from "../../../common/reservations";
 import { AppRoute } from "../../router";
 
 import classes from "./ReservationsPage.module.scss";
@@ -79,14 +79,17 @@ export const ReservationsPage = () => {
             ) : (
                 <>
                     <ReservationsSection
+                        onItemRender={(props) => <ReservationItemCard {...props} />}
                         items={organizedActivitiesInstances.today}
                         label={translate("pages.reservations.sections.today")}
                     />
                     <ReservationsSection
+                        onItemRender={(props) => <ReservationItemCard {...props} />}
                         items={organizedActivitiesInstances.nextWeek}
                         label={translate("pages.reservations.sections.incoming")}
                     />
                     <ReservationsSection
+                        onItemRender={(props) => <ReservationItemCard {...props} />}
                         items={organizedActivitiesInstances.rest}
                         label={translate("pages.reservations.sections.others")}
                     />

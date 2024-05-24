@@ -4,3 +4,4 @@ export { ChangeUserReservationPermissionsModal } from "./ChangeUserReservationPe
 export { ChangeUserRoleModal } from "./ChangeUserRoleModal";
 export { DeleteActivityModal } from "./DeleteActivityModal";
 export { DeleteUserModal } from "./DeleteUserModal";
+export { ReservationsModal } from "./ReservationsModal/ReservationsModal";

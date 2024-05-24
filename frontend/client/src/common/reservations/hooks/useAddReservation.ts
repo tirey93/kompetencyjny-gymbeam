@@ -22,7 +22,7 @@ export const useAddReservation = (): UseAddReservation => {
     const { invalidate } = useInvalidateQuery();
     const { mutateAsync, isPending: isLoading } = useMutation({
         mutationFn: addReservationRequest,
-        onSuccess: () => invalidate(QueryKey.Enrollments),
+        onSuccess: () => invalidate(QueryKey.Enrollments, QueryKey.Reservations),
     });
 
     const addReservation = useCallback(

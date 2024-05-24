@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Box, Center, Group, Loader, Stack, Text } from "@mantine/core";
+import { Box, Group, Stack, Text } from "@mantine/core";
 import { ContextModalProps, modals } from "@mantine/modals";
 
 import { useActivity } from "../../../../activities";
@@ -26,11 +26,7 @@ export const ActivityDetailsModal = ({ innerProps: { activityId } }: ActivityDet
     }, []);
 
     if (isLoading) {
-        return (
-            <Center>
-                <Loader />
-            </Center>
-        );
+        return <Modal.Loader />;
     }
 
     return (

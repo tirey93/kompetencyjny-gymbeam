@@ -42,6 +42,19 @@ export type TranslationSource = {
     };
 
     modals: {
+        reservations: {
+            caption: {
+                empty: string;
+            };
+            title: {
+                error: string;
+                default: string;
+            };
+            buttons: {
+                retry: string;
+                close: string;
+            };
+        };
         activities: {
             details: {
                 title: {
@@ -251,6 +264,9 @@ export type TranslationSource = {
             };
         };
         reservations: {
+            getAll: {
+                default: string;
+            };
             add: {
                 default: string;
                 forbidden: string;
@@ -393,6 +409,7 @@ export type TranslationSource = {
             tab: string;
             options: {
                 delete: string;
+                seeReservations: string;
             };
             search: {
                 placeholder: string;

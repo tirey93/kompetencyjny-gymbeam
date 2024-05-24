@@ -1,5 +1,5 @@
 import { ActionIcon, Menu } from "@mantine/core";
-import { IconDots, IconTrash } from "@tabler/icons-react";
+import { IconDots, IconListCheck, IconTrash } from "@tabler/icons-react";
 
 import { UserDetails } from "../../../../../common/auth";
 import { useTranslate } from "../../../../../common/i18n";
@@ -22,7 +22,15 @@ export const UserOptionsDropdown = ({ events, userDetails }: UserOptionsDropdown
                     <IconDots />
                 </ActionIcon>
             </Menu.Target>
+
             <Menu.Dropdown>
+                <Menu.Item
+                    onClick={() => events.onShowReservations(userDetails)}
+                    leftSection={<IconListCheck className={classes.menuItemIcon} />}
+                >
+                    {translate("pages.usersDashboard.options.seeReservations")}
+                </Menu.Item>
+
                 <Menu.Item
                     onClick={() => events.onDelete(userDetails)}
                     leftSection={<IconTrash className={classes.menuItemIcon} />}

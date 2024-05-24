@@ -45,6 +45,19 @@ export const en: TranslationSource = {
     },
 
     modals: {
+        reservations: {
+            caption: {
+                empty: "There are no reservations.",
+            },
+            title: {
+                error: "Oops!",
+                default: "Reservations",
+            },
+            buttons: {
+                retry: "Retry",
+                close: "Close",
+            },
+        },
         activities: {
             details: {
                 title: {
@@ -186,6 +199,9 @@ export const en: TranslationSource = {
             },
         },
         reservations: {
+            getAll: {
+                default: "Failed to get list of reservations. Something went wrong on our side.",
+            },
             add: {
                 default: "Failed to add a reservation. Something went wrong on our side.",
                 forbidden: "You are not allowed to reserve this activity.",
@@ -393,6 +409,7 @@ export const en: TranslationSource = {
             tab: "Users",
             options: {
                 delete: "Delete user's account",
+                seeReservations: "See reservations",
             },
             search: {
                 placeholder: "Search for an user",

@@ -1,8 +1,7 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { Paper, Text } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
-import { IconUsers } from "@tabler/icons-react";
 import classNames from "classnames";
 
 import { ActivityInstance } from "../../../../activities";
@@ -10,7 +9,7 @@ import { useAuthState } from "../../../../auth";
 import { useDateTimeLocale } from "../../../../hooks";
 import { useTranslate } from "../../../../i18n";
 import { useAddReservation, useRemoveReservation } from "../../../../reservations";
-import { TextWithTooltip } from "../../../DataDisplay";
+import { ActivitySlotsInfo } from "../ActivitySlotsInfo/ActivitySlotsInfo";
 import { ReservationButton } from "./ReservationButton";
 
 import classes from "./ActivityItemCard.module.scss";
@@ -42,17 +41,7 @@ export const ActivityItemCard = ({
     const hasStartedAlready = startTime < new Date();
     const isFull = totalCapacity === slotsTaken;
 
-    const reservationsColor = useMemo(() => {
-        if (totalCapacity === slotsTaken) {
-            return "danger";
-        } else if (slotsTaken / totalCapacity >= 0.75) {
-            return "warning";
-        } else {
-            return "success";
-        }
-    }, [totalCapacity, slotsTaken]);
-
-    const openActivityDetailsModal = useCallback((activityId: number) => {
+    const openActivityDetailsModal = useCallback(() => {
         modals.openContextModal({
             modal: "activityDetails",
             centered: true,
@@ -61,7 +50,22 @@ export const ActivityItemCard = ({
                 activityId,
             },
         });
-    }, []);
+    }, [activityId]);
+
+    const openReservationsModal = useCallback(
+        () =>
+            modals.openContextModal({
+                modal: "showReservations",
+                centered: true,
+                withCloseButton: false,
+                innerProps: {
+                    type: "ReservationsForActivity",
+                    activityId,
+                    startTime,
+                },
+            }),
+        [activityId, startTime]
+    );
 
     const handleRemoveReservation = useCallback(async () => {
         try {
@@ -119,7 +123,7 @@ export const ActivityItemCard = ({
 
     return (
         <Paper className={classNames(classes.calendarItem, { [classes.disabled]: hasStartedAlready })}>
-            <Text className={classes.name} onClick={() => openActivityDetailsModal(activityId)}>
+            <Text className={classes.name} onClick={openActivityDetailsModal}>
                 {name}
             </Text>
 
@@ -130,15 +134,11 @@ export const ActivityItemCard = ({
 
             <Text className={classes.leader}>{leaderName}</Text>
 
-            <TextWithTooltip
-                alwaysVisible
-                c={reservationsColor}
-                className={classes.participants}
-                label={translate("activityCalendar.item.participants.tooltip", { slotsTaken })}
-            >
-                {slotsTaken} / {totalCapacity}
-                <IconUsers className={classes.participantsIcon} />
-            </TextWithTooltip>
+            <ActivitySlotsInfo
+                slotsTaken={slotsTaken}
+                totalCapacity={totalCapacity}
+                onClick={user?.role === "Admin" ? openReservationsModal : undefined}
+            />
 
             <ReservationButton
                 onReservation={handleAddReservation}
