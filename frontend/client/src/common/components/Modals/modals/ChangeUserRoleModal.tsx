@@ -14,14 +14,14 @@ type ChangeUserRoleModalProps = ContextModalProps<{
     newRole: UserRole;
 }>;
 
-export const ChangeUserRoleModal = ({ innerProps: { user, newRole } }: ChangeUserRoleModalProps) => {
+export const ChangeUserRoleModal = ({ innerProps: { user, newRole }, id }: ChangeUserRoleModalProps) => {
     const translate = useTranslate();
     const translatedRole = newRole === "Admin" ? translate("user.roles.admin") : translate("user.roles.user");
     const { changeRole, error, reset, isLoading } = useChangeUserRole();
 
     const onClose = useCallback(() => {
-        modals.closeAll();
-    }, []);
+        modals.close(id);
+    }, [id]);
 
     const handleChangeRole = useCallback(async () => {
         await changeRole(user.id, newRole);

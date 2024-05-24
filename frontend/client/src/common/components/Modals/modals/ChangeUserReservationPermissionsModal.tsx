@@ -15,13 +15,14 @@ type ChangeUserReservationPermissionsModalProps = ContextModalProps<{
 
 export const ChangeUserReservationPermissionsModal = ({
     innerProps: { user },
+    id,
 }: ChangeUserReservationPermissionsModalProps) => {
     const translate = useTranslate();
     const { changeReservationsPermission, error, reset, isLoading } = useChangeReservationsPermission();
 
     const onClose = useCallback(() => {
-        modals.closeAll();
-    }, []);
+        modals.close(id);
+    }, [id]);
 
     const handleChangePermissions = useCallback(async () => {
         await changeReservationsPermission(user.id, !user.reservationDisabled);

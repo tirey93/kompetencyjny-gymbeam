@@ -15,15 +15,15 @@ type ActivityDetailsModalProps = ContextModalProps<{
     activityId: number;
 }>;
 
-export const ActivityDetailsModal = ({ innerProps: { activityId } }: ActivityDetailsModalProps) => {
+export const ActivityDetailsModal = ({ innerProps: { activityId }, id }: ActivityDetailsModalProps) => {
     const translate = useTranslate();
     const { locale } = useDateTimeLocale();
 
     const { activity, error, refetch, isLoading } = useActivity(activityId);
 
     const onClose = useCallback(() => {
-        modals.closeAll();
-    }, []);
+        modals.close(id);
+    }, [id]);
 
     if (isLoading) {
         return <Modal.Loader />;
