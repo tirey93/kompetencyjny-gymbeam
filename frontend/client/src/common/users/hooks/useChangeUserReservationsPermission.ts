@@ -55,5 +55,7 @@ const changeReservationsPermissionRequest = (options: ChangeReservationsPermissi
 
 const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.user.changeReservationsPermission.default",
-    statusCodesMap: {},
+    statusCodesMap: {
+        404: "apiErrors.user.changeReservationsPermission.notFound",
+    },
 };

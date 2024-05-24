@@ -21,7 +21,7 @@ export const useRemoveReservation = (): UseRemoveReservation => {
     const { invalidate } = useInvalidateQuery();
     const { mutateAsync, isPending: isLoading } = useMutation({
         mutationFn: removeReservationRequest,
-        onSuccess: () => invalidate(QueryKey.Enrollments),
+        onSuccess: () => invalidate(QueryKey.Enrollments, QueryKey.Reservations),
     });
 
     const removeReservation = useCallback(
@@ -45,5 +45,8 @@ const removeReservationRequest = (reservationId: number) => {
 
 const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.reservations.remove.default",
-    statusCodesMap: {},
+    statusCodesMap: {
+        403: "apiErrors.reservations.remove.forbidden",
+        404: "apiErrors.reservations.remove.notFound",
+    },
 };

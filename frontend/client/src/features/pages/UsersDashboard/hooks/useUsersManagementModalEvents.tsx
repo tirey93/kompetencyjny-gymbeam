@@ -7,6 +7,7 @@ type UseUsersManagementModalEvents = {
     onUserDelete: (user: UserDetails) => void;
     onUserRoleChange: (user: UserDetails, newRole: UserRole) => void;
     onUserReservationsPermissionToggle: (user: UserDetails) => void;
+    onShowUserReservations: (user: UserDetails) => void;
 };
 
 export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents => {
@@ -50,5 +51,19 @@ export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents =
         []
     );
 
-    return { onUserDelete, onUserRoleChange, onUserReservationsPermissionToggle };
+    const onShowUserReservations = useCallback(
+        (user: UserDetails) =>
+            modals.openContextModal({
+                modal: "showReservations",
+                centered: true,
+                withCloseButton: false,
+                innerProps: {
+                    type: "ReservationsForUser",
+                    userId: user.id,
+                },
+            }),
+        []
+    );
+
+    return { onUserDelete, onUserRoleChange, onUserReservationsPermissionToggle, onShowUserReservations };
 };

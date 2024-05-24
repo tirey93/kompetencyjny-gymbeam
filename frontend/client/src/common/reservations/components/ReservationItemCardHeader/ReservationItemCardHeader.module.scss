@@ -1,0 +1,21 @@
+html .header {
+  width: 100%;
+
+  .dismissButton {
+    margin-left: auto;
+  }
+
+  p {
+    font-weight: 700;
+    font-size: var(--mantine-font-size-xl);
+    transition: 0.2s;
+
+    &.interactive {
+      cursor: pointer;
+
+      &:hover {
+        color: var(--mantine-color-secondary-3);
+      }
+    }
+  }
+}

@@ -22,7 +22,7 @@ export const useAddReservation = (): UseAddReservation => {
     const { invalidate } = useInvalidateQuery();
     const { mutateAsync, isPending: isLoading } = useMutation({
         mutationFn: addReservationRequest,
-        onSuccess: () => invalidate(QueryKey.Enrollments),
+        onSuccess: () => invalidate(QueryKey.Enrollments, QueryKey.Reservations),
     });
 
     const addReservation = useCallback(
@@ -46,5 +46,8 @@ const addReservationRequest = (body: AddReservationDTO) => {
 
 const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.reservations.add.default",
-    statusCodesMap: {},
+    statusCodesMap: {
+        403: "apiErrors.reservations.add.forbidden",
+        404: "apiErrors.reservations.add.notFound",
+    },
 };

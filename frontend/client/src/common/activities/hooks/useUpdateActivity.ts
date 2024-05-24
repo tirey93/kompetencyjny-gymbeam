@@ -46,5 +46,7 @@ export const useUpdateActivity = (): UseUpdateActivity => {
 
 const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.activities.update.default",
-    statusCodesMap: {},
+    statusCodesMap: {
+        404: "apiErrors.activities.update.notFound",
+    },
 };

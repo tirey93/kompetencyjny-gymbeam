@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Anchor, Container, Title } from "@mantine/core";
 import dayjs from "dayjs";
 
-import { ReservationsSection } from "./components/ReservationsSection/ReservationsSection";
 import { ActivityInstance, useActivitiesInstances } from "../../../common/activities";
 import { ErrorScreen, LoaderOverlay } from "../../../common/components/DataDisplay";
 import { NoResultsMessage } from "../../../common/components/Table";
 import { useTranslate } from "../../../common/i18n";
+import { ReservationItemCard, ReservationsSection } from "../../../common/reservations";
 import { AppRoute } from "../../router";
 
 import classes from "./ReservationsPage.module.scss";
@@ -28,17 +28,19 @@ export const ReservationsPage = () => {
         const endOfToday = dayjs().endOf("day");
         const endOfWeek = endOfToday.add(6, "days");
 
-        activitiesInstances?.forEach((instance) => {
-            const startDate = dayjs(instance.startTime);
+        activitiesInstances
+            ?.sort((a, b) => dayjs(a.startTime).diff(dayjs(b.startTime), "seconds"))
+            ?.forEach((instance) => {
+                const startDate = dayjs(instance.startTime);
 
-            if (startDate.isBefore(endOfToday)) {
-                today.push(instance);
-            } else if (startDate.isBefore(endOfWeek)) {
-                nextWeek.push(instance);
-            } else {
-                rest.push(instance);
-            }
-        });
+                if (startDate.isBefore(endOfToday)) {
+                    today.push(instance);
+                } else if (startDate.isBefore(endOfWeek)) {
+                    nextWeek.push(instance);
+                } else {
+                    rest.push(instance);
+                }
+            });
 
         return { today, nextWeek, rest };
     }, [activitiesInstances]);
@@ -77,14 +79,17 @@ export const ReservationsPage = () => {
             ) : (
                 <>
                     <ReservationsSection
+                        onItemRender={(props) => <ReservationItemCard {...props} />}
                         items={organizedActivitiesInstances.today}
                         label={translate("pages.reservations.sections.today")}
                     />
                     <ReservationsSection
+                        onItemRender={(props) => <ReservationItemCard {...props} />}
                         items={organizedActivitiesInstances.nextWeek}
                         label={translate("pages.reservations.sections.incoming")}
                     />
                     <ReservationsSection
+                        onItemRender={(props) => <ReservationItemCard {...props} />}
                         items={organizedActivitiesInstances.rest}
                         label={translate("pages.reservations.sections.others")}
                     />

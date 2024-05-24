@@ -42,6 +42,19 @@ export type TranslationSource = {
     };
 
     modals: {
+        reservations: {
+            caption: {
+                empty: string;
+            };
+            title: {
+                error: string;
+                default: string;
+            };
+            buttons: {
+                retry: string;
+                close: string;
+            };
+        };
         activities: {
             details: {
                 title: {
@@ -149,6 +162,7 @@ export type TranslationSource = {
                     tooltip: {
                         tooLate: string;
                         full: string;
+                        notAllowed: string;
                     };
                 };
             };
@@ -239,31 +253,43 @@ export type TranslationSource = {
             };
             delete: {
                 default: string;
+                notFound: string;
             };
             add: {
                 default: string;
             };
             update: {
                 default: string;
+                notFound: string;
             };
         };
         reservations: {
+            getAll: {
+                default: string;
+            };
             add: {
                 default: string;
+                forbidden: string;
+                notFound: string;
             };
             remove: {
                 default: string;
+                forbidden: string;
+                notFound: string;
             };
         };
         user: {
             changeReservationsPermission: {
                 default: string;
+                notFound: string;
             };
             changeRole: {
                 default: string;
+                notFound: string;
             };
             delete: {
                 default: string;
+                notFound: string;
             };
             getAll: {
                 default: string;
@@ -383,6 +409,7 @@ export type TranslationSource = {
             tab: string;
             options: {
                 delete: string;
+                seeReservations: string;
             };
             search: {
                 placeholder: string;

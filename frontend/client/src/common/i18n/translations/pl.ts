@@ -45,6 +45,19 @@ export const pl: TranslationSource = {
     },
 
     modals: {
+        reservations: {
+            caption: {
+                empty: "Nie ma żadnych rezerwacji.",
+            },
+            title: {
+                error: "Ups!",
+                default: "Lista rezerwacji",
+            },
+            buttons: {
+                retry: "Ponów",
+                close: "Zamknij",
+            },
+        },
         activities: {
             details: {
                 title: {
@@ -153,6 +166,7 @@ export const pl: TranslationSource = {
                     tooltip: {
                         tooLate: "Te zajęcia się już zaczęły.",
                         full: "Wszystkie miejsca zostały zarezerwowane.",
+                        notAllowed: "Nie masz uprawnień do rezerwacji.",
                     },
                 },
             },
@@ -174,31 +188,47 @@ export const pl: TranslationSource = {
             },
             delete: {
                 default: "Nie udało się usunąć zajęć, coś poszło nie tak po naszej stronie.",
+                notFound: "Nie udało się znaleźć zajęć które próbujesz usunąć. Możliwe, że zostały wcześniej usunięte.",
             },
             add: {
                 default: "Nie udało się dodać zajęć, coś poszło nie tak po naszej stronie.",
             },
             update: {
                 default: "Nie udało się zmodyfikować zajęć, coś poszło nie tak po naszej stronie.",
+                notFound:
+                    "Nie udało się znaleźć zajęć które próbujesz zaktualizować. Możliwe, że zostały wcześniej usunięte.",
             },
         },
         reservations: {
+            getAll: {
+                default: "Nie udało się pobrać listy rezerwacji. Coś poszło nie tak po naszej stronie.",
+            },
             add: {
                 default: "Nie udało się dodać rezerwacji, coś poszło nie tak po naszej stronie.",
+                forbidden: "Nie masz uprawnień do dodawania rezerwacji.",
+                notFound: "Nie znaleziono zajęć które chcesz zarezerwować.",
             },
             remove: {
                 default: "Nie udało się usunąć rezerwacji, coś poszło nie tak po naszej stronie.",
+                forbidden: "Nie masz uprawnień do usunięcia tej rezerwacji.",
+                notFound: "Nie udało się usunąć rezerwacji. Możliwe, że została już wcześniej wycofana.",
             },
         },
         user: {
             changeReservationsPermission: {
                 default: "Nie udało się zmienić uprawnień użytkownika, coś poszło nie tak po naszej stronie.",
+                notFound:
+                    "Nie udało się odnaleźć użytkownika którego próbujesz edytować. Możliwe, że ten użytkownik nie istnieje.",
             },
             changeRole: {
                 default: "Nie udało się zmienić roli użytkownika, coś poszło nie tak po naszej stronie.",
+                notFound:
+                    "Nie udało się odnaleźć użytkownika którego próbujesz edytować. Możliwe, że ten użytkownik nie istnieje.",
             },
             delete: {
                 default: "Nie udało się usunąć użytkownika, coś poszło nie tak po naszej stronie.",
+                notFound:
+                    "Nie udało się odnaleźć użytkownika którego próbujesz usunąć. Możliwe, że ten użytkownik nie istnieje.",
             },
             getAll: {
                 default: "Nie udało się pobrać listy użytkowników, coś poszło nie tak po naszej stronie.",
@@ -333,7 +363,7 @@ export const pl: TranslationSource = {
                 today: "Dzisiaj",
                 incoming: "W najbliższych dniach",
                 others: "Pozostałe",
-                empty: "Brak rezerwacji.",
+                empty: "Brak rezerwacji do wyświetlenia.",
             },
         },
         activities: {
@@ -382,6 +412,7 @@ export const pl: TranslationSource = {
             tab: "Użytkownicy",
             options: {
                 delete: "Usuń konto użytkownika",
+                seeReservations: "Pokaż rezerwacje",
             },
             search: {
                 placeholder: "Wyszukaj użytkownika",

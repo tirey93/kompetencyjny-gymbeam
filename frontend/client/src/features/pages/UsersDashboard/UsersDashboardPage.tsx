@@ -17,13 +17,15 @@ export type UserManagementEvents = {
     onDelete: (user: UserDetails) => void;
     onUserRoleChange: (user: UserDetails) => void;
     onUserReservationsPermissionToggle: (user: UserDetails) => void;
+    onShowReservations: (user: UserDetails) => void;
 };
 
 export const UsersDashboardPage = () => {
     const translate = useTranslate();
     const columns = useUsersColumnsConfig();
     const { users, error, isLoading, refetch } = useAllUsers();
-    const { onUserDelete, onUserRoleChange, onUserReservationsPermissionToggle } = useUsersManagementModalEvents();
+    const { onUserDelete, onUserRoleChange, onUserReservationsPermissionToggle, onShowUserReservations } =
+        useUsersManagementModalEvents();
 
     const { sortBy, onSort, sortDirection, data, onSearch } = useSearchAndSort<UserDetails>({
         dataToProcess: users ?? [],
@@ -71,6 +73,7 @@ export const UsersDashboardPage = () => {
                                     onDelete: onUserDelete,
                                     onUserRoleChange: onUserRoleChangeInternal,
                                     onUserReservationsPermissionToggle: onUserReservationsPermissionToggle,
+                                    onShowReservations: onShowUserReservations,
                                 }}
                             />
                         ))}

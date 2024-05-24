@@ -5,14 +5,17 @@ export enum QueryKey {
     Users,
     Activities,
     Enrollments,
+    Reservations,
 }
 
 export const useInvalidateQuery = () => {
     const client = useQueryClient();
 
     const invalidate = useCallback(
-        async (queryKey: QueryKey) => {
-            return await client.invalidateQueries({ queryKey: [queryKey] });
+        async (...queryKeys: QueryKey[]) => {
+            for (const key of queryKeys) {
+                await client.invalidateQueries({ queryKey: [key] });
+            }
         },
         [client]
     );

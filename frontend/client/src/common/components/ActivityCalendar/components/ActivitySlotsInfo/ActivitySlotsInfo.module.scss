@@ -1,0 +1,19 @@
+html .activitySlotsContainer {
+  width: fit-content;
+  margin-inline: auto;
+
+  .participants {
+    margin-block: var(--mantine-spacing-sm);
+    font-size: var(--mantine-font-size-sm);
+    font-weight: 700;
+
+    .participantsIcon {
+      height: calc(var(--mantine-font-size-sm) * 0.8);
+      stroke-width: 3px;
+    }
+  }
+
+  &.interactive {
+    cursor: pointer;
+  }
+}

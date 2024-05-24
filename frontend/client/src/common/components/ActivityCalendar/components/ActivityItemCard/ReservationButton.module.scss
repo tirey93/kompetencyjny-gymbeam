@@ -1,0 +1,10 @@
+html .reservationButtonIcon {
+  width: var(--mantine-font-size-sm);
+}
+
+html .reservationsDisabled {
+  font-size: var(--mantine-font-size-xs);
+  padding: var(--mantine-spacing-xs);
+  color: var(--mantine-color-dimmed);
+  font-weight: 600;
+}

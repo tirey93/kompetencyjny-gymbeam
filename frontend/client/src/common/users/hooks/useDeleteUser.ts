@@ -53,5 +53,7 @@ export const useDeleteUser = (): UseDeleteUser => {
 
 const errorsMap: HttpErrorsTranslationsMap = {
     defaultError: "apiErrors.user.delete.default",
-    statusCodesMap: {},
+    statusCodesMap: {
+        404: "apiErrors.user.delete.notFound",
+    },
 };

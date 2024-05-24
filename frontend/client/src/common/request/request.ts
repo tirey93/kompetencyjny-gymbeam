@@ -2,6 +2,7 @@
 import { ActivityDTO, ActivityInstance, AddActivityDTO } from "../activities/Activities";
 import { UserDetails, UserRole } from "../auth";
 import { AddReservationDTO } from "../reservations";
+import { ReservationDTO } from "../reservations/Reservations";
 import { ApiResourceName, RequestOptions, SignInRequestBody, SignUpRequestBody, UserDetailsResponse } from "./";
 
 const { VITE_API_BASE_URL } = import.meta.env;
@@ -26,6 +27,7 @@ const AVAILABLE_API_RESOURCES: Record<
     DeleteActivity: { endpoint: "Activity/{activityId}", method: "DELETE" },
     GetActivitiesInstancesByDates: { endpoint: "Enrollment/ByDates" },
     GetActivitiesInstancesReservedByUser: { endpoint: "Enrollment/ByLoggedUser" },
+    GetAllReservations: { endpoint: "Reservation" },
     AddReservation: { endpoint: "Reservation", method: "POST" },
     RemoveReservation: { endpoint: "Reservation/{id}", method: "DELETE" },
 };
@@ -56,6 +58,8 @@ export async function request(
     resource: "DeleteActivity",
     options: { urlParams: { activityId: string } }
 ): Promise<null>;
+
+export async function request(resource: "GetAllReservations"): Promise<ReservationDTO[]>;
 
 export async function request(resource: "AddReservation", options: { body: AddReservationDTO }): Promise<void>;
 
