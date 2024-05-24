@@ -25,7 +25,7 @@ type ReservationsModalProps = ContextModalProps<
       }
 >;
 
-export const ReservationsModal = ({ innerProps: { ...modalProps } }: ReservationsModalProps) => {
+export const ReservationsModal = ({ innerProps: { ...modalProps }, id }: ReservationsModalProps) => {
     const translate = useTranslate();
     const { reservations, refetch, error, isLoading } = useReservations({
         ...modalProps,
@@ -48,8 +48,8 @@ export const ReservationsModal = ({ innerProps: { ...modalProps } }: Reservation
     );
 
     const onClose = useCallback(() => {
-        modals.closeAll();
-    }, []);
+        modals.close(id);
+    }, [id]);
 
     if (isLoading) {
         return <Modal.Loader />;

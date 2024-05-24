@@ -71,9 +71,9 @@ export const ActivityCalendar = ({
             )}
 
             <Table.ScrollContainer minWidth={600} className={classes.scrollContainer}>
-                <Table stickyHeader highlightOnHover withColumnBorders className={classes.table}>
-                    {isLoading && <LoaderOverlay />}
+                {isLoading && <LoaderOverlay />}
 
+                <Table stickyHeader highlightOnHover withColumnBorders className={classes.table}>
                     <Table.Thead>
                         <Table.Tr className={classes.headerRow}>
                             <Table.Td className={classes.dateRangeSwitch}>

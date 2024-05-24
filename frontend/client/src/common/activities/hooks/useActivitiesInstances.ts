@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
 import { QueryKey } from "../../apiClient";
 import { request } from "../../request";
@@ -57,8 +58,10 @@ export const useActivitiesInstances = (options: UseActivitiesInstancesOptions): 
 };
 
 const getActivitiesInstancesByDateRangeRequest = ({ from, to }: { from: Date; to: Date }) => {
+    const endOfLastDay = dayjs(to).endOf("day");
+
     return request("GetActivitiesInstancesByDates", {
-        queryParams: { from: from.toISOString(), to: to.toISOString() },
+        queryParams: { from: from.toISOString(), to: endOfLastDay.toISOString() },
     });
 };
 

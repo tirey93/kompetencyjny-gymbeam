@@ -11,14 +11,14 @@ type DeleteActivityModalProps = ContextModalProps<{
     activity?: Activity;
 }>;
 
-export const DeleteActivityModal = ({ innerProps: { activity } }: DeleteActivityModalProps) => {
+export const DeleteActivityModal = ({ innerProps: { activity }, id }: DeleteActivityModalProps) => {
     const translate = useTranslate();
 
     const { deleteActivity, error, reset, isLoading } = useDeleteActivity();
 
     const onClose = useCallback(() => {
-        modals.closeAll();
-    }, []);
+        modals.close(id);
+    }, [id]);
 
     const handleDeleteActivity = useCallback(async () => {
         if (!activity) {

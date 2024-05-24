@@ -13,13 +13,13 @@ type DeleteUserModalProps = ContextModalProps<{
     user: UserDetails;
 }>;
 
-export const DeleteUserModal = ({ innerProps: { user } }: DeleteUserModalProps) => {
+export const DeleteUserModal = ({ innerProps: { user }, id }: DeleteUserModalProps) => {
     const translate = useTranslate();
     const { deleteUser, error, reset, isLoading } = useDeleteUser();
 
     const onClose = useCallback(() => {
-        modals.closeAll();
-    }, []);
+        modals.close(id);
+    }, [id]);
 
     const handleDeleteUser = useCallback(async () => {
         await deleteUser(user.id);

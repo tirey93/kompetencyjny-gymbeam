@@ -31,7 +31,7 @@ const NAME_MAX_LENGTH = 255;
 const LONG_DESCRIPTION_MAX_LENGTH = 4000;
 const SHORT_DESCRIPTION_MAX_LENGTH = 1000;
 
-export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalProps) => {
+export const AddActivityModal = ({ innerProps: { activity }, id }: AddActivityModalProps) => {
     const form = useActivityModalForm(activity);
     const translate = useTranslate();
     const { users } = useAllUsers();
@@ -46,8 +46,8 @@ export const AddActivityModal = ({ innerProps: { activity } }: AddActivityModalP
         }));
 
     const onClose = useCallback(() => {
-        modals.closeAll();
-    }, []);
+        modals.close(id);
+    }, [id]);
 
     const mapFormValuesToAddActivityDTO = useCallback(() => {
         const {
