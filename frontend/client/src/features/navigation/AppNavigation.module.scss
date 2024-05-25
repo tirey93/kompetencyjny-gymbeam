@@ -1,5 +1,5 @@
 html .burger {
-  position: absolute;
+  position: fixed;
   top: var(--mantine-spacing-md);
   left: var(--mantine-spacing-md);
   z-index: 1000;
