@@ -1,7 +1,7 @@
 @import "src/mantine";
 
 html .calendar {
-  max-height: 90dvh;
+  max-height: 90vh;
 
   .calendarHeader {
     padding-block: var(--mantine-spacing-md);
@@ -23,12 +23,12 @@ html .calendar {
   }
 
   .scrollContainer {
-    height: calc(100dvh - 250px);
+    height: calc(100vh - 250px);
     border-radius: var(--mantine-radius-md);
     overflow: hidden;
 
     @media (width < $mantine-breakpoint-sm) {
-      height: calc(100dvh - 300px);
+      height: calc(100vh - 300px);
     }
 
     > *:first-child {

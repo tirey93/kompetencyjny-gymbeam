@@ -1,6 +1,7 @@
 html .container {
   max-width: 600px;
-  min-height: 800px;
+  min-height: 80vh;
+  box-sizing: border-box;
   margin: auto;
   justify-content: center;
   padding: var(--mantine-spacing-xl);
