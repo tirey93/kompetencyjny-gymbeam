@@ -3,6 +3,14 @@ import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
     common: {
+        cookies: {
+            popup: {
+                title: "Allow cookies",
+                body: "We need your permission to use cookies. They are required to make the app fully functional and allow us to improve the application with collected metrics. We won't spy on you, we won't collect your personal information. Without cookies, this site may not work as expected.",
+                acceptButtonLabel: "Accept all",
+                seeTermsAndConditionsButtonLabel: "See Terms & Conditions",
+            },
+        },
         errorScreen: {
             retry: "Retry",
         },

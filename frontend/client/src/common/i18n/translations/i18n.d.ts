@@ -1,5 +1,13 @@
 export type TranslationSource = {
     common: {
+        cookies: {
+            popup: {
+                title: string;
+                body: string;
+                acceptButtonLabel: string;
+                seeTermsAndConditionsButtonLabel: string;
+            };
+        };
         errorScreen: {
             retry: string;
         };

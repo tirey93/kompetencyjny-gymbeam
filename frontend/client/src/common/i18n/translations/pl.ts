@@ -3,6 +3,14 @@ import { TranslationSource } from "./i18n";
 
 export const pl: TranslationSource = {
     common: {
+        cookies: {
+            popup: {
+                title: "Zezwól na ciasteczka",
+                body: "Potrzebujemy Twojego pozwolenia na korzystanie z ciasteczek. Są wymagane do tego, aby nasza aplikacja była w pełni funkcjonalna i abyśmy mogli ją stale ulepszać. Nie będziemy Cię szpiegować, nie będziemy zbierać Twoich danych osobowych. Bez ciasteczek, aplikacja może nie działać jak należy.",
+                acceptButtonLabel: "Zgadzam się",
+                seeTermsAndConditionsButtonLabel: "Chcę sprawdzić regulamin",
+            },
+        },
         errorScreen: {
             retry: "Spróbuj ponownie",
         },
