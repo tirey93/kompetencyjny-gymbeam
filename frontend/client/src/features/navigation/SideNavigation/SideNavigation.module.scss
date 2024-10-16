@@ -1,7 +1,9 @@
 html .sideNavigationContainer {
   align-items: center;
   justify-content: space-between;
-  min-height: 95vh;
+  height: 100%;
+  padding-block: var(--mantine-spacing-lg);
+  background-color: var(--mantine-color-dark-8);
 
   .sectionWrapper {
     gap: 0;
@@ -12,6 +14,7 @@ html .sideNavigationContainer {
 
     .languageSelect {
       margin-top: var(--mantine-spacing-md);
+      background-color: var(--mantine-color-dark-9);
     }
   }
 }

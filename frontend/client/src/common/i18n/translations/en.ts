@@ -332,6 +332,7 @@ export const en: TranslationSource = {
             usersDashboard: "Users Dashboard",
             activitiesDashboard: "Activities Dashboard",
             reservations: "My reservations",
+            legal: "Terms & Conditions",
         },
     },
     user: {
@@ -645,6 +646,82 @@ export const en: TranslationSource = {
                     header: "Is this data correct?",
                     login: "Login",
                     password: "Password",
+                },
+            },
+        },
+
+        termsAndConditions: {
+            header: "Terms & Conditions",
+            generalTerms: {
+                title: "General Terms",
+                items: {
+                    "1": 'The GymBeam App ("App") is owned and operated by GymBeam.',
+                    "2": "By downloading, accessing, or using the App, you agree to be bound by these Terms & Conditions.",
+                    "3": "We reserve the right to amend these Terms & Conditions at any time. Changes will be posted within the App.",
+                },
+            },
+            gymMembership: {
+                title: "Gym Membership",
+                items: {
+                    "1": "Users may purchase different types of gym memberships through the App.",
+                    "2": "Memberships are non-transferable and may not be shared with or used by third parties.",
+                    "3": "If you wish to temporarily suspend your membership, please contact our customer service team.",
+                },
+            },
+            classRegistrationAndAttendance: {
+                title: "Class Registration and Attendance",
+                items: {
+                    "1": "Users can register for fitness classes through the App.",
+                    "2": "You may cancel your class registration up to 2 hours before the start of the class.",
+                    "3": "Missing more than 3 classes in a month will lead to a temporary block on class registration.",
+                },
+            },
+            lateArrivals: {
+                title: "Late Arrivals",
+                items: {
+                    "1": "If you arrive late, you may still join the class with minimal disruption.",
+                    "2": "Repeated late arrivals may result in warnings or restrictions.",
+                },
+            },
+            appUsageAndTechnicalSupport: {
+                title: "App Usage and Technical Support",
+                items: {
+                    "1": 'The App is provided on an "as is" basis, and we do not guarantee that it will be available at all times.',
+                    "2": "Unauthorized use of the App may result in account termination.",
+                },
+            },
+            accountSuspensionAndTermination: {
+                title: "Account Suspension and Termination",
+                items: {
+                    "1": "We reserve the right to suspend or terminate your account if you violate these Terms & Conditions.",
+                    "2": "Suspension may occur due to repeated missed or late-canceled classes, or if you share your account with others.",
+                },
+            },
+            paymentAndRefundPolicy: {
+                title: "Payment and Refund Policy",
+                items: {
+                    "1": "Payments for memberships and class bookings can be made through the App.",
+                    "2": "In the event of any billing errors or disputes, contact our customer service team immediately.",
+                },
+            },
+            dataPrivacy: {
+                title: "Data Privacy",
+                items: {
+                    "1": "By using the App, you consent to the collection and processing of your personal data in accordance with our Privacy Policy.",
+                    "2": "We take your privacy seriously and will not share your personal information with third parties without your consent.",
+                },
+            },
+            liabilityDisclaimer: {
+                title: "Liability Disclaimer",
+                items: {
+                    "1": "While we strive to ensure that all information provided in the App is accurate, we do not guarantee its completeness.",
+                    "2": "You agree to use the App and participate in gym activities at your own risk.",
+                },
+            },
+            contactInformation: {
+                title: "Contact Information",
+                items: {
+                    "1": "If you have any questions or concerns, please contact us through the App or at support@gymbeam.com.",
                 },
             },
         },

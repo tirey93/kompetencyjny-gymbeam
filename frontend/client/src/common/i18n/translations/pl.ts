@@ -336,6 +336,7 @@ export const pl: TranslationSource = {
             usersDashboard: "Zarządzanie użytkownikami",
             activitiesDashboard: "Zarządzanie zajęciami",
             reservations: "Moje rezerwacje",
+            legal: "Regulamin",
         },
     },
     user: {
@@ -656,6 +657,82 @@ export const pl: TranslationSource = {
                     header: "Czy te dane są poprawne?",
                     login: "Login",
                     password: "Hasło",
+                },
+            },
+        },
+
+        termsAndConditions: {
+            header: "Regulamin",
+            generalTerms: {
+                title: "Warunki ogólne",
+                items: {
+                    "1": 'Aplikacja GymBeam ("Aplikacja") jest własnością i jest zarządzana przez GymBeam.',
+                    "2": "Pobierając, uzyskując dostęp lub korzystając z Aplikacji, zgadzasz się na przestrzeganie niniejszych Warunków.",
+                    "3": "Zastrzegamy sobie prawo do zmiany niniejszych Warunków w dowolnym czasie. Zmiany będą publikowane w Aplikacji.",
+                },
+            },
+            gymMembership: {
+                title: "Członkostwo w siłowni",
+                items: {
+                    "1": "Użytkownicy mogą kupować różne rodzaje członkostwa w siłowni za pośrednictwem Aplikacji.",
+                    "2": "Członkostwa nie mogą być przenoszone ani udostępniane osobom trzecim.",
+                    "3": "Jeśli chcesz tymczasowo zawiesić swoje członkostwo, skontaktuj się z naszym działem obsługi klienta.",
+                },
+            },
+            classRegistrationAndAttendance: {
+                title: "Rejestracja na zajęcia i frekwencja",
+                items: {
+                    "1": "Użytkownicy mogą rejestrować się na zajęcia fitness za pośrednictwem Aplikacji.",
+                    "2": "Możesz anulować rejestrację na zajęcia do 2 godzin przed ich rozpoczęciem.",
+                    "3": "Nieobecność na więcej niż 3 zajęciach w ciągu miesiąca spowoduje tymczasową blokadę rejestracji na zajęcia.",
+                },
+            },
+            lateArrivals: {
+                title: "Spóźnienia",
+                items: {
+                    "1": "W przypadku spóźnienia, możesz dołączyć do zajęć z minimalnym zakłóceniem.",
+                    "2": "Powtarzające się spóźnienia mogą skutkować ostrzeżeniami lub ograniczeniami.",
+                },
+            },
+            appUsageAndTechnicalSupport: {
+                title: "Korzystanie z aplikacji i wsparcie techniczne",
+                items: {
+                    "1": 'Aplikacja jest udostępniana "tak jak jest", i nie gwarantujemy, że będzie dostępna w każdej chwili.',
+                    "2": "Nieautoryzowane korzystanie z Aplikacji może skutkować zakończeniem konta.",
+                },
+            },
+            accountSuspensionAndTermination: {
+                title: "Zawieszenie i zakończenie konta",
+                items: {
+                    "1": "Zastrzegamy sobie prawo do zawieszenia lub zakończenia twojego konta w przypadku naruszenia niniejszych Warunków.",
+                    "2": "Zawieszenie może nastąpić z powodu powtarzających się nieobecności lub późnych anulacji zajęć, albo w przypadku udostępniania konta innym osobom.",
+                },
+            },
+            paymentAndRefundPolicy: {
+                title: "Polityka płatności i zwrotów",
+                items: {
+                    "1": "Płatności za członkostwa i rezerwacje na zajęcia mogą być dokonywane za pośrednictwem Aplikacji.",
+                    "2": "W przypadku błędów rozliczeniowych lub sporów, skontaktuj się natychmiast z naszym działem obsługi klienta.",
+                },
+            },
+            dataPrivacy: {
+                title: "Prywatność danych",
+                items: {
+                    "1": "Korzystając z Aplikacji, wyrażasz zgodę na gromadzenie i przetwarzanie swoich danych osobowych zgodnie z naszą Polityką Prywatności.",
+                    "2": "Poważnie podchodzimy do twojej prywatności i nie będziemy udostępniać twoich danych osobowych osobom trzecim bez twojej zgody.",
+                },
+            },
+            liabilityDisclaimer: {
+                title: "Zrzeczenie się odpowiedzialności",
+                items: {
+                    "1": "Mimo że staramy się zapewnić, aby wszystkie informacje w Aplikacji były dokładne, nie gwarantujemy ich kompletności.",
+                    "2": "Zgadzasz się korzystać z Aplikacji i uczestniczyć w zajęciach na własne ryzyko.",
+                },
+            },
+            contactInformation: {
+                title: "Informacje kontaktowe",
+                items: {
+                    "1": "Jeśli masz jakiekolwiek pytania lub wątpliwości, skontaktuj się z nami za pośrednictwem Aplikacji lub na adres support@gymbeam.com.",
                 },
             },
         },

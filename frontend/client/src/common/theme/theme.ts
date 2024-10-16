@@ -119,4 +119,5 @@ export const theme = createTheme({
         lg: "75em",
         xl: "88em",
     },
+    respectReducedMotion: true,
 });

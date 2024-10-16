@@ -6,8 +6,8 @@ html .cookiesPopup {
   background: var(--mantine-color-dark-8);
 
   position: fixed;
-  bottom: 90px; // TODO: Use variable instead;
-  right: 10px;
+  bottom: var(--mantine-spacing-md);
+  right: var(--mantine-spacing-md);
 
   z-index: 10;
 

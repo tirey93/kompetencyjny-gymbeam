@@ -1,0 +1,23 @@
+html .title {
+  margin-bottom: var(--mantine-spacing-md);
+}
+
+html .sectionTitle {
+  font-weight: 600;
+  margin-top: var(--mantine-spacing-sm);
+  margin-bottom: var(--mantine-spacing-xs);
+}
+
+html .list {
+  margin-bottom: var(--mantine-spacing-lg);
+  max-width: 95%;
+
+  .subList {
+    --list-fz:  var(--mantine-font-size-sm);
+
+    .listItem {
+      font-size: var(--mantine-font-size-sm);
+      margin-bottom: var(--mantine-spacing-sm);
+    }
+  }
+}

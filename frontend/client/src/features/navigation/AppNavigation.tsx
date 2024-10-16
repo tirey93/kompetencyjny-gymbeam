@@ -2,12 +2,10 @@ import { PropsWithChildren } from "react";
 import { AppShell, Burger } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { Footer } from "./Footer/Footer";
 import { SideNavigation } from "./SideNavigation/SideNavigation";
 
 import classes from "./AppNavigation.module.scss";
 
-const NAVIGATION_FOOTER_HEIGHT = 80;
 const PAGE_TOP_OFFSET = 40;
 
 export const AppNavigation = ({ children }: PropsWithChildren) => {
@@ -17,7 +15,6 @@ export const AppNavigation = ({ children }: PropsWithChildren) => {
         <AppShell
             withBorder={false}
             layout="alt"
-            footer={{ height: NAVIGATION_FOOTER_HEIGHT }}
             header={{ height: PAGE_TOP_OFFSET }}
             navbar={{ width: 100, breakpoint: "sm", collapsed: { desktop: false, mobile: !isNavbarVisible } }}
         >
@@ -28,10 +25,6 @@ export const AppNavigation = ({ children }: PropsWithChildren) => {
             </AppShell.Navbar>
 
             <AppShell.Main className={classes.outlet}>{children}</AppShell.Main>
-
-            <AppShell.Footer className={classes.appNavigationFooter}>
-                <Footer />
-            </AppShell.Footer>
         </AppShell>
     );
 };

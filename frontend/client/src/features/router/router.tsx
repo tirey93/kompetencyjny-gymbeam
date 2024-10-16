@@ -13,6 +13,7 @@ import { ReservationsPage } from "../pages/Reservations/ReservationsPage";
 import { SignInPage } from "../pages/SignIn";
 import { UsersDashboardPage } from "../pages/UsersDashboard";
 import { AppRoute } from "./AppRoute";
+import {LegalPage} from "../pages/Legal/LegalPage";
 
 const APP_PAGES = [
     {
@@ -74,6 +75,10 @@ const APP_PAGES = [
                 <ReservationsPage />
             </ProtectedRoute>
         ),
+    },
+    {
+        path: AppRoute.LEGAL,
+        element: <LegalPage />,
     },
 ];
 
