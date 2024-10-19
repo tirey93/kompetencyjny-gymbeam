@@ -1,4 +1,18 @@
 export type TranslationSource = {
+    settings: {
+        header: string;
+        contrast: {
+            label: string;
+        };
+        language: {
+            label: string;
+            options: {
+                polish: string;
+                english: string;
+            };
+        };
+    };
+
     common: {
         cookies: {
             popup: {
@@ -665,80 +679,80 @@ export type TranslationSource = {
         };
 
         termsAndConditions: {
-            header: string
+            header: string;
             generalTerms: {
-                title:  string;
-                items: {
-                    "1":  string;
-                    "2":  string;
-                    "3":  string;
-                },
-            },
-            gymMembership: {
                 title: string;
-                items: {
-                    "1":  string;
-                    "2":  string;
-                    "3": string;
-                },
-            },
-            classRegistrationAndAttendance: {
-                title:  string;
                 items: {
                     "1": string;
                     "2": string;
-                    "3":  string;
-                },
-            },
-            lateArrivals: {
-                title:  string;
+                    "3": string;
+                };
+            };
+            gymMembership: {
+                title: string;
                 items: {
-                    "1":  string;
+                    "1": string;
                     "2": string;
-                },
-            },
+                    "3": string;
+                };
+            };
+            classRegistrationAndAttendance: {
+                title: string;
+                items: {
+                    "1": string;
+                    "2": string;
+                    "3": string;
+                };
+            };
+            lateArrivals: {
+                title: string;
+                items: {
+                    "1": string;
+                    "2": string;
+                };
+            };
             appUsageAndTechnicalSupport: {
                 title: string;
                 items: {
-                    "1":  string;
-                    "2":  string;
-                },
-            },
+                    "1": string;
+                    "2": string;
+                };
+            };
             accountSuspensionAndTermination: {
                 title: string;
                 items: {
                     "1": string;
-                    "2":  string;
-                },
-            },
+                    "2": string;
+                };
+            };
             paymentAndRefundPolicy: {
-                title:  string;
+                title: string;
                 items: {
-                    "1":  string;
-                    "2":  string;
-                },
-            },
+                    "1": string;
+                    "2": string;
+                };
+            };
             dataPrivacy: {
                 title: string;
                 items: {
                     "1": string;
-                    "2":  string;
-                },
-            },
+                    "2": string;
+                };
+            };
             liabilityDisclaimer: {
                 title: string;
                 items: {
-                    "1":  string;
+                    "1": string;
                     "2": string;
-                },
-            },
+                };
+            };
             contactInformation: {
                 title: string;
                 items: {
-                    "1":  string;
-                },
-            },
-        },
+                    "1": string;
+                };
+            };
+        };
     };
 };
 

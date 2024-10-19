@@ -2,6 +2,20 @@
 import { TranslationSource } from "./i18n";
 
 export const en: TranslationSource = {
+    settings: {
+        header: "Settings",
+        contrast: {
+            label: "High contrast",
+        },
+        language: {
+            label: "Language",
+            options: {
+                polish: "Polish",
+                english: "English",
+            },
+        },
+    },
+
     common: {
         cookies: {
             popup: {

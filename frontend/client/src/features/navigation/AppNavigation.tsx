@@ -13,7 +13,6 @@ export const AppNavigation = ({ children }: PropsWithChildren) => {
 
     return (
         <AppShell
-            withBorder={false}
             layout="alt"
             header={{ height: PAGE_TOP_OFFSET }}
             navbar={{ width: 100, breakpoint: "sm", collapsed: { desktop: false, mobile: !isNavbarVisible } }}

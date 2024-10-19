@@ -1,11 +1,13 @@
 import { PropsWithChildren } from "react";
 import { MantineProvider } from "@mantine/core";
 
-import { theme } from "./theme";
+import { useTheme } from "./hooks/useTheme";
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
+    const { theme } = useTheme();
+
     return (
-        <MantineProvider defaultColorScheme="dark" theme={theme}>
+        <MantineProvider forceColorScheme="dark" theme={theme}>
             {children}
         </MantineProvider>
     );

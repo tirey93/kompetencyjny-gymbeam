@@ -7,14 +7,15 @@ html .sideNavigationContainer {
 
   .sectionWrapper {
     gap: 0;
+    align-items: center;
+
+    .divider {
+      margin-block: var(--mantine-spacing-md);
+      width: 1rem;
+    }
 
     .logoWrapper {
       padding-top: var(--mantine-spacing-md);
-    }
-
-    .languageSelect {
-      margin-top: var(--mantine-spacing-md);
-      background-color: var(--mantine-color-dark-9);
     }
   }
 }

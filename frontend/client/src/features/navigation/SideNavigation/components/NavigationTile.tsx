@@ -45,7 +45,7 @@ export const NavigationTile = ({
         >
             <Button
                 className={classes.navigationTile}
-                variant={isActive ? "outline" : "subtle"}
+                variant={isActive ? "light" : "subtle"}
                 onClick={handleNavigation}
                 data-active={isActive}
             >
