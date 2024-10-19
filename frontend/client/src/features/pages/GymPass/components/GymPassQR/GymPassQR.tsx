@@ -1,12 +1,14 @@
 import { QRCodeSVG } from "qrcode.react";
 
-import { theme } from "../../../../../common/theme/theme";
+import { useTheme } from "../../../../../common/theme";
 
 type GymPassQRProps = {
     qrValue: string;
 };
 
 export const GymPassQR = ({ qrValue }: GymPassQRProps) => {
+    const { theme } = useTheme();
+
     return (
         <QRCodeSVG
             value={qrValue}

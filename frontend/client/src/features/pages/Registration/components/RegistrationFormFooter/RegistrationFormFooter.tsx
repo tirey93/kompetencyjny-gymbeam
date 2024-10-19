@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Anchor, Button, Group, Stack } from "@mantine/core";
+import { Button, Group, Stack } from "@mantine/core";
 
 import { useTranslate } from "../../../../../common/i18n";
 import { AppRoute } from "../../../../router";
@@ -36,9 +36,14 @@ export const RegistrationFormFooter = ({
                     </Button>
                 )}
             </Group>
-            <Anchor className={classes.signInLink} onClick={() => navigate(AppRoute.LOGIN)}>
+            <Button
+                variant="subtle"
+                color="info"
+                className={classes.signInButton}
+                onClick={() => navigate(AppRoute.LOGIN)}
+            >
                 {translate("pages.registration.navigation.signInLink")}
-            </Anchor>
+            </Button>
         </Stack>
     );
 };

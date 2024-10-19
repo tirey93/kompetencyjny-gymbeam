@@ -6,7 +6,7 @@ import {
     IconListCheck,
     IconLogin,
     IconLogout,
-    IconQrcode,
+    IconQrcode, IconSectionSign,
     IconUserPlus,
     IconUsersGroup,
 } from "@tabler/icons-react";
@@ -31,7 +31,8 @@ type UseSideNavigationItems = Record<
     | "activitiesDashboard"
     | "activities"
     | "qr"
-    | "reservations",
+    | "reservations"
+    | "legal",
     NavigationItem
 >;
 
@@ -42,6 +43,11 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
     return useMemo(
         () => ({
             home: { Icon: IconHome2, label: translate("navigation.labels.home"), route: AppRoute.ROOT },
+            legal: {
+                Icon: IconSectionSign,
+                label: translate("navigation.labels.legal"),
+                route: AppRoute.LEGAL,
+            },
             signIn: { Icon: IconLogin, label: translate("navigation.labels.signIn"), route: AppRoute.LOGIN },
             signUp: { Icon: IconUserPlus, label: translate("navigation.labels.signUp"), route: AppRoute.REGISTRATION },
             signOut: {

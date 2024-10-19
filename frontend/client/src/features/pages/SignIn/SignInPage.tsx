@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Anchor, Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
+import { Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 
 import { useSignInForm } from "./hooks/useSignInForm";
@@ -83,9 +83,9 @@ export const SignInPage = () => {
                 <Button size="md" variant="gradient" onClick={onSubmit}>
                     {translate("pages.signIn.navigation.submit")}
                 </Button>
-                <Anchor className={classes.signUpLink} onClick={() => navigate(AppRoute.REGISTRATION)}>
+                <Button variant="subtle" color="info" onClick={() => navigate(AppRoute.REGISTRATION)}>
                     {translate("pages.signIn.navigation.signUpLink")}
-                </Anchor>
+                </Button>
             </Stack>
         </Stack>
     );

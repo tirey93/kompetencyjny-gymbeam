@@ -1,0 +1,43 @@
+@import "src/mantine";
+
+html .cookiesPopup {
+  padding: var(--mantine-spacing-lg);
+  border-radius: var(--mantine-radius-md);
+  background: var(--mantine-color-dark-8);
+
+  position: fixed;
+  bottom: var(--mantine-spacing-md);
+  right: var(--mantine-spacing-md);
+
+  z-index: 10;
+
+  width: 90%;
+  @media (width > $mantine-breakpoint-sm) {
+    width: 450px;
+  }
+
+  .caption {
+    text-align: justify;
+    font-size: var(--mantine-font-size-xs);
+    color: var(--mantine-color-dimmed);
+  }
+
+  .footer {
+    margin-top: var(--mantine-spacing-md);
+    justify-content: flex-end;
+  }
+
+  .header {
+    .title {
+      font-weight: 600;
+    }
+
+    .closeButton {
+      position: absolute;
+      top: var(--mantine-spacing-sm);
+      right: var(--mantine-spacing-sm);
+    }
+  }
+}
+
+

@@ -1,0 +1,12 @@
+@import "src/mantine";
+
+html .container {
+  min-height: 80vh;
+  margin: auto;
+  justify-content: center;
+  padding: var(--mantine-spacing-lg) var(--mantine-spacing-xl);
+
+  @media (min-width: $mantine-breakpoint-sm) {
+    max-width: 80vw;
+  }
+}

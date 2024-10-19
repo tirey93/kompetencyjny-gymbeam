@@ -1,17 +1,21 @@
 html .sideNavigationContainer {
   align-items: center;
   justify-content: space-between;
-  min-height: 95vh;
+  height: 100%;
+  padding-block: var(--mantine-spacing-lg);
+  background-color: var(--mantine-color-dark-8);
 
   .sectionWrapper {
     gap: 0;
+    align-items: center;
+
+    .divider {
+      margin-block: var(--mantine-spacing-md);
+      width: 1rem;
+    }
 
     .logoWrapper {
       padding-top: var(--mantine-spacing-md);
-    }
-
-    .languageSelect {
-      margin-top: var(--mantine-spacing-md);
     }
   }
 }

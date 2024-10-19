@@ -28,7 +28,7 @@ export const HeroBanner = ({ onLearnMoreClick }: HeroBannerProps) => {
     }, [isSignedIn, navigate]);
 
     return (
-        <Container className={classes.container} fluid bg="dark">
+        <Container className={classes.container} fluid>
             <Group className={classes.group}>
                 <Stack className={classes.textContent}>
                     <Title className={classes.title}>

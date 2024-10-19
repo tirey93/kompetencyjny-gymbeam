@@ -1,10 +1,10 @@
-import { Center, Stack } from "@mantine/core";
+import { Center, Divider, Stack } from "@mantine/core";
 
-import { LanguageSelect } from "./components/LanguageSelect";
 import { NavigationSection } from "./components/NavigationSection";
 import { useSideNavigationItems } from "./hooks/useSideNavigationItems";
 import { UserRoleGuard } from "../../../common/auth";
 import { Logo } from "../../../common/components/Logo";
+import { SettingsMenu } from "../../../common/components/SettingsMenu/SettingsMenu";
 
 import classes from "./SideNavigation.module.scss";
 
@@ -13,7 +13,7 @@ type SideNavigationProps = {
 };
 
 export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
-    const { qr, signOut, signIn, signUp, home, usersDashboard, activitiesDashboard, activities, reservations } =
+    const { qr, signOut, signIn, signUp, home, usersDashboard, activitiesDashboard, activities, reservations, legal } =
         useSideNavigationItems();
 
     return (
@@ -23,7 +23,7 @@ export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
                     <Logo logoSize={65} variant="gradient" />
                 </Center>
 
-                <NavigationSection onNavigate={onNavigate} tiles={[home]} />
+                <NavigationSection onNavigate={onNavigate} tiles={[home, legal]} />
 
                 <UserRoleGuard allowedRoles={["Admin", "User"]}>
                     <NavigationSection onNavigate={onNavigate} tiles={[activities, reservations, qr]} />
@@ -42,7 +42,8 @@ export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
                     <NavigationSection onNavigate={onNavigate} tiles={[signOut]} />
                 </UserRoleGuard>
 
-                <LanguageSelect className={classes.languageSelect} />
+                <Divider className={classes.divider} />
+                <SettingsMenu />
             </Stack>
         </Stack>
     );
