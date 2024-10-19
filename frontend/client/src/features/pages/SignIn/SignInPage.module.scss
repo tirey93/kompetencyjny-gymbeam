@@ -9,6 +9,10 @@ html .container {
   .title {
     text-align: center;
     margin-bottom: var(--mantine-spacing-xl);
+
+    .titleEmphasis {
+      color: var(--mantine-color-success-5);
+    }
   }
 
   .form {

@@ -63,7 +63,7 @@ export const HeroBanner = ({ onLearnMoreClick }: HeroBannerProps) => {
                     </List>
 
                     <Group className={classes.buttonsWrapper}>
-                        <Button size="md" variant="gradient" onClick={handleGetStartedButtonNavigation}>
+                        <Button size="md" onClick={handleGetStartedButtonNavigation}>
                             {translate("pages.home.heroBanner.buttons.getStarted")}
                         </Button>
                         <Button variant="default" size="md" onClick={onLearnMoreClick}>
@@ -71,7 +71,7 @@ export const HeroBanner = ({ onLearnMoreClick }: HeroBannerProps) => {
                         </Button>
                     </Group>
                 </Stack>
-                <Image className={classes.image} src={picture} visibleFrom="lg" />
+                <Image className={classes.image} src={picture} visibleFrom="lg" width={367} height={330} />
             </Group>
         </Container>
     );
