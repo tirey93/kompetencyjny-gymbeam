@@ -1,4 +1,4 @@
-import { List, ListItem, Text } from "@mantine/core";
+import { List, Text } from "@mantine/core";
 
 import classes from "./TermsAndConditions.module.scss";
 
@@ -9,15 +9,15 @@ type TermsAndConditionsSectionProps = {
 
 export const TermsAndConditionsSection = ({ title, items }: TermsAndConditionsSectionProps) => {
     return (
-        <ListItem>
+        <List.Item className={classes.section}>
             <Text className={classes.sectionTitle}>{title}</Text>
             <List type="ordered" className={classes.subList}>
                 {items.map((item) => (
-                    <ListItem key={item}>
+                    <List.Item key={item}>
                         <Text className={classes.listItem}>{item}</Text>
-                    </ListItem>
+                    </List.Item>
                 ))}
             </List>
-        </ListItem>
+        </List.Item>
     );
 };

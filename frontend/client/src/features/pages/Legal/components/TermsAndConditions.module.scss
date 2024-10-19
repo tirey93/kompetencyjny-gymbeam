@@ -1,23 +1,43 @@
+@import "src/mantine";
+
 html .title {
   margin-bottom: var(--mantine-spacing-md);
 }
 
-html .sectionTitle {
-  font-weight: 600;
-  margin-top: var(--mantine-spacing-sm);
-  margin-bottom: var(--mantine-spacing-xs);
-}
+html .section {
+  background-color: var(--mantine-color-dark-6);
+  border-radius: var(--mantine-radius-md);
+  padding-block: var(--mantine-spacing-md);
+  padding-inline: var(--mantine-spacing-md) calc(var(--mantine-spacing-xl) * 2);
+  font-weight: 700;
 
-html .list {
-  margin-bottom: var(--mantine-spacing-lg);
-  max-width: 95%;
+  * {
+    word-wrap: break-word;
+  }
+
+  .sectionTitle {
+    font-weight: 700;
+    margin-top: var(--mantine-spacing-sm);
+    margin-bottom: var(--mantine-spacing-md);
+  }
 
   .subList {
+    font-weight: 400;
     --list-fz:  var(--mantine-font-size-sm);
 
     .listItem {
       font-size: var(--mantine-font-size-sm);
       margin-bottom: var(--mantine-spacing-sm);
     }
+  }
+}
+
+html .list {
+  margin-bottom: var(--mantine-spacing-lg);
+  display: grid;
+
+  @media (min-width: $mantine-breakpoint-sm) {
+    grid-gap: var(--mantine-spacing-lg);
+    grid-template-columns: repeat(2, 1fr);
   }
 }

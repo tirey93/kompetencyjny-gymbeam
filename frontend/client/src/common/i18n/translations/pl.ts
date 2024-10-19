@@ -732,7 +732,7 @@ export const pl: TranslationSource = {
             dataPrivacy: {
                 title: "Prywatność danych",
                 items: {
-                    "1": "Korzystając z Aplikacji, wyrażasz zgodę na gromadzenie i przetwarzanie swoich danych osobowych zgodnie z naszą Polityką Prywatności.",
+                    "1": "Korzystając z Aplikacji, wyrażasz zgodę na gromadzenie i przetwarzanie swoich danych osobowych zgodnie z naszą Polityką Prywatności. Wszelkie dane będą przechowywane przez 14 dni od momentu usunięcia konta.",
                     "2": "Poważnie podchodzimy do twojej prywatności i nie będziemy udostępniać twoich danych osobowych osobom trzecim bez twojej zgody.",
                 },
             },

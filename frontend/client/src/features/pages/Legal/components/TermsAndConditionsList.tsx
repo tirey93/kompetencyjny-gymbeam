@@ -1,4 +1,4 @@
-import { List, Stack, Title } from "@mantine/core";
+import { Grid, List, Title } from "@mantine/core";
 
 import { useTranslate } from "../../../../common/i18n";
 import { TermsAndConditionsSection } from "./TermsAndConditionsSection";
@@ -82,13 +82,13 @@ export const TermsAndConditionsList = () => {
     ];
 
     return (
-        <Stack>
+        <Grid>
             <Title className={classes.title}>{t("pages.termsAndConditions.header")}</Title>
             <List className={classes.list} type="ordered">
                 {termsAndConditions.map((section) => (
                     <TermsAndConditionsSection {...section} key={section.title} />
                 ))}
             </List>
-        </Stack>
+        </Grid>
     );
 };

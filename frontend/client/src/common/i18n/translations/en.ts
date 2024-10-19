@@ -721,7 +721,7 @@ export const en: TranslationSource = {
             dataPrivacy: {
                 title: "Data Privacy",
                 items: {
-                    "1": "By using the App, you consent to the collection and processing of your personal data in accordance with our Privacy Policy.",
+                    "1": "By using the App, you consent to the collection and processing of your personal data in accordance with our Privacy Policy. All data will be stored for 14 since the day your account is removed.",
                     "2": "We take your privacy seriously and will not share your personal information with third parties without your consent.",
                 },
             },
