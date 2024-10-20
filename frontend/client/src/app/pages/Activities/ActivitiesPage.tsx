@@ -40,11 +40,11 @@ export const ActivitiesPage = () => {
         );
     }
 
-    if (activitiesError) {
+    if (activitiesError || !activities) {
         return (
             <ErrorScreen
                 onRetry={refetchActivities}
-                description={activitiesError}
+                description={activitiesError ?? translate("apiErrors.activities.getAll.default")}
                 title={translate("pages.activities.errorScreen.activities.title")}
             />
         );
@@ -52,15 +52,13 @@ export const ActivitiesPage = () => {
 
     return (
         <Container size="xl" className={classes.container}>
-            {activities && (
-                <ActivityCalendar
-                    isLoading={areInstancesLoading}
-                    activityInstances={activitiesInstances ?? []}
-                    activities={activities}
-                    dateRangeOptions={dateRangeOptions}
-                    withFilters
-                />
-            )}
+            <ActivityCalendar
+                isLoading={areInstancesLoading}
+                activityInstances={activitiesInstances ?? []}
+                activities={activities}
+                dateRangeOptions={dateRangeOptions}
+                withFilters
+            />
         </Container>
     );
 };

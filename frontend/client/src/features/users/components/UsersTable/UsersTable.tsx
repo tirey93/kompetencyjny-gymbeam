@@ -29,6 +29,7 @@ export const UsersTable = ({ users, events }: UsersTableProps) => {
         return <NoResultsMessage description={translate("pages.usersDashboard.noResults.description")} />;
     }
 
+    // TODO: Replace Fragment
     return (
         <>
             <SearchBar placeholder={translate("pages.usersDashboard.search.placeholder")} onSearch={onSearch} />
