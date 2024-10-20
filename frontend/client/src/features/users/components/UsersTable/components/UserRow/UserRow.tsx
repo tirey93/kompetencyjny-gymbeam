@@ -3,10 +3,10 @@ import classNames from "classnames";
 
 import classes from "./UserRow.module.scss";
 
-import { UserOptionsDropdown } from "@/app/pages/UsersDashboard/components/UserOptionsDropdown/UserOptionsDropdown";
 import { UserManagementEvents } from "@/app/pages/UsersDashboard/UsersDashboardPage";
 import { TextWithTooltip } from "@/components/DataDisplay";
 import { UserAvatar, UserReservationsPermissionBadge, UserRoleBadge } from "@/features/users/components";
+import { UserOptionsDropdown } from "@/features/users/components/UsersTable/components/UserOptionsDropdown/UserOptionsDropdown";
 import { useTranslate } from "@/lib/i18n";
 import { UserDetails } from "@/types";
 

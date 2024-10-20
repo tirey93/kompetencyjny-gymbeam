@@ -1,7 +1,7 @@
 import { ActionIcon, Menu } from "@mantine/core";
 import { IconDots, IconListCheck, IconTrash } from "@tabler/icons-react";
 
-import { UserManagementEvents } from "../../UsersDashboardPage";
+import { UserManagementEvents } from "../../../../../../app/pages/UsersDashboard/UsersDashboardPage";
 
 import classes from "./UserOptionsDropdown.module.scss";
 

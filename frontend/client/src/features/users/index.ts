@@ -1,4 +1,12 @@
+export { ChangeUserReservationPermissionsModal } from "./components/ChangeUserReservationPermissionsModal/ChangeUserReservationPermissionsModal";
+export { ChangeUserRoleModal } from "./components/ChangeUserRoleModal/ChangeUserRoleModal";
+export { DeleteUserModal } from "./components/DeleteUserModal/DeleteUserModal";
+export { UserAvatar } from "./components/UserAvatar/UserAvatar";
+export { UserReservationsPermissionBadge } from "./components/UserReservationsPermissionBadge/UserReservationsPermissionBadge";
+export { UserRoleBadge } from "./components/UserRoleBadge/UserRoleBadge";
+export { UsersTable } from "./components/UsersTable/UsersTable";
 export { useAllUsers } from "./hooks/useAllUsers";
 export { useChangeReservationsPermission } from "./hooks/useChangeUserReservationsPermission";
 export { useChangeUserRole } from "./hooks/useChangeUserRole";
 export { useDeleteUser } from "./hooks/useDeleteUser";
+export { useUsersManagementModalEvents } from "./hooks/useUsersManagementModalEvents";
