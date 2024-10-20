@@ -24,6 +24,10 @@ export async function request<T = null>(endpoint: string, requestOptions?: Reque
         };
     }
 
+    if (response.status === 204) {
+        return {} as T; // TODO: Remove this assertion and handle 204 differently
+    }
+
     return response.json();
 }
 
