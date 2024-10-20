@@ -1,5 +1,3 @@
-import dayjs from "dayjs";
-
 import { request } from "@/api";
 import { DateRange } from "@/hooks/useCalendarDateRange/useCalendarDateRange";
 import { ActivityDTO, ActivityInstance, AddActivityDTO } from "@/types";
@@ -28,7 +26,7 @@ export class ActivitiesService {
     public static async getActivityInstancesByDates({ from, to }: DateRange): Promise<ActivityInstance[]> {
         return request("Enrollment/ByDates", {
             method: "GET",
-            queryParams: { from: from.toISOString(), to: dayjs(to).endOf("day").toISOString() },
+            queryParams: { from: from.toISOString(), to: to.toISOString() },
         });
     }
 

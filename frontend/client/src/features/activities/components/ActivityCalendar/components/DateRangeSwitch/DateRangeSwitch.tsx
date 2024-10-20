@@ -13,7 +13,7 @@ type ActivityCalendarFilters = {
 export const DateRangeSwitch = ({ value, onChange }: ActivityCalendarFilters) => {
     const calculateNewDateRange = useCallback(({ from, to }: DateRange, operation: "increment" | "decrement") => {
         const multiplier = operation === "increment" ? 1 : -1;
-        const timespan = dayjs(to).diff(dayjs(from), "days") * multiplier;
+        const timespan = (dayjs(to).diff(dayjs(from), "days") + 1) * multiplier;
         const newFrom = dayjs(from).add(timespan, "days").toDate();
         const newTo = dayjs(to).add(timespan, "days").toDate();
         return { from: newFrom, to: newTo };
