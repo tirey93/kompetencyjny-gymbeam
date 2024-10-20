@@ -2,11 +2,11 @@ import { useCallback } from "react";
 import { notifications } from "@mantine/notifications";
 import { useMutation } from "@tanstack/react-query";
 
-import { request } from "@/api";
 import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
 import { useAppOverlayStore } from "@/components/AppOverlay";
 import { useAuthState } from "@/features/auth";
+import { AuthService } from "@/features/auth/api/authService";
 import { useTranslate } from "@/lib/i18n";
 
 type UseSignOut = {
@@ -16,7 +16,7 @@ type UseSignOut = {
 export const useSignOut = (): UseSignOut => {
     const { setAndTranslateError } = useRequestErrorHandler();
     const { mutateAsync } = useMutation({
-        mutationFn: signOutRequest,
+        mutationFn: AuthService.signOut,
     });
 
     const { clearUser } = useAuthState();
@@ -51,10 +51,6 @@ export const useSignOut = (): UseSignOut => {
     }, [clearUser, mutateAsync, setAndTranslateError, setIsLoading, translate]);
 
     return { signOut };
-};
-
-const signOutRequest = () => {
-    return request("SignOut");
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {

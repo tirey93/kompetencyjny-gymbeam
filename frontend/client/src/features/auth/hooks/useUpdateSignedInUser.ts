@@ -2,12 +2,8 @@ import { useEffect } from "react";
 
 import { useAuthState } from "./useAuthState";
 
-import { request } from "@/api";
 import { useAppOverlayStore } from "@/components/AppOverlay";
-
-const getUserDetailsRequest = () => {
-    return request("CurrentUserDetails");
-};
+import { UsersService } from "@/features/users/api/usersService";
 
 export const useUpdateSignedInUser = () => {
     const { setUser, user } = useAuthState();
@@ -18,7 +14,7 @@ export const useUpdateSignedInUser = () => {
             if (!user) {
                 setIsLoading(true);
                 try {
-                    const data = await getUserDetailsRequest();
+                    const data = await UsersService.getMyself();
 
                     if (data) {
                         setUser(data);

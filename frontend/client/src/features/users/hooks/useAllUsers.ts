@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { request } from "@/api";
 import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
+import { UsersService } from "@/features/users/api/usersService";
 import { QueryKey } from "@/lib/apiClient";
 import { UserDetails } from "@/types";
 
@@ -14,10 +14,6 @@ type UseAllUsers = {
     refetch: () => Promise<unknown>;
 };
 
-const getAllUsersRequest = () => {
-    return request("GetAllUsers");
-};
-
 export const useAllUsers = (): UseAllUsers => {
     const { error, setAndTranslateError } = useRequestErrorHandler();
     const {
@@ -26,7 +22,7 @@ export const useAllUsers = (): UseAllUsers => {
         refetch,
         isLoading,
     } = useQuery({
-        queryFn: getAllUsersRequest,
+        queryFn: UsersService.getAllUsers,
         queryKey: [QueryKey.Users],
     });
 

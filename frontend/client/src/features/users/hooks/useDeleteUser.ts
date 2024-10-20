@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { request } from "@/api";
 import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
+import { UsersService } from "@/features/users/api/usersService";
 import { QueryKey, useInvalidateQuery } from "@/lib/apiClient";
 
 type UseDeleteUser = {
@@ -13,30 +13,18 @@ type UseDeleteUser = {
     isLoading: boolean;
 };
 
-type DeleteUserRequestOptions = {
-    urlParams: { userId: string };
-};
-
-const deleteUserRequest = (options: DeleteUserRequestOptions) => {
-    return request("DeleteUser", {
-        ...options,
-    });
-};
-
 export const useDeleteUser = (): UseDeleteUser => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { invalidate } = useInvalidateQuery();
     const { mutateAsync, isPending } = useMutation({
-        mutationFn: deleteUserRequest,
+        mutationFn: UsersService.deleteUser,
         onSuccess: () => invalidate(QueryKey.Users),
     });
 
     const deleteUser = useCallback(
         async (userId: number) => {
             try {
-                await mutateAsync({
-                    urlParams: { userId: userId.toString() },
-                });
+                await mutateAsync(userId);
             } catch (error) {
                 const errorTranslation = mapErrorToErrorTranslationKey(error, errorsMap);
                 throw new Error(setAndTranslateError(errorTranslation));

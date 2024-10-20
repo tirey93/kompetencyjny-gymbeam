@@ -1,3 +1,4 @@
+export { ReservationsService } from "./api/reservationsService";
 export { ReservationItemCard } from "./components/ReservationItemCard/ReservationItemCard";
 export { ReservationItemCardHeader } from "./components/ReservationItemCardHeader/ReservationItemCardHeader";
 export { ReservationsList } from "./components/ReservationsList/ReservationsList";

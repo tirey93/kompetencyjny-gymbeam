@@ -3,10 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 
 import { useAuthState } from "./useAuthState";
 
-import { request, SignInRequestBody } from "@/api";
 import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
 import { useAppOverlayStore } from "@/components/AppOverlay";
+import { AuthService, SignInRequestBody } from "@/features/auth/api/authService";
 import { UserDetails } from "@/types/Auth";
 
 type UseSignIn = {
@@ -18,7 +18,7 @@ type UseSignIn = {
 export const useSignIn = (): UseSignIn => {
     const { setAndTranslateError, error, reset } = useRequestErrorHandler();
     const { mutateAsync } = useMutation({
-        mutationFn: signInRequest,
+        mutationFn: AuthService.signIn,
     });
 
     const { setUser } = useAuthState();
@@ -43,10 +43,6 @@ export const useSignIn = (): UseSignIn => {
     );
 
     return { signIn, error, reset };
-};
-
-const signInRequest = (body: SignInRequestBody) => {
-    return request("SignIn", { body });
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {

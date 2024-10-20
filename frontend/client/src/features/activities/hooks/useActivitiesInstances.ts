@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import dayjs from "dayjs";
 
-import { request } from "@/api";
 import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
+import { ActivitiesService } from "@/features/activities/api/activitiesService";
 import { QueryKey } from "@/lib/apiClient";
 import { ActivityInstance } from "@/types";
 
@@ -39,8 +38,8 @@ export const useActivitiesInstances = (options: UseActivitiesInstancesOptions): 
     } = useQuery({
         queryFn: () =>
             options.type === "ByDateRange"
-                ? getActivitiesInstancesByDateRangeRequest(options.dateRange)
-                : getActivitiesInstancesReservedByUser(),
+                ? ActivitiesService.getActivityInstancesByDates(options.dateRange)
+                : ActivitiesService.getActivityInstancesForMyself(),
         select: mapResponse,
         queryKey: [QueryKey.Enrollments, options],
     });
@@ -52,18 +51,6 @@ export const useActivitiesInstances = (options: UseActivitiesInstancesOptions): 
     }, [queryError, setAndTranslateError]);
 
     return { activitiesInstances: data ?? null, error, isLoading, refetch };
-};
-
-const getActivitiesInstancesByDateRangeRequest = ({ from, to }: { from: Date; to: Date }) => {
-    const endOfLastDay = dayjs(to).endOf("day");
-
-    return request("GetActivitiesInstancesByDates", {
-        queryParams: { from: from.toISOString(), to: endOfLastDay.toISOString() },
-    });
-};
-
-const getActivitiesInstancesReservedByUser = () => {
-    return request("GetActivitiesInstancesReservedByUser");
 };
 
 const mapResponse = (data: ActivityInstance[]) =>

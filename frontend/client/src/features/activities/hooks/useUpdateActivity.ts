@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { request } from "@/api";
 import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
+import { ActivitiesService } from "@/features/activities/api/activitiesService";
 import { QueryKey, useInvalidateQuery } from "@/lib/apiClient";
 import { ActivityDTO } from "@/types";
 
@@ -14,15 +14,11 @@ type UseUpdateActivity = {
     reset: () => void;
 };
 
-const updateActivityRequest = (activityDto: ActivityDTO) => {
-    return request("UpdateActivity", { body: activityDto, urlParams: { activityId: activityDto.id.toString() } });
-};
-
 export const useUpdateActivity = (): UseUpdateActivity => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { invalidate } = useInvalidateQuery();
     const { mutateAsync, isPending } = useMutation({
-        mutationFn: updateActivityRequest,
+        mutationFn: ActivitiesService.updateActivity,
         onSuccess: () => invalidate(QueryKey.Activities),
     });
 

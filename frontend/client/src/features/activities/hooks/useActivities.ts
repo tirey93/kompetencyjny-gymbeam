@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { request } from "@/api";
 import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
 import { mapActivityDTOToActivity } from "@/features/activities";
+import { ActivitiesService } from "@/features/activities/api/activitiesService";
 import { QueryKey } from "@/lib/apiClient";
 import { Activity } from "@/types";
 
@@ -23,7 +23,7 @@ export const useActivities = (): UseActivities => {
         refetch,
         isLoading,
     } = useQuery({
-        queryFn: getAllActivitiesRequest,
+        queryFn: ActivitiesService.getAllActivities,
         select: (items) => items.map(mapActivityDTOToActivity),
         queryKey: [QueryKey.Activities],
     });
@@ -35,10 +35,6 @@ export const useActivities = (): UseActivities => {
     }, [queryError, setAndTranslateError]);
 
     return { activities: data ?? null, error, isLoading, refetch };
-};
-
-const getAllActivitiesRequest = () => {
-    return request("GetAllActivities");
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {

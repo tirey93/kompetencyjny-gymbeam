@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { request } from "@/api";
 import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
+import { UsersService } from "@/features/users/api/usersService";
 import { QueryKey, useInvalidateQuery } from "@/lib/apiClient";
 
 type UseChangeUserReservationsPermission = {
@@ -13,26 +13,18 @@ type UseChangeUserReservationsPermission = {
     isLoading: boolean;
 };
 
-type ChangeReservationsPermissionRequestOptions = {
-    queryParams: { value: boolean };
-    urlParams: { userId: string };
-};
-
 export const useChangeReservationsPermission = (): UseChangeUserReservationsPermission => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { invalidate } = useInvalidateQuery();
     const { mutateAsync, isPending } = useMutation({
-        mutationFn: changeReservationsPermissionRequest,
+        mutationFn: UsersService.changeUserReservationsPermission,
         onSuccess: () => invalidate(QueryKey.Users),
     });
 
     const changeReservationsPermission = useCallback(
-        async (userId: number, reservationsEnabled: boolean) => {
+        async (userId: number, permission: boolean) => {
             try {
-                await mutateAsync({
-                    queryParams: { value: reservationsEnabled },
-                    urlParams: { userId: userId.toString() },
-                });
+                await mutateAsync({ id: userId, permission });
             } catch (error) {
                 const errorTranslation = mapErrorToErrorTranslationKey(error, errorsMap);
                 throw new Error(setAndTranslateError(errorTranslation));
@@ -42,12 +34,6 @@ export const useChangeReservationsPermission = (): UseChangeUserReservationsPerm
     );
 
     return { changeReservationsPermission, error, reset, isLoading: isPending };
-};
-
-const changeReservationsPermissionRequest = (options: ChangeReservationsPermissionRequestOptions) => {
-    return request("ChangeReservationsPermission", {
-        ...options,
-    });
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {

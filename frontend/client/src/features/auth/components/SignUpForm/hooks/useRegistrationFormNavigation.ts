@@ -2,8 +2,8 @@ import { useCallback, useState } from "react";
 
 import { UseRegistrationForm } from "./useRegistrationForm";
 
-import { request } from "@/api";
 import { useAppOverlayStore } from "@/components/AppOverlay";
+import { AuthService } from "@/features/auth/api/authService";
 import { useTranslate } from "@/lib/i18n";
 
 type UseRegistrationFormNavigationOptions = {
@@ -32,9 +32,7 @@ export const useRegistrationFormNavigation = ({ registrationForm }: UseRegistrat
 
     const checkLoginAvailability = useCallback(async () => {
         try {
-            const isLoginAvailable = await request("CheckUserNameAvailability", {
-                urlParams: { username: registrationForm.values.login },
-            });
+            const isLoginAvailable = await AuthService.checkUsernameAvailability(registrationForm.values.login);
             return { isLoginAvailable };
         } catch (error) {
             return { error };

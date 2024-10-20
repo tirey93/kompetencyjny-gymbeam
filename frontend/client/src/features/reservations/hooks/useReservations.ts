@@ -2,9 +2,9 @@ import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
-import { request } from "@/api";
 import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
+import { ReservationsService } from "@/features/reservations/api/reservationsService";
 import { QueryKey } from "@/lib/apiClient";
 import { Reservation } from "@/types";
 
@@ -34,7 +34,7 @@ export const useReservations = (options: UseReservationOptions): UseReservations
         refetch,
         isLoading,
     } = useQuery({
-        queryFn: getAllReservationsRequest,
+        queryFn: ReservationsService.getAllReservations,
         select: (data) => data.map((item) => ({ ...item, startTime: new Date(item.startTime) })),
         queryKey: [QueryKey.Reservations, options],
     });
@@ -66,10 +66,6 @@ export const useReservations = (options: UseReservationOptions): UseReservations
     );
 
     return { reservations: filteredData ?? null, error, isLoading, refetch };
-};
-
-const getAllReservationsRequest = () => {
-    return request("GetAllReservations");
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {

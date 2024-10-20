@@ -1,3 +1,4 @@
+export { UsersService } from "./api/usersService";
 export { ChangeUserReservationPermissionsModal } from "./components/ChangeUserReservationPermissionsModal/ChangeUserReservationPermissionsModal";
 export { ChangeUserRoleModal } from "./components/ChangeUserRoleModal/ChangeUserRoleModal";
 export { DeleteUserModal } from "./components/DeleteUserModal/DeleteUserModal";

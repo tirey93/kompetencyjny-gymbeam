@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { request } from "@/api";
 import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
+import { ReservationsService } from "@/features/reservations/api/reservationsService";
 import { QueryKey, useInvalidateQuery } from "@/lib/apiClient";
 
 type UseRemoveReservation = {
@@ -17,7 +17,7 @@ export const useRemoveReservation = (): UseRemoveReservation => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { invalidate } = useInvalidateQuery();
     const { mutateAsync, isPending: isLoading } = useMutation({
-        mutationFn: removeReservationRequest,
+        mutationFn: ReservationsService.removeReservation,
         onSuccess: () => invalidate(QueryKey.Enrollments, QueryKey.Reservations),
     });
 
@@ -34,10 +34,6 @@ export const useRemoveReservation = (): UseRemoveReservation => {
     );
 
     return { removeReservation, error, reset, isLoading };
-};
-
-const removeReservationRequest = (reservationId: number) => {
-    return request("RemoveReservation", { urlParams: { id: reservationId.toString() } });
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {

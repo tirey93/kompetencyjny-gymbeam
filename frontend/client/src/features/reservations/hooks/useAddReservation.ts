@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { request } from "@/api";
 import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
+import { ReservationsService } from "@/features/reservations/api/reservationsService";
 import { QueryKey, useInvalidateQuery } from "@/lib/apiClient";
 import { AddReservationDTO } from "@/types";
 
@@ -18,14 +18,14 @@ export const useAddReservation = (): UseAddReservation => {
     const { error, reset, setAndTranslateError } = useRequestErrorHandler();
     const { invalidate } = useInvalidateQuery();
     const { mutateAsync, isPending: isLoading } = useMutation({
-        mutationFn: addReservationRequest,
+        mutationFn: ReservationsService.addReservation,
         onSuccess: () => invalidate(QueryKey.Enrollments, QueryKey.Reservations),
     });
 
     const addReservation = useCallback(
-        async (body: AddReservationDTO) => {
+        async (dto: AddReservationDTO) => {
             try {
-                await mutateAsync(body);
+                await mutateAsync(dto);
             } catch (error) {
                 const errorTranslation = mapErrorToErrorTranslationKey(error, errorsMap);
                 throw new Error(setAndTranslateError(errorTranslation));
@@ -35,10 +35,6 @@ export const useAddReservation = (): UseAddReservation => {
     );
 
     return { addReservation, error, reset, isLoading };
-};
-
-const addReservationRequest = (body: AddReservationDTO) => {
-    return request("AddReservation", { body });
 };
 
 const errorsMap: HttpErrorsTranslationsMap = {
