@@ -4,7 +4,7 @@ import { IconEye, IconEyeOff, IconUser } from "@tabler/icons-react";
 
 import classes from "./SubmitForm.module.scss";
 
-import { RegistrationFormProps } from "@/app/pages/Registration/Registration";
+import { RegistrationFormProps } from "@/features/auth/components/SignUpForm/types";
 import { useTranslate } from "@/lib/i18n";
 
 export const SubmitForm = ({ form }: RegistrationFormProps) => {
@@ -20,7 +20,7 @@ export const SubmitForm = ({ form }: RegistrationFormProps) => {
                     <IconUser size={50} />
                 </ThemeIcon>
 
-                <Text className={classes.userName}>{form.values.name}</Text>
+                <Text className={classes.displayName}>{form.values.name}</Text>
 
                 <Text className={classes.userCredentials}>
                     {translate("pages.registration.steps.summary.login")}: {form.values.login}

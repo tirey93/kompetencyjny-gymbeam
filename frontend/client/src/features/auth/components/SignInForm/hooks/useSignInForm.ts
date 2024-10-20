@@ -1,7 +1,12 @@
 import { useForm } from "@mantine/form";
 
+export type SignInFormInputs = {
+    password: string;
+    login: string;
+};
+
 export const useSignInForm = () => {
-    const form = useForm({
+    const form = useForm<SignInFormInputs>({
         initialValues: {
             password: "",
             login: "",

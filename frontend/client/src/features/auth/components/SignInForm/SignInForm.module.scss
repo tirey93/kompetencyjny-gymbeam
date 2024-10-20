@@ -1,0 +1,35 @@
+html .container {
+  .title {
+    text-align: center;
+    margin-bottom: var(--mantine-spacing-xl);
+
+    .titleEmphasis {
+      color: var(--mantine-color-success-5);
+    }
+  }
+
+  .form {
+    padding: var(--mantine-spacing-xl);
+    box-shadow: var(--mantine-shadow-xl);
+    border-radius: var(--mantine-radius-md);
+    gap: var(--mantine-spacing-xl);
+
+    .inputLabel {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-left: var(--mantine-radius-xs);
+      margin-bottom: var(--mantine-radius-xs);
+      font-weight: 700;
+    }
+  }
+
+  .buttonsContainer {
+    align-self: center;
+    margin-top: var(--mantine-spacing-sm);
+    max-width: 400px;
+    min-width: 50%;
+  }
+}
+
+
+

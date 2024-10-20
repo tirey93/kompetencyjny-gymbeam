@@ -1,6 +1,6 @@
 import { Button, Image } from "@mantine/core";
 
-import googleLogo from "../assets/google-logo.svg";
+import googleLogo from "../../assets/google-logo.svg";
 
 import classes from "./GoogleOAuthButton.module.scss";
 

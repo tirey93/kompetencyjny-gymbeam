@@ -3,8 +3,8 @@ import { PasswordInput } from "@mantine/core";
 
 import classes from "./PasswordForm.module.scss";
 
-import { RequirementsList } from "@/app/pages/Registration/components";
-import { RegistrationFormProps } from "@/app/pages/Registration/Registration";
+import { RequirementsList } from "@/features/auth/components/SignUpForm/components/RequirementsList/RequirementsList";
+import { RegistrationFormProps } from "@/features/auth/components/SignUpForm/types";
 import { useTranslate } from "@/lib/i18n";
 
 export const PasswordForm = ({ form, rules, onSubmit }: RegistrationFormProps) => {

@@ -6,16 +6,10 @@ import { SearchBar } from "@/components/DataInput";
 import { NoResultsMessage, SortableTableHeader } from "@/components/Table";
 import { UserRow } from "@/features/users/components/UsersTable/components/UserRow/UserRow";
 import { useUsersColumnsConfig } from "@/features/users/components/UsersTable/hooks/useUsersColumnsConfig";
+import { UserManagementEvents } from "@/features/users/components/UsersTable/types";
 import { useSearchAndSort } from "@/hooks";
 import { useTranslate } from "@/lib/i18n";
 import { UserDetails } from "@/types";
-
-type UserManagementEvents = {
-    onDelete: (user: UserDetails) => void;
-    onUserRoleChange: (user: UserDetails) => void;
-    onUserReservationsPermissionToggle: (user: UserDetails) => void;
-    onShowReservations: (user: UserDetails) => void;
-};
 
 type UsersTableProps = {
     users: UserDetails[];

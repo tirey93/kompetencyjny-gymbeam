@@ -1,11 +1,16 @@
 import { useCallback, useMemo } from "react";
 import { useForm } from "@mantine/form";
 
-import { RuleValidationResult, ValidationRule } from "../Registration";
 import { useRegistrationValidationRules } from "./useRegistrationValidationRules";
 
+import {
+    RegistrationFormInputs,
+    RuleValidationResult,
+    ValidationRule,
+} from "@/features/auth/components/SignUpForm/types";
+
 export type UseRegistrationForm = ReturnType<typeof useRegistrationForm>;
-type RegistrationFormField = "login" | "password" | "confirmPassword" | "name";
+type RegistrationFormField = keyof RegistrationFormInputs;
 
 export const useRegistrationForm = () => {
     const rules = useRegistrationValidationRules();
@@ -25,7 +30,7 @@ export const useRegistrationForm = () => {
         [isRuleValidationError]
     );
 
-    const form = useForm({
+    const form = useForm<RegistrationFormInputs>({
         initialValues: {
             password: "",
             confirmPassword: "",

@@ -3,8 +3,8 @@ import { Paper, Stack, Text, Title } from "@mantine/core";
 
 import classes from "./RegistrationFormWrapper.module.scss";
 
-import { RegistrationFormFooter } from "@/app/pages/Registration/components";
 import { ErrorMessage } from "@/components/DataDisplay";
+import { RegistrationFormFooter } from "@/features/auth/components/SignUpForm/components/RegistrationFormFooter/RegistrationFormFooter";
 import { useTranslate } from "@/lib/i18n";
 
 const MAX_DISPLAYABLE_USER_NAME_LENGTH = 10;
@@ -12,7 +12,7 @@ const MAX_DISPLAYABLE_USER_NAME_LENGTH = 10;
 export type RegistrationFormWrapperProps = PropsWithChildren<{
     onNextStep?: () => unknown;
     onPreviousStep?: () => unknown;
-    userName: string;
+    userDisplayName: string;
     errorProps?: {
         signUpError?: string;
         clearSignUpError: () => unknown;
@@ -21,7 +21,7 @@ export type RegistrationFormWrapperProps = PropsWithChildren<{
 
 export const RegistrationFormWrapper = ({
     children,
-    userName,
+    userDisplayName,
     onPreviousStep,
     onNextStep,
     errorProps,
@@ -29,12 +29,12 @@ export const RegistrationFormWrapper = ({
     const translate = useTranslate();
 
     const parsedUserName = useMemo(() => {
-        if (!userName) {
+        if (!userDisplayName) {
             return;
         }
 
-        return `, ${userName.length > MAX_DISPLAYABLE_USER_NAME_LENGTH ? translate("pages.registration.header.defaultName") : userName}`;
-    }, [userName]);
+        return `, ${userDisplayName.length > MAX_DISPLAYABLE_USER_NAME_LENGTH ? translate("pages.registration.header.defaultName") : userDisplayName}`;
+    }, [translate, userDisplayName]);
 
     const padWithSpaceIfNotEmpty = (text: string) => {
         if (text) {

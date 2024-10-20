@@ -1,24 +1,19 @@
 import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { notifications } from "@mantine/notifications";
 
 import { UseRegistrationForm } from "./useRegistrationForm";
 
 import { request } from "@/api";
-import { AppRoute } from "@/app/router";
 import { useAppOverlayStore } from "@/components/AppOverlay";
 import { useTranslate } from "@/lib/i18n";
 
 type UseRegistrationFormNavigationOptions = {
     registrationForm: UseRegistrationForm["form"];
-    onSubmit: (payload: { username: string; password: string; displayName: string }) => Promise<unknown>;
 };
 
-export const useRegistrationFormNavigation = ({ registrationForm, onSubmit }: UseRegistrationFormNavigationOptions) => {
+export const useRegistrationFormNavigation = ({ registrationForm }: UseRegistrationFormNavigationOptions) => {
     const setIsLoading = useAppOverlayStore((state) => state.setIsLoading);
     const [step, setStep] = useState(0);
     const translate = useTranslate();
-    const navigate = useNavigate();
 
     const goToNextStep = useCallback(() => {
         setStep((step) => ++step);
@@ -74,23 +69,9 @@ export const useRegistrationFormNavigation = ({ registrationForm, onSubmit }: Us
         }
     }, [registrationForm, goToNextStep]);
 
-    const submitRegistrationForm = useCallback(async () => {
-        const { login: username, password, name: displayName } = registrationForm.values;
-        await onSubmit({ username, password, displayName });
-
-        notifications.show({
-            title: translate("notifications.auth.signedUp.title"),
-            message: translate("notifications.auth.signedUp.description"),
-            color: "success",
-            withBorder: true,
-        });
-        navigate(AppRoute.ROOT);
-    }, [registrationForm.values, navigate, onSubmit, translate]);
-
     return {
         onNextStepNameForm,
         onNextStepPasswordForm,
-        submitRegistrationForm,
         canSelectStep,
         goToPreviousStep,
         step,

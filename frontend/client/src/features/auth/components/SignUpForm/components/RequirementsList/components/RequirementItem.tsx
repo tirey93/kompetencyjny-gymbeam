@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { List, Text, ThemeIcon } from "@mantine/core";
 
-import { RuleValidationResult } from "../../../Registration";
-
 import classes from "./RequirementItem.module.scss";
+
+import { RuleValidationResult } from "@/features/auth/components/SignUpForm/types";
 
 type RequirementItemProps = {
     rule: RuleValidationResult;
