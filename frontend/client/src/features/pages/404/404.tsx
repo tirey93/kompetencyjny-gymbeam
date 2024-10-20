@@ -20,7 +20,7 @@ export const NotFoundPage = () => {
                 <Button variant="default" onClick={() => navigate(AppRoute.ROOT)}>
                     {translate("pages.404.goToHome")}
                 </Button>
-                <Button variant="gradient" onClick={() => navigate(-1)}>
+                <Button color="info" onClick={() => navigate(-1)}>
                     {translate("pages.404.goBack")}
                 </Button>
             </Group>

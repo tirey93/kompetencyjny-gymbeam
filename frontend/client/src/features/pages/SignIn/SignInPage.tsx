@@ -1,8 +1,9 @@
 import React, { useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
+import { Button, Divider, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 
+import { GoogleOAuthButton } from "./components/GoogleOAuthButton";
 import { useSignInForm } from "./hooks/useSignInForm";
 import { useSignIn } from "../../../common/auth";
 import { ErrorMessage } from "../../../common/components/DataDisplay";
@@ -13,9 +14,9 @@ import classes from "./SignInPage.module.scss";
 
 export const SignInPage = () => {
     const translate = useTranslate();
+    const navigate = useNavigate();
     const { form } = useSignInForm();
     const { signIn, error, reset } = useSignIn();
-    const navigate = useNavigate();
     const { state: routeState } = useLocation();
 
     const onSubmit = useCallback(async () => {
@@ -47,7 +48,7 @@ export const SignInPage = () => {
         <Stack className={classes.container}>
             <Title className={classes.title}>
                 {translate("pages.signIn.header.preEmphasis")}{" "}
-                <Text span c="accent" inherit>
+                <Text span className={classes.titleEmphasis} inherit>
                     {translate("pages.signIn.header.emphasised")}
                 </Text>{" "}
                 {translate("pages.signIn.header.postEmphasis")}
@@ -80,12 +81,15 @@ export const SignInPage = () => {
             {error && <ErrorMessage onClose={reset}>{error}</ErrorMessage>}
 
             <Stack className={classes.buttonsContainer}>
-                <Button size="md" variant="gradient" onClick={onSubmit}>
+                <Button size="md" color="success" onClick={onSubmit}>
                     {translate("pages.signIn.navigation.submit")}
                 </Button>
                 <Button variant="subtle" color="info" onClick={() => navigate(AppRoute.REGISTRATION)}>
                     {translate("pages.signIn.navigation.signUpLink")}
                 </Button>
+
+                <Divider label={translate("pages.signIn.oAuth.divider")} />
+                <GoogleOAuthButton />
             </Stack>
         </Stack>
     );

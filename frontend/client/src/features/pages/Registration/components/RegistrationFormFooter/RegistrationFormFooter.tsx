@@ -31,7 +31,7 @@ export const RegistrationFormFooter = ({
                     </Button>
                 )}
                 {onNextStep && (
-                    <Button className={classes.button} variant="gradient" size="md" onClick={onNextStep}>
+                    <Button className={classes.button} color="success" size="md" onClick={onNextStep}>
                         {nextLabel ?? translate("pages.registration.navigation.nextStep")}
                     </Button>
                 )}

@@ -24,7 +24,7 @@ export const UserAvatar = ({ user }: UserAvatarProps) => {
         if (user.role === "Admin") {
             return "secondary";
         } else {
-            return "accent";
+            return "primary";
         }
     }, [user]);
 

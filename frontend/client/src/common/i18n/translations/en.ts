@@ -605,6 +605,11 @@ export const en: TranslationSource = {
                 submit: "Sign in",
             },
 
+            oAuth: {
+                divider: "Or",
+                google: "Continue with Google",
+            },
+
             header: {
                 preEmphasis: "Happy to see",
                 emphasised: "you",

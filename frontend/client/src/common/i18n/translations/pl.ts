@@ -610,6 +610,11 @@ export const pl: TranslationSource = {
                 submit: "Zaloguj się",
             },
 
+            oAuth: {
+                divider: "Albo",
+                google: "Kontynuuj z Google",
+            },
+
             header: {
                 preEmphasis: "Miło",
                 emphasised: "Cię",

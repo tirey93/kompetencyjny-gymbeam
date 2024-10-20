@@ -605,6 +605,11 @@ export type TranslationSource = {
                 submit: string;
                 signUpLink: string;
             };
+
+            oAuth: {
+                divider: string;
+                google: string;
+            };
         };
 
         registration: {
