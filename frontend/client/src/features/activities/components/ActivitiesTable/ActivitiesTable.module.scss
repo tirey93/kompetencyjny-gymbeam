@@ -1,0 +1,6 @@
+html .tableBody {
+  border-radius: var(--mantine-radius-md);
+  margin-top: var(--mantine-spacing-lg);
+  --table-horizontal-spacing: var(--mantine-spacing-xl);
+  --table-vertical-spacing: var(--mantine-spacing-md);
+}

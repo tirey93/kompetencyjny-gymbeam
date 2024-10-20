@@ -44,11 +44,12 @@
     "react-i18next": "^13.0.10",
     "react-router-dom": "^6.22.3",
     "recharts": "^2.12.3",
-    "vite-plugin-checker": "^0.6.4",
     "yup": "^1.4.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "vite-plugin-checker": "^0.6.4",
+    "vite-tsconfig-paths": "^5.0.1",
     "@types/node": "^22.7.5",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",

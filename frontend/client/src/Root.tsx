@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 
-import { useUpdateSignedInUser } from "./common/auth";
-import { AppOverlay } from "./common/components/AppOverlay";
-import { CookiesPopup, useCookiesPopup } from "./common/components/CookiesPopup";
-import { AppNavigation } from "./features/navigation";
+import { AppNavigation } from "@/app/navigation";
+import { AppOverlay } from "@/components/AppOverlay";
+import { useUpdateSignedInUser } from "@/features/auth";
+import { CookiesPopup, useCookiesPopup } from "@/features/cookies";
 
 export const Root = () => {
     useUpdateSignedInUser();
