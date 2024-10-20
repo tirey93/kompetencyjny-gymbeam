@@ -3,7 +3,7 @@ import { Divider, Group, Stack, Text } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 
-import { ReservationItemCardFields, ReservationItemCardProps } from "../ReservationItemCard/ReservationItemCard"; // TODO: Try to resolve this import in a better way
+import { ReservationItemCardFields, ReservationItemCardProps } from "../ReservationItemCard/ReservationItemCard";
 
 import classes from "./ReservationsSection.module.scss";
 

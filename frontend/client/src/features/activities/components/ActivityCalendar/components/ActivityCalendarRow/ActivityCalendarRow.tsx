@@ -3,16 +3,16 @@ import { Table, Text } from "@mantine/core";
 import dayjs from "dayjs";
 
 import { ActivityCalendarCell } from "./components/ActivityCalendarDay/ActivityCalendarCell";
-import { ActivityItemCardProps } from "../ActivityItemCard/ActivityItemCard"; // TODO: Resolve this import better, maybe there is no need for it
 
 import classes from "./ActivityCalendarRow.module.scss";
 
 import { useDateTimeLocale } from "@/hooks";
+import { ActivityInstance } from "@/types";
 
 type ActivityCalendarRowProps = {
     hour: number;
     days: Date[];
-    activities: ActivityItemCardProps[];
+    activities: ActivityInstance[];
 };
 
 export const ActivityCalendarRow = ({ hour, days, activities }: ActivityCalendarRowProps) => {

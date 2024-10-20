@@ -5,15 +5,16 @@ type UseCookies = {
     accept: () => void;
 };
 
-export const useCookies = (): UseCookies => { // TODO: Handle properly
+export const useCookies = (): UseCookies => {
+    // TODO: Handle properly
     const [hasAccepted, setHasAccepted] = useState(false);
 
     const accept = useCallback(() => {
         setHasAccepted(true);
     }, []);
 
-     return {
+    return {
         hasAccepted,
         accept,
-     }
+    };
 };

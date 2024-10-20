@@ -1,4 +1,4 @@
-import { Table } from "@mantine/core";
+import { Box, Table } from "@mantine/core";
 
 import { UserRow } from "./components/UserRow/UserRow";
 import { useUsersColumnsConfig } from "./hooks/useUsersColumnsConfig";
@@ -30,9 +30,8 @@ export const UsersTable = ({ users, events }: UsersTableProps) => {
         return <NoResultsMessage description={translate("pages.usersDashboard.noResults.description")} />;
     }
 
-    // TODO: Replace Fragment
     return (
-        <>
+        <Box>
             <SearchBar placeholder={translate("pages.usersDashboard.search.placeholder")} onSearch={onSearch} />
             <Table.ScrollContainer minWidth={200} className={classes.scrollContainer}>
                 <Table stickyHeader highlightOnHover className={classes.table}>
@@ -49,6 +48,6 @@ export const UsersTable = ({ users, events }: UsersTableProps) => {
                     </Table.Tbody>
                 </Table>
             </Table.ScrollContainer>
-        </>
+        </Box>
     );
 };
