@@ -33,9 +33,12 @@ const mapRequestOptionsToInitRequest = (options: RequestOptions): RequestInit =>
 });
 
 const buildFinalURL = (endpoint: string, options?: Pick<RequestOptions, "queryParams" | "urlParams">) => {
-    const searchParams = options?.queryParams
-        ? new URLSearchParams(JSON.parse(JSON.stringify(options.queryParams)))
-        : "";
+    const baseUrl = `${VITE_API_BASE_URL}/${endpoint}`;
 
-    return `${VITE_API_BASE_URL}/${endpoint}?${searchParams}`;
+    if (!options?.queryParams) {
+        return baseUrl;
+    }
+
+    const searchParams = new URLSearchParams(JSON.parse(JSON.stringify(options.queryParams)));
+    return `${baseUrl}?${searchParams}`;
 };
