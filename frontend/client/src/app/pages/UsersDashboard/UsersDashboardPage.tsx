@@ -2,8 +2,7 @@ import { useCallback } from "react";
 import { Container } from "@mantine/core";
 
 import { ErrorScreen, LoaderOverlay } from "@/components/DataDisplay";
-import { useAllUsers, useUsersManagementModalEvents } from "@/features/users";
-import { UsersTable } from "@/features/users/components";
+import { useAllUsers, UsersTable, useUsersManagementModalEvents } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
 import { UserDetails } from "@/types";
 

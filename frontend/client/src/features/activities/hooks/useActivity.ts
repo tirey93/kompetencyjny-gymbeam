@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
-import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
-import { mapActivityDTOToActivity } from "@/features/activities";
-import { ActivitiesService } from "@/features/activities/api/activitiesService";
+import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey, useRequestErrorHandler } from "@/api";
+import { ActivitiesService, mapActivityDTOToActivity } from "@/features/activities";
 import { QueryKey } from "@/lib/apiClient";
 import { Activity } from "@/types";
 

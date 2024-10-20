@@ -4,10 +4,11 @@ import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import classNames from "classnames";
 
+import { ActivitySlotsInfo } from "./components/ActivitySlotsInfo/ActivitySlotsInfo";
+import { ReservationButton } from "./components/ReservationButton/ReservationButton";
+
 import classes from "./ActivityItemCard.module.scss";
 
-import { ReservationButton } from "@/features/activities/components/ActivityCalendar/components/ActivityItemCard/ReservationButton";
-import { ActivitySlotsInfo } from "@/features/activities/components/ActivityCalendar/components/ActivitySlotsInfo/ActivitySlotsInfo";
 import { useAuthState } from "@/features/auth";
 import { useAddReservation, useRemoveReservation } from "@/features/reservations";
 import { useDateTimeLocale } from "@/hooks";

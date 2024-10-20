@@ -4,8 +4,7 @@ import { notifications } from "@mantine/notifications";
 
 import { ErrorMessage } from "@/components/DataDisplay";
 import { Modal } from "@/components/Modals";
-import { useChangeReservationsPermission } from "@/features/users";
-import { UserShortInfo } from "@/features/users/components";
+import { useChangeReservationsPermission, UserShortInfo } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
 import { UserDetails } from "@/types";
 

@@ -1,11 +1,12 @@
 import React, { useCallback } from "react";
 import { Button, Divider, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
 
+import { SignInFormInputs, useSignInForm } from "./hooks/useSignInForm";
+import { GoogleOAuthButton } from "../GoogleOAuthButton/GoogleOAuthButton";
+
 import classes from "./SignInForm.module.scss";
 
 import { ErrorMessage } from "@/components/DataDisplay";
-import { GoogleOAuthButton } from "@/features/auth/components/GoogleOAuthButton/GoogleOAuthButton";
-import { SignInFormInputs, useSignInForm } from "@/features/auth/components/SignInForm/hooks/useSignInForm";
 import { useTranslate } from "@/lib/i18n";
 
 type SignInFormProps = {

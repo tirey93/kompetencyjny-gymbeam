@@ -1,10 +1,11 @@
 import React, { useCallback } from "react";
 import { PasswordInput } from "@mantine/core";
 
+import { RegistrationFormProps } from "../../types";
+import { RequirementsList } from "../RequirementsList/RequirementsList";
+
 import classes from "./PasswordForm.module.scss";
 
-import { RequirementsList } from "@/features/auth/components/SignUpForm/components/RequirementsList/RequirementsList";
-import { RegistrationFormProps } from "@/features/auth/components/SignUpForm/types";
 import { useTranslate } from "@/lib/i18n";
 
 export const PasswordForm = ({ form, rules, onSubmit }: RegistrationFormProps) => {

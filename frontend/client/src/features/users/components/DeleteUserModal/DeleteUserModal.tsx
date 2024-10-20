@@ -4,8 +4,7 @@ import { notifications } from "@mantine/notifications";
 
 import { ErrorMessage } from "@/components/DataDisplay";
 import { Modal } from "@/components/Modals";
-import { useDeleteUser } from "@/features/users";
-import { UserShortInfo } from "@/features/users/components";
+import { useDeleteUser, UserShortInfo } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
 import { UserDetails } from "@/types";
 

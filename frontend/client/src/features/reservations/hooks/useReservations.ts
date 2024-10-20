@@ -2,9 +2,8 @@ import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
-import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
-import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
-import { ReservationsService } from "@/features/reservations/api/reservationsService";
+import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey, useRequestErrorHandler } from "@/api";
+import { ReservationsService } from "@/features/reservations";
 import { QueryKey } from "@/lib/apiClient";
 import { Reservation } from "@/types";
 

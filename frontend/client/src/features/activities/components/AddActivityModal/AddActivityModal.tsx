@@ -4,13 +4,14 @@ import { DatePickerInput, TimeInput } from "@mantine/dates";
 import { ContextModalProps, modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 
+import { useActivityModalForm } from "./hooks/useActivityModalForm";
+
 import classes from "./AddActivityModal.module.scss";
 
 import { ErrorMessage } from "@/components/DataDisplay";
 import { DaysInput } from "@/components/DataInput";
 import { Modal } from "@/components/Modals";
 import { generateCronExpression, useAddActivity, useUpdateActivity } from "@/features/activities";
-import { useActivityModalForm } from "@/features/activities/components/AddActivityModal/hooks/useActivityModalForm";
 import { useAllUsers } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
 import { Activity, ActivityDTO, AddActivityDTO } from "@/types/Activities";

@@ -1,13 +1,8 @@
 import { useCallback, useMemo } from "react";
 import { useForm } from "@mantine/form";
 
+import { RegistrationFormInputs, RuleValidationResult, ValidationRule } from "../types";
 import { useRegistrationValidationRules } from "./useRegistrationValidationRules";
-
-import {
-    RegistrationFormInputs,
-    RuleValidationResult,
-    ValidationRule,
-} from "@/features/auth/components/SignUpForm/types";
 
 export type UseRegistrationForm = ReturnType<typeof useRegistrationForm>;
 type RegistrationFormField = keyof RegistrationFormInputs;

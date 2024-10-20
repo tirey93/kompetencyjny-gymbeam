@@ -3,10 +3,9 @@ import { useMutation } from "@tanstack/react-query";
 
 import { useAuthState } from "./useAuthState";
 
-import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
-import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
+import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey, useRequestErrorHandler } from "@/api";
 import { useAppOverlayStore } from "@/components/AppOverlay";
-import { AuthService, SignUpRequestBody } from "@/features/auth/api/authService";
+import { AuthService, SignUpRequestBody } from "@/features/auth";
 import { UserDetails } from "@/types/Auth";
 
 type UseSignUp = {

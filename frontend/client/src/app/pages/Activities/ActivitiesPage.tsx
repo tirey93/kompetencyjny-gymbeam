@@ -3,8 +3,7 @@ import { Container } from "@mantine/core";
 import classes from "./ActivitiesPage.module.scss";
 
 import { ErrorScreen, LoaderOverlay } from "@/components/DataDisplay";
-import { useActivities, useActivitiesInstances } from "@/features/activities";
-import { ActivityCalendar } from "@/features/activities/components/ActivityCalendar";
+import { ActivityCalendar, useActivities, useActivitiesInstances } from "@/features/activities";
 import { useCalendarDateRange } from "@/hooks";
 import { useTranslate } from "@/lib/i18n";
 

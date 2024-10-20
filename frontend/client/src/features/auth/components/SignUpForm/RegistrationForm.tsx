@@ -1,13 +1,14 @@
 import { useCallback } from "react";
 import { Stepper } from "@mantine/core";
 
-import { RegistrationFormWrapper } from "@/features/auth/components/SignUpForm/components/FormWrapper/RegistrationFormWrapper";
-import { NameForm } from "@/features/auth/components/SignUpForm/components/NameForm/NameForm";
-import { PasswordForm } from "@/features/auth/components/SignUpForm/components/PasswordForm/PasswordForm";
-import { SubmitForm } from "@/features/auth/components/SignUpForm/components/SubmitForm/SubmitForm";
-import { useRegistrationForm } from "@/features/auth/components/SignUpForm/hooks/useRegistrationForm";
-import { useRegistrationFormNavigation } from "@/features/auth/components/SignUpForm/hooks/useRegistrationFormNavigation";
-import { RegistrationFormInputs } from "@/features/auth/components/SignUpForm/types";
+import { RegistrationFormWrapper } from "./components/FormWrapper/RegistrationFormWrapper";
+import { NameForm } from "./components/NameForm/NameForm";
+import { PasswordForm } from "./components/PasswordForm/PasswordForm";
+import { SubmitForm } from "./components/SubmitForm/SubmitForm";
+import { useRegistrationForm } from "./hooks/useRegistrationForm";
+import { useRegistrationFormNavigation } from "./hooks/useRegistrationFormNavigation";
+import { RegistrationFormInputs } from "./types";
+
 import { useTranslate } from "@/lib/i18n";
 
 export type RegistrationFormProps = {

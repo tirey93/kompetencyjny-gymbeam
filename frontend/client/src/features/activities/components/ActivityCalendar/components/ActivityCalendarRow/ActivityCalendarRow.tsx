@@ -2,10 +2,11 @@ import { useCallback, useMemo } from "react";
 import { Table, Text } from "@mantine/core";
 import dayjs from "dayjs";
 
+import { ActivityCalendarCell } from "./components/ActivityCalendarDay/ActivityCalendarCell";
+import { ActivityItemCardProps } from "../ActivityItemCard/ActivityItemCard"; // TODO: Resolve this import better, maybe there is no need for it
+
 import classes from "./ActivityCalendarRow.module.scss";
 
-import { ActivityCalendarCell } from "@/features/activities/components/ActivityCalendar/components/ActivityCalendarDay/ActivityCalendarCell";
-import { ActivityItemCardProps } from "@/features/activities/components/ActivityCalendar/components/ActivityItemCard/ActivityItemCard";
 import { useDateTimeLocale } from "@/hooks";
 
 type ActivityCalendarRowProps = {

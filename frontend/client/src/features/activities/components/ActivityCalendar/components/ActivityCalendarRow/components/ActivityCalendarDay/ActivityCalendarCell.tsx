@@ -1,7 +1,7 @@
 import { Table } from "@mantine/core";
 import classNames from "classnames";
 
-import { ActivityItemCard, ActivityItemCardProps } from "../ActivityItemCard/ActivityItemCard";
+import { ActivityItemCard, ActivityItemCardProps } from "../../../ActivityItemCard/ActivityItemCard";
 
 import classes from "./ActivityCalendarDay.module.scss";
 

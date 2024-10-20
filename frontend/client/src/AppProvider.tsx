@@ -9,16 +9,12 @@ import "dayjs/locale/pl.js";
 import "dayjs/locale/en.js";
 
 import { ModalsManager } from "@/components/Modals";
-import { ActivityDetailsModal } from "@/features/activities/components/ActivityDetailsModal/ActivityDetailsModal";
-import { AddActivityModal } from "@/features/activities/components/AddActivityModal/AddActivityModal";
-import { DeleteActivityModal } from "@/features/activities/components/DeleteActivityModal/DeleteActivityModal";
-import { ReservationsModal } from "@/features/reservations/components/ReservationsModal/ReservationsModal";
-import { ChangeUserReservationPermissionsModal } from "@/features/users/components/ChangeUserReservationPermissionsModal/ChangeUserReservationPermissionsModal";
-import { ChangeUserRoleModal } from "@/features/users/components/ChangeUserRoleModal/ChangeUserRoleModal";
-import { DeleteUserModal } from "@/features/users/components/DeleteUserModal/DeleteUserModal";
+import { ActivityDetailsModal, AddActivityModal, DeleteActivityModal } from "@/features/activities";
+import { ReservationsModal } from "@/features/reservations";
+import { ChangeUserReservationPermissionsModal, ChangeUserRoleModal, DeleteUserModal } from "@/features/users";
 import { useDateTimeLocale } from "@/hooks";
 import { apiClient } from "@/lib/apiClient";
-import { i18n } from "@/lib/i18n/i18n";
+import { i18n } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
 
 export const AppProvider = () => {

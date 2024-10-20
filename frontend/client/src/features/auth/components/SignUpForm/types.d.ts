@@ -1,4 +1,4 @@
-import { UseRegistrationForm } from "@/features/auth/components/SignUpForm/hooks/useRegistrationForm";
+import { UseRegistrationForm } from "./hooks/useRegistrationForm";
 
 export type RegistrationFormInputs = {
     login: string;

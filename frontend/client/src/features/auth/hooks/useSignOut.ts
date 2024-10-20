@@ -2,11 +2,9 @@ import { useCallback } from "react";
 import { notifications } from "@mantine/notifications";
 import { useMutation } from "@tanstack/react-query";
 
-import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
-import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
+import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey, useRequestErrorHandler } from "@/api";
 import { useAppOverlayStore } from "@/components/AppOverlay";
-import { useAuthState } from "@/features/auth";
-import { AuthService } from "@/features/auth/api/authService";
+import { AuthService, useAuthState } from "@/features/auth";
 import { useTranslate } from "@/lib/i18n";
 
 type UseSignOut = {

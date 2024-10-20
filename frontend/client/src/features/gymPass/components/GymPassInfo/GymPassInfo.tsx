@@ -2,7 +2,7 @@ import { Box, Stack, Text } from "@mantine/core";
 
 import classes from "./GymPassInfo.module.scss";
 
-import { UserReservationsPermissionBadge } from "@/features/users/components";
+import { UserReservationsPermissionBadge } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
 import { UserDetails } from "@/types";
 

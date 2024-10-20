@@ -7,9 +7,7 @@ import { notifications } from "@mantine/notifications";
 import classes from "./RegistrationPage.module.scss";
 
 import { AppRoute } from "@/app/router";
-import { useSignUp } from "@/features/auth";
-import { RegistrationForm } from "@/features/auth/components/SignUpForm/RegistrationForm";
-import { RegistrationFormInputs } from "@/features/auth/components/SignUpForm/types";
+import { RegistrationForm, RegistrationFormInputs, useSignUp } from "@/features/auth";
 import { useTranslate } from "@/lib/i18n";
 
 export const RegistrationPage = () => {

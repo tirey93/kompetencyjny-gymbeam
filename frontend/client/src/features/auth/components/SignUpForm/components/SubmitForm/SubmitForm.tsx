@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Box, CloseButton, Group, Stack, Text, ThemeIcon } from "@mantine/core";
 import { IconEye, IconEyeOff, IconUser } from "@tabler/icons-react";
 
+import { RegistrationFormProps } from "../../types";
+
 import classes from "./SubmitForm.module.scss";
 
-import { RegistrationFormProps } from "@/features/auth/components/SignUpForm/types";
 import { useTranslate } from "@/lib/i18n";
 
 export const SubmitForm = ({ form }: RegistrationFormProps) => {

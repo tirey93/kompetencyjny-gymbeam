@@ -3,13 +3,11 @@ import { Divider, Group, Stack, Text } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 
+import { ReservationItemCardFields, ReservationItemCardProps } from "../ReservationItemCard/ReservationItemCard"; // TODO: Try to resolve this import in a better way
+
 import classes from "./ReservationsSection.module.scss";
 
 import { useRemoveReservation } from "@/features/reservations";
-import {
-    ReservationItemCardFields,
-    ReservationItemCardProps,
-} from "@/features/reservations/components/ReservationItemCard/ReservationItemCard";
 import { useTranslate } from "@/lib/i18n";
 
 type ReservationsSectionProps = {

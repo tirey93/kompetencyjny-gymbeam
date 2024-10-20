@@ -1,9 +1,8 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
-import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
-import { ReservationsService } from "@/features/reservations/api/reservationsService";
+import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey, useRequestErrorHandler } from "@/api";
+import { ReservationsService } from "@/features/reservations";
 import { QueryKey, useInvalidateQuery } from "@/lib/apiClient";
 
 type UseRemoveReservation = {

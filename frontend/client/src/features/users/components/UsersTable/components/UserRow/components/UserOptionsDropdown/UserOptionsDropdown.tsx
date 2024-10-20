@@ -3,7 +3,7 @@ import { IconDots, IconListCheck, IconTrash } from "@tabler/icons-react";
 
 import classes from "./UserOptionsDropdown.module.scss";
 
-import { UserManagementEvents } from "@/features/users/components/UsersTable/types";
+import { UserManagementEvents } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
 import { UserDetails } from "@/types";
 

@@ -7,7 +7,7 @@ import classes from "./SideNavigation.module.scss";
 
 import { Logo } from "@/components/Logo";
 import { UserRoleGuard } from "@/features/auth";
-import { SettingsMenu } from "@/features/settings/components/SettingsMenu/SettingsMenu";
+import { SettingsMenu } from "@/features/settings";
 
 type SideNavigationProps = {
     onNavigate?: () => unknown;

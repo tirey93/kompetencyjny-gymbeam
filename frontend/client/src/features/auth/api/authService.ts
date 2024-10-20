@@ -1,9 +1,6 @@
 import { request } from "@/api";
+import { SignInRequestBody, SignUpRequestBody } from "@/features/auth";
 import { UserDetails } from "@/types";
-
-export type SignInRequestBody = { username: string; password: string };
-
-export type SignUpRequestBody = { displayName: string; username: string; password: string };
 
 export class AuthService {
     public static signIn(body: SignInRequestBody): Promise<UserDetails> {

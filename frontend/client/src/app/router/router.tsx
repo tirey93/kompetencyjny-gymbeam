@@ -7,7 +7,7 @@ import { GymPassPage } from "@/app/pages/GymPass";
 import { HomePage } from "@/app/pages/Home";
 import { LegalPage } from "@/app/pages/Legal/LegalPage";
 import { RegistrationPage } from "@/app/pages/Registration";
-import { ReservationsPage } from "@/app/pages/Reservations/ReservationsPage";
+import { ReservationsPage } from "@/app/pages/Reservations";
 import { SignInPage } from "@/app/pages/SignIn";
 import { UsersDashboardPage } from "@/app/pages/UsersDashboard";
 import { AppRoute } from "@/app/router/AppRoute";

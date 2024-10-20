@@ -3,7 +3,7 @@ import { Box, Group, Text } from "@mantine/core";
 
 import classes from "./UserShortInfo.module.scss";
 
-import { UserAvatar } from "@/features/users/components";
+import { UserAvatar } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
 import { UserDetails } from "@/types";
 

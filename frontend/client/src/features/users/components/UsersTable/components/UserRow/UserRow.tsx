@@ -1,12 +1,12 @@
 import { Table, Text } from "@mantine/core";
 import classNames from "classnames";
 
+import { UserOptionsDropdown } from "./components/UserOptionsDropdown/UserOptionsDropdown";
+
 import classes from "./UserRow.module.scss";
 
 import { TextWithTooltip } from "@/components/DataDisplay";
-import { UserAvatar, UserReservationsPermissionBadge, UserRoleBadge } from "@/features/users/components";
-import { UserOptionsDropdown } from "@/features/users/components/UsersTable/components/UserOptionsDropdown/UserOptionsDropdown";
-import { UserManagementEvents } from "@/features/users/components/UsersTable/types";
+import { UserAvatar, UserManagementEvents, UserReservationsPermissionBadge, UserRoleBadge } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
 import { UserDetails } from "@/types";
 

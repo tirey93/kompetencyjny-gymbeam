@@ -6,9 +6,7 @@ import { notifications } from "@mantine/notifications";
 import classes from "./SignInPage.module.scss";
 
 import { AppRoute } from "@/app/router";
-import { useSignIn } from "@/features/auth";
-import { SignInFormInputs } from "@/features/auth/components/SignInForm/hooks/useSignInForm";
-import { SignInForm } from "@/features/auth/components/SignInForm/SignInForm";
+import { SignInForm, SignInFormInputs, useSignIn } from "@/features/auth";
 import { useTranslate } from "@/lib/i18n";
 
 export const SignInPage = () => {

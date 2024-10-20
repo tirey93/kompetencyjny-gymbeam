@@ -1,12 +1,13 @@
 import { Table } from "@mantine/core";
 
+import { UserRow } from "./components/UserRow/UserRow";
+import { useUsersColumnsConfig } from "./hooks/useUsersColumnsConfig";
+import { UserManagementEvents } from "./types";
+
 import classes from "./UsersTable.module.scss";
 
 import { SearchBar } from "@/components/DataInput";
 import { NoResultsMessage, SortableTableHeader } from "@/components/Table";
-import { UserRow } from "@/features/users/components/UsersTable/components/UserRow/UserRow";
-import { useUsersColumnsConfig } from "@/features/users/components/UsersTable/hooks/useUsersColumnsConfig";
-import { UserManagementEvents } from "@/features/users/components/UsersTable/types";
 import { useSearchAndSort } from "@/hooks";
 import { useTranslate } from "@/lib/i18n";
 import { UserDetails } from "@/types";

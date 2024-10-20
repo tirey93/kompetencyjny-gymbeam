@@ -4,7 +4,7 @@ import { IconShield } from "@tabler/icons-react";
 import classes from "./GymPass.module.scss";
 
 import { useAuthState } from "@/features/auth";
-import { GymPassInfo, GymPassQR, Timestamp } from "@/features/gymPass/components";
+import { GymPassInfo, GymPassQR, Timestamp } from "@/features/gymPass";
 
 export const GymPassPage = () => {
     const { user } = useAuthState();

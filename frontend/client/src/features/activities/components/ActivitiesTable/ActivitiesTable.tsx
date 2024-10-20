@@ -1,12 +1,13 @@
 import { Box, Button, Group, Table } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 
+import { ActivityRow } from "./components/ActivityRow/ActivityRow";
+import { useActivitiesColumnsConfig } from "./hooks/useActivitiesColumnsConfig";
+
 import classes from "./ActivitiesTable.module.scss";
 
 import { SearchBar } from "@/components/DataInput";
 import { NoResultsMessage, SortableTableHeader } from "@/components/Table";
-import { ActivityRow } from "@/features/activities/components/ActivitiesTable/components/ActivityRow/ActivityRow";
-import { useActivitiesColumnsConfig } from "@/features/activities/components/ActivitiesTable/hooks/useActivitiesColumnsConfig";
 import { useSearchAndSort } from "@/hooks";
 import { useTranslate } from "@/lib/i18n";
 import { Activity } from "@/types";

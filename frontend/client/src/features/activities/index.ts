@@ -1,5 +1,6 @@
 export { ActivitiesService } from "./api/activitiesService";
 export { ActivitiesTable } from "./components/ActivitiesTable/ActivitiesTable";
+export { ActivityCalendar } from "./components/ActivityCalendar";
 export { ActivityDetailsModal } from "./components/ActivityDetailsModal/ActivityDetailsModal";
 export { AddActivityModal } from "./components/AddActivityModal/AddActivityModal";
 export { DeleteActivityModal } from "./components/DeleteActivityModal/DeleteActivityModal";

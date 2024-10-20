@@ -1,9 +1,8 @@
 import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-import { useRequestErrorHandler } from "@/api/hooks/useRequestErrorHandler";
-import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey } from "@/api/utils/mapErrorToErrorTranslationKey";
-import { UsersService } from "@/features/users/api/usersService";
+import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey, useRequestErrorHandler } from "@/api";
+import { UsersService } from "@/features/users";
 import { QueryKey, useInvalidateQuery } from "@/lib/apiClient";
 import { UserRole } from "@/types";
 

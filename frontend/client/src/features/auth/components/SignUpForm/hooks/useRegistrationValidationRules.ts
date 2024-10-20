@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
-import { ValidationRule } from "@/features/auth/components/SignUpForm/types";
+import { ValidationRule } from "../types";
+
 import { useTranslate } from "@/lib/i18n";
 
 const MIN_LOGIN_LENGTH = 5;

@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { UseRegistrationForm } from "./useRegistrationForm";
 
 import { useAppOverlayStore } from "@/components/AppOverlay";
-import { AuthService } from "@/features/auth/api/authService";
+import { AuthService } from "@/features/auth";
 import { useTranslate } from "@/lib/i18n";
 
 type UseRegistrationFormNavigationOptions = {

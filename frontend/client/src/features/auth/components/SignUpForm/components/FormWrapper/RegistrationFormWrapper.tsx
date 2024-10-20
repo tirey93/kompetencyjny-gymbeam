@@ -1,10 +1,11 @@
 import { PropsWithChildren, useMemo } from "react";
 import { Paper, Stack, Text, Title } from "@mantine/core";
 
+import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
+
 import classes from "./RegistrationFormWrapper.module.scss";
 
 import { ErrorMessage } from "@/components/DataDisplay";
-import { RegistrationFormFooter } from "@/features/auth/components/SignUpForm/components/RegistrationFormFooter/RegistrationFormFooter";
 import { useTranslate } from "@/lib/i18n";
 
 const MAX_DISPLAYABLE_USER_NAME_LENGTH = 10;
