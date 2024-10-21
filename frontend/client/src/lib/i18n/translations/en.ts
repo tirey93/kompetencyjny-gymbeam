@@ -653,7 +653,6 @@ export const en: TranslationSource = {
                 preEmphasis: "Nice to meet",
                 emphasised: "you",
                 postEmphasis: "",
-                defaultName: "pal",
             },
             navigation: { nextStep: "Next", previousStep: "Back", submit: "Submit", signInLink: "I want to sign in." },
             steps: {

@@ -26,7 +26,9 @@ export const RegistrationForm = ({ onSubmit, onCloseError, error, isVerbose }: R
         useRegistrationFormNavigation({ registrationForm: form });
 
     const handleSubmit = useCallback(async () => {
-        await onSubmit(form.values);
+        const trimmedLogin = form.values.login.trim();
+        const trimmedDisplayName = form.values.name.trim();
+        await onSubmit({ ...form.values, login: trimmedLogin, name: trimmedDisplayName });
     }, [form.values, onSubmit]);
 
     return (

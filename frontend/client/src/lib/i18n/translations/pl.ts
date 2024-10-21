@@ -659,7 +659,6 @@ export const pl: TranslationSource = {
                 preEmphasis: "Miło",
                 emphasised: "Cię",
                 postEmphasis: "poznać",
-                defaultName: "ziomeczku",
             },
             navigation: {
                 nextStep: "Dalej",

@@ -16,7 +16,7 @@ export class AuthService {
     }
 
     public static checkUsernameAvailability(username: string): Promise<boolean> {
-        return request<boolean>(`/User/CheckAvailability/ByName/${username}`, {
+        return request<boolean>(`User/CheckAvailability/ByName/${username}`, {
             method: "GET",
             urlParams: { username },
         });
