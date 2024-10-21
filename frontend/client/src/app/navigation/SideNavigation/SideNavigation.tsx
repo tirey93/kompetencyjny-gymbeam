@@ -25,14 +25,17 @@ export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
                 </Center>
 
                 <NavigationSection onNavigate={onNavigate} tiles={[home, legal]} />
+                <Divider className={classes.divider} />
 
                 <UserRoleGuard allowedRoles={["Admin", "User"]}>
                     <NavigationSection onNavigate={onNavigate} tiles={[activities, reservations, qr]} />
                 </UserRoleGuard>
 
+                <Divider className={classes.divider} />
                 <UserRoleGuard allowedRoles={["Admin"]}>
                     <NavigationSection onNavigate={onNavigate} tiles={[activitiesDashboard, usersDashboard]} />
                 </UserRoleGuard>
+                <Divider className={classes.divider} />
             </Stack>
 
             <Stack className={classes.sectionWrapper}>

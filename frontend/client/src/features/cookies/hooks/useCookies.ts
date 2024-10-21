@@ -1,4 +1,8 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
+
+import { useStorage } from "@/hooks/useStorage/useStorage";
+
+const COOKIE_CONSENT_STORAGE_KEY = "cookie-consent-storage-key";
 
 type UseCookies = {
     hasAccepted: boolean;
@@ -6,15 +10,14 @@ type UseCookies = {
 };
 
 export const useCookies = (): UseCookies => {
-    // TODO: Handle properly
-    const [hasAccepted, setHasAccepted] = useState(false);
+    const [hasAccepted, setHasAccepted] = useStorage<boolean>(COOKIE_CONSENT_STORAGE_KEY);
 
     const accept = useCallback(() => {
         setHasAccepted(true);
     }, []);
 
     return {
-        hasAccepted,
+        hasAccepted: Boolean(hasAccepted),
         accept,
     };
 };

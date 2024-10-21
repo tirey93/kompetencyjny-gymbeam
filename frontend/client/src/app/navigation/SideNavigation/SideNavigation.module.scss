@@ -6,7 +6,7 @@ html .sideNavigationContainer {
   background-color: var(--mantine-color-dark-8);
 
   .sectionWrapper {
-    gap: 0;
+    gap: var(--chip-spacing-md);
     align-items: center;
 
     .divider {
@@ -16,6 +16,7 @@ html .sideNavigationContainer {
 
     .logoWrapper {
       padding-top: var(--mantine-spacing-md);
+      margin-bottom: var(--mantine-spacing-xl);
     }
   }
 }

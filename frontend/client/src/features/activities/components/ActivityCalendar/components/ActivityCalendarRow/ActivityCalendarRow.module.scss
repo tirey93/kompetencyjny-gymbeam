@@ -11,6 +11,7 @@ html .row {
 
     &.hourCell {
       width: 40px;
+      height: 100px;
 
       .hour {
         padding-inline: var(--mantine-spacing-sm);

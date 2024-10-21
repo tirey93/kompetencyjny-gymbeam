@@ -1,7 +1,7 @@
 @import "src/mantine";
 
 html .calendar {
-  max-height: 90vh;
+  height: calc(100vh - 100px);
 
   .calendarHeader {
     padding-block: var(--mantine-spacing-md);
@@ -23,13 +23,8 @@ html .calendar {
   }
 
   .scrollContainer {
-    height: calc(100vh - 250px);
     border-radius: var(--mantine-radius-md);
     overflow: hidden;
-
-    @media (width < $mantine-breakpoint-sm) {
-      height: calc(100vh - 300px);
-    }
 
     > *:first-child {
       padding: 0;
@@ -45,7 +40,7 @@ html .calendar {
           text-align: center;
 
           &.dateRangeSwitch {
-            > * {
+            > div {
               justify-content: center;
             }
           }
