@@ -73,7 +73,7 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
             <Table.Td>
                 <Days value={activity.days} />
             </Table.Td>
-            <Table.Td>{activity.totalCapacity}</Table.Td>F
+            <Table.Td>{activity.totalCapacity}</Table.Td>
             <Table.Td className={classes.columnWithTruncatedValue}>
                 <TextWithTooltip>{activity.leaderName}</TextWithTooltip>
             </Table.Td>
