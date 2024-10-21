@@ -1,6 +1,8 @@
 import { useCallback } from "react";
 import { Container } from "@mantine/core";
 
+import classes from "./UsersDashboardPage.module.scss";
+
 import { ErrorScreen, LoaderOverlay } from "@/components/DataDisplay";
 import { useAllUsers, UsersTable, useUsersManagementModalEvents } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
@@ -34,7 +36,7 @@ export const UsersDashboardPage = () => {
     }
 
     return (
-        <Container size="xl">
+        <Container className={classes.container}>
             <UsersTable
                 users={users ?? []}
                 events={{

@@ -546,7 +546,7 @@ export const pl: TranslationSource = {
                         label: "Szybkie zapisy",
                     },
                     customers: {
-                        description: "Ponad 28.000+ ludzi, któzy nam zaufali, 98% wciąż jest z nami!",
+                        description: "Zaufało nam ponad 28.000+ ludzi, 98% wciąż jest z nami!",
                         label: "Zadowoleni klienci",
                     },
                     privacy: {

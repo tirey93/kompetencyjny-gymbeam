@@ -28,8 +28,8 @@ export const ActivitiesTable = ({ activities, onAdd, onDelete }: ActivitiesTable
     });
 
     return (
-        <Box>
-            <Group>
+        <Box className={classes.container}>
+            <Group className={classes.header}>
                 <SearchBar
                     placeholder={translate("pages.activitiesDashboard.searchBar.placeholder")}
                     onSearch={onSearch}
