@@ -1,4 +1,4 @@
-import { Badge, Group } from "@mantine/core";
+import { Group } from "@mantine/core";
 
 import classes from "./Days.module.scss";
 
@@ -13,13 +13,5 @@ type DaysProps = {
 export const Days = ({ value }: DaysProps) => {
     const translate = useTranslate();
 
-    return (
-        <Group className={classes.container}>
-            {value.map((day) => (
-                <Badge variant="outline" key={day} color="primary">
-                    {parseInt(day) + 1} - {translate(WEEKDAYS[day].long)}
-                </Badge>
-            ))}
-        </Group>
-    );
+    return <Group className={classes.container}>{value.map((day) => translate(WEEKDAYS[day].short)).join(", ")}</Group>;
 };

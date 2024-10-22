@@ -1,4 +1,4 @@
-import { PropsWithChildren, useMemo } from "react";
+import { PropsWithChildren } from "react";
 import { Paper, Stack, Text, Title } from "@mantine/core";
 
 import { RegistrationFormFooter } from "../RegistrationFormFooter/RegistrationFormFooter";
@@ -7,8 +7,6 @@ import classes from "./RegistrationFormWrapper.module.scss";
 
 import { ErrorMessage } from "@/components/DataDisplay";
 import { useTranslate } from "@/lib/i18n";
-
-const MAX_DISPLAYABLE_USER_NAME_LENGTH = 10;
 
 export type RegistrationFormWrapperProps = PropsWithChildren<{
     onNextStep?: () => unknown;
@@ -22,20 +20,11 @@ export type RegistrationFormWrapperProps = PropsWithChildren<{
 
 export const RegistrationFormWrapper = ({
     children,
-    userDisplayName,
     onPreviousStep,
     onNextStep,
     errorProps,
 }: RegistrationFormWrapperProps) => {
     const translate = useTranslate();
-
-    const parsedUserName = useMemo(() => {
-        if (!userDisplayName) {
-            return;
-        }
-
-        return `, ${userDisplayName.length > MAX_DISPLAYABLE_USER_NAME_LENGTH ? translate("pages.registration.header.defaultName") : userDisplayName}`;
-    }, [translate, userDisplayName]);
 
     const padWithSpaceIfNotEmpty = (text: string) => {
         if (text) {
@@ -51,15 +40,16 @@ export const RegistrationFormWrapper = ({
                 <Text className={classes.titleHighlight} span inherit>
                     {translate("pages.registration.header.emphasised")}
                 </Text>
-                {padWithSpaceIfNotEmpty(translate("pages.registration.header.postEmphasis"))}
-                {parsedUserName}!
+                {padWithSpaceIfNotEmpty(translate("pages.registration.header.postEmphasis"))}!
             </Title>
 
             <Paper className={classes.formWrapper} withBorder component={Stack}>
                 {children}
             </Paper>
 
-            {errorProps && <ErrorMessage onClose={errorProps.clearSignUpError}>{errorProps.signUpError}</ErrorMessage>}
+            {errorProps?.signUpError && (
+                <ErrorMessage onClose={errorProps.clearSignUpError}>{errorProps.signUpError}</ErrorMessage>
+            )}
             <RegistrationFormFooter onPreviousStep={onPreviousStep} onNextStep={onNextStep} />
         </Stack>
     );

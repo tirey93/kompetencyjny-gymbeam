@@ -1,17 +1,26 @@
-html .scrollContainer {
-  border-radius: var(--mantine-radius-md);
-  overflow: hidden;
-  position: relative;
-
-  .table {
-    border-radius: var(--mantine-radius-md);
-    margin-top: var(--mantine-spacing-lg);
-    --table-vertical-spacing: var(--mantine-spacing-md);
+html .container {
+  .searchBar {
+    margin-bottom: var(--mantine-spacing-sm);
+    max-width: 400px;
   }
 
-  .errorContainer {
-    align-items: center;
-    margin-top: var(--mantine-spacing-lg);
-    gap: var(--mantine-spacing-md);
+  .scrollContainer {
+    border-radius: var(--mantine-radius-md);
+    overflow: hidden;
+    position: relative;
+
+    .table {
+      border-radius: var(--mantine-radius-md);
+      margin-top: var(--mantine-spacing-lg);
+      --table-vertical-spacing: var(--mantine-spacing-md);
+    }
+
+    .errorContainer {
+      align-items: center;
+      margin-top: var(--mantine-spacing-lg);
+      gap: var(--mantine-spacing-md);
+    }
   }
 }
+
+

@@ -10,7 +10,24 @@ html .row {
     text-align: center;
 
     &.hourCell {
+      z-index: 10;
+      left: 0;
+      top: 80px;
+      position: sticky;
+
+      background: var(--mantine-color-dark-8);
       width: 40px;
+      height: 100px;
+
+      &:after {
+        top: 0;
+        right: -1px;
+        left: 0;
+        bottom: 0;
+        border-right: 2px solid var(--mantine-color-dark-5);
+        content: "";
+        position: absolute;
+      }
 
       .hour {
         padding-inline: var(--mantine-spacing-sm);

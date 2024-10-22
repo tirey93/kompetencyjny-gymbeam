@@ -74,15 +74,15 @@ export const AddActivityModal = ({ innerProps: { activity }, id }: AddActivityMo
         const [durationHours, durationMinutes] = duration.split(":");
 
         return {
-            name: name!,
+            name: name!.trim(),
             totalCapacity: totalCapacity,
             leaderId: parseInt(leaderId),
             startTime: dateRange[0].toISOString(),
             endTime: dateRange[1].toISOString(),
             duration: parseInt(durationHours) * 60 + parseInt(durationMinutes),
             cron: generateCronExpression(startHour, days).stringify(),
-            shortDescription: shortDescription,
-            longDescription: longDescription?.length ? longDescription : shortDescription,
+            shortDescription: shortDescription.trim(),
+            longDescription: (longDescription?.length ? longDescription : shortDescription).trim(),
         };
     }, [form.values]);
 

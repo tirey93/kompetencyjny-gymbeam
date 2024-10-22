@@ -31,8 +31,12 @@ export const UsersTable = ({ users, events }: UsersTableProps) => {
     }
 
     return (
-        <Box>
-            <SearchBar placeholder={translate("pages.usersDashboard.search.placeholder")} onSearch={onSearch} />
+        <Box className={classes.container}>
+            <SearchBar
+                placeholder={translate("pages.usersDashboard.search.placeholder")}
+                onSearch={onSearch}
+                className={classes.searchBar}
+            />
             <Table.ScrollContainer minWidth={200} className={classes.scrollContainer}>
                 <Table stickyHeader highlightOnHover className={classes.table}>
                     <SortableTableHeader

@@ -28,8 +28,8 @@ export const ActivitiesTable = ({ activities, onAdd, onDelete }: ActivitiesTable
     });
 
     return (
-        <Box>
-            <Group>
+        <Box className={classes.container}>
+            <Group className={classes.header}>
                 <SearchBar
                     placeholder={translate("pages.activitiesDashboard.searchBar.placeholder")}
                     onSearch={onSearch}
@@ -39,7 +39,7 @@ export const ActivitiesTable = ({ activities, onAdd, onDelete }: ActivitiesTable
                     {translate("pages.activitiesDashboard.addNewButton")}
                 </Button>
             </Group>
-            <Table.ScrollContainer minWidth={200}>
+            <Table.ScrollContainer minWidth={200} className={classes.tableScrollContainer}>
                 <Table stickyHeader highlightOnHover className={classes.tableBody}>
                     <SortableTableHeader
                         columns={columnsConfig}

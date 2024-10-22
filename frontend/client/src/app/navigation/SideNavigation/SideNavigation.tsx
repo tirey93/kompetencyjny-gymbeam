@@ -27,10 +27,12 @@ export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
                 <NavigationSection onNavigate={onNavigate} tiles={[home, legal]} />
 
                 <UserRoleGuard allowedRoles={["Admin", "User"]}>
+                    <Divider className={classes.divider} />
                     <NavigationSection onNavigate={onNavigate} tiles={[activities, reservations, qr]} />
                 </UserRoleGuard>
 
                 <UserRoleGuard allowedRoles={["Admin"]}>
+                    <Divider className={classes.divider} />
                     <NavigationSection onNavigate={onNavigate} tiles={[activitiesDashboard, usersDashboard]} />
                 </UserRoleGuard>
             </Stack>

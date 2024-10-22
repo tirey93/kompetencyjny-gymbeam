@@ -50,7 +50,7 @@ export const ActivitiesPage = () => {
     }
 
     return (
-        <Container size="xl" className={classes.container}>
+        <Container className={classes.container}>
             <ActivityCalendar
                 isLoading={areInstancesLoading}
                 activityInstances={activitiesInstances ?? []}

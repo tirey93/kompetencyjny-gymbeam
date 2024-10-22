@@ -22,7 +22,8 @@ export const SignInForm = ({ onSubmit, onRegister, error, onCloseError }: SignIn
 
     const handleSubmit = useCallback(async () => {
         if (!form.validate().hasErrors) {
-            onSubmit(form.values);
+            const trimmedLogin = form.values.login.trim();
+            onSubmit({ ...form.values, login: trimmedLogin });
         }
     }, [form, onSubmit]);
 

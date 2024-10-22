@@ -95,19 +95,19 @@ const validatePasswordMaximumLength = (password: string) => {
 };
 
 const validateNameMinimumLength = (name: string) => {
-    return name.length >= MIN_NAME_LENGTH;
+    return name.trim().length >= MIN_NAME_LENGTH;
 };
 
 const validateNameMaximumLength = (name: string) => {
-    return name.length <= MAX_NAME_LENGTH;
+    return name.trim().length <= MAX_NAME_LENGTH;
 };
 
 const validateLoginMinimumLength = (login: string) => {
-    return login.length >= MIN_LOGIN_LENGTH;
+    return login.trim().length >= MIN_LOGIN_LENGTH;
 };
 
 const validateLoginMaximumLength = (login: string) => {
-    return login.length <= MAX_LOGIN_LENGTH;
+    return login.trim().length <= MAX_LOGIN_LENGTH;
 };
 
 const validatePasswordsMatch = (passwords: string[]) => {

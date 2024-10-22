@@ -1,6 +1,20 @@
-html .tableBody {
-  border-radius: var(--mantine-radius-md);
-  margin-top: var(--mantine-spacing-lg);
-  --table-horizontal-spacing: var(--mantine-spacing-xl);
-  --table-vertical-spacing: var(--mantine-spacing-md);
+html .container {
+
+  .header {
+    margin-bottom: var(--mantine-spacing-sm);
+
+    .searchBar {
+      flex-grow: 1;
+      max-width: 400px;
+    }
+  }
+
+  .tableScrollContainer {
+    .tableBody {
+      border-radius: var(--mantine-radius-md);
+      margin-top: var(--mantine-spacing-lg);
+      --table-horizontal-spacing: var(--mantine-spacing-xl);
+      --table-vertical-spacing: var(--mantine-spacing-md);
+    }
+  }
 }

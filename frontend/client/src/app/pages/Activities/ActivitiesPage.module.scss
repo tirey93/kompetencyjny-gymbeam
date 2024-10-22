@@ -1,5 +1,11 @@
-.container {
+@import "src/mantine";
+
+html .container {
   padding-block: var(--mantine-spacing-md);
   justify-content: center;
   margin: auto;
+
+  @media (min-width: $mantine-breakpoint-md) {
+    max-width: 90%;
+  }
 }

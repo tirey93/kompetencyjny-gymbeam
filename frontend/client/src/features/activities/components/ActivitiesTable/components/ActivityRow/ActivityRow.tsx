@@ -33,7 +33,6 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
     return (
         <Table.Tr key={activity.id} className={classes.row}>
             <Table.Td className={classNames(classes.center, classes.columnLabel)}>{activity.id}</Table.Td>
-
             <Table.Td>
                 <Group className={classes.cellContentWrapper}>
                     {activity.name}
@@ -42,7 +41,6 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
                     </ActionIcon>
                 </Group>
             </Table.Td>
-
             <Table.Td className={classNames(classes.date, { [classes.future]: hasNotStarted })}>
                 <TextWithTooltip
                     alwaysVisible={hasNotStarted}
@@ -58,7 +56,6 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
                     </Group>
                 </TextWithTooltip>
             </Table.Td>
-
             <Table.Td className={classNames(classes.date, { [classes.past]: isExpired })}>
                 <TextWithTooltip alwaysVisible={isExpired} label={translate("pages.activitiesDashboard.expired")}>
                     <Group className={classes.cellContentWrapper}>
@@ -71,28 +68,21 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
                     </Group>
                 </TextWithTooltip>
             </Table.Td>
-
             <Table.Td>{activity.startHour.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}</Table.Td>
             <Table.Td>{activity.duration} min</Table.Td>
-
             <Table.Td>
                 <Days value={activity.days} />
             </Table.Td>
-
             <Table.Td>{activity.totalCapacity}</Table.Td>
-
             <Table.Td className={classes.columnWithTruncatedValue}>
                 <TextWithTooltip>{activity.leaderName}</TextWithTooltip>
             </Table.Td>
-
             <Table.Td className={classes.columnWithTruncatedValue}>
                 <TextWithTooltip>{activity.longDescription}</TextWithTooltip>
             </Table.Td>
-
             <Table.Td className={classes.columnWithTruncatedValue}>
                 <TextWithTooltip>{activity.shortDescription}</TextWithTooltip>
             </Table.Td>
-
             <Table.Td className={classes.pinned}>
                 <Group className={classes.actionButtons}>
                     <ActionIcon variant="subtle" color="success" onClick={() => onEdit(activity)}>
