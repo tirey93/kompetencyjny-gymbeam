@@ -334,6 +334,7 @@ export type TranslationSource = {
 
     navigation: {
         labels: {
+            payments: string;
             home: string;
             signIn: string;
             signOut: string;

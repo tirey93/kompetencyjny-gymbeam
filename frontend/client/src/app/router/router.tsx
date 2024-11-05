@@ -1,28 +1,53 @@
+import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import { NotFoundPage } from "@/app/pages/404";
-import { ActivitiesPage } from "@/app/pages/Activities";
-import { ActivitiesDashboardPage } from "@/app/pages/ActivitiesDashboard";
-import { GymPassPage } from "@/app/pages/GymPass";
-import { HomePage } from "@/app/pages/Home";
-import { LegalPage } from "@/app/pages/Legal/LegalPage";
-import { RegistrationPage } from "@/app/pages/Registration";
-import { ReservationsPage } from "@/app/pages/Reservations";
-import { SignInPage } from "@/app/pages/SignIn";
-import { UsersDashboardPage } from "@/app/pages/UsersDashboard";
+const HomePage = React.lazy(() => import("@/app/pages/Home").then((module) => ({ default: module.HomePage })));
+
+const RegistrationPage = React.lazy(() =>
+    import("@/app/pages/Registration").then((module) => ({ default: module.RegistrationPage }))
+);
+
+const SignInPage = React.lazy(() => import("@/app/pages/SignIn").then((module) => ({ default: module.SignInPage })));
+
+const GymPassPage = React.lazy(() => import("@/app/pages/GymPass").then((module) => ({ default: module.GymPassPage })));
+
+const ActivitiesPage = React.lazy(() =>
+    import("@/app/pages/Activities").then((module) => ({ default: module.ActivitiesPage }))
+);
+
+const UsersDashboardPage = React.lazy(() =>
+    import("@/app/pages/UsersDashboard").then((module) => ({ default: module.UsersDashboardPage }))
+);
+
+const ActivitiesDashboardPage = React.lazy(() =>
+    import("@/app/pages/ActivitiesDashboard").then((module) => ({ default: module.ActivitiesDashboardPage }))
+);
+
+const ReservationsPage = React.lazy(() =>
+    import("@/app/pages/Reservations").then((module) => ({ default: module.ReservationsPage }))
+);
+
+const LegalPage = React.lazy(() =>
+    import("@/app/pages/Legal/LegalPage").then((module) => ({ default: module.LegalPage }))
+);
+
+const NotFoundPage = React.lazy(() => import("@/app/pages/404").then((module) => ({ default: module.NotFoundPage })));
+
+import { PaymentsPage } from "@/app/pages/Payments";
 import { AppRoute } from "@/app/router/AppRoute";
 import { ProtectedRoute } from "@/app/router/components/ProtectedRoute";
+import { WithSuspense } from "@/app/router/components/WithSuspense";
 import { AppProvider } from "@/AppProvider";
 import { Root } from "@/Root";
 
 const APP_PAGES = [
     {
         path: AppRoute.ROOT,
-        element: <HomePage />,
+        element: WithSuspense(<HomePage />),
     },
     {
         path: AppRoute.REGISTRATION,
-        element: (
+        element: WithSuspense(
             <ProtectedRoute allowedRoles={["Guest"]} redirectUnauthorizedTo={AppRoute.ROOT}>
                 <RegistrationPage />
             </ProtectedRoute>
@@ -30,7 +55,7 @@ const APP_PAGES = [
     },
     {
         path: AppRoute.LOGIN,
-        element: (
+        element: WithSuspense(
             <ProtectedRoute allowedRoles={["Guest"]} redirectUnauthorizedTo={AppRoute.ROOT}>
                 <SignInPage />
             </ProtectedRoute>
@@ -38,15 +63,23 @@ const APP_PAGES = [
     },
     {
         path: AppRoute.GYM_PASS,
-        element: (
+        element: WithSuspense(
             <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
                 <GymPassPage />
             </ProtectedRoute>
         ),
     },
     {
+        path: AppRoute.PAYMENTS,
+        element: WithSuspense(
+            <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
+                <PaymentsPage />
+            </ProtectedRoute>
+        ),
+    },
+    {
         path: AppRoute.ACTIVITIES,
-        element: (
+        element: WithSuspense(
             <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
                 <ActivitiesPage />
             </ProtectedRoute>
@@ -54,7 +87,7 @@ const APP_PAGES = [
     },
     {
         path: AppRoute.USERS_DASHBOARD,
-        element: (
+        element: WithSuspense(
             <ProtectedRoute allowedRoles={["Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
                 <UsersDashboardPage />
             </ProtectedRoute>
@@ -62,7 +95,7 @@ const APP_PAGES = [
     },
     {
         path: AppRoute.ACTIVITIES_DASHBOARD,
-        element: (
+        element: WithSuspense(
             <ProtectedRoute allowedRoles={["Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
                 <ActivitiesDashboardPage />
             </ProtectedRoute>
@@ -70,7 +103,7 @@ const APP_PAGES = [
     },
     {
         path: AppRoute.RESERVATIONS,
-        element: (
+        element: WithSuspense(
             <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
                 <ReservationsPage />
             </ProtectedRoute>
@@ -78,7 +111,7 @@ const APP_PAGES = [
     },
     {
         path: AppRoute.LEGAL,
-        element: <LegalPage />,
+        element: WithSuspense(<LegalPage />),
     },
 ];
 
@@ -94,7 +127,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "*",
-                element: <NotFoundPage />,
+                element: WithSuspense(<NotFoundPage />),
             },
         ],
     },
