@@ -340,6 +340,7 @@ export const pl: TranslationSource = {
     },
     navigation: {
         labels: {
+            payments: "Płatności",
             home: "Strona główna",
             signIn: "Logowanie",
             signOut: "Wyloguj",
