@@ -336,6 +336,7 @@ export const en: TranslationSource = {
     },
     navigation: {
         labels: {
+            payments: "Payments",
             home: "Home",
             signIn: "Sign in",
             signOut: "Sign out",
