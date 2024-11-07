@@ -13,7 +13,8 @@ namespace GymBeam.Extensions
                    SameSite = SameSiteMode.None,
                    Secure = true,
                    HttpOnly = true,
-                   MaxAge = new TimeSpan(12, 0, 0)
+                   MaxAge = new TimeSpan(12, 0, 0),
+                   Domain = "localhost"
                });
 
             return cookies;

@@ -117,8 +117,22 @@ namespace GymBeam.Controllers
         {
             try
             {
-                Response.Cookies.Delete(Cookies.UserId);
-                Response.Cookies.Delete(Cookies.AccessToken);
+                Response.Cookies.Delete(Cookies.UserId, new CookieOptions()
+                {
+                    SameSite = SameSiteMode.None,
+                    Secure = true,
+                    HttpOnly = true,
+                    MaxAge = new TimeSpan(12, 0, 0),
+                    Domain = "localhost"
+                });
+                Response.Cookies.Delete(Cookies.AccessToken, new CookieOptions()
+                {
+                    SameSite = SameSiteMode.None,
+                    Secure = true,
+                    HttpOnly = true,
+                    MaxAge = new TimeSpan(12, 0, 0),
+                    Domain = "localhost"
+                });
 
                 return NoContent();
             }
