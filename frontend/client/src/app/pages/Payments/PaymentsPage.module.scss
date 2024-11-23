@@ -1,0 +1,9 @@
+@import "src/mantine";
+
+html .container {
+  padding: var(--mantine-spacing-xl);
+
+  @media (min-width: $mantine-breakpoint-md) {
+    max-width: 90%;
+  }
+}

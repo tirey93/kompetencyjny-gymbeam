@@ -13,7 +13,7 @@ export const UserReservationsPermissionBadge = ({ disabled, onClick }: UserReser
     const translate = useTranslate();
 
     return (
-        <Badge className={classes.badge} variant="light" color={disabled ? "danger" : "success"} onClick={onClick}>
+        <Badge className={classes.badge} variant="dot" color={disabled ? "danger.5" : "success.5"} onClick={onClick}>
             {disabled
                 ? translate("pages.usersDashboard.rows.reservations.off")
                 : translate("pages.usersDashboard.rows.reservations.on")}

@@ -53,7 +53,7 @@ export const WhyUsSection = () => {
 
                 <Group className={classes.awardsContainer}>
                     {awards.map((award) => (
-                        <Badge key={award} variant="light" leftSection={<IconStarFilled size={10} />}>
+                        <Badge key={award} variant="light" color="success" leftSection={<IconStarFilled size={10} />}>
                             {award}
                         </Badge>
                     ))}
