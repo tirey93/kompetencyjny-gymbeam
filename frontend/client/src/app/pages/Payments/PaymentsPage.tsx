@@ -1,3 +1,5 @@
+import styles from "./PaymentsPage.module.scss";
+
 export const PaymentsPage = () => {
-    return <div>Payments</div>;
+    return <div className={styles.container}></div>;
 };

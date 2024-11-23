@@ -70,7 +70,7 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
             </Table.Td>
             <Table.Td>{activity.startHour.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}</Table.Td>
             <Table.Td>{activity.duration} min</Table.Td>
-            <Table.Td>
+            <Table.Td className={classes.columnWithTruncatedValue}>
                 <Days value={activity.days} />
             </Table.Td>
             <Table.Td>{activity.totalCapacity}</Table.Td>

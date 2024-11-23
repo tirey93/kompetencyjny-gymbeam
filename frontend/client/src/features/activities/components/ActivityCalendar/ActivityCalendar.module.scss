@@ -46,7 +46,7 @@ html .calendar {
             z-index: 10;
             background: var(--mantine-color-dark-9);
 
-            &:after {
+            &:before {
               top: 0;
               right: -1px;
               left: 0;

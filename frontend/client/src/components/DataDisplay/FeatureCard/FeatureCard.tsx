@@ -14,9 +14,7 @@ export const FeatureCard = ({ title, description, Icon }: CardProps) => {
     return (
         <MantineCard className={classes.featureCard}>
             <Icon className={classes.icon} />
-            <Text c="primary" className={classes.title}>
-                {title}
-            </Text>
+            <Text className={classes.title}>{title}</Text>
             <Text className={classes.description}>{description}</Text>
         </MantineCard>
     );

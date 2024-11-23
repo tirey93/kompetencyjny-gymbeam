@@ -41,15 +41,15 @@ export const darkTheme = createTheme({
     colors: {
         dark: [
             "#F0EDEA",
-            "#B8B2AC",
-            "#7F7A74",
+            "#d3cbc3",
+            "#b9b2aa",
             "#645F59",
             "#3E3934",
             "#342F2B",
             "#2C2825",
             "#24211E",
             "#1A1816",
-            "#130D1E",
+            "#151413",
         ],
         primary: [
             "#fff4e2",
