@@ -15,6 +15,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using GymBeam.Clients;
+using Domain;
 
 namespace GymBeam.Controllers
 {
@@ -24,13 +25,15 @@ namespace GymBeam.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IMediator _mediator;
+        private readonly IRepository _repository;
         private readonly GoogleClient _googleClient;
 
-        public AuthenticationController(IConfiguration configuration, IMediator mediator, GoogleClient googleClient)
+        public AuthenticationController(IConfiguration configuration, IMediator mediator, GoogleClient googleClient, IRepository repository)
         {
             _configuration = configuration;
             _mediator = mediator;
             _googleClient = googleClient;
+            _repository = repository;
         }
 
         [AllowAnonymous]
@@ -43,7 +46,7 @@ namespace GymBeam.Controllers
 
         [AllowAnonymous]
         [HttpGet("google/callback")]
-        public async Task<IActionResult> GoogleCallback([FromQuery] string code)
+        public async Task<ActionResult<UserResponse>> GoogleCallback([FromQuery] string code)
         {
             if (string.IsNullOrEmpty(code))
                 return BadRequest("Authorization code not provided.");
@@ -53,8 +56,29 @@ namespace GymBeam.Controllers
                 var accessToken = await _googleClient.GetAccessTokenAsync(code);
                 var userInfo = await _googleClient.GetUserInfoAsync(accessToken);
 
-                Console.WriteLine($"User Info: Email = {userInfo.Email}, Name = {userInfo.Name}, Id = {userInfo.Id}");
-                return Ok(userInfo);
+                var user = _repository.GetUsers(x => x.Name == userInfo.Email).FirstOrDefault();
+                
+                if (user == null)
+                {
+                    var registerRequest = new RegisterRequest
+                    {
+                        DisplayName = userInfo.Name,
+                        Username = userInfo.Email,
+                        Password = null
+                    };
+
+                    return await Register(registerRequest);
+                }
+                else
+                {
+                    var loginRequest = new LoginRequest
+                    {
+                        Username = userInfo.Email,
+                        Password = null
+                    };
+
+                    return await Login(loginRequest);
+                }
             }
             catch (Exception ex)
             {
