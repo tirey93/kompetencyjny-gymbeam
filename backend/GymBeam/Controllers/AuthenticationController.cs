@@ -75,12 +75,20 @@ namespace GymBeam.Controllers
             }
             catch (UserNotFoundException ex)
             {
-                return await Register(new RegisterRequest
+                if (userInfo != null)
                 {
-                    DisplayName = userInfo.Name,
-                    Username = userInfo.Email,
-                    Password = null
-                });
+                    return await Register(new RegisterRequest
+                    {
+                        DisplayName = userInfo.Name,
+                        Username = userInfo.Email,
+                        Password = null
+                    });
+                }
+                else
+                {
+                    return StatusCode((int)HttpStatusCode.BadRequest,
+                        Resource.ExceptionFailedToFetchUserInfo);
+                }
             }
             catch (AuthenticationFailureException ex)
             {
