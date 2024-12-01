@@ -106,11 +106,38 @@ namespace GymBeam.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to exchange authorization code for token..
+        /// </summary>
+        public static string ExceptionAuthCodeExchangeFailed {
+            get {
+                return ResourceManager.GetString("ExceptionAuthCodeExchangeFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cookie {0} was not found..
         /// </summary>
         public static string ExceptionCookieIsInvalid {
             get {
                 return ResourceManager.GetString("ExceptionCookieIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to fetch user information..
+        /// </summary>
+        public static string ExceptionFailedToFetchUserInfo {
+            get {
+                return ResourceManager.GetString("ExceptionFailedToFetchUserInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Google OAuth secret is not set in environment variables..
+        /// </summary>
+        public static string ExceptionNoOAuthSecretInEnvVariables {
+            get {
+                return ResourceManager.GetString("ExceptionNoOAuthSecretInEnvVariables", resourceCulture);
             }
         }
         
@@ -156,6 +183,15 @@ namespace GymBeam.Properties {
         public static string ValidatorActivityIdRequired {
             get {
                 return ResourceManager.GetString("ValidatorActivityIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Authorization code not provided..
+        /// </summary>
+        public static string ValidatorAuthorizationCodeNotProvided {
+            get {
+                return ResourceManager.GetString("ValidatorAuthorizationCodeNotProvided", resourceCulture);
             }
         }
         

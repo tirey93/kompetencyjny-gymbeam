@@ -16,6 +16,7 @@ using System.Net;
 using System.Security.Claims;
 using GymBeam.Clients;
 using Domain;
+using GymBeam.Responses;
 
 namespace GymBeam.Controllers
 {
@@ -25,65 +26,71 @@ namespace GymBeam.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IMediator _mediator;
-        private readonly IRepository _repository;
         private readonly GoogleClient _googleClient;
 
-        public AuthenticationController(IConfiguration configuration, IMediator mediator, GoogleClient googleClient, IRepository repository)
+        public AuthenticationController(IConfiguration configuration, IMediator mediator, GoogleClient googleClient)
         {
             _configuration = configuration;
             _mediator = mediator;
             _googleClient = googleClient;
-            _repository = repository;
         }
 
-        [AllowAnonymous]
         [HttpGet("google")]
+        [AllowAnonymous]
         public IActionResult GetGoogleLoginLink()
         {
             var loginLink = _configuration.GetGoogleLoginLink();
             return Ok(new { link = loginLink });
         }
 
-        [AllowAnonymous]
         [HttpGet("google/callback")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [AllowAnonymous]
         public async Task<ActionResult<UserResponse>> GoogleCallback([FromQuery] string code)
         {
             if (string.IsNullOrEmpty(code))
-                return BadRequest("Authorization code not provided.");
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    Resource.ValidatorAuthorizationCodeNotProvided);
 
+            GoogleUserResponse userInfo = null;
             try
             {
                 var accessToken = await _googleClient.GetAccessTokenAsync(code);
-                var userInfo = await _googleClient.GetUserInfoAsync(accessToken);
+                userInfo = await _googleClient.GetUserInfoAsync(accessToken);
 
-                var user = _repository.GetUsers(x => x.Name == userInfo.Email).FirstOrDefault();
-                
-                if (user == null)
+                var user = await _mediator.Send(new GetUserByNameQuery
                 {
-                    var registerRequest = new RegisterRequest
-                    {
-                        DisplayName = userInfo.Name,
-                        Username = userInfo.Email,
-                        Password = null
-                    };
+                    Username = userInfo.Email
+                });
 
-                    return await Register(registerRequest);
-                }
-                else
+                return await Login(new LoginRequest
                 {
-                    var loginRequest = new LoginRequest
-                    {
-                        Username = userInfo.Email,
-                        Password = null
-                    };
-
-                    return await Login(loginRequest);
-                }
+                    Username = user.Name,
+                    Password = null
+                });
+  
+            }
+            catch (UserNotFoundException ex)
+            {
+                return await Register(new RegisterRequest
+                {
+                    DisplayName = userInfo.Name,
+                    Username = userInfo.Email,
+                    Password = null
+                });
+            }
+            catch (AuthenticationFailureException ex)
+            {
+                return StatusCode((int)HttpStatusCode.Forbidden,
+                    string.Format(Resource.ControllerForbidden, ex.Message));
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
-                return BadRequest("Authentication failed.");
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
             }
         }
 

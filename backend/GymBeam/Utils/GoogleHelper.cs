@@ -1,12 +1,14 @@
-﻿
+﻿using Domain.Exceptions;
+using GymBeam.Properties;
+
+
 namespace GymBeam.Utils
 {
     public static class GoogleHelper
     {
         public static string GetGoogleLoginLink(this IConfiguration configuration)
         {
-            var googleOAuthUri = "https://accounts.google.com/o/oauth2/v2/auth";
-
+            var googleOAuthUri = configuration["GoogleOAuth:AuthUri"];
             var clientId = configuration["GoogleOAuth:ClientId"];
             var redirectUri = configuration["GoogleOAuth:RedirectUri"];
             var state = Guid.NewGuid().ToString();
@@ -17,6 +19,19 @@ namespace GymBeam.Utils
                    $"&redirect_uri={Uri.EscapeDataString(redirectUri)}" +
                    $"&scope={Uri.EscapeDataString(scope)}" +
                    $"&state={Uri.EscapeDataString(state)}";
+        }
+
+        public static string GetGoogleOAuthSecret(this IConfiguration configuration)
+        {
+            var EnvironmentVariableName = configuration["GoogleOAuth:EnvironmentSecretVariableName"];
+            string secret = Environment.GetEnvironmentVariable(EnvironmentVariableName);
+
+            if (string.IsNullOrEmpty(secret))
+            {
+                throw new AuthenticationFailureException(Resource.ExceptionNoOAuthSecretInEnvVariables);
+            }
+
+            return secret;
         }
     }
 }

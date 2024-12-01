@@ -8,7 +8,8 @@ namespace GymBeam.QueryHandlers
 {
     public class UserQueryHandler : IRequestHandler<CheckUsernameAvailabilityQuery, bool>,
                                     IRequestHandler<GetUserQuery, UserResponse>,
-                                    IRequestHandler<GetAllUsersQuery, IEnumerable<UserResponse>>
+                                    IRequestHandler<GetAllUsersQuery, IEnumerable<UserResponse>>,
+                                    IRequestHandler<GetUserByNameQuery, UserResponse>
     {
         private readonly IRepository _repository;
 
@@ -62,6 +63,22 @@ namespace GymBeam.QueryHandlers
                 ReservationDisabled = x.ReservationDisabled
             });
 
+            return Task.FromResult(result);
+        }
+
+        public Task<UserResponse> Handle(GetUserByNameQuery request, CancellationToken cancellationToken)
+        {
+            var user = _repository.GetUserByName(request.Username)
+                ?? throw new UserNotFoundException(request.Username);
+
+            var result = new UserResponse
+            {
+                Id = user.Id,
+                Name = user.Name,
+                DisplayName = user.DisplayName,
+                Role = user.Role.ToString(),
+                ReservationDisabled = user.ReservationDisabled
+            };
             return Task.FromResult(result);
         }
     }
