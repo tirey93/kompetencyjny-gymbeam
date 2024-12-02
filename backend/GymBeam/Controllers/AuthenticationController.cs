@@ -49,7 +49,7 @@ namespace GymBeam.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [AllowAnonymous]
-        public async Task<ActionResult<UserResponse>> GoogleCallback([FromQuery] string code)
+        public async Task<IActionResult> GoogleCallback([FromQuery] string code)
         {
             if (string.IsNullOrEmpty(code))
                 return StatusCode((int)HttpStatusCode.InternalServerError,
