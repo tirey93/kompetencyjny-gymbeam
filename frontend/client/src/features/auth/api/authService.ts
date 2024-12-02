@@ -1,6 +1,7 @@
 import { request } from "@/api";
 import { SignInRequestBody, SignUpRequestBody } from "@/features/auth";
 import { UserDetails } from "@/types";
+import { OIDCInitializedResult } from "@/types/Auth";
 
 export class AuthService {
     public static signIn(body: SignInRequestBody): Promise<UserDetails> {
@@ -20,5 +21,9 @@ export class AuthService {
             method: "GET",
             urlParams: { username },
         });
+    }
+
+    public static signInWithGoogle(): Promise<OIDCInitializedResult> {
+        return request<OIDCInitializedResult>("Authentication/google", { method: "GET" });
     }
 }
