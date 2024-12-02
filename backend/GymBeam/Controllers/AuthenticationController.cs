@@ -66,7 +66,7 @@ namespace GymBeam.Controllers
                     Username = userInfo.Email
                 });
 
-                return await Login(new LoginRequest
+                await Login(new LoginRequest
                 {
                     Username = user.Name,
                     Password = null
@@ -77,7 +77,7 @@ namespace GymBeam.Controllers
             {
                 if (userInfo != null)
                 {
-                    return await Register(new RegisterRequest
+                    await Register(new RegisterRequest
                     {
                         DisplayName = userInfo.Name,
                         Username = userInfo.Email,
@@ -100,6 +100,8 @@ namespace GymBeam.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError,
                     string.Format(Resource.ControllerInternalError, ex.Message));
             }
+            var redirectUrl = Uri.UnescapeDataString(_configuration["GoogleOAuth:ReturnUrl"]);
+            return Redirect(redirectUrl);
         }
 
         [HttpPost("Register")]
