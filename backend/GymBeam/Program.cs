@@ -1,5 +1,6 @@
 using GymBeam.Constants;
 using GymBeam.Extensions;
+using GymBeam.Clients;
 using System.Reflection;
 using Infrastructure.Extensions;
 using FluentValidation.AspNetCore;
@@ -22,7 +23,7 @@ builder.Services.AddInfrastructure(fileName);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddCors(allowedOrigin);
 builder.Services.AddFluentValidation();
-
+builder.Services.AddHttpClient<GoogleClient>();
 
 
 /********************************************************/

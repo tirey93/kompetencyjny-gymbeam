@@ -13,5 +13,6 @@ namespace Domain
         void Delete<T>(T entity) where T : class;
         Task SaveChangesAsync();
         Dictionary<Enrollment, int> GetSlotsTakenForEnrollments(DateTime from, DateTime to);
+        public User GetUserByName(string name);
     }
 }

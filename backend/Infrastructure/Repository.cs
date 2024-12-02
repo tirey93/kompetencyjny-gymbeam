@@ -70,6 +70,11 @@ namespace Infrastructure
                 .FirstOrDefault(x => x.Id == id);
         }
 
+        public User? GetUserByName(string name)
+        {
+            return _appDbContext.Users.FirstOrDefault(x => x.Name == name);
+        }
+
         public void Add<T>(T entity) where T : class
         {
             _appDbContext.Add(entity);

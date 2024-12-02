@@ -132,8 +132,17 @@
   <data name="ControllerNotFound" xml:space="preserve">
     <value>Not Found: {0}</value>
   </data>
+  <data name="ExceptionAuthCodeExchangeFailed" xml:space="preserve">
+    <value>Failed to exchange authorization code for token.</value>
+  </data>
   <data name="ExceptionCookieIsInvalid" xml:space="preserve">
     <value>Cookie {0} was not found.</value>
+  </data>
+  <data name="ExceptionFailedToFetchUserInfo" xml:space="preserve">
+    <value>Failed to fetch user information.</value>
+  </data>
+  <data name="ExceptionNoOAuthSecretInEnvVariables" xml:space="preserve">
+    <value>Google OAuth secret is not set in environment variables.</value>
   </data>
   <data name="ExceptionSigningKeyIsMissing" xml:space="preserve">
     <value>JWT signing key is missing.</value>
@@ -149,6 +158,9 @@
   </data>
   <data name="ValidatorActivityIdRequired" xml:space="preserve">
     <value>ActivityId is required.</value>
+  </data>
+  <data name="ValidatorAuthorizationCodeNotProvided" xml:space="preserve">
+    <value>Authorization code not provided.</value>
   </data>
   <data name="ValidatorCronRequired" xml:space="preserve">
     <value>Cron field is required.</value>

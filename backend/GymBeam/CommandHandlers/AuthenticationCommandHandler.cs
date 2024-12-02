@@ -23,7 +23,12 @@ namespace GymBeam.CommandHandlers
             if (userExists != null)
                 throw new UserAlreadyExistsException(request.Username);
 
-            var hash = ShaHelper.QuickHash(request.Password);
+            String hash = null;
+            if (request.Password != null)
+            {
+                hash = ShaHelper.QuickHash(request.Password);
+            }
+
             var user = new User 
             { 
                 Name = request.Username,

@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
+using GymBeam.Clients;
+using Domain;
+using GymBeam.Responses;
 
 namespace GymBeam.Controllers
 {
@@ -23,11 +26,80 @@ namespace GymBeam.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IMediator _mediator;
+        private readonly GoogleClient _googleClient;
 
-        public AuthenticationController(IConfiguration configuration, IMediator mediator)
+        public AuthenticationController(IConfiguration configuration, IMediator mediator, GoogleClient googleClient)
         {
             _configuration = configuration;
             _mediator = mediator;
+            _googleClient = googleClient;
+        }
+
+        [HttpGet("google")]
+        [AllowAnonymous]
+        public IActionResult GetGoogleLoginLink()
+        {
+            var loginLink = _configuration.GetGoogleLoginLink();
+            return Ok(new { link = loginLink });
+        }
+
+        [HttpGet("google/callback")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [AllowAnonymous]
+        public async Task<ActionResult<UserResponse>> GoogleCallback([FromQuery] string code)
+        {
+            if (string.IsNullOrEmpty(code))
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    Resource.ValidatorAuthorizationCodeNotProvided);
+
+            GoogleUserResponse userInfo = null;
+            try
+            {
+                var accessToken = await _googleClient.GetAccessTokenAsync(code);
+                userInfo = await _googleClient.GetUserInfoAsync(accessToken);
+
+                var user = await _mediator.Send(new GetUserByNameQuery
+                {
+                    Username = userInfo.Email
+                });
+
+                return await Login(new LoginRequest
+                {
+                    Username = user.Name,
+                    Password = null
+                });
+  
+            }
+            catch (UserNotFoundException ex)
+            {
+                if (userInfo != null)
+                {
+                    return await Register(new RegisterRequest
+                    {
+                        DisplayName = userInfo.Name,
+                        Username = userInfo.Email,
+                        Password = null
+                    });
+                }
+                else
+                {
+                    return StatusCode((int)HttpStatusCode.BadRequest,
+                        Resource.ExceptionFailedToFetchUserInfo);
+                }
+            }
+            catch (AuthenticationFailureException ex)
+            {
+                return StatusCode((int)HttpStatusCode.Forbidden,
+                    string.Format(Resource.ControllerForbidden, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
         }
 
         [HttpPost("Register")]

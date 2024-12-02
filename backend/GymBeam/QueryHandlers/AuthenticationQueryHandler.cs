@@ -22,9 +22,12 @@ namespace GymBeam.QueryHandlers
             var user = _repository.GetUsers(x => x.Name == request.Username).FirstOrDefault()
                 ?? throw new UserNotFoundException(request.Username);
 
-            var hash = ShaHelper.QuickHash(request.Password);
-            if (hash.ToLower() != user.HashedPassword.ToLower())
-                throw new PasswordNotMatchException(request.Username);
+            if (request.Password != null)
+            {
+                var hash = ShaHelper.QuickHash(request.Password);
+                if (hash.ToLower() != user.HashedPassword.ToLower())
+                    throw new PasswordNotMatchException(request.Username);
+            }
 
             return Task.FromResult(new UserResponse
             {
