@@ -9,3 +9,7 @@ export type UserDetails = {
     role: InternalUserRole;
     reservationDisabled: boolean;
 };
+
+export type OIDCInitializedResult = {
+    link: string;
+};

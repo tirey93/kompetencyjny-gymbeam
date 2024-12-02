@@ -48,13 +48,12 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
-    "vite-plugin-checker": "^0.6.4",
-    "vite-tsconfig-paths": "^5.0.1",
     "@types/node": "^22.7.5",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
+    "@vitejs/plugin-basic-ssl": "^1.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
@@ -71,6 +70,8 @@
     "postcss-simple-vars": "^7.0.1",
     "sass": "^1.72.0",
     "typescript": "^5.2.2",
-    "vite": "^5.1.6"
+    "vite": "^5.1.6",
+    "vite-plugin-checker": "^0.6.4",
+    "vite-tsconfig-paths": "^5.0.1"
   }
 }
