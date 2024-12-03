@@ -4,6 +4,7 @@ using GymBeam.Clients;
 using System.Reflection;
 using Infrastructure.Extensions;
 using FluentValidation.AspNetCore;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +16,12 @@ builder.Services.AddSwaggerGen();
 var issuer = builder.Configuration["JWT:Issuer"];
 var audience = builder.Configuration["JWT:Audience"];
 var envVariable = builder.Configuration["JWT:EnvironmentSecretVariableName"];
+var stripeEnvVariable = builder.Configuration["StripeAuth:ApiKeyEnvironmentVariableName"];
 var allowedOrigin = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
 var fileName = builder.Configuration.GetConnectionString("WebApiDatabase");
 
 builder.Services.AddJWTAuthentication(issuer, audience, envVariable);
+builder.Services.AddStripe(stripeEnvVariable);
 builder.Services.AddInfrastructure(fileName);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddCors(allowedOrigin);
