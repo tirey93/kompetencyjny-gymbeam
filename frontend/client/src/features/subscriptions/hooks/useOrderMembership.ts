@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
 import { AppRoute } from "@/app/router";
-import { SubscriptionsService } from "@/features/subscriptions/api/subscriptionsService";
+import { MembershipService } from "@/features/subscriptions/api/membershipService";
 
 type UseOrderGymMembership = {
     orderMembership: () => void;
@@ -14,7 +14,7 @@ export const useOrderMembership = (): UseOrderGymMembership => {
     const navigate = useNavigate();
 
     const retrieveOrderInformation = useCallback(async () => {
-        const { clientSecret } = await SubscriptionsService.startPaymentProcess();
+        const { clientSecret } = await MembershipService.order();
         navigate(AppRoute.PAYMENT, {
             state: { clientSecret },
         });
