@@ -56,7 +56,7 @@ export const PaymentForm = ({ title, description, clientSecret }: PaymentFormPro
                     Go back
                 </Button>
                 <Button variant="light" loading={isLoading} color="success" onClick={confirmPayment}>
-                    Pay {data.amount / 100} {data.currency}
+                    Pay {data.amount / 100} {data.currency.toUpperCase()}
                 </Button>
             </Group>
         </Stack>
