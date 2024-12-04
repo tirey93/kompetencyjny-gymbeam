@@ -1,13 +1,12 @@
-import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Group, Loader, Stack, Text, Title } from "@mantine/core";
-import { PaymentElement, useStripe } from "@stripe/react-stripe-js";
-import { useQuery } from "@tanstack/react-query";
+import { PaymentElement } from "@stripe/react-stripe-js";
 
 import classes from "./PaymentForm.module.scss";
 
 import { ErrorMessage } from "@/components/DataDisplay";
 import { useConfirmPayment } from "@/features/subscriptions/hooks/useConfirmPayment";
+import { usePaymentIntent } from "@/features/subscriptions/hooks/usePaymentIntent";
 
 type PaymentFormProps = {
     title: string;
@@ -62,24 +61,4 @@ export const PaymentForm = ({ title, description, clientSecret }: PaymentFormPro
             </Group>
         </Stack>
     );
-};
-
-export const usePaymentIntent = (clientSecret: string) => {
-    const stripe = useStripe();
-
-    const retrievePaymentIntent = useCallback(async () => {
-        if (!stripe) {
-            throw new Error("Stripe is not initialized.");
-        }
-
-        const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
-
-        if (!paymentIntent) {
-            throw new Error("Could not retrieve order info.");
-        }
-
-        return paymentIntent;
-    }, [clientSecret, stripe]);
-
-    return useQuery({ queryFn: retrievePaymentIntent, queryKey: [clientSecret] });
 };
