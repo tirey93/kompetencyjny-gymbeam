@@ -14,19 +14,8 @@ type SideNavigationProps = {
 };
 
 export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
-    const {
-        qr,
-        signOut,
-        signIn,
-        signUp,
-        home,
-        usersDashboard,
-        activitiesDashboard,
-        activities,
-        reservations,
-        legal,
-        payments,
-    } = useSideNavigationItems();
+    const { qr, signOut, signIn, signUp, home, usersDashboard, activitiesDashboard, activities, reservations, legal } =
+        useSideNavigationItems();
 
     return (
         <Stack component="nav" className={classes.sideNavigationContainer}>
@@ -39,7 +28,7 @@ export const SideNavigation = ({ onNavigate }: SideNavigationProps) => {
 
                 <UserRoleGuard allowedRoles={["Admin", "User"]}>
                     <Divider className={classes.divider} />
-                    <NavigationSection onNavigate={onNavigate} tiles={[activities, reservations, qr, payments]} />
+                    <NavigationSection onNavigate={onNavigate} tiles={[activities, reservations, qr]} />
                 </UserRoleGuard>
 
                 <UserRoleGuard allowedRoles={["Admin"]}>

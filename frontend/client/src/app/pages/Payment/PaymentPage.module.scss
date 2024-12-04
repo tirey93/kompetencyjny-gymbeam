@@ -1,0 +1,24 @@
+@import "src/mantine";
+
+html .container {
+  margin: auto;
+  padding: var(--mantine-spacing-xl);
+
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  min-height: 80vh;
+
+  @media (min-width: $mantine-breakpoint-md) {
+    max-width: 90%;
+  }
+
+  .wrapper {
+    width: 700px;
+    max-width: 100%;
+    background: var(--mantine-color-dark-8);
+    padding: var(--mantine-spacing-sm);
+    border-radius: var(--mantine-radius-md);
+  }
+}

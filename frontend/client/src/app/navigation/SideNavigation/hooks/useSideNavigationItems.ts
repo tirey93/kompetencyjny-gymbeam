@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import {
     IconCalendarEvent,
-    IconCoin,
     IconDashboard,
     IconHome2,
     IconListCheck,
@@ -34,8 +33,7 @@ type UseSideNavigationItems = Record<
     | "activities"
     | "qr"
     | "reservations"
-    | "legal"
-    | "payments",
+    | "legal",
     NavigationItem
 >;
 
@@ -80,11 +78,6 @@ export const useSideNavigationItems = (): UseSideNavigationItems => {
                 route: AppRoute.RESERVATIONS,
             },
             qr: { Icon: IconQrcode, label: translate("navigation.labels.qr"), route: AppRoute.GYM_PASS },
-            payments: {
-                Icon: IconCoin,
-                label: translate("navigation.labels.payments"),
-                route: AppRoute.PAYMENTS,
-            },
         }),
         [signOutAsync, translate]
     );
