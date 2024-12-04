@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { usePaymentIntent } from "@/features/subscriptions/components/PaymentForm/PaymentForm";
+import { usePaymentIntent } from "@/features/subscriptions/hooks/usePaymentIntent";
 
 type PaymentIntentResult = {
     status: "loading" | "error" | "success" | "warning";

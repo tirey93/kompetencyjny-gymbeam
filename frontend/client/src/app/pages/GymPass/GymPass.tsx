@@ -1,19 +1,15 @@
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button, SimpleGrid, Stack, ThemeIcon } from "@mantine/core";
 import { IconShield } from "@tabler/icons-react";
-import { useMutation } from "@tanstack/react-query";
 
 import classes from "./GymPass.module.scss";
 
-import { AppRoute } from "@/app/router";
 import { useAuthState } from "@/features/auth";
 import { GymPassInfo, GymPassQR, Timestamp } from "@/features/gymPass";
-import { SubscriptionsService } from "@/features/subscriptions/api/subscriptionsService";
+import { useOrderMembership } from "@/features/subscriptions/hooks/useOrderMembership";
 
 export const GymPassPage = () => {
     const { user } = useAuthState();
-    const { orderMembership, isPending } = useOrderGymMembership();
+    const { orderMembership, isPending } = useOrderMembership();
 
     if (!user) {
         return null;
@@ -39,28 +35,4 @@ export const GymPassPage = () => {
             </Stack>
         </Stack>
     );
-};
-
-type UseOrderGymMembership = {
-    orderMembership: () => void;
-    isPending: boolean;
-};
-
-const useOrderGymMembership = (): UseOrderGymMembership => {
-    const navigate = useNavigate();
-
-    const retrieveOrderInformation = useCallback(async () => {
-        const { clientSecret } = await SubscriptionsService.startPaymentProcess();
-        navigate(AppRoute.PAYMENT, {
-            state: { clientSecret },
-        });
-    }, [navigate]);
-
-    const { mutateAsync, isPending } = useMutation({ mutationFn: retrieveOrderInformation });
-
-    const orderMembership = useCallback(async () => {
-        await mutateAsync();
-    }, [mutateAsync]);
-
-    return { orderMembership, isPending };
 };
