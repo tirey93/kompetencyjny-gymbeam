@@ -17,8 +17,9 @@ html .container {
   .wrapper {
     width: 700px;
     max-width: 100%;
-    background: var(--mantine-color-dark-8);
-    padding: var(--mantine-spacing-sm);
-    border-radius: var(--mantine-radius-md);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

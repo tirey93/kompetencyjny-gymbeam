@@ -429,7 +429,7 @@ export const pl: TranslationSource = {
                     },
                     title: "Zamów karnet",
                     description:
-                        "Po potwierdzeniu płatności, otrzymasz karnet na 30 dni. Jeśli już posiadasz karnet, zostanie on przedłużony o 30 dni. Zwroty rozpatrywane są indywidualnie po kontakcie mailowym",
+                        "Po potwierdzeniu płatności, otrzymasz karnet na 30 dni. Jeśli już posiadasz karnet, zostanie on przedłużony o 30 dni. Zwroty rozpatrywane są indywidualnie po kontakcie mailowym.",
                 },
             },
         },

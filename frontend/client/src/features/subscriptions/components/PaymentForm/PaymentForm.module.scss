@@ -1,5 +1,7 @@
 html .container {
-  padding: var(--mantine-spacing-md);
+  padding: var(--mantine-spacing-xl);
+  background: var(--mantine-color-dark-8);
+  border-radius: var(--mantine-radius-md);
 
   .caption {
     font-size: var(--mantine-font-size-sm);

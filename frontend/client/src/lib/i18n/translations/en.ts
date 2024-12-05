@@ -516,7 +516,8 @@ export const en: TranslationSource = {
                 },
                 form: {
                     title: "Order gym membership",
-                    description: "TODO",
+                    description:
+                        "After confirming your payment, you will receive gym membership for 30 days. If you already have one, it will be extended by 30 days. Refunds are issued after mail contact.",
                     buttons: {
                         goBack: {
                             label: "Go back",
