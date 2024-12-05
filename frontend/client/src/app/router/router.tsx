@@ -31,9 +31,14 @@ const LegalPage = React.lazy(() =>
     import("@/app/pages/Legal/LegalPage").then((module) => ({ default: module.LegalPage }))
 );
 
+const PaymentPage = React.lazy(() => import("@/app/pages/Payment").then((module) => ({ default: module.PaymentPage })));
+
+const PaymentStatusPage = React.lazy(() =>
+    import("@/app/pages/PaymentStatus").then((module) => ({ default: module.PaymentStatusPage }))
+);
+
 const NotFoundPage = React.lazy(() => import("@/app/pages/404").then((module) => ({ default: module.NotFoundPage })));
 
-import { PaymentsPage } from "@/app/pages/Payments";
 import { AppRoute } from "@/app/router/AppRoute";
 import { ProtectedRoute } from "@/app/router/components/ProtectedRoute";
 import { WithSuspense } from "@/app/router/components/WithSuspense";
@@ -70,12 +75,16 @@ const APP_PAGES = [
         ),
     },
     {
-        path: AppRoute.PAYMENTS,
+        path: AppRoute.PAYMENT,
         element: WithSuspense(
             <ProtectedRoute allowedRoles={["User", "Admin"]} redirectUnauthorizedTo={AppRoute.LOGIN}>
-                <PaymentsPage />
+                <PaymentPage />
             </ProtectedRoute>
         ),
+    },
+    {
+        path: AppRoute.PAYMENT_STATUS,
+        element: WithSuspense(<PaymentStatusPage />),
     },
     {
         path: AppRoute.ACTIVITIES,

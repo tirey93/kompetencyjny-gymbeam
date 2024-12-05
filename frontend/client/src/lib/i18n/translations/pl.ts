@@ -269,8 +269,32 @@ export const pl: TranslationSource = {
                 default: "Nie udało nam się Cię wylogować. Prosimy spróbować ponownie.",
             },
         },
+        payments: {
+            intent: {
+                default: "Nie udało się pobrać informacji o płatności.",
+            },
+        },
     },
     notifications: {
+        payments: {
+            status: {
+                loading: {
+                    waitingForInitialization: "Ładowanie...",
+                    processing: "Twoja płatność jest przetwarzana.",
+                },
+                success: {
+                    default: "Płatność została potwierdzona.",
+                },
+                warning: {
+                    actionRequired: "Wymagane są dodatkowe kroki. Sprawdź swojego dostawcę płatności.",
+                },
+                error: {
+                    canceled: "Płatność została anulowana.",
+                    unknownStatus: "Nieznany status płatności. Skontaktuj się z nami.",
+                    default: "Nie udało się pobrać statusu płatności. Skontaktuj się z nami.",
+                },
+            },
+        },
         activity: {
             delete: {
                 title: "Usunięto zajęcia.",
@@ -376,6 +400,39 @@ export const pl: TranslationSource = {
         summary: "Krótki opis",
     },
     pages: {
+        payment: {
+            gymMembership: {
+                status: {
+                    title: {
+                        loading: "Oczekiwanie na status",
+                        success: "Sukces!",
+                        warning: "Wymagana akcja",
+                        error: "Wystąpił błąd",
+                    },
+                    buttons: {
+                        goBack: {
+                            label: "Wróc do poprzedniej strony",
+                        },
+                        goToQR: {
+                            label: "Zobacz swój karnet",
+                        },
+                    },
+                },
+                form: {
+                    buttons: {
+                        pay: {
+                            label: "Zapłać {{amount}} {{currency}}",
+                        },
+                        goBack: {
+                            label: "Wróć do poprzedniej strony",
+                        },
+                    },
+                    title: "Zamów karnet",
+                    description:
+                        "Po potwierdzeniu płatności, otrzymasz karnet na 30 dni. Jeśli już posiadasz karnet, zostanie on przedłużony o 30 dni. Zwroty rozpatrywane są indywidualnie po kontakcie mailowym.",
+                },
+            },
+        },
         reservations: {
             noResults: {
                 description: "Nie masz aktualnie żadnych rezerwacji.",
@@ -469,6 +526,9 @@ export const pl: TranslationSource = {
             gymPassDetails: {
                 owner: "Właściciel",
                 reservationsPermission: "Status",
+            },
+            orderMembershipButton: {
+                label: "Zamów karnet",
             },
         },
 

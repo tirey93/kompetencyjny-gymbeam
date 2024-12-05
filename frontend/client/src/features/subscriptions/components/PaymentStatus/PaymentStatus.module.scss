@@ -1,0 +1,43 @@
+html .container {
+  align-items: center;
+  gap: var(--mantine-spacing-xl);
+
+   .status {
+     justify-content: center;
+     padding: var(--mantine-spacing-xl);
+
+     background: var(--mantine-color-dark-6);
+     border-radius: var(--mantine-radius-md);
+     border: thin solid var(--mantine-color-dark-4);
+
+    .textContainer {
+      gap: var(--mantine-spacing-sm);
+      max-width: 400px;
+
+      .title {
+        font-size: var(--mantine-font-size-xl);
+      }
+
+      .description {
+        font-size: var(--mantine-font-size-md);
+      }
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+
+      &.success {
+        color: var(--mantine-color-success-4);
+      }
+
+      &.error {
+        color: var(--mantine-color-danger-4);
+      }
+
+      &.warning {
+        color: var(--mantine-color-warning-4);
+      }
+    }
+  }
+}
