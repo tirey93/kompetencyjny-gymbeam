@@ -258,6 +258,25 @@ export type TranslationSource = {
                 description: string;
             };
         };
+        payments: {
+            status: {
+                loading: {
+                    waitingForInitialization: string;
+                    processing: string;
+                };
+                success: {
+                    default: string;
+                };
+                warning: {
+                    actionRequired: string;
+                };
+                error: {
+                    canceled: string;
+                    unknownStatus: string;
+                    default: string;
+                };
+            };
+        };
     };
 
     apiErrors: {
@@ -327,6 +346,11 @@ export type TranslationSource = {
                 default: string;
             };
             signOut: {
+                default: string;
+            };
+        };
+        payments: {
+            intent: {
                 default: string;
             };
         };
@@ -466,6 +490,42 @@ export type TranslationSource = {
             gymPassDetails: {
                 owner: string;
                 reservationsPermission: string;
+            };
+            orderMembershipButton: {
+                label: string;
+            };
+        };
+
+        payment: {
+            gymMembership: {
+                status: {
+                    title: {
+                        loading: string;
+                        success: string;
+                        error: string;
+                        warning: string;
+                    };
+                    buttons: {
+                        goBack: {
+                            label: string;
+                        };
+                        goToQR: {
+                            label: string;
+                        };
+                    };
+                };
+                form: {
+                    title: string;
+                    description: string;
+                    buttons: {
+                        goBack: {
+                            label: string;
+                        };
+                        pay: {
+                            label: string;
+                        };
+                    };
+                };
             };
         };
 

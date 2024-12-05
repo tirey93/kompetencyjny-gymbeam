@@ -6,10 +6,12 @@ import classes from "./GymPass.module.scss";
 import { useAuthState } from "@/features/auth";
 import { GymPassInfo, GymPassQR, Timestamp } from "@/features/gymPass";
 import { useOrderMembership } from "@/features/subscriptions/hooks/useOrderMembership";
+import { useTranslate } from "@/lib/i18n";
 
 export const GymPassPage = () => {
     const { user } = useAuthState();
     const { orderMembership, isPending } = useOrderMembership();
+    const t = useTranslate();
 
     if (!user) {
         return null;
@@ -30,7 +32,7 @@ export const GymPassPage = () => {
 
             <Stack className={classes.buttonsWrapper}>
                 <Button variant="default" onClick={orderMembership} loading={isPending}>
-                    Order membership
+                    {t("pages.qr.orderMembershipButton.label")}
                 </Button>
             </Stack>
         </Stack>

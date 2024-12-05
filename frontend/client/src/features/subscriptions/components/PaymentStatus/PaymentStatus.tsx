@@ -7,6 +7,7 @@ import styles from "./PaymentStatus.module.scss";
 
 import { AppRoute } from "@/app/router";
 import { usePaymentStatus } from "@/features/subscriptions/hooks/usePaymentStatus";
+import { useTranslate } from "@/lib/i18n";
 
 const icons = {
     loading: <Loader />,
@@ -15,20 +16,21 @@ const icons = {
     error: <IconCircleXFilled className={classNames(styles.icon, styles.error)} />,
 };
 
-const titles = {
-    loading: "Loading",
-    success: "Congrats!",
-    warning: "Additional steps required",
-    error: "Payment failed",
-};
-
 type PaymentStatusProps = {
     clientSecret: string;
 };
 
 export const PaymentStatus = ({ clientSecret }: PaymentStatusProps) => {
+    const t = useTranslate();
     const { message, status } = usePaymentStatus(clientSecret);
     const navigate = useNavigate();
+
+    const titles = {
+        loading: t("pages.payment.gymMembership.status.title.loading"),
+        success: t("pages.payment.gymMembership.status.title.success"),
+        warning: t("pages.payment.gymMembership.status.title.warning"),
+        error: t("pages.payment.gymMembership.status.title.error"),
+    };
 
     const onGoBack = () => {
         navigate(-1);
@@ -50,10 +52,10 @@ export const PaymentStatus = ({ clientSecret }: PaymentStatusProps) => {
             {status !== "loading" && (
                 <Group>
                     <Button variant="default" onClick={onGoBack}>
-                        Go back
+                        {t("pages.payment.gymMembership.status.buttons.goBack.label")}
                     </Button>
                     <Button variant="light" onClick={onGoToGymPass}>
-                        See gym pass
+                        {t("pages.payment.gymMembership.status.buttons.goToQR.label")}
                     </Button>
                 </Group>
             )}

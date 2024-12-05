@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { usePaymentIntent } from "@/features/subscriptions/hooks/usePaymentIntent";
+import { useTranslate } from "@/lib/i18n";
 
 type PaymentIntentResult = {
     status: "loading" | "error" | "success" | "warning";
@@ -8,44 +9,45 @@ type PaymentIntentResult = {
 };
 
 export const usePaymentStatus = (clientSecret: string): PaymentIntentResult => {
+    const t = useTranslate();
     const { data: paymentIntent, isLoading } = usePaymentIntent(clientSecret);
 
     const [paymentIntentResult, setPaymentIntentResult] = useState<PaymentIntentResult>({
         status: "loading",
-        message: "Loading...",
+        message: t("notifications.payments.status.loading.waitingForInitialization"),
     });
 
     const getPaymentIntentResult = useCallback(async (): Promise<PaymentIntentResult> => {
         if (isLoading) {
-            return { status: "loading", message: "We are processing your payment." };
+            return { status: "loading", message: t("notifications.payments.status.loading.processing") };
         }
 
         if (!paymentIntent) {
-            return { status: "error", message: "Failed to retrieve payment information." };
+            return { status: "error", message: t("notifications.payments.status.error.default") };
         }
 
         const status = paymentIntent?.status;
 
         switch (status) {
             case "processing":
-                return { status: "loading", message: "We are processing your payment." };
+                return { status: "loading", message: t("notifications.payments.status.loading.processing") };
 
             case "succeeded":
-                return { status: "success", message: "Payment succeeded!" };
+                return { status: "success", message: t("notifications.payments.status.success.default") };
 
             case "canceled":
-                return { status: "error", message: "Payment canceled." };
+                return { status: "error", message: t("notifications.payments.status.error.canceled") };
 
             case "requires_action":
             case "requires_payment_method":
             case "requires_confirmation":
             case "requires_capture":
-                return { status: "warning", message: "Payment requires some action." };
+                return { status: "warning", message: t("notifications.payments.status.warning.actionRequired") };
 
             default:
-                throw new Error("Unknown payment status!");
+                throw new Error(t("notifications.payments.status.error.unknownStatus"));
         }
-    }, [isLoading, paymentIntent]);
+    }, [isLoading, paymentIntent, t]);
 
     useEffect(() => {
         const updatePaymentStatus = async () => {

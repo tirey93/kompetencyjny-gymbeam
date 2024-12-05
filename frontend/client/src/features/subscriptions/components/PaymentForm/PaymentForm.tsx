@@ -7,6 +7,7 @@ import classes from "./PaymentForm.module.scss";
 import { ErrorMessage } from "@/components/DataDisplay";
 import { useConfirmPayment } from "@/features/subscriptions/hooks/useConfirmPayment";
 import { usePaymentIntent } from "@/features/subscriptions/hooks/usePaymentIntent";
+import { useTranslate } from "@/lib/i18n";
 
 type PaymentFormProps = {
     title: string;
@@ -15,6 +16,7 @@ type PaymentFormProps = {
 };
 
 export const PaymentForm = ({ title, description, clientSecret }: PaymentFormProps) => {
+    const t = useTranslate();
     const { confirmPayment, error, reset, isLoading } = useConfirmPayment();
     const { data, error: orderError } = usePaymentIntent(clientSecret);
 
@@ -53,10 +55,13 @@ export const PaymentForm = ({ title, description, clientSecret }: PaymentFormPro
 
             <Group className={classes.buttonsContainer}>
                 <Button variant="default" onClick={onGoBack}>
-                    Go back
+                    {t("pages.payment.gymMembership.form.buttons.goBack.label")}
                 </Button>
                 <Button variant="light" loading={isLoading} color="success" onClick={confirmPayment}>
-                    Pay {data.amount / 100} {data.currency.toUpperCase()}
+                    {t("pages.payment.gymMembership.form.buttons.pay.label", {
+                        amount: data.amount / 100,
+                        currency: data.currency.toUpperCase(),
+                    })}
                 </Button>
             </Group>
         </Stack>

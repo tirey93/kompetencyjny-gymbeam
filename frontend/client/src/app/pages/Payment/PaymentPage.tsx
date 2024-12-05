@@ -5,8 +5,10 @@ import styles from "./PaymentPage.module.scss";
 import { AppRoute } from "@/app/router";
 import { PaymentForm } from "@/features/subscriptions/components/PaymentForm/PaymentForm";
 import { PaymentFormProvider } from "@/features/subscriptions/components/PaymentFormProvider/PaymentFormProvider";
+import { useTranslate } from "@/lib/i18n";
 
 export const PaymentPage = () => {
+    const t = useTranslate();
     const { state } = useLocation();
     const { clientSecret } = state;
 
@@ -20,8 +22,8 @@ export const PaymentPage = () => {
                 <PaymentFormProvider clientSecret={clientSecret}>
                     <PaymentForm
                         clientSecret={clientSecret}
-                        description="Przedłuż ważność swojego karnetu o 30 dni. Zwroty rozpatrujemy indywidualnie przy recepcji w każdej z naszych placówek."
-                        title="Przedłuż karnet"
+                        description={t("pages.payment.gymMembership.form.description")}
+                        title={t("pages.payment.gymMembership.form.title")}
                     />
                 </PaymentFormProvider>
             </div>
