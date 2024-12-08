@@ -3,6 +3,11 @@ html .container {
   min-height: 80vh;
   margin: auto;
   justify-content: center;
+  align-items: center;
+
+  .buttonsWrapper {
+    width: 300px;
+  }
 
   .grid {
     margin-inline: auto;

@@ -1,3 +1,4 @@
+import basicSsl from "@vitejs/plugin-basic-ssl";
 import react from "@vitejs/plugin-react-swc";
 import dotenv from "dotenv";
 import { defineConfig, loadEnv } from "vite";
@@ -13,7 +14,7 @@ export default defineConfig(({ mode }) => {
 
     return {
         base: "/",
-        plugins: [react(), checker({ typescript: true }), tsConfigPaths()],
+        plugins: [basicSsl(), react(), checker({ typescript: true }), tsConfigPaths()],
         define: {
             "process.env": {},
             __APP_ENV__: JSON.stringify(env.APP_ENV),

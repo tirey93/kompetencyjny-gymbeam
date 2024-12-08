@@ -265,8 +265,32 @@ export const en: TranslationSource = {
                 default: "We couldn't sign you out. Please try again.",
             },
         },
+        payments: {
+            intent: {
+                default: "Could not retrieve payment information.",
+            },
+        },
     },
     notifications: {
+        payments: {
+            status: {
+                loading: {
+                    waitingForInitialization: "Loading...",
+                    processing: "We are processing your payment.",
+                },
+                success: {
+                    default: "Payment succeeded!",
+                },
+                warning: {
+                    actionRequired: "Additional steps are required. Please check your payment provider.",
+                },
+                error: {
+                    canceled: "Payment canceled.",
+                    unknownStatus: "Unknown payment status. Please contact us.",
+                    default: "Could not retrieve payment status. Please contact us.",
+                },
+            },
+        },
         activity: {
             delete: {
                 title: "Activity deleted.",
@@ -466,6 +490,43 @@ export const en: TranslationSource = {
             gymPassDetails: {
                 owner: "Owner",
                 reservationsPermission: "Status",
+            },
+            orderMembershipButton: {
+                label: "Order gym membership",
+            },
+        },
+
+        payment: {
+            gymMembership: {
+                status: {
+                    title: {
+                        loading: "Waiting for status",
+                        success: "Congrats!",
+                        warning: "Action required",
+                        error: "Payment failed",
+                    },
+                    buttons: {
+                        goBack: {
+                            label: "Go back",
+                        },
+                        goToQR: {
+                            label: "See gym pass",
+                        },
+                    },
+                },
+                form: {
+                    title: "Order gym membership",
+                    description:
+                        "After confirming your payment, you will receive gym membership for 30 days. If you already have one, it will be extended by 30 days. Refunds are issued after mail contact.",
+                    buttons: {
+                        goBack: {
+                            label: "Go back",
+                        },
+                        pay: {
+                            label: "Pay {{amount}} {{currency}}",
+                        },
+                    },
+                },
             },
         },
 
