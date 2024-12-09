@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using GymBeam.Commands;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
 namespace GymBeam.Controllers
@@ -33,11 +34,16 @@ namespace GymBeam.Controllers
                 {
                     var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
                     _logger.LogInformation($"Stripe: in payment_intent.succeeded paymentIntent.Id:{paymentIntent.Id}");
+
+                    await _mediator.Send(new UpdateSubscriptionWebhookCommand
+                    {
+                        PaymentIntentId = paymentIntent.Id
+                    });
                 }
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, "Unexpected exception apeared.");
             }
             return Ok();
         }
