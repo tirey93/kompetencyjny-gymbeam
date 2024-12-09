@@ -10,6 +10,7 @@ using GymBeam.Exceptions;
 using GymBeam.Commands;
 using GymBeam.Requests;
 using Domain.Exceptions;
+using Stripe;
 
 namespace GymBeam.Controllers
 {
@@ -18,9 +19,14 @@ namespace GymBeam.Controllers
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public UserController(IMediator mediator)
+        private readonly PaymentIntentService _paymentIntentService;
+        private readonly ILogger<UserController> _logger;
+
+        public UserController(IMediator mediator, PaymentIntentService paymentIntentService, ILogger<UserController> logger)
         {
             _mediator = mediator;
+            _paymentIntentService = paymentIntentService;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -227,6 +233,39 @@ namespace GymBeam.Controllers
             {
                 return StatusCode((int)HttpStatusCode.NotFound,
                     string.Format(Resource.ControllerNotFound, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
+        }
+
+        [HttpPost("Subscription")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+#if !DEBUG
+        [Authorize(Roles = Roles.User)]
+#endif
+        public async Task<ActionResult> Subscription()
+        {
+            try
+            {
+                Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId);
+                var options = new PaymentIntentCreateOptions
+                {
+                    Currency = "pln",
+                    Amount = 1099,
+                    AutomaticPaymentMethods = new()
+                    {
+                        Enabled = true,
+                    }
+                };
+
+                var paymentIntent = await _paymentIntentService.CreateAsync(options);
+                _logger.LogWarning($"in USER paymentIntent.Id:{paymentIntent.Id}");
+                return Ok(new { clientSecret = paymentIntent.ClientSecret });
             }
             catch (Exception ex)
             {
