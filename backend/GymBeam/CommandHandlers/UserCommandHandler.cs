@@ -73,9 +73,17 @@ namespace GymBeam.CommandHandlers
             var paymentIntent = await _paymentIntentService.CreateAsync(options);
             _logger.LogInformation($"Stripe: paymentIntent.Id:{paymentIntent.Id}");
 
-            var subscription = new Domain.Subscription(paymentIntent.Id);
-            user.Subscription = subscription;
-            _repository.Add(subscription);
+            Domain.Subscription subscription = user.Subscription;
+            if (subscription == null)
+            {
+                subscription = new Domain.Subscription(paymentIntent.Id);
+                user.Subscription = subscription;
+                _repository.Add(subscription);
+            }
+            else
+            {
+                user.Subscription.PaymentIntentId = paymentIntent.Id;
+            }
             await _repository.SaveChangesAsync();
 
             return paymentIntent.ClientSecret;

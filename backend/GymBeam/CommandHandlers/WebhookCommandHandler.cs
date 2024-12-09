@@ -19,7 +19,8 @@ namespace GymBeam.CommandHandlers
             var user = _repository.GetUserByPaymentId(request.PaymentIntentId)
                 ?? throw new UserNotFoundException();
 
-            user.Subscription.ExpiresAt = DateTime.UtcNow.AddMonths(1);
+            var currentDate = user.Subscription.ExpiresAt ?? DateTime.UtcNow;
+            user.Subscription.ExpiresAt = currentDate.AddMonths(1);
             user.Subscription.Succeeded = true;
 
             await _repository.SaveChangesAsync();
