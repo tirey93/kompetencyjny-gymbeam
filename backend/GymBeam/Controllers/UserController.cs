@@ -99,10 +99,7 @@ namespace GymBeam.Controllers
             int id;
             try
             {
-                if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
-                    throw new InvalidCookieException(Cookies.UserId);
-                if (!int.TryParse(cookiesUserId, out id))
-                    throw new InvalidUserIdException();
+                id = GetIdFromCookies();
             }
             catch (InvalidCookieException ex)
             {
@@ -252,7 +249,7 @@ namespace GymBeam.Controllers
         {
             try
             {
-                Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId);
+                var id = GetIdFromCookies();
                 var options = new PaymentIntentCreateOptions
                 {
                     Currency = "pln",
@@ -272,6 +269,17 @@ namespace GymBeam.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError,
                     string.Format(Resource.ControllerInternalError, ex.Message));
             }
+        }
+
+
+        private int GetIdFromCookies()
+        {
+            int id;
+            if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
+                throw new InvalidCookieException(Cookies.UserId);
+            if (!int.TryParse(cookiesUserId, out id))
+                throw new InvalidUserIdException();
+            return id;
         }
     }
 }
