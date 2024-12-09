@@ -10,7 +10,6 @@ using GymBeam.Exceptions;
 using GymBeam.Commands;
 using GymBeam.Requests;
 using Domain.Exceptions;
-using Stripe;
 
 namespace GymBeam.Controllers
 {
@@ -19,14 +18,10 @@ namespace GymBeam.Controllers
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly PaymentIntentService _paymentIntentService;
-        private readonly ILogger<UserController> _logger;
 
-        public UserController(IMediator mediator, PaymentIntentService paymentIntentService, ILogger<UserController> logger)
+        public UserController(IMediator mediator)
         {
             _mediator = mediator;
-            _paymentIntentService = paymentIntentService;
-            _logger = logger;
         }
 
         [HttpGet]
@@ -239,7 +234,8 @@ namespace GymBeam.Controllers
         }
 
         [HttpPost("Subscription")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 #if !DEBUG
@@ -250,19 +246,26 @@ namespace GymBeam.Controllers
             try
             {
                 var id = GetIdFromCookies();
-                var options = new PaymentIntentCreateOptions
+                var clientSecret = await _mediator.Send(new CreateSubscriptionUserCommand
                 {
-                    Currency = "pln",
-                    Amount = 1099,
-                    AutomaticPaymentMethods = new()
-                    {
-                        Enabled = true,
-                    }
-                };
-
-                var paymentIntent = await _paymentIntentService.CreateAsync(options);
-                _logger.LogWarning($"in USER paymentIntent.Id:{paymentIntent.Id}");
-                return Ok(new { clientSecret = paymentIntent.ClientSecret });
+                    UserId = id
+                });
+                return Ok(new { clientSecret });
+            }
+            catch (InvalidCookieException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (InvalidUserIdException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (UserNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
             }
             catch (Exception ex)
             {

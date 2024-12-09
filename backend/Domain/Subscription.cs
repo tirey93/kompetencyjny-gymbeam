@@ -12,5 +12,10 @@ namespace Domain
 
         public bool IsPrivileged => Succeeded && ExpiresAt == null;
         public bool HasExpired => ExpiresAt < DateTime.UtcNow;
+
+        public Subscription(string paymentIntentId)
+        {
+            PaymentIntentId = paymentIntentId;
+        }
     }
 }

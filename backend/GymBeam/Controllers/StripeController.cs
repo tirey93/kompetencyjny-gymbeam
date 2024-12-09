@@ -32,7 +32,7 @@ namespace GymBeam.Controllers
                 if (stripeEvent.Type == "payment_intent.succeeded")
                 {
                     var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
-                    _logger.LogWarning($"in WEBHOOK.payment_intent.succeeded paymentIntent.Id:{paymentIntent.Id}");
+                    _logger.LogInformation($"Stripe: in payment_intent.succeeded paymentIntent.Id:{paymentIntent.Id}");
                 }
             }
             catch (Exception ex)
