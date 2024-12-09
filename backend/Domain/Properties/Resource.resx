@@ -138,4 +138,13 @@
   <data name="ExceptionUserPasswordNotMatch" xml:space="preserve">
     <value>Password for user name {0} not match.</value>
   </data>
+  <data name="UserDoesntHaveSubscription" xml:space="preserve">
+    <value>User with ID {0} doesn't have subscription.</value>
+  </data>
+  <data name="UserPaymentUnsucceed" xml:space="preserve">
+    <value>User with ID {0} doesn't have approved subscription.</value>
+  </data>
+  <data name="UserPaymentExpired" xml:space="preserve">
+    <value>User with ID {0} has a subscription that expired. Expired at: {1}</value>
+  </data>
 </root>

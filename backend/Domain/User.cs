@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Exceptions;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
@@ -15,11 +16,16 @@ namespace Domain
 
         public bool HasValidSubscription()
         {
-            if (Subscription == null) return false;
+            if (Subscription == null) 
+                throw new UserDoesntHaveSubscriptionException(Id);
 
-            if (Subscription.IsPrivileged) return true;
-            if (!Subscription.Succeeded) return false;
-            if (Subscription.HasExpired) return false;
+            if (Subscription.IsPrivileged) 
+                return true;
+
+            if (!Subscription.Succeeded)
+                throw new UserPaymentUnsucceedException(Id);
+            if (Subscription.HasExpired)
+                throw new UserPaymentExpiredException(Id, Subscription.ExpiresAt.Value);
 
             return true;
         }
