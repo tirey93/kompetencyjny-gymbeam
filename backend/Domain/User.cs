@@ -17,21 +17,5 @@ namespace Domain
         public bool SubscriptionIsActive => Subscription != null 
             && Subscription.Succeeded 
             && (!Subscription.HasExpired || Subscription.IsPrivileged);
-
-        public bool HasValidSubscription()
-        {
-            if (Subscription == null) 
-                throw new UserDoesntHaveSubscriptionException(Id);
-
-            if (Subscription.IsPrivileged) 
-                return true;
-
-            if (!Subscription.Succeeded)
-                throw new UserPaymentUnsucceedException(Id);
-            if (Subscription.HasExpired)
-                throw new UserPaymentExpiredException(Id, Subscription.ExpiresAt.Value);
-
-            return true;
-        }
     }
 }

@@ -131,32 +131,5 @@ namespace Domain.Properties {
                 return ResourceManager.GetString("ExceptionUserPasswordNotMatch", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User with ID {0} doesn&apos;t have subscription..
-        /// </summary>
-        internal static string UserDoesntHaveSubscription {
-            get {
-                return ResourceManager.GetString("UserDoesntHaveSubscription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User with ID {0} has a subscription that expired. Expired at: {1}.
-        /// </summary>
-        internal static string UserPaymentExpired {
-            get {
-                return ResourceManager.GetString("UserPaymentExpired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User with ID {0} doesn&apos;t have approved subscription..
-        /// </summary>
-        internal static string UserPaymentUnsucceed {
-            get {
-                return ResourceManager.GetString("UserPaymentUnsucceed", resourceCulture);
-            }
-        }
     }
 }
