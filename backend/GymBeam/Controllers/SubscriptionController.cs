@@ -17,12 +17,14 @@ namespace GymBeam.Controllers
         private readonly IConfiguration _configuration;
         private readonly IMediator _mediator;
         private readonly PaymentIntentService _paymentIntentService;
+        private readonly ILogger<SubscriptionController> _logger;
 
-        public SubscriptionController(IConfiguration configuration, IMediator mediator, PaymentIntentService paymentIntentService)
+        public SubscriptionController(IConfiguration configuration, IMediator mediator, PaymentIntentService paymentIntentService, ILogger<SubscriptionController> logger)
         {
             _configuration = configuration;
             _mediator = mediator;
             _paymentIntentService = paymentIntentService;
+            _logger = logger;
         }
         [HttpPost("PaymentIntent")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -47,6 +49,7 @@ namespace GymBeam.Controllers
                 };
 
                 var paymentIntent = await _paymentIntentService.CreateAsync(options);
+                _logger.LogWarning($"in POST paymentIntent.Id:{paymentIntent.Id}");
                 return Ok(new {clientSecret = paymentIntent.ClientSecret });
             }
              catch (Exception ex)
@@ -70,6 +73,7 @@ namespace GymBeam.Controllers
                 if (stripeEvent.Type == "payment_intent.succeeded")
                 {
                     var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
+                    _logger.LogWarning($"in WEBHOOK.payment_intent.succeeded paymentIntent.Id:{paymentIntent.Id}");
                 }
             }
             catch (Exception ex)
