@@ -14,6 +14,10 @@ namespace Domain
         public bool ReservationDisabled { get; set; }
         public Subscription Subscription { get; set; }
 
+        public bool SubscriptionIsActive => Subscription != null 
+            && Subscription.Succeeded 
+            && (!Subscription.HasExpired || Subscription.IsPrivileged);
+
         public bool HasValidSubscription()
         {
             if (Subscription == null) 
