@@ -21,7 +21,9 @@ export default defineConfig(({ mode }) => {
         },
         server: {
             port: VITE_PORT,
-            hmr: false
+            hmr: {
+                port: VITE_PORT,
+            },
         },
         css: {
             preprocessorOptions: {
