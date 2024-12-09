@@ -70,6 +70,15 @@ namespace Domain.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User not found..
+        /// </summary>
+        internal static string ExceptionNoneUserNotFound {
+            get {
+                return ResourceManager.GetString("ExceptionNoneUserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reservation with ID {0} not found..
         /// </summary>
         internal static string ExceptionReservationNotFound {

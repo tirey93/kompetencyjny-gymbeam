@@ -40,7 +40,9 @@ namespace GymBeam.QueryHandlers
                 Name = user.Name,
                 DisplayName = user.DisplayName,
                 Role = user.Role.ToString(),
-                ReservationDisabled = user.ReservationDisabled
+                ReservationDisabled = user.ReservationDisabled,
+                SubscriptionExpiresAt = user.Subscription?.ExpiresAt,
+                SubscriptionIsActive = user.SubscriptionIsActive,
             };
             return Task.FromResult(result);
         }
@@ -60,7 +62,9 @@ namespace GymBeam.QueryHandlers
                 Name = x.Name,
                 DisplayName = x.DisplayName,
                 Role = x.Role.ToString(),
-                ReservationDisabled = x.ReservationDisabled
+                ReservationDisabled = x.ReservationDisabled,
+                SubscriptionIsActive = x.SubscriptionIsActive,
+                SubscriptionExpiresAt = x.Subscription?.ExpiresAt,
             });
 
             return Task.FromResult(result);

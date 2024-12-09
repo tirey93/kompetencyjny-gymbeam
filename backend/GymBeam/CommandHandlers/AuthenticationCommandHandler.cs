@@ -46,7 +46,7 @@ namespace GymBeam.CommandHandlers
                 Name = user.Name,
                 DisplayName = user.DisplayName,
                 Role = user.Role.ToString(),
-                ReservationDisabled = user.ReservationDisabled,
+                ReservationDisabled = user.ReservationDisabled
             };
         }
     }

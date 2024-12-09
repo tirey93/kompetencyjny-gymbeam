@@ -14,5 +14,6 @@ namespace Domain
         Task SaveChangesAsync();
         Dictionary<Enrollment, int> GetSlotsTakenForEnrollments(DateTime from, DateTime to);
         public User GetUserByName(string name);
+        public User GetUserByPaymentId(string paymentIntentId);
     }
 }
