@@ -1,19 +1,20 @@
-import { useMemo } from "react";
 import { Button } from "@mantine/core";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
+import dayjs from "dayjs";
 
 import classes from "./ReservationButton.module.scss";
 
 import { TextWithTooltip } from "@/components/DataDisplay";
 import { useTranslate } from "@/lib/i18n";
+import { User } from "@/types";
 
 type ReservationButtonProps = {
+    user?: User | null;
+    activityDate: Date;
     isFull: boolean;
-    hasStartedAlready: boolean;
     isAlreadyReserved: boolean;
     onReservation: () => unknown;
     onCancellation: () => unknown;
-    isUserPermittedToEnroll: boolean;
     isLoading: boolean;
 };
 
@@ -22,23 +23,35 @@ export const ReservationButton = ({
     isFull,
     onReservation,
     onCancellation,
-    hasStartedAlready,
     isLoading,
-    isUserPermittedToEnroll,
+    activityDate,
+    user,
 }: ReservationButtonProps) => {
     const translate = useTranslate();
+    const now = new Date();
 
-    const disabledButtonLabel = useMemo(() => {
-        if (isFull) {
+    const hasStartedAlready = dayjs(activityDate).isBefore(now);
+    const isCancellationAllowed = isAlreadyReserved && !hasStartedAlready;
+
+    const isActivityDateValid =
+        !!user?.gymPassExpirationTime && dayjs(activityDate).isBefore(user.gymPassExpirationTime);
+
+    const isReservationAllowed =
+        !isFull && !hasStartedAlready && !user?.areReservationsForbidden && isActivityDateValid;
+
+    const getDisabledButtonLabel = () => {
+        if (!isActivityDateValid) {
+            return translate("activityCalendar.item.enrollment.disabled.tooltip.noGymPass");
+        } else if (isFull) {
             return translate("activityCalendar.item.enrollment.disabled.tooltip.full");
         } else if (hasStartedAlready) {
             return translate("activityCalendar.item.enrollment.disabled.tooltip.tooLate");
-        } else if (!isUserPermittedToEnroll) {
+        } else if (user?.areReservationsForbidden) {
             return translate("activityCalendar.item.enrollment.disabled.tooltip.notAllowed");
         }
-    }, [hasStartedAlready, isFull, isUserPermittedToEnroll, translate]);
+    };
 
-    if (!hasStartedAlready && isAlreadyReserved) {
+    if (isCancellationAllowed) {
         return (
             <Button
                 size="xs"
@@ -53,9 +66,9 @@ export const ReservationButton = ({
         );
     }
 
-    if (isFull || hasStartedAlready || !isUserPermittedToEnroll) {
+    if (!isReservationAllowed) {
         return (
-            <TextWithTooltip alwaysVisible className={classes.reservationsDisabled} label={disabledButtonLabel}>
+            <TextWithTooltip alwaysVisible className={classes.reservationsDisabled} label={getDisabledButtonLabel()}>
                 {translate("activityCalendar.item.enrollment.disabled.label")}
             </TextWithTooltip>
         );

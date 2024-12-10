@@ -37,7 +37,7 @@ export const AddActivityModal = ({ innerProps: { activity }, id }: AddActivityMo
         .filter((user) => user.role === "Admin")
         .map((user) => ({
             value: user.id.toString(),
-            label: `${user.displayName}`,
+            label: `${user.name}`,
         }));
 
     const onClose = useCallback(() => {

@@ -6,7 +6,7 @@ import classes from "./UsersDashboardPage.module.scss";
 import { ErrorScreen, LoaderOverlay } from "@/components/DataDisplay";
 import { useAllUsers, UsersTable, useUsersManagementModalEvents } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
 export const UsersDashboardPage = () => {
     const translate = useTranslate();
@@ -15,7 +15,7 @@ export const UsersDashboardPage = () => {
         useUsersManagementModalEvents();
 
     const onUserRoleChangeInternal = useCallback(
-        (user: UserDetails) => {
+        (user: User) => {
             return onUserRoleChange(user, user.role === "Admin" ? "User" : "Admin");
         },
         [onUserRoleChange]

@@ -5,11 +5,11 @@ import classes from "./UserOptionsDropdown.module.scss";
 
 import { UserManagementEvents } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
 type UserOptionsDropdownProps = {
     events: UserManagementEvents;
-    userDetails: UserDetails;
+    userDetails: User;
 };
 
 export const UserOptionsDropdown = ({ events, userDetails }: UserOptionsDropdownProps) => {

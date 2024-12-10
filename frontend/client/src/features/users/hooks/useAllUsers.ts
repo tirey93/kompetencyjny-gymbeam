@@ -3,11 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey, useRequestErrorHandler } from "@/api";
 import { UsersService } from "@/features/users";
+import { mapUserDtoToUser } from "@/features/users/utils/mapUserDtoToUser";
 import { QueryKey } from "@/lib/apiClient";
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
 type UseAllUsers = {
-    users: UserDetails[] | null;
+    users: User[] | null;
     isLoading: boolean;
     error: string | null;
     refetch: () => Promise<unknown>;
@@ -23,6 +24,7 @@ export const useAllUsers = (): UseAllUsers => {
     } = useQuery({
         queryFn: UsersService.getAllUsers,
         queryKey: [QueryKey.Users],
+        select: (data) => data.map(mapUserDtoToUser),
     });
 
     useEffect(() => {

@@ -1,18 +1,18 @@
 import { useCallback } from "react";
 import { modals } from "@mantine/modals";
 
-import { UserDetails, UserRole } from "@/types";
+import { User, UserRole } from "@/types";
 
 type UseUsersManagementModalEvents = {
-    onUserDelete: (user: UserDetails) => void;
-    onUserRoleChange: (user: UserDetails, newRole: UserRole) => void;
-    onUserReservationsPermissionToggle: (user: UserDetails) => void;
-    onShowUserReservations: (user: UserDetails) => void;
+    onUserDelete: (user: User) => void;
+    onUserRoleChange: (user: User, newRole: UserRole) => void;
+    onUserReservationsPermissionToggle: (user: User) => void;
+    onShowUserReservations: (user: User) => void;
 };
 
 export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents => {
     const onUserDelete = useCallback(
-        (user: UserDetails) =>
+        (user: User) =>
             modals.openContextModal({
                 modal: "deleteUser",
                 withCloseButton: false,
@@ -25,7 +25,7 @@ export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents =
     );
 
     const onUserRoleChange = useCallback(
-        (user: UserDetails, newRole: UserRole) =>
+        (user: User, newRole: UserRole) =>
             modals.openContextModal({
                 modal: "changeUserRole",
                 centered: true,
@@ -39,7 +39,7 @@ export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents =
     );
 
     const onUserReservationsPermissionToggle = useCallback(
-        (user: UserDetails) =>
+        (user: User) =>
             modals.openContextModal({
                 modal: "toggleUserReservationsPermission",
                 centered: true,
@@ -52,7 +52,7 @@ export const useUsersManagementModalEvents = (): UseUsersManagementModalEvents =
     );
 
     const onShowUserReservations = useCallback(
-        (user: UserDetails) =>
+        (user: User) =>
             modals.openContextModal({
                 modal: "showReservations",
                 centered: true,

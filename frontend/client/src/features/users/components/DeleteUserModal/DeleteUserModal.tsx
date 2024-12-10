@@ -6,10 +6,10 @@ import { ErrorMessage } from "@/components/DataDisplay";
 import { Modal } from "@/components/Modals";
 import { useDeleteUser, UserShortInfo } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
 type DeleteUserModalProps = ContextModalProps<{
-    user: UserDetails;
+    user: User;
 }>;
 
 export const DeleteUserModal = ({ innerProps: { user }, id }: DeleteUserModalProps) => {

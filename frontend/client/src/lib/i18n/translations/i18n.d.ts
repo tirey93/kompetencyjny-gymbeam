@@ -185,6 +185,7 @@ export type TranslationSource = {
                         tooLate: string;
                         full: string;
                         notAllowed: string;
+                        noGymPass: string;
                     };
                 };
             };
@@ -472,6 +473,7 @@ export type TranslationSource = {
                 role: string;
                 reservations: string;
                 options: string;
+                gymPassExpirationTime: string;
             };
             rows: {
                 reservations: {
@@ -480,6 +482,10 @@ export type TranslationSource = {
                 };
                 name: string;
                 login: string;
+                gymPassExpirationTime: {
+                    label: string;
+                    expired: string;
+                };
             };
             errorScreen: {
                 title: string;
@@ -490,8 +496,16 @@ export type TranslationSource = {
             gymPassDetails: {
                 owner: string;
                 reservationsPermission: string;
+                expired: string;
+                expiresAt: string;
+            };
+            errors: {
+                expired: string;
             };
             orderMembershipButton: {
+                label: string;
+            };
+            extendMembershipButton: {
                 label: string;
             };
         };

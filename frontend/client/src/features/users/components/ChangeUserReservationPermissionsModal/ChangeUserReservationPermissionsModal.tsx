@@ -6,10 +6,10 @@ import { ErrorMessage } from "@/components/DataDisplay";
 import { Modal } from "@/components/Modals";
 import { useChangeReservationsPermission, UserShortInfo } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
 type ChangeUserReservationPermissionsModalProps = ContextModalProps<{
-    user: UserDetails;
+    user: User;
 }>;
 
 export const ChangeUserReservationPermissionsModal = ({
@@ -24,7 +24,7 @@ export const ChangeUserReservationPermissionsModal = ({
     }, [id]);
 
     const handleChangePermissions = useCallback(async () => {
-        await changeReservationsPermission(user.id, !user.reservationDisabled);
+        await changeReservationsPermission(user.id, !user.areReservationsForbidden);
         notifications.show({
             withBorder: true,
             title: translate("notifications.user.changeReservationsPermission.title"),
@@ -34,13 +34,13 @@ export const ChangeUserReservationPermissionsModal = ({
             color: "success",
         });
         onClose();
-    }, [changeReservationsPermission, onClose, translate, user.id, user.reservationDisabled]);
+    }, [changeReservationsPermission, onClose, translate, user.id, user.areReservationsForbidden]);
 
     return (
         <Modal.Wrapper>
             <Modal.Title>{translate("modals.user.toggleReservations.title")}</Modal.Title>
             <Modal.Caption>
-                {user.reservationDisabled
+                {user.areReservationsForbidden
                     ? translate("modals.user.toggleReservations.toggleOnCaption")
                     : translate("modals.user.toggleReservations.toggleOffCaption")}
             </Modal.Caption>

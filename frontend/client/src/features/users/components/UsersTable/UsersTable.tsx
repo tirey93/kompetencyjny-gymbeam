@@ -10,10 +10,10 @@ import { SearchBar } from "@/components/DataInput";
 import { NoResultsMessage, SortableTableHeader } from "@/components/Table";
 import { useSearchAndSort } from "@/hooks";
 import { useTranslate } from "@/lib/i18n";
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
 type UsersTableProps = {
-    users: UserDetails[];
+    users: User[];
     events: UserManagementEvents;
 };
 
@@ -21,9 +21,9 @@ export const UsersTable = ({ users, events }: UsersTableProps) => {
     const translate = useTranslate();
     const columns = useUsersColumnsConfig();
 
-    const { sortBy, onSort, sortDirection, data, onSearch } = useSearchAndSort<UserDetails>({
+    const { sortBy, onSort, sortDirection, data, onSearch } = useSearchAndSort<User>({
         dataToProcess: users ?? [],
-        predicates: ["name", "displayName"],
+        predicates: ["login", "name"],
     });
 
     if (!data.length) {

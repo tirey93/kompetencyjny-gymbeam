@@ -142,12 +142,12 @@ export const ActivityItemCard = ({
             />
 
             <ReservationButton
+                activityDate={startTime}
+                user={user}
                 onReservation={handleAddReservation}
                 onCancellation={handleRemoveReservation}
                 isAlreadyReserved={!!reservationId}
                 isLoading={isAddReservationLoading || isRemoveReservationLoading}
-                hasStartedAlready={hasStartedAlready}
-                isUserPermittedToEnroll={!user?.reservationDisabled}
                 isFull={isFull}
             />
         </Paper>

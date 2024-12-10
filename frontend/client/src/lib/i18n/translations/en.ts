@@ -189,6 +189,7 @@ export const en: TranslationSource = {
                         tooLate: "This activity has already started.",
                         full: "All slots are taken.",
                         notAllowed: "You are not allowed to enroll.",
+                        noGymPass: "Your Gym Pass won't be valid during the start time of this activity.",
                     },
                 },
             },
@@ -472,6 +473,7 @@ export const en: TranslationSource = {
                 role: "Role",
                 reservations: "Reservations",
                 options: "Options",
+                gymPassExpirationTime: "GymPass",
             },
             rows: {
                 reservations: {
@@ -480,6 +482,10 @@ export const en: TranslationSource = {
                 },
                 name: "Name",
                 login: "Login",
+                gymPassExpirationTime: {
+                    label: "Valid until",
+                    expired: "Expired",
+                },
             },
             errorScreen: {
                 title: "Can't display list of users.",
@@ -489,10 +495,18 @@ export const en: TranslationSource = {
         qr: {
             gymPassDetails: {
                 owner: "Owner",
-                reservationsPermission: "Status",
+                reservationsPermission: "Account status",
+                expired: "Expired",
+                expiresAt: "Expires at",
+            },
+            errors: {
+                expired: "Expired",
             },
             orderMembershipButton: {
                 label: "Order gym membership",
+            },
+            extendMembershipButton: {
+                label: "Extend gym membership",
             },
         },
 

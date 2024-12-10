@@ -189,6 +189,7 @@ export const pl: TranslationSource = {
                         tooLate: "Te zajęcia się już zaczęły.",
                         full: "Wszystkie miejsca zostały zarezerwowane.",
                         notAllowed: "Nie masz uprawnień do rezerwacji.",
+                        noGymPass: "Twój karnet nie będzie ważny w momencie startu zajęć.",
                     },
                 },
             },
@@ -508,6 +509,7 @@ export const pl: TranslationSource = {
                 role: "Rola",
                 reservations: "Rezerwacje",
                 options: "Opcje",
+                gymPassExpirationTime: "Karnet",
             },
             rows: {
                 reservations: {
@@ -516,6 +518,10 @@ export const pl: TranslationSource = {
                 },
                 name: "Nazwa",
                 login: "Login",
+                gymPassExpirationTime: {
+                    label: "Ważny do",
+                    expired: "Ważność zakończona",
+                },
             },
             errorScreen: {
                 title: "Nie można wyświetlić listy użytkowników.",
@@ -525,7 +531,15 @@ export const pl: TranslationSource = {
         qr: {
             gymPassDetails: {
                 owner: "Właściciel",
-                reservationsPermission: "Status",
+                reservationsPermission: "Status konta",
+                expired: "Po dacie ważności",
+                expiresAt: "Data ważności",
+            },
+            errors: {
+                expired: "Nieważny",
+            },
+            extendMembershipButton: {
+                label: "Przedłuż karnet",
             },
             orderMembershipButton: {
                 label: "Zamów karnet",
