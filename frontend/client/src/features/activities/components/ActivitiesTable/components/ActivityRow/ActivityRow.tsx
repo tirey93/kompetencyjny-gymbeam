@@ -36,7 +36,11 @@ export const ActivityRow = ({ activity, onEdit, onDelete }: ActivityRowProps) =>
             <Table.Td>
                 <Group className={classes.cellContentWrapper}>
                     {activity.name}
-                    <ActionIcon onClick={searchForActivityInstances} className={classes.icon} variant="transparent">
+                    <ActionIcon
+                        onClick={searchForActivityInstances}
+                        className={classes.searchIcon}
+                        variant="transparent"
+                    >
                         <IconSearch />
                     </ActionIcon>
                 </Group>

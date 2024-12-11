@@ -58,7 +58,7 @@ export const ActivitiesTable = ({ activities, onAdd, onDelete }: ActivitiesTable
             {!data.length && (
                 <NoResultsMessage
                     description={translate("pages.activitiesDashboard.noResults.description")}
-                    onActionButtonClick={onAdd}
+                    onActionButtonClick={() => onAdd()}
                 />
             )}
         </Box>
