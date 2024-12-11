@@ -3,21 +3,21 @@ import { Avatar } from "@mantine/core";
 
 import classes from "./UserAvatar.module.scss";
 
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
 type UserAvatarProps = {
-    user: UserDetails;
+    user: User;
 };
 
 export const UserAvatar = ({ user }: UserAvatarProps) => {
     const userInitials = useMemo(() => {
-        const words = user.displayName.split(" ");
+        const words = user.name.split(" ");
         const initials = words.map((word) => word.charAt(0));
         return initials.slice(0, 2).join("");
     }, [user]);
 
     const avatarColor = useMemo(() => {
-        if (user.reservationDisabled) {
+        if (user.areReservationsForbidden) {
             return "danger";
         }
 

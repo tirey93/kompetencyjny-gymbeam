@@ -2,6 +2,12 @@ html .row {
   background-color: var(--mantine-color-dark-6);
   height: 60px;
 
+  &:hover {
+    .searchIcon {
+      visibility: visible;
+    }
+  }
+
   .cellContentWrapper {
     gap: var(--mantine-spacing-xs);
     white-space: nowrap;
@@ -38,10 +44,14 @@ html .row {
     right: 0;
   }
 
-  .icon {
+  .icon, .searchIcon {
     --ti-size: var(--mantine-font-size-xl);
     --ai-size: var(--mantine-font-size-xl);
     margin-top: -2px;
+  }
+
+  .searchIcon {
+    visibility: hidden;
   }
 
   .date {

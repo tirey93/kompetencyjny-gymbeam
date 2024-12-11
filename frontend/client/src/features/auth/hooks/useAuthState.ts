@@ -2,13 +2,13 @@ import { useMemo } from "react";
 
 import { useAuthStore } from "../store/AuthStore";
 
-import { InternalUserRole, UserDetails } from "@/types/Auth";
+import { InternalUserRole, User } from "@/types/Auth";
 
 type UseAuthState = {
-    setUser: (user: UserDetails) => void;
+    setUser: (user: User) => void;
     clearUser: () => void;
     role: InternalUserRole;
-    user: UserDetails | null;
+    user: User | null;
     isSignedIn: boolean;
 };
 

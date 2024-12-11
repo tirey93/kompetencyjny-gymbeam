@@ -8,10 +8,10 @@ import classes from "./UserRow.module.scss";
 import { TextWithTooltip } from "@/components/DataDisplay";
 import { UserAvatar, UserManagementEvents, UserReservationsPermissionBadge, UserRoleBadge } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
 type UserRowProps = {
-    userDetails: UserDetails;
+    userDetails: User;
     events: UserManagementEvents;
 };
 
@@ -30,12 +30,23 @@ export const UserRow = ({ userDetails, events }: UserRowProps) => {
 
             <Table.Td className={classes.columnWithTruncatedValue}>
                 <Text className={classes.columnLabel}>{translate("pages.usersDashboard.rows.name")}</Text>
-                <TextWithTooltip className={classes.columnValue}>{userDetails.displayName}</TextWithTooltip>
+                <TextWithTooltip className={classes.columnValue}>{userDetails.name}</TextWithTooltip>
             </Table.Td>
 
             <Table.Td className={classes.columnWithTruncatedValue}>
                 <Text className={classes.columnLabel}>{translate("pages.usersDashboard.rows.login")}</Text>
-                <TextWithTooltip className={classes.columnValue}>{userDetails.name}</TextWithTooltip>
+                <TextWithTooltip className={classes.columnValue}>{userDetails.login}</TextWithTooltip>
+            </Table.Td>
+
+            <Table.Td className={classes.columnWithTruncatedValue}>
+                <Text className={classes.columnLabel}>
+                    {translate("pages.usersDashboard.rows.gymPassExpirationTime.label")}
+                </Text>
+                <TextWithTooltip className={classes.columnValue}>
+                    {userDetails.gymPassExpirationTime
+                        ? userDetails.gymPassExpirationTime?.toLocaleString()
+                        : translate("pages.usersDashboard.rows.gymPassExpirationTime.expired")}
+                </TextWithTooltip>
             </Table.Td>
 
             <Table.Td className={classes.center}>
@@ -45,7 +56,7 @@ export const UserRow = ({ userDetails, events }: UserRowProps) => {
             <Table.Td className={classes.center}>
                 <UserReservationsPermissionBadge
                     onClick={() => events.onUserReservationsPermissionToggle(userDetails)}
-                    disabled={userDetails.reservationDisabled}
+                    disabled={userDetails.areReservationsForbidden}
                 />
             </Table.Td>
 

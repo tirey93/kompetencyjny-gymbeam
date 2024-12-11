@@ -6,10 +6,11 @@ import { useAuthState } from "./useAuthState";
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey, useRequestErrorHandler } from "@/api";
 import { useAppOverlayStore } from "@/components/AppOverlay";
 import { AuthService, SignInRequestBody } from "@/features/auth";
-import { UserDetails } from "@/types/Auth";
+import { mapUserDtoToUser } from "@/features/users/utils/mapUserDtoToUser";
+import { User } from "@/types/Auth";
 
 type UseSignIn = {
-    signIn: (signInData: SignInRequestBody) => Promise<UserDetails>;
+    signIn: (signInData: SignInRequestBody) => Promise<User>;
     error: string | null;
     reset: () => void;
 };
@@ -29,8 +30,9 @@ export const useSignIn = (): UseSignIn => {
 
             try {
                 const data = await mutateAsync(signInRequestBody);
-                setUser(data);
-                return data;
+                const user = mapUserDtoToUser(data);
+                setUser(user);
+                return user;
             } catch (error) {
                 const errorTranslation = mapErrorToErrorTranslationKey(error, errorsMap);
                 throw new Error(setAndTranslateError(errorTranslation));

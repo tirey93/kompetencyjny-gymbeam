@@ -21,7 +21,7 @@ export const SignInPage = () => {
 
             notifications.show({
                 title: translate("notifications.auth.signedIn.title"),
-                message: translate("notifications.auth.signedIn.description", { user: user.displayName }),
+                message: translate("notifications.auth.signedIn.description", { user: user.name }),
                 color: "success",
                 withBorder: true,
             });

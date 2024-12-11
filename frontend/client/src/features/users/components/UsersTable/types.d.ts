@@ -1,8 +1,8 @@
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
 export type UserManagementEvents = {
-    onDelete: (user: UserDetails) => void;
-    onUserRoleChange: (user: UserDetails) => void;
-    onUserReservationsPermissionToggle: (user: UserDetails) => void;
-    onShowReservations: (user: UserDetails) => void;
+    onDelete: (user: User) => void;
+    onUserRoleChange: (user: User) => void;
+    onUserReservationsPermissionToggle: (user: User) => void;
+    onShowReservations: (user: User) => void;
 };

@@ -1,15 +1,14 @@
 import { request } from "@/api";
 import { SignInRequestBody, SignUpRequestBody } from "@/features/auth";
-import { UserDetails } from "@/types";
-import { OIDCInitializedResult } from "@/types/Auth";
+import { OIDCInitializedResult, UserDto } from "@/types/Auth";
 
 export class AuthService {
-    public static signIn(body: SignInRequestBody): Promise<UserDetails> {
-        return request<UserDetails>("Authentication/Login", { method: "POST", body });
+    public static signIn(body: SignInRequestBody): Promise<UserDto> {
+        return request<UserDto>("Authentication/Login", { method: "POST", body });
     }
 
-    public static signUp(body: SignUpRequestBody): Promise<UserDetails> {
-        return request<UserDetails>("Authentication/Register", { method: "POST", body });
+    public static signUp(body: SignUpRequestBody): Promise<UserDto> {
+        return request<UserDto>("Authentication/Register", { method: "POST", body });
     }
 
     public static signOut(): Promise<null> {

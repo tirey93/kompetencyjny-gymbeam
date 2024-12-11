@@ -6,10 +6,10 @@ import { ErrorMessage } from "@/components/DataDisplay";
 import { Modal } from "@/components/Modals";
 import { useChangeUserRole, UserShortInfo } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
-import { UserDetails, UserRole } from "@/types";
+import { User, UserRole } from "@/types";
 
 type ChangeUserRoleModalProps = ContextModalProps<{
-    user: UserDetails;
+    user: User;
     newRole: UserRole;
 }>;
 

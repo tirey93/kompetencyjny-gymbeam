@@ -1,8 +1,8 @@
 import { SortableTableColumnsConfig } from "@/components/Table";
 import { useTranslate } from "@/lib/i18n";
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
-export const useUsersColumnsConfig = (): SortableTableColumnsConfig<UserDetails>[] => {
+export const useUsersColumnsConfig = (): SortableTableColumnsConfig<User>[] => {
     const translate = useTranslate();
 
     return [
@@ -13,12 +13,16 @@ export const useUsersColumnsConfig = (): SortableTableColumnsConfig<UserDetails>
         },
         {
             children: translate("pages.usersDashboard.header.user"),
-            column: "displayName",
+            column: "name",
             colSpan: 2,
         },
         {
             children: translate("pages.usersDashboard.header.login"),
-            column: "name",
+            column: "login",
+        },
+        {
+            children: translate("pages.usersDashboard.header.gymPassExpirationTime"),
+            column: "gymPassExpirationTime",
         },
         {
             children: translate("pages.usersDashboard.header.role"),
@@ -27,7 +31,7 @@ export const useUsersColumnsConfig = (): SortableTableColumnsConfig<UserDetails>
         },
         {
             children: translate("pages.usersDashboard.header.reservations"),
-            column: "reservationDisabled",
+            column: "areReservationsForbidden",
             ta: "center",
         },
     ];

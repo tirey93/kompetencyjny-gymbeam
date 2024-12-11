@@ -1,12 +1,13 @@
 import { request } from "@/api";
-import { UserDetails, UserRole } from "@/types";
+import { UserRole } from "@/types";
+import { UserDto } from "@/types/Auth";
 
 export class UsersService {
-    public static getAllUsers(): Promise<UserDetails[]> {
+    public static getAllUsers(): Promise<UserDto[]> {
         return request("User", { method: "GET" });
     }
 
-    public static getMyself(): Promise<UserDetails> {
+    public static getMyself(): Promise<UserDto> {
         return request("User/LoggedIn", { method: "GET" });
     }
 

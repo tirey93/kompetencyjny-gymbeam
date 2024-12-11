@@ -1,10 +1,10 @@
 import { create } from "zustand";
 
-import { UserDetails } from "@/types/Auth";
+import { User } from "@/types/Auth";
 
 type AuthStore = {
-    currentUserDetails: UserDetails | null;
-    setCurrentUserDetails: (currentUserDetails: UserDetails) => void;
+    currentUserDetails: User | null;
+    setCurrentUserDetails: (currentUserDetails: User) => void;
     clearCurrentUserDetails: () => void;
 };
 

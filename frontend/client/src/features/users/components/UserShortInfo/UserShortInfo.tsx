@@ -5,10 +5,10 @@ import classes from "./UserShortInfo.module.scss";
 
 import { UserAvatar } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
 type UserShortInfoProps = {
-    user: UserDetails;
+    user: User;
 };
 
 export const UserShortInfo = ({ user }: UserShortInfoProps) => {
@@ -22,14 +22,14 @@ export const UserShortInfo = ({ user }: UserShortInfoProps) => {
             },
             {
                 label: translate("user.name"),
-                value: user.displayName,
+                value: user.name,
             },
             {
                 label: translate("user.login"),
-                value: user.name,
+                value: user.login,
             },
         ],
-        [translate, user.displayName, user.id, user.name]
+        [translate, user.name, user.id, user.login]
     );
 
     return (

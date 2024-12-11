@@ -4,10 +4,10 @@ import classes from "./GymPassInfo.module.scss";
 
 import { UserReservationsPermissionBadge } from "@/features/users";
 import { useTranslate } from "@/lib/i18n";
-import { UserDetails } from "@/types";
+import { User } from "@/types";
 
 type GymPassInfoProps = {
-    owner: UserDetails;
+    owner: User;
 };
 
 export const GymPassInfo = ({ owner }: GymPassInfoProps) => {
@@ -17,11 +17,21 @@ export const GymPassInfo = ({ owner }: GymPassInfoProps) => {
         <Stack className={classes.container}>
             <Box>
                 <Text className={classes.label}>{translate("pages.qr.gymPassDetails.owner")}</Text>
-                <Text className={classes.ownerName}>{owner.name}</Text>
+                <Text className={classes.ownerName}>
+                    {owner.name} ({owner.login})
+                </Text>
+            </Box>
+            <Box>
+                <Text className={classes.label}>{translate("pages.qr.gymPassDetails.expiresAt")}</Text>
+                <Text className={classes.ownerName}>
+                    {owner.gymPassExpirationTime
+                        ? owner.gymPassExpirationTime.toLocaleString()
+                        : translate("pages.qr.gymPassDetails.expired")}
+                </Text>
             </Box>
             <Box>
                 <Text className={classes.label}>{translate("pages.qr.gymPassDetails.reservationsPermission")}</Text>
-                <UserReservationsPermissionBadge disabled={owner.reservationDisabled} />
+                <UserReservationsPermissionBadge disabled={owner.areReservationsForbidden} />
             </Box>
         </Stack>
     );
