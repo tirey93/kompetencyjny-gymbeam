@@ -18,6 +18,7 @@ namespace GymBeam.Controllers
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
+
         public UserController(IMediator mediator)
         {
             _mediator = mediator;
@@ -93,10 +94,7 @@ namespace GymBeam.Controllers
             int id;
             try
             {
-                if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
-                    throw new InvalidCookieException(Cookies.UserId);
-                if (!int.TryParse(cookiesUserId, out id))
-                    throw new InvalidUserIdException();
+                id = GetIdFromCookies();
             }
             catch (InvalidCookieException ex)
             {
@@ -233,6 +231,58 @@ namespace GymBeam.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError,
                     string.Format(Resource.ControllerInternalError, ex.Message));
             }
+        }
+
+        [HttpPost("Subscription")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+#if !DEBUG
+        [Authorize(Roles = Roles.User)]
+#endif
+        public async Task<ActionResult> Subscription()
+        {
+            try
+            {
+                var id = GetIdFromCookies();
+                var clientSecret = await _mediator.Send(new CreateSubscriptionUserCommand
+                {
+                    UserId = id
+                });
+                return Ok(new { clientSecret });
+            }
+            catch (InvalidCookieException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (InvalidUserIdException ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest,
+                    string.Format(Resource.ControllerBadRequest, ex.Message));
+            }
+            catch (UserNotFoundException ex)
+            {
+                return StatusCode((int)HttpStatusCode.NotFound,
+                    string.Format(Resource.ControllerNotFound, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError,
+                    string.Format(Resource.ControllerInternalError, ex.Message));
+            }
+        }
+
+
+        private int GetIdFromCookies()
+        {
+            int id;
+            if (!Request.Cookies.TryGetValue(Cookies.UserId, out string cookiesUserId))
+                throw new InvalidCookieException(Cookies.UserId);
+            if (!int.TryParse(cookiesUserId, out id))
+                throw new InvalidUserIdException();
+            return id;
         }
     }
 }

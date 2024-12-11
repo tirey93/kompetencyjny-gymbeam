@@ -36,6 +36,8 @@ namespace GymBeam.QueryHandlers
                 DisplayName = user.DisplayName,
                 Role = user.Role.ToString(),
                 ReservationDisabled = user.ReservationDisabled,
+                SubscriptionIsActive = user.SubscriptionIsActive,
+                SubscriptionExpiresAt = user.Subscription?.ExpiresAt
             });
         }
     }

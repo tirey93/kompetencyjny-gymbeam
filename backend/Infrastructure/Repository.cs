@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace Infrastructure
 {
@@ -15,12 +16,12 @@ namespace Infrastructure
         public List<User> GetUsers(Func<User, bool>? predicate = null)
         {
             if (predicate == null)
-                return _appDbContext.Users.ToList();
-            return _appDbContext.Users.Where(predicate).ToList();
+                return _appDbContext.Users.Include(i => i.Subscription).ToList();
+            return _appDbContext.Users.Include(i => i.Subscription).Where(predicate).ToList();
         }
         public User? GetUser(int id)
         {
-            return _appDbContext.Users.FirstOrDefault(x => x.Id == id);
+            return _appDbContext.Users.Include(i => i.Subscription).FirstOrDefault(x => x.Id == id);
         }
 
         public List<Activity> GetActivities(Func<Activity, bool>? predicate = null)
@@ -73,6 +74,12 @@ namespace Infrastructure
         public User? GetUserByName(string name)
         {
             return _appDbContext.Users.FirstOrDefault(x => x.Name == name);
+        }
+
+        public User? GetUserByPaymentId(string paymentIntentId)
+        {
+            return _appDbContext.Users.Include(i => i.Subscription)
+                .FirstOrDefault(x => x.Subscription != null && x.Subscription.PaymentIntentId == paymentIntentId);
         }
 
         public void Add<T>(T entity) where T : class

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Exceptions;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
@@ -11,5 +12,10 @@ namespace Domain
         public Role Role { get; set; }
         public string HashedPassword { get; set; }
         public bool ReservationDisabled { get; set; }
+        public Subscription Subscription { get; set; }
+
+        public bool SubscriptionIsActive => Subscription != null 
+            && Subscription.Succeeded 
+            && (!Subscription.HasExpired || Subscription.IsPrivileged);
     }
 }

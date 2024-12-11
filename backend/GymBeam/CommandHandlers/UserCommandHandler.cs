@@ -1,20 +1,25 @@
 ﻿using Domain;
 using Domain.Exceptions;
 using GymBeam.Commands;
-using GymBeam.Exceptions;
 using MediatR;
+using Stripe;
 
 namespace GymBeam.CommandHandlers
 {
     public class UserCommandHandler : IRequestHandler<UpdateUserRoleCommand, Unit>,
                                       IRequestHandler<UpdateUserReservationDisabledFlagCommand, Unit>,
-                                      IRequestHandler<DeleteUserCommand, Unit>
+                                      IRequestHandler<DeleteUserCommand, Unit>,
+                                      IRequestHandler<CreateSubscriptionUserCommand, string>
     {
         private readonly IRepository _repository;
+        private readonly PaymentIntentService _paymentIntentService;
+        private readonly ILogger<UserCommandHandler> _logger;
 
-        public UserCommandHandler(IRepository repository)
+        public UserCommandHandler(IRepository repository, PaymentIntentService paymentIntentService, ILogger<UserCommandHandler> logger)
         {
             _repository = repository;
+            _paymentIntentService = paymentIntentService;
+            _logger = logger;
         }
 
         public async Task<Unit> Handle(UpdateUserRoleCommand request, CancellationToken cancellationToken)
@@ -48,6 +53,40 @@ namespace GymBeam.CommandHandlers
             await _repository.SaveChangesAsync();
 
             return Unit.Value;
+        }
+
+        public async Task<string> Handle(CreateSubscriptionUserCommand request, CancellationToken cancellationToken)
+        {
+            var user = _repository.GetUser(request.UserId)
+                ?? throw new UserNotFoundException(request.UserId);
+
+            var options = new PaymentIntentCreateOptions
+            {
+                Currency = "pln",
+                Amount = 1099,
+                AutomaticPaymentMethods = new()
+                {
+                    Enabled = true,
+                }
+            };
+
+            var paymentIntent = await _paymentIntentService.CreateAsync(options);
+            _logger.LogInformation($"Stripe: paymentIntent.Id:{paymentIntent.Id}");
+
+            Domain.Subscription subscription = user.Subscription;
+            if (subscription == null)
+            {
+                subscription = new Domain.Subscription(paymentIntent.Id);
+                user.Subscription = subscription;
+                _repository.Add(subscription);
+            }
+            else
+            {
+                user.Subscription.PaymentIntentId = paymentIntent.Id;
+            }
+            await _repository.SaveChangesAsync();
+
+            return paymentIntent.ClientSecret;
         }
     }
 }
