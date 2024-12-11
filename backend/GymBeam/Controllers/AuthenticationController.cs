@@ -154,14 +154,7 @@ namespace GymBeam.Controllers
                 var response = await _mediator.Send(query);
                 AppendToCookie(response);
 
-                return Ok(new UserResponse
-                {
-                    Id = response.Id,
-                    Name = response.Name,
-                    DisplayName = response.DisplayName,
-                    Role = response.Role,
-                    ReservationDisabled = response.ReservationDisabled
-                });
+                return Ok(response);
             }
             catch (UserNotFoundException ex)
             {
