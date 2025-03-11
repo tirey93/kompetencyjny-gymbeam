@@ -6,5 +6,5 @@ import { config } from "@/lib/ui/config";
 type AppProviderProps = PropsWithChildren;
 
 export const AppProvider = ({ children }: AppProviderProps) => {
-    return <TamaguiProvider config={config}>{children}</TamaguiProvider>;
+    return <TamaguiProvider config={config} defaultTheme="light">{children}</TamaguiProvider>;
 };

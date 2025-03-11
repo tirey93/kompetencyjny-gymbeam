@@ -3,60 +3,32 @@ import { defaultConfig } from "@tamagui/config/v4";
 import { createThemes, defaultComponentThemes } from "@tamagui/theme-builder";
 import { createTamagui } from "tamagui";
 
-const darkPalette = [
-    "hsla(0, 15%, 1%, 1)",
-    "hsla(0, 15%, 6%, 1)",
-    "hsla(0, 15%, 12%, 1)",
-    "hsla(0, 15%, 17%, 1)",
-    "hsla(0, 15%, 23%, 1)",
-    "hsla(0, 15%, 28%, 1)",
-    "hsla(0, 15%, 34%, 1)",
-    "hsla(0, 15%, 39%, 1)",
-    "hsla(0, 15%, 45%, 1)",
-    "hsla(0, 15%, 50%, 1)",
-    "hsla(0, 15%, 93%, 1)",
-    "hsla(0, 15%, 99%, 1)",
-];
-const lightPalette = [
-    "hsla(0, 15%, 99%, 1)",
-    "hsla(0, 15%, 94%, 1)",
-    "hsla(0, 15%, 88%, 1)",
-    "hsla(0, 15%, 83%, 1)",
-    "hsla(0, 15%, 77%, 1)",
-    "hsla(0, 15%, 72%, 1)",
-    "hsla(0, 15%, 66%, 1)",
-    "hsla(0, 15%, 61%, 1)",
-    "hsla(0, 15%, 55%, 1)",
-    "hsla(0, 15%, 50%, 1)",
-    "hsla(0, 15%, 15%, 1)",
-    "hsla(0, 15%, 1%, 1)",
-];
 
 const lightShadows = {
-    shadow1: "rgba(0,0,0,0.04)",
-    shadow2: "rgba(0,0,0,0.08)",
-    shadow3: "rgba(0,0,0,0.16)",
-    shadow4: "rgba(0,0,0,0.24)",
-    shadow5: "rgba(0,0,0,0.32)",
-    shadow6: "rgba(0,0,0,0.4)",
-};
+    shadow1: 'rgba(0,0,0,0.04)',
+    shadow2: 'rgba(0,0,0,0.08)',
+    shadow3: 'rgba(0,0,0,0.16)',
+    shadow4: 'rgba(0,0,0,0.24)',
+    shadow5: 'rgba(0,0,0,0.32)',
+    shadow6: 'rgba(0,0,0,0.4)',
+}
 
 const darkShadows = {
-    shadow1: "rgba(0,0,0,0.2)",
-    shadow2: "rgba(0,0,0,0.3)",
-    shadow3: "rgba(0,0,0,0.4)",
-    shadow4: "rgba(0,0,0,0.5)",
-    shadow5: "rgba(0,0,0,0.6)",
-    shadow6: "rgba(0,0,0,0.7)",
-};
+    shadow1: 'rgba(0,0,0,0.2)',
+    shadow2: 'rgba(0,0,0,0.3)',
+    shadow3: 'rgba(0,0,0,0.4)',
+    shadow4: 'rgba(0,0,0,0.5)',
+    shadow5: 'rgba(0,0,0,0.6)',
+    shadow6: 'rgba(0,0,0,0.7)',
+}
 
 const themes = createThemes({
     componentThemes: defaultComponentThemes,
 
     base: {
         palette: {
-            dark: darkPalette,
-            light: lightPalette,
+            dark: ['hsla(253, 15%, 1%, 1)','hsla(253, 15%, 6%, 1)','hsla(253, 15%, 12%, 1)','hsla(253, 15%, 17%, 1)','hsla(253, 15%, 23%, 1)','hsla(253, 15%, 28%, 1)','hsla(253, 15%, 34%, 1)','hsla(253, 15%, 39%, 1)','hsla(253, 15%, 45%, 1)','hsla(253, 15%, 50%, 1)','hsla(0, 15%, 93%, 1)','hsla(0, 15%, 99%, 1)'],
+            light: ['hsla(253, 15%, 95%, 1)','hsla(253, 15%, 93%, 1)','hsla(253, 15%, 90%, 1)','hsla(253, 15%, 87%, 1)','hsla(253, 15%, 84%, 1)','hsla(253, 15%, 80%, 1)','hsla(253, 15%, 76%, 1)','hsla(253, 15%, 72%, 1)','hsla(253, 15%, 68%, 1)','hsla(253, 15%, 60%, 1)','hsla(0, 15%, 15%, 1)','hsla(0, 15%, 1%, 1)'],
         },
 
         extra: {
@@ -79,34 +51,8 @@ const themes = createThemes({
 
     accent: {
         palette: {
-            dark: [
-                "hsla(25, 66%, 50%, 1)",
-                "hsla(25, 66%, 51%, 1)",
-                "hsla(25, 66%, 52%, 1)",
-                "hsla(25, 66%, 53%, 1)",
-                "hsla(25, 66%, 54%, 1)",
-                "hsla(25, 66%, 56%, 1)",
-                "hsla(25, 66%, 57%, 1)",
-                "hsla(25, 66%, 58%, 1)",
-                "hsla(25, 66%, 59%, 1)",
-                "hsla(25, 66%, 60%, 1)",
-                "hsla(250, 50%, 90%, 1)",
-                "hsla(250, 50%, 95%, 1)",
-            ],
-            light: [
-                "hsla(25, 66%, 57%, 1)",
-                "hsla(25, 66%, 58%, 1)",
-                "hsla(25, 66%, 59%, 1)",
-                "hsla(25, 66%, 60%, 1)",
-                "hsla(25, 66%, 61%, 1)",
-                "hsla(25, 66%, 61%, 1)",
-                "hsla(25, 66%, 62%, 1)",
-                "hsla(25, 66%, 63%, 1)",
-                "hsla(25, 66%, 64%, 1)",
-                "hsla(25, 66%, 65%, 1)",
-                "hsla(250, 50%, 95%, 1)",
-                "hsla(250, 50%, 95%, 1)",
-            ],
+            dark: ['hsla(252, 100%, 0%, 1)','hsla(252, 100%, 7%, 1)','hsla(253, 100%, 13%, 1)','hsla(253, 100%, 20%, 1)','hsla(254, 100%, 27%, 1)','hsla(254, 100%, 33%, 1)','hsla(255, 100%, 40%, 1)','hsla(255, 100%, 47%, 1)','hsla(256, 100%, 53%, 1)','hsla(256, 100%, 60%, 1)','hsla(250, 50%, 90%, 1)','hsla(250, 50%, 95%, 1)'],
+            light: ['hsla(256, 100%, 3%, 1)','hsla(256, 100%, 10%, 1)','hsla(256, 100%, 17%, 1)','hsla(256, 100%, 24%, 1)','hsla(256, 100%, 31%, 1)','hsla(256, 100%, 37%, 1)','hsla(256, 100%, 44%, 1)','hsla(256, 100%, 51%, 1)','hsla(256, 100%, 58%, 1)','hsla(256, 100%, 65%, 1)','hsla(250, 50%, 95%, 1)','hsla(250, 50%, 95%, 1)'],
         },
     },
 
@@ -132,10 +78,16 @@ const themes = createThemes({
             },
         },
     },
-});
+})
 
-export type Themes = typeof themes;
-export const config = createTamagui({ ...themes, ...defaultConfig });
+export const config = createTamagui({
+    ...defaultConfig,
+    settings: {
+        ...defaultConfig.settings,
+        onlyAllowShorthands: false,
+    },
+    themes,
+});
 
 type Conf = typeof config;
 
