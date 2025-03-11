@@ -62,8 +62,10 @@ module.exports = {
             version: "detect",
         },
         "import/resolver": {
-            node: {
-                extensions: [".js", ".jsx", ".ts", ".tsx", ".native.js"],
+            typescript: {},
+            alias: {
+                map: [["@", "./"]],
+                extensions: [".ts", ".tsx", ".js", ".jsx"],
             },
         },
     },

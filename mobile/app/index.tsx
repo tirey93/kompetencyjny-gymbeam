@@ -1,17 +1,21 @@
-import { useState } from "react";
-import { Stack } from "expo-router";
-import { Button, SizableText, styled, View, YStack } from "tamagui";
+import { Link, Stack } from "expo-router";
+import {Button, H1, SizableText, styled, Theme, View, YStack} from "tamagui";
 
-export default function HomeScreen() {
-    const [count, setCount] = useState(0);
+import { Screens } from "@/constants/Screens";
 
+export default function Screen() {
     return (
         <>
-            <Stack.Screen options={{ title: "Home" }} />
+            <Stack.Screen options={{ headerShown: false }} />
             <View>
                 <Styled.VerticalStack>
-                    <Styled.Text>Count: {count}</Styled.Text>
-                    <Button onPress={() => setCount((prev) => prev + 1)}>+1</Button>
+                    <Styled.Header>GymBeam</Styled.Header>
+                    <Link href={Screens.SignIn} asChild>
+                        <Styled.Button theme="accent">Sign in</Styled.Button>
+                    </Link>
+                    <Link href={Screens.SignUp} asChild>
+                        <Styled.Button>Create new account</Styled.Button>
+                    </Link>
                 </Styled.VerticalStack>
             </View>
         </>
@@ -21,11 +25,21 @@ export default function HomeScreen() {
 const Styled = {
     VerticalStack: styled(YStack, {
         alignSelf: "center",
+        alignItems: "center",
         justifyContent: "center",
         minHeight: "100%",
+        gap: "$2",
+    }),
+    Header: styled(H1, {
+        fontWeight: 700,
+        marginBottom: "$5",
     }),
     Text: styled(SizableText, {
         fontWeight: 700,
         fontSize: "$6",
+    }),
+    Button: styled(Button, {
+        width: 200,
+        fontWeight: 400,
     }),
 };
