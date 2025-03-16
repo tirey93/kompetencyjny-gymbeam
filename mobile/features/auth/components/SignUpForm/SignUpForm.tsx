@@ -1,22 +1,80 @@
-import { Form, Input, Label } from "tamagui";
+import React from "react";
+import { Button, Form } from "tamagui";
 
-import { SignUpFormStyled } from "@/features/auth/components/SignUpForm/styles";
+import { TextInput } from "@/components/TextInput/TextInput";
+import { SignInFormStyled } from "@/features/auth/components/SignInForm/styles";
+import {
+    LOGIN_LENGTH_REQUIREMENT,
+    NAME_LENGTH_REQUIREMENT,
+    PASSWORD_LENGTH_REQUIREMENT,
+    PASSWORD_MATCH_REQUIREMENT,
+} from "@/features/auth/components/SignUpForm/constants/requirements";
+import { SignUpFormInputs, useSignUpForm } from "@/features/auth/components/SignUpForm/hooks/useSignUpForm";
 
-export const SignUpForm = () => {
+type SignUpFormProps = {
+    onSubmit: (inputs: SignUpFormInputs) => void;
+};
+
+export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useSignUpForm();
+
+    const onFormSubmit = (data: SignUpFormInputs) => {
+        const trimmedLogin = data.login.trim();
+        const trimmedName = data.name.trim();
+        onSubmit({ ...data, login: trimmedLogin, name: trimmedName });
+    };
+
     return (
-        <Form width="100%">
-            <Label>Username</Label>
-            <Input placeholder="Enter your username" />
+        <Form width="100%" onSubmit={handleSubmit(onFormSubmit)}>
+            <SignInFormStyled.InputsContainer>
+                <TextInput
+                    name="name"
+                    label="Name"
+                    control={control}
+                    error={errors.name?.message}
+                    requirements={[NAME_LENGTH_REQUIREMENT]}
+                    placeholder="How should we call you?"
+                />
 
-            <Label>Email</Label>
-            <Input placeholder="Enter your email" />
+                <TextInput
+                    name="login"
+                    label="Login"
+                    control={control}
+                    error={errors.login?.message}
+                    requirements={[LOGIN_LENGTH_REQUIREMENT]}
+                    placeholder="Enter your login"
+                />
 
-            <Label>Password</Label>
-            <Input placeholder="Enter your password" secureTextEntry />
+                <TextInput
+                    name="password"
+                    label="Password"
+                    control={control}
+                    error={errors.password?.message}
+                    placeholder="Enter your password"
+                    requirements={[PASSWORD_LENGTH_REQUIREMENT]}
+                    secureTextEntry
+                />
 
-            <Form.Trigger>
-                <SignUpFormStyled.SubmitButton theme="accent">Sign Up</SignUpFormStyled.SubmitButton>
-            </Form.Trigger>
+                <TextInput
+                    name="confirmPassword"
+                    label="Confirm password"
+                    control={control}
+                    error={errors.confirmPassword?.message}
+                    placeholder="Confirm your password"
+                    requirements={[PASSWORD_MATCH_REQUIREMENT]}
+                    secureTextEntry
+                />
+            </SignInFormStyled.InputsContainer>
+
+            <SignInFormStyled.ButtonsContainer>
+                <Form.Trigger asChild>
+                    <Button theme="success">Sign up</Button>
+                </Form.Trigger>
+            </SignInFormStyled.ButtonsContainer>
         </Form>
     );
 };

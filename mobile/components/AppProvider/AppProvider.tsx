@@ -10,6 +10,8 @@ import { config } from "@/lib/ui/config";
 
 type AppProviderProps = PropsWithChildren;
 
+const TOP_SAFE_AREA_OFFSET = 50;
+
 export const AppProvider = ({ children }: AppProviderProps) => {
     const [queryClient] = useState(() => new QueryClient());
 
@@ -19,7 +21,12 @@ export const AppProvider = ({ children }: AppProviderProps) => {
                 <Scrollable>
                     <GestureHandlerRootView>
                         <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-                        <Toaster position="top-center" />
+                        <Toaster
+                            position="top-center"
+                            swipeToDismissDirection="left"
+                            offset={TOP_SAFE_AREA_OFFSET}
+                            richColors
+                        />
                     </GestureHandlerRootView>
                 </Scrollable>
             </StyledAppProvider.SafeAreaViewProvider>
