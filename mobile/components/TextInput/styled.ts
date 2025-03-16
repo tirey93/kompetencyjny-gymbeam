@@ -1,21 +1,23 @@
-import { Input, SizableText, styled } from "tamagui";
+import { Input, Label, SizableText, styled } from "tamagui";
 
 export const StyledTextInput = {
     Input: styled(Input, {
-        marginBottom: "$2",
+        borderWidth: "$0.25",
+
         variants: {
             withError: {
                 true: {
-                    borderColor: "$red10",
-                    borderWidth: 1,
-                },
-                false: {
-                    borderColor: "transparent",
+                    borderColor: "$error10",
                 },
             },
         } as const,
     }),
     Error: styled(SizableText, {
-        color: "$red10",
+        color: "$error10",
+    }),
+    Label: styled(Label, {
+        fontWeight: 700,
+        fontSize: "$3",
+        marginBottom: "$-2",
     }),
 };

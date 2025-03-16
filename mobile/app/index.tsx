@@ -25,7 +25,7 @@ export default function Screen() {
 
 const Styled = {
     View: styled(View, {
-        backgroundColor: "$accentBackground",
+        backgroundColor: "$background",
     }),
     VerticalStack: styled(YStack, {
         alignSelf: "center",

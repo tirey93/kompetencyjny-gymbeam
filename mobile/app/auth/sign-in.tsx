@@ -38,10 +38,10 @@ export default function LoginScreen() {
 
 const Styled = {
     Container: styled(View, {
-        backgroundColor: "$background",
-        flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        flex: 1,
+        backgroundColor: "$background",
         padding: "$6",
     }),
     Header: styled(H2, {

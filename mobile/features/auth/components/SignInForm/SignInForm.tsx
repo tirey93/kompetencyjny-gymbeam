@@ -1,12 +1,9 @@
 import React from "react";
-import { Link } from "expo-router";
-import { Button, Form, Separator } from "tamagui";
+import { Button, Form } from "tamagui";
 
 import { SignInFormInputs, useSignInForm } from "./hooks/useSignInForm";
-import { GoogleOAuthButton } from "../GoogleOAuthButton/GoogleOAuthButton";
 
 import { TextInput } from "@/components/TextInput/TextInput";
-import { Screens } from "@/constants/Screens";
 import { SignInFormStyled } from "@/features/auth/components/SignInForm/styles";
 
 type SignInFormProps = {
@@ -30,11 +27,10 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
             <SignInFormStyled.InputsContainer>
                 <TextInput
                     name="login"
-                    label="Email"
+                    label="Login"
                     control={control}
                     error={errors.login?.message}
-                    placeholder="Enter your email"
-                    keyboardType="email-address"
+                    placeholder="Enter your login"
                 />
 
                 <TextInput
@@ -49,15 +45,8 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
 
             <SignInFormStyled.ButtonsContainer>
                 <Form.Trigger asChild>
-                    <Button theme="accent">Sign in</Button>
+                    <Button theme="success">Sign in</Button>
                 </Form.Trigger>
-
-                <Link href={Screens.SignUp} asChild>
-                    <Button>I don&#39;t have an account.</Button>
-                </Link>
-
-                <Separator />
-                <GoogleOAuthButton />
             </SignInFormStyled.ButtonsContainer>
         </Form>
     );
