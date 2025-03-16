@@ -62,9 +62,19 @@ module.exports = {
             version: "detect",
         },
         "import/resolver": {
-            typescript: {},
             alias: {
-                map: [["@", "./"]],
+                map: [
+                    ["@api", "./api"],
+                    ["@app", "./app"],
+                    ["@assets", "./assets"],
+                    ["@components", "./components"],
+                    ["@constants", "./constants"],
+                    ["@features", "./features"],
+                    ["@hooks", "./hooks"],
+                    ["@lib", "./lib"],
+                    ["@types", "./types"],
+                    [("@", "./")],
+                ],
                 extensions: [".ts", ".tsx", ".js", ".jsx"],
             },
         },
