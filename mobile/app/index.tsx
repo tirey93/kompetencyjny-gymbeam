@@ -1,14 +1,15 @@
 import { Link, Stack } from "expo-router";
-import {Button, H1, SizableText, styled, Theme, View, YStack} from "tamagui";
+import { Button, H1, SizableText, styled, View, YStack } from "tamagui";
 
+import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 import { Screens } from "@/constants/Screens";
 
 export default function Screen() {
     return (
-        <>
+        <ScreenContainer>
             <Stack.Screen options={{ headerShown: false }} />
-            <View>
-                <Styled.VerticalStack>
+            <Styled.View>
+                <Styled.VerticalStack theme="dark">
                     <Styled.Header>GymBeam</Styled.Header>
                     <Link href={Screens.SignIn} asChild>
                         <Styled.Button theme="accent">Sign in</Styled.Button>
@@ -17,12 +18,15 @@ export default function Screen() {
                         <Styled.Button>Create new account</Styled.Button>
                     </Link>
                 </Styled.VerticalStack>
-            </View>
-        </>
+            </Styled.View>
+        </ScreenContainer>
     );
 }
 
 const Styled = {
+    View: styled(View, {
+        backgroundColor: "$accentBackground",
+    }),
     VerticalStack: styled(YStack, {
         alignSelf: "center",
         alignItems: "center",
