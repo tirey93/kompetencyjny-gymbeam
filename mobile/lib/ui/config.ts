@@ -120,39 +120,39 @@ const warningPalette = {
     light: Object.values(warningLight),
 };
 
-const errorDark = {
-    error1: "hsla(0, 76%, 26%, 1)",
-    error2: "hsla(0, 76%, 30%, 1)",
-    error3: "hsla(0, 76%, 34%, 1)",
-    error4: "hsla(0, 76%, 37%, 1)",
-    error5: "hsla(0, 76%, 41%, 1)",
-    error6: "hsla(0, 76%, 45%, 1)",
-    error7: "hsla(0, 76%, 49%, 1)",
-    error8: "hsla(0, 76%, 52%, 1)",
-    error9: "hsla(0, 76%, 56%, 1)",
-    error10: "hsla(0, 76%, 60%, 1)",
-    error11: "hsla(0, 50%, 90%, 1)",
-    error12: "hsla(0, 50%, 95%, 1)",
+const dangerDark = {
+    danger1: "hsla(0, 76%, 26%, 1)",
+    danger2: "hsla(0, 76%, 30%, 1)",
+    danger3: "hsla(0, 76%, 34%, 1)",
+    danger4: "hsla(0, 76%, 37%, 1)",
+    danger5: "hsla(0, 76%, 41%, 1)",
+    danger6: "hsla(0, 76%, 45%, 1)",
+    danger7: "hsla(0, 76%, 49%, 1)",
+    danger8: "hsla(0, 76%, 52%, 1)",
+    danger9: "hsla(0, 76%, 56%, 1)",
+    danger10: "hsla(0, 76%, 60%, 1)",
+    danger11: "hsla(0, 50%, 90%, 1)",
+    danger12: "hsla(0, 50%, 95%, 1)",
 };
 
-const errorLight = {
-    error1: "hsla(0, 76%, 40%, 1)",
-    error2: "hsla(0, 76%, 43%, 1)",
-    error3: "hsla(0, 76%, 46%, 1)",
-    error4: "hsla(0, 76%, 48%, 1)",
-    error5: "hsla(0, 76%, 51%, 1)",
-    error6: "hsla(0, 76%, 54%, 1)",
-    error7: "hsla(0, 76%, 57%, 1)",
-    error8: "hsla(0, 76%, 59%, 1)",
-    error9: "hsla(0, 76%, 62%, 1)",
-    error10: "hsla(0, 76%, 65%, 1)",
-    error11: "hsla(0, 50%, 95%, 1)",
-    error12: "hsla(0, 50%, 95%, 1)",
+const dangerLight = {
+    danger1: "hsla(0, 76%, 40%, 1)",
+    danger2: "hsla(0, 76%, 43%, 1)",
+    danger3: "hsla(0, 76%, 46%, 1)",
+    danger4: "hsla(0, 76%, 48%, 1)",
+    danger5: "hsla(0, 76%, 51%, 1)",
+    danger6: "hsla(0, 76%, 54%, 1)",
+    danger7: "hsla(0, 76%, 57%, 1)",
+    danger8: "hsla(0, 76%, 59%, 1)",
+    danger9: "hsla(0, 76%, 62%, 1)",
+    danger10: "hsla(0, 76%, 65%, 1)",
+    danger11: "hsla(0, 50%, 95%, 1)",
+    danger12: "hsla(0, 50%, 95%, 1)",
 };
 
-const errorPalette = {
-    dark: Object.values(errorDark),
-    light: Object.values(errorLight),
+const dangerPalette = {
+    dark: Object.values(dangerDark),
+    light: Object.values(dangerLight),
 };
 
 const themes = createThemes({
@@ -168,14 +168,14 @@ const themes = createThemes({
             light: {
                 ...successLight,
                 ...warningLight,
-                ...errorLight,
+                ...dangerLight,
                 ...lightShadows,
                 shadowColor: lightShadows.shadow1,
             },
             dark: {
                 ...successDark,
                 ...warningDark,
-                ...errorDark,
+                ...dangerDark,
                 ...darkShadows,
                 shadowColor: darkShadows.shadow1,
             },
@@ -220,8 +220,8 @@ const themes = createThemes({
             palette: warningPalette,
         },
 
-        error: {
-            palette: errorPalette,
+        danger: {
+            palette: dangerPalette,
         },
 
         success: {

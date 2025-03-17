@@ -1,5 +1,5 @@
 export const Screens = {
-    Home: "index",
+    Landing: "index",
     SignUp: "/auth/sign-up",
     SignIn: "/auth/sign-in",
     Dashboard: "dashboard",
