@@ -7,13 +7,13 @@ export const StyledTextInput = {
         variants: {
             withError: {
                 true: {
-                    borderColor: "$error10",
+                    borderColor: "$danger10",
                 },
             },
         } as const,
     }),
     Error: styled(SizableText, {
-        color: "$error10",
+        color: "$danger10",
     }),
     Label: styled(Label, {
         fontWeight: 700,

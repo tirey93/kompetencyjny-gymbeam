@@ -12,7 +12,7 @@ export const StyledRequirements = {
         variants: {
             withError: {
                 true: {
-                    color: "$error10",
+                    color: "$danger10",
                     fontWeight: 600,
                 },
                 false: {
