@@ -32,7 +32,8 @@ export default function RootLayout() {
     return (
         <AppProvider>
             <Stack>
-                <Stack.Screen name={Screens.Home} />
+                <Stack.Screen name={Screens.Home} options={{ headerShown: false }} />
+                <Stack.Screen name={Screens.Dashboard} options={{ headerShown: false }} />
             </Stack>
             <StatusBar style="auto" />
         </AppProvider>
