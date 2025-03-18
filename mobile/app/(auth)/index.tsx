@@ -1,10 +1,20 @@
-import { Link, Stack } from "expo-router";
+import { Link, router, Stack } from "expo-router";
+import { toast } from "sonner-native";
 import { Button, H1, SizableText, styled, View, YStack } from "tamagui";
 
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 import { Screens } from "@/constants/Screens";
+import { useSignIn } from "@/features/auth";
 
 export default function Screen() {
+    const { signIn } = useSignIn();
+
+    const onBackdoor = async () => {
+        const user = await signIn({ username: "admin", password: "admin" });
+        toast.success(`Welcome back, ${user.name}.`);
+        router.replace(Screens.GymPass);
+    };
+
     return (
         <ScreenContainer>
             <Stack.Screen options={{ headerShown: false }} />
@@ -17,6 +27,7 @@ export default function Screen() {
                     <Link href={Screens.SignUp} asChild>
                         <Styled.Button>Create new account</Styled.Button>
                     </Link>
+                    <Styled.Button onPress={onBackdoor}>Backdoor</Styled.Button>
                 </Styled.VerticalStack>
             </Styled.View>
         </ScreenContainer>
