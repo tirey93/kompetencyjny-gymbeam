@@ -5,9 +5,9 @@ import { H2, styled, View } from "tamagui";
 
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 import { Screens } from "@/constants/Screens";
-import { useChangePassword } from "@/features/user";
-import { ChangePasswordFormInputs } from "@/features/user/components/ChangePasswordForm/hooks/useChangePasswordForm";
-import { ChangePasswordForm } from "@/features/user/components/ChangePasswordForm/ChangePasswordForm";
+import { useChangePassword } from "@/features/users";
+import { ChangePasswordFormInputs } from "@/features/users/components/ChangePasswordForm/hooks/useChangePasswordForm";
+import { ChangePasswordForm } from "@/features/users/components/ChangePasswordForm/ChangePasswordForm";
 
 export default function PasswordChangeScreen() {
     const { changePassword } = useChangePassword();

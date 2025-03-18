@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form } from "tamagui";
 import { TextInput } from "@/components/TextInput/TextInput";
-import { ChangePasswordFormStyled } from "@/features/user/components/ChangePasswordForm/styles";
+import { ChangePasswordFormStyled } from "@/features/users/components/ChangePasswordForm/styles";
 import { ChangePasswordFormInputs, useChangePasswordForm } from "./hooks/useChangePasswordForm";
 
 type ChangePasswordFormProps = {
