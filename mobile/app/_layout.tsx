@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 
 import "react-native-reanimated";
 
 import { AppProvider } from "@/components/AppProvider/AppProvider";
-import { Screens } from "@/constants/Screens";
 
 void SplashScreen.preventAutoHideAsync();
 
@@ -31,10 +30,7 @@ export default function RootLayout() {
 
     return (
         <AppProvider>
-            <Stack>
-                <Stack.Screen name={Screens.Landing} options={{ headerShown: false }} />
-                <Stack.Screen name={Screens.Dashboard} options={{ headerShown: false }} />
-            </Stack>
+            <Slot />
             <StatusBar style="auto" />
         </AppProvider>
     );

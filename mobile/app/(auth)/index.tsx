@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { Link, Stack } from "expo-router";
 import { Button, H1, SizableText, styled, View, YStack } from "tamagui";
 
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
@@ -7,6 +7,7 @@ import { Screens } from "@/constants/Screens";
 export default function Screen() {
     return (
         <ScreenContainer>
+            <Stack.Screen options={{ headerShown: false }} />
             <Styled.View>
                 <Styled.VerticalStack theme="dark">
                     <Styled.Header>GymBeam</Styled.Header>

@@ -1,152 +1,86 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { CameraType, CameraView, useCameraPermissions } from "expo-camera";
+import { Button, Text } from "react-native";
+import { BarcodeScanningResult, CameraType, useCameraPermissions } from "expo-camera";
 import { Flashlight, FlashlightOff, SwitchCameraIcon, XIcon } from "lucide-react-native";
+
+import { StyledQRScanner } from "@/features/gym-pass/components/QRScanner/styled";
+
+const ICON_SIZE = 48;
+const ICON_COLOR = "white";
 
 type QRScannerProps = {
     isActive?: boolean;
+    onScanned: (result: BarcodeScanningResult) => void;
     onClose?: () => void;
 };
 
-export const QRScanner = ({ isActive, onClose }: QRScannerProps) => {
+export const QRScanner = ({ isActive, onClose, onScanned }: QRScannerProps) => {
     const [facing, setFacing] = useState<CameraType>("back");
     const [isTorchEnabled, setIsTorchEnabled] = useState(false);
     const [permission, requestPermission] = useCameraPermissions();
 
     if (!permission || !isActive) {
-        return <View />;
+        return <StyledQRScanner.Container />;
     }
 
     if (!permission.granted) {
+        // TODO: Better error screen
         return (
-            <View style={styles.container}>
-                <Text style={styles.message}>We need your permission to show the camera</Text>
-                <Button onPress={requestPermission} title="grant permission" />
-            </View>
+            <StyledQRScanner.Container>
+                <Text>We need your permission to show the camera</Text>
+                <Button onPress={requestPermission} title="Grant Permission" />
+            </StyledQRScanner.Container>
         );
     }
 
-    function toggleCameraFacing() {
+    const toggleCameraFacing = () => {
         setFacing((current) => (current === "back" ? "front" : "back"));
-    }
+    };
+
+    const toggleTorch = () => {
+        setIsTorchEnabled((current) => !current);
+    };
+
+    const internalOnBarcodeScanned = (result: BarcodeScanningResult) => {
+        if (result.type !== "qr") {
+            return;
+        }
+
+        return onScanned(result);
+    };
 
     return (
-        <View style={styles.container}>
-            <CameraView style={styles.camera} facing={facing} enableTorch={isTorchEnabled}>
-                <View style={styles.overlay}>
-                    {/* Ramka skanowania */}
-                    <View style={styles.scanArea}>
-                        {/* Cztery dekoracyjne linie w rogach */}
-                        <View style={[styles.corner, styles.cornerTopLeft]} />
-                        <View style={[styles.corner, styles.cornerTopRight]} />
-                        <View style={[styles.corner, styles.cornerBottomLeft]} />
-                        <View style={[styles.corner, styles.cornerBottomRight]} />
-                    </View>
+        <StyledQRScanner.Container>
+            <StyledQRScanner.CameraContainer
+                facing={facing}
+                enableTorch={isTorchEnabled}
+                onBarcodeScanned={internalOnBarcodeScanned}
+            >
+                <StyledQRScanner.Overlay>
+                    <StyledQRScanner.ScanArea>
+                        <StyledQRScanner.Corner placement="topLeft" />
+                        <StyledQRScanner.Corner placement="topRight" />
+                        <StyledQRScanner.Corner placement="bottomRight" />
+                        <StyledQRScanner.Corner placement="bottomLeft" />
+                    </StyledQRScanner.ScanArea>
 
-                    {/* Przycisk "X" w prawym górnym rogu */}
-                    <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-                        <XIcon size={32} color="white" />
-                    </TouchableOpacity>
+                    <StyledQRScanner.IconButton slot="topRight" onPress={onClose}>
+                        <XIcon color={ICON_COLOR} size={ICON_SIZE} />
+                    </StyledQRScanner.IconButton>
 
-                    {/* Przyciski sterujące */}
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity onPress={toggleCameraFacing} style={styles.iconButton}>
-                            <SwitchCameraIcon size={32} color="white" />
-                        </TouchableOpacity>
+                    <StyledQRScanner.IconButton slot="bottomRight" onPress={toggleCameraFacing}>
+                        <SwitchCameraIcon color={ICON_COLOR} size={ICON_SIZE} />
+                    </StyledQRScanner.IconButton>
 
-                        <TouchableOpacity
-                            onPress={() => setIsTorchEnabled((current) => !current)}
-                            style={styles.iconButton}
-                        >
-                            {isTorchEnabled ? (
-                                <FlashlightOff size={32} color="white" />
-                            ) : (
-                                <Flashlight size={32} color="white" />
-                            )}
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </CameraView>
-        </View>
+                    <StyledQRScanner.IconButton slot="bottomLeft" onPress={toggleTorch}>
+                        {isTorchEnabled ? (
+                            <FlashlightOff color={ICON_COLOR} size={ICON_SIZE} />
+                        ) : (
+                            <Flashlight color={ICON_COLOR} size={ICON_SIZE} />
+                        )}
+                    </StyledQRScanner.IconButton>
+                </StyledQRScanner.Overlay>
+            </StyledQRScanner.CameraContainer>
+        </StyledQRScanner.Container>
     );
 };
-
-const styles = StyleSheet.create({
-    buttonContainer: {
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        borderRadius: 10,
-        flexDirection: "row",
-        marginBottom: 20,
-        padding: 10,
-    },
-    camera: {
-        flex: 1,
-        width: "100%",
-    },
-    closeButton: {
-        alignItems: "center",
-        backgroundColor: "rgba(0, 0, 0, 0.6)",
-        borderRadius: 20,
-        height: 40,
-        justifyContent: "center",
-        position: "absolute",
-        right: 20,
-        top: 20,
-        width: 40,
-    },
-    container: {
-        alignItems: "center",
-        flex: 1,
-        justifyContent: "center",
-    },
-    corner: {
-        borderColor: "#cfb0ff",
-        height: 40,
-        position: "absolute",
-        width: 40,
-    },
-    cornerBottomLeft: {
-        borderBottomWidth: 4,
-        borderLeftWidth: 4,
-        bottom: 0,
-        left: 0,
-    },
-    cornerBottomRight: {
-        borderBottomWidth: 4,
-        borderRightWidth: 4,
-        bottom: 0,
-        right: 0,
-    },
-    cornerTopLeft: {
-        borderLeftWidth: 4,
-        borderTopWidth: 4,
-        left: 0,
-        top: 0,
-    },
-    cornerTopRight: {
-        borderRightWidth: 4,
-        borderTopWidth: 4,
-        right: 0,
-        top: 0,
-    },
-    iconButton: {
-        marginHorizontal: 10,
-    },
-    message: {
-        paddingBottom: 10,
-        textAlign: "center",
-    },
-    overlay: {
-        ...StyleSheet.absoluteFillObject, // Pokryj całą kamerę
-        justifyContent: "flex-end", // Przyciski na dole ekranu
-        alignItems: "center",
-    },
-    scanArea: {
-        position: "absolute",
-        top: "30%", // Wyśrodkowanie w pionie (około 30% od górnej krawędzi)
-        width: 250,
-        height: 250,
-        justifyContent: "center", // Wyśrodkowanie elementów
-        alignItems: "center",
-    },
-});

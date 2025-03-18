@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { router } from "expo-router";
 import { toast } from "sonner-native";
 
 import { useAuthState } from "../hooks/useAuthState";
@@ -22,7 +21,6 @@ export const useSignOut = (): UseSignOut => {
             //await mutateAsync();
             clearUser();
             toast.success("See you later!");
-            router.replace("../..");
         } catch (error) {
             toast.success("Couldn't log you out.");
             const errorMessage = mapErrorToErrorMessage(error, errorsMap);
