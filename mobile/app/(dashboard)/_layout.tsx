@@ -1,9 +1,17 @@
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import { QrCodeIcon, UserIcon, VolleyballIcon } from "lucide-react-native";
 import { useTheme } from "tamagui";
 
+import { Screens } from "@/constants/Screens";
+import { useAuthState } from "@/features/auth";
+
 export default function DashboardLayout() {
+    const { isSignedIn } = useAuthState();
     const theme = useTheme();
+
+    if (!isSignedIn) {
+        return <Redirect href={Screens.SignIn} />;
+    }
 
     return (
         <Tabs
