@@ -1,0 +1,1 @@
+export type ChangePasswordBody = { oldPassword: string; newPassword: string}

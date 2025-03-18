@@ -4,6 +4,8 @@ import { Button, SizableText, styled, View } from "tamagui";
 
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 import { useSignOut } from "@/features/auth";
+import { Screens } from "@/constants/Screens";
+import { Link } from "expo-router";
 
 export default function Screen() {
     const { signOut } = useSignOut();
@@ -16,6 +18,9 @@ export default function Screen() {
                 <Styled.LogoutButton theme="danger" iconAfter={<LogOutIcon />} onPress={signOut}>
                     Sign out
                 </Styled.LogoutButton>
+                <Link href={Screens.ChangePassword} asChild>
+                    <Styled.Button>Change Password</Styled.Button>
+                </Link>
             </Styled.View>
         </ScreenContainer>
     );
@@ -29,6 +34,10 @@ const Styled = {
         minHeight: "100%",
     }),
     LogoutButton: styled(Button, {
+        minWidth: "90%",
+        fontWeight: 700,
+    }),
+    Button: styled(Button, {
         minWidth: "90%",
         fontWeight: 700,
     }),
