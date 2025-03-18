@@ -20,7 +20,7 @@ export default function PasswordChangeScreen() {
                 }
                 await changePassword({ oldPassword, newPassword });
                 toast.success("Password changed successfully.");
-                router.replace(Screens.Profile);
+                router.push(Screens.Profile);
             } catch (error: any) {
                 toast.error(error.message || "Failed to change password.");
             }

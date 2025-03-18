@@ -15,12 +15,8 @@ export const ChangePasswordForm = ({ onSubmit }: ChangePasswordFormProps) => {
         formState: { errors },
     } = useChangePasswordForm();
 
-    const onFormSubmit = (data: ChangePasswordFormInputs) => {
-        onSubmit(data);
-    };
-
     return (
-        <Form width="100%" onSubmit={handleSubmit(onFormSubmit)}>
+        <Form width="100%" onSubmit={handleSubmit(onSubmit)}>
             <ChangePasswordFormStyled.InputsContainer>
                 <TextInput
                     name="oldPassword"

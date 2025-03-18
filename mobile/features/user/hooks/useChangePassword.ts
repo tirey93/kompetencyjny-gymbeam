@@ -2,12 +2,14 @@ import { useCallback } from "react";
 import { ChangePasswordBody } from "../api/types";
 import { HttpErrorsMap, mapErrorToErrorMessage } from "@/api";
 import { UserService } from "../api/userService";
+import { useAuthState } from "@/features/auth";
 
 type UseChangePassword = {
     changePassword: (changePasswordData: ChangePasswordBody) => Promise<void>;
 };
 
 export const useChangePassword = (): UseChangePassword => {
+    const { user } = useAuthState();
     // const { mutateAsync } = useMutation({
     //     mutationFn: AuthService.changePassword,
     // });
@@ -15,7 +17,11 @@ export const useChangePassword = (): UseChangePassword => {
     const changePassword = useCallback(
         async (changePasswordBody: ChangePasswordBody) => {
             try {
-                // await UserService.changePassword(changePasswordBody);
+                if (!user || !user.id) {
+                    throw new Error("User ID is required but not found.");
+                }
+
+                // await UserService.changePassword(user.id, changePasswordBody);
 
                 console.log("Password changed successfully.");
             } catch (error) {
@@ -23,7 +29,7 @@ export const useChangePassword = (): UseChangePassword => {
                 throw new Error(errorMessage);
             }
         },
-        []
+        [user]
     );
 
     return { changePassword };
