@@ -15,9 +15,6 @@ export default function PasswordChangeScreen() {
     const onSubmit = useCallback(
         async ({ oldPassword, newPassword, confirmPassword }: ChangePasswordFormInputs) => {
             try {
-                if (newPassword !== confirmPassword) {
-                    throw new Error("Passwords do not match.");
-                }
                 await changePassword({ oldPassword, newPassword });
                 toast.success("Password changed successfully.");
                 router.push(Screens.Profile);

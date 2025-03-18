@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { passwordValidationRule, confirmPasswordValidationRule } from '@/common/validation/passwordRules'
+
 
 export type ChangePasswordFormInputs = {
     oldPassword: string;
@@ -8,17 +10,17 @@ export type ChangePasswordFormInputs = {
     confirmPassword: string;
 };
 
-const schema = yup.object({
-    oldPassword: yup.string().required("Old password is required."),
-    newPassword: yup.string().required("New password is required."),
-    confirmPassword: yup.string()
-        .oneOf([yup.ref('newPassword')], "Passwords must match.")
-        .required("Confirmation is required."),
+export const OLD_PASSWORD_REQUIREMENT = "Old password is required.";
+
+const ChangePasswordSchema = yup.object({
+    oldPassword: yup.string().required(OLD_PASSWORD_REQUIREMENT),
+    newPassword: passwordValidationRule,
+    confirmPassword: confirmPasswordValidationRule("newPassword"),
 });
 
 export const useChangePasswordForm = () => {
     return useForm<ChangePasswordFormInputs>({
-        resolver: yupResolver(schema),
+        resolver: yupResolver(ChangePasswordSchema),
         defaultValues: {
             oldPassword: "",
             newPassword: "",
