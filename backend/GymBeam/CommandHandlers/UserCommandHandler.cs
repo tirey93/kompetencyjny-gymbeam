@@ -1,6 +1,7 @@
 ﻿using Domain;
 using Domain.Exceptions;
 using GymBeam.Commands;
+using GymBeam.Utils;
 using MediatR;
 using Stripe;
 
@@ -9,7 +10,8 @@ namespace GymBeam.CommandHandlers
     public class UserCommandHandler : IRequestHandler<UpdateUserRoleCommand, Unit>,
                                       IRequestHandler<UpdateUserReservationDisabledFlagCommand, Unit>,
                                       IRequestHandler<DeleteUserCommand, Unit>,
-                                      IRequestHandler<CreateSubscriptionUserCommand, string>
+                                      IRequestHandler<CreateSubscriptionUserCommand, string>,
+                                      IRequestHandler<ChangeUserPasswordCommand, Unit>
     {
         private readonly IRepository _repository;
         private readonly PaymentIntentService _paymentIntentService;
@@ -87,6 +89,23 @@ namespace GymBeam.CommandHandlers
             await _repository.SaveChangesAsync();
 
             return paymentIntent.ClientSecret;
+        }
+
+        public async Task<Unit> Handle(ChangeUserPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var user = _repository.GetUser(request.UserId)
+                ?? throw new UserNotFoundException(request.UserId);
+
+            var oldPasswordHash = ShaHelper.QuickHash(request.OldPassword);
+            if (oldPasswordHash.ToLower() != user.HashedPassword.ToLower())
+                throw new PasswordNotMatchException(user.Name);
+
+            var newPasswordHash = ShaHelper.QuickHash(request.NewPassword);
+
+            user.HashedPassword = newPasswordHash;
+            await _repository.SaveChangesAsync();
+
+            return Unit.Value;
         }
     }
 }
