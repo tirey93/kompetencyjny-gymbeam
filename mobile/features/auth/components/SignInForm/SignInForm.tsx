@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Form } from "tamagui";
 
 import { SignInFormInputs, useSignInForm } from "./hooks/useSignInForm";
+import { GoogleOAuthButton } from "../GoogleOAuthButton/GoogleOAuthButton";
 
 import { TextInput } from "@/components/TextInput/TextInput";
 import { SignInFormStyled } from "@/features/auth/components/SignInForm/styles";
@@ -47,6 +48,7 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
                 <Form.Trigger asChild>
                     <Button theme="success">Sign in</Button>
                 </Form.Trigger>
+                <GoogleOAuthButton />
             </SignInFormStyled.ButtonsContainer>
         </Form>
     );
