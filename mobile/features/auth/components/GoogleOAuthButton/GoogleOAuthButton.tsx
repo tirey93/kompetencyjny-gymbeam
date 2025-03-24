@@ -1,6 +1,7 @@
 import { router } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
 import { Button } from "tamagui";
+import { toast } from "sonner-native";
 
 import { HttpErrorsMap, mapErrorToErrorMessage } from "@/api";
 import { Screens } from "@/constants/Screens";
@@ -18,7 +19,7 @@ export const GoogleOAuthButton = () => {
             }
         } catch (error) {
             const errorMessage = mapErrorToErrorMessage(error, errorsMap);
-            throw new Error(errorMessage);
+            toast.error(errorMessage);
         }
     };
 
