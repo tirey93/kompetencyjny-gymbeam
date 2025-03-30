@@ -7,4 +7,5 @@ export const Screens = {
     Activities: "/(dashboard)/activities",
     Profile: "/(dashboard)/profile",
     ChangePassword: "/(user)/change-password",
+    Payment: "/(subscription)/payment",
 } as const;
