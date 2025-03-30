@@ -1,5 +1,5 @@
 import { Redirect, Tabs } from "expo-router";
-import { QrCodeIcon, UserIcon, VolleyballIcon } from "lucide-react-native";
+import { QrCodeIcon, UserIcon, VolleyballIcon, ListChecksIcon } from "lucide-react-native";
 import { useTheme } from "tamagui";
 
 import { Screens } from "@/constants/Screens";
@@ -35,6 +35,13 @@ export default function DashboardLayout() {
                 options={{
                     title: "Activities",
                     tabBarIcon: ({ color, size }) => <VolleyballIcon color={color} size={size} />,
+                }}
+            />
+            <Tabs.Screen
+                name="reservations"
+                options={{
+                    title: "Reservations",
+                    tabBarIcon: ({ color, size }) => <ListChecksIcon color={color} size={size} />,
                 }}
             />
             <Tabs.Screen
