@@ -1,14 +1,17 @@
 import React from "react";
-import { View, Text, XStack, YStack, Spinner, styled } from "tamagui";
-
 import { Calendar, Clock, User, Users, X } from "@tamagui/lucide-icons";
-import { ActivityInstance } from "@/types";
+import { Spinner } from "tamagui";
+
 import { ReservationItemCardStyled } from "./styles";
+
+import { ActivityInstance } from "@/types";
+
+const ICON_SIZE = 16;
 
 type ReservationItemCardProps = {
     reservation: ActivityInstance;
-    onDismiss?: () => void;
-    onShowDetails?: () => void;
+    onDismiss?: (activityId: number) => void;
+    onShowDetails?: (activityId: number) => void;
     isLoading?: boolean;
 };
 
@@ -16,14 +19,26 @@ export const ReservationItemCard = ({
     reservation,
     onDismiss,
     onShowDetails,
-    isLoading
+    isLoading,
 }: ReservationItemCardProps) => {
     const startTime = new Date(reservation.startTime);
-    const endTime = new Date(startTime.getTime() + reservation.duration * 60000);
+    const endTime = new Date(
+        startTime.getTime() + reservation.duration * 60000,
+    );
+
+    const onDismissInternal = () => {
+        if (!onDismiss) return;
+        onDismiss(reservation.activityId);
+    };
+
+    const onShowDetailsInternal = () => {
+        if (!onShowDetails) return;
+        onShowDetails(reservation.activityId);
+    };
 
     return (
-        <ReservationItemCardStyled.Card onPress={onShowDetails}>
-            <XStack justifyContent="space-between" alignItems="center" mb="$3">
+        <ReservationItemCardStyled.Card onPress={onShowDetailsInternal}>
+            <ReservationItemCardStyled.HeaderRow>
                 <ReservationItemCardStyled.TitleText>
                     {reservation.name}
                 </ReservationItemCardStyled.TitleText>
@@ -31,48 +46,59 @@ export const ReservationItemCard = ({
                     <Spinner size="small" />
                 ) : (
                     onDismiss && (
-                        <ReservationItemCardStyled.CloseButton onPress={onDismiss}>
+                        <ReservationItemCardStyled.CloseButton
+                            onPress={onDismissInternal}
+                        >
                             <ReservationItemCardStyled.CloseButtonInner>
-                                <X size={16} color="#ff4d4f" />
+                                <X size={ICON_SIZE} color="#ff4d4f" />
                             </ReservationItemCardStyled.CloseButtonInner>
                         </ReservationItemCardStyled.CloseButton>
                     )
                 )}
-            </XStack>
+            </ReservationItemCardStyled.HeaderRow>
 
-            <XStack flexWrap="wrap">
-                <YStack width="50%" gap="$2" paddingRight="$2">
+            <ReservationItemCardStyled.DetailsContainer>
+                <ReservationItemCardStyled.DetailsColumn>
                     <ReservationItemCardStyled.DetailRow>
-                        <Users size={16} color="#FAB565" />
+                        <Users size={ICON_SIZE} color="orange" />
                         <ReservationItemCardStyled.DetailText>
-                            {reservation.slotsTaken} / {reservation.totalCapacity} slots
+                            {reservation.slotsTaken} /{" "}
+                            {reservation.totalCapacity} slots
                         </ReservationItemCardStyled.DetailText>
                     </ReservationItemCardStyled.DetailRow>
 
                     <ReservationItemCardStyled.DetailRow>
-                        <Calendar size={16} color="#FAB565" />
+                        <Calendar size={ICON_SIZE} color="orange" />
                         <ReservationItemCardStyled.DetailText>
                             {startTime.toLocaleDateString()}
                         </ReservationItemCardStyled.DetailText>
                     </ReservationItemCardStyled.DetailRow>
-                </YStack>
+                </ReservationItemCardStyled.DetailsColumn>
 
-                <YStack width="50%" gap="$2">
+                <ReservationItemCardStyled.DetailsColumn>
                     <ReservationItemCardStyled.DetailRow>
-                        <Clock size={16} color="#FAB565" />
+                        <Clock size={ICON_SIZE} color="orange" />
                         <ReservationItemCardStyled.DetailText>
-                            {startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            {startTime.toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            })}{" "}
+                            -{" "}
+                            {endTime.toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            })}
                         </ReservationItemCardStyled.DetailText>
                     </ReservationItemCardStyled.DetailRow>
 
                     <ReservationItemCardStyled.DetailRow>
-                        <User size={16} color="#FAB565" />
+                        <User size={ICON_SIZE} color="orange" />
                         <ReservationItemCardStyled.DetailText>
                             {reservation.leaderName}
                         </ReservationItemCardStyled.DetailText>
                     </ReservationItemCardStyled.DetailRow>
-                </YStack>
-            </XStack>
+                </ReservationItemCardStyled.DetailsColumn>
+            </ReservationItemCardStyled.DetailsContainer>
         </ReservationItemCardStyled.Card>
     );
 };

@@ -1,42 +1,57 @@
-import { styled, View, Text, XStack } from "tamagui";
+import { styled, View, Text, XStack, YStack } from "tamagui";
 
 export const ReservationItemCardStyled = {
     Card: styled(View, {
-        backgroundColor: "#24211E",
-        padding: 16,
-        paddingTop: 10,
-        borderRadius: 8,
-        marginBottom: 12,
-        borderLeftWidth: 3,
+        backgroundColor: "$color3",
+        padding: "$3",
+        paddingTop: "$3",
+        paddingBottom: "$4",
+        borderRadius: "$2",
+        marginBottom: "$3",
+        borderLeftWidth: "$2",
         borderLeftColor: "transparent",
         pressStyle: {
-            borderLeftColor: "#FAB565",
-            backgroundColor: "#3f3f3f"
-        }
+            borderLeftColor: "orange",
+            backgroundColor: "$color4",
+        },
+    }),
+    HeaderRow: styled(XStack, {
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: "$3",
     }),
     TitleText: styled(Text, {
-        fontSize: 16,
+        fontSize: "$5",
         fontWeight: "bold",
-        color: "#FFFFFF"
+        color: "white",
     }),
     DetailText: styled(Text, {
-        fontSize: 12
+        fontSize: "$3",
+        color: "white",
     }),
     DetailRow: styled(XStack, {
         alignItems: "center",
-        gap: 8,
-        width: '100%'
+        gap: "$2",
+        width: "100%",
+    }),
+    DetailsContainer: styled(XStack, {
+        flexWrap: "wrap",
+    }),
+    DetailsColumn: styled(YStack, {
+        width: "50%",
+        gap: "$2",
+        paddingRight: "$3",
     }),
     CloseButton: styled(XStack, {
-        borderRadius: 999,
+        borderRadius: "$4",
         hoverStyle: {
-            backgroundColor: "#fff2f0"
+            backgroundColor: "white",
         },
         pressStyle: {
-            backgroundColor: "#ffccc7"
-        }
+            backgroundColor: "pink",
+        },
     }),
     CloseButtonInner: styled(XStack, {
-        padding: "$2"
-    })
+        padding: "$2",
+    }),
 };

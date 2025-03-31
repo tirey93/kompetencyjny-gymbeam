@@ -1,13 +1,13 @@
 import React from "react";
 import { ActivityInstance } from "@/types";
-import { ReservationItemCard } from "@/features/reservations";
+import { ReservationItemCard } from "@/features/reservations/components/ReservationItemCard/ReservationItemCard";
 import { ReservationSectionStyled } from "./styles";
 
 export const ReservationSection = ({
     items,
     label,
     onRemoveReservation,
-    onShowDetails
+    onShowDetails,
 }: {
     items: ActivityInstance[];
     label: string;
@@ -28,14 +28,8 @@ export const ReservationSection = ({
                 <ReservationItemCard
                     key={`${item.activityId}-${item.startTime}`}
                     reservation={item}
-                    onDismiss={onRemoveReservation && item.reservationId
-                        ? () => onRemoveReservation(item.reservationId!)
-                        : undefined
-                    }
-                    onShowDetails={onShowDetails
-                        ? () => onShowDetails(item.activityId)
-                        : undefined
-                    }
+                    onDismiss={onRemoveReservation}
+                    onShowDetails={onShowDetails}
                 />
             ))}
         </ReservationSectionStyled.Content>

@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
-import { ActivitiesService } from "@/features/activities";
+import { ActivitiesService } from "@/features/activities/api/activitiesService";
 import { ActivityInstance } from "@/types";
 import { mapErrorToErrorMessage } from "@/api";
 import { toast } from "sonner-native";

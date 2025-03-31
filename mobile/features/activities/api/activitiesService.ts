@@ -11,7 +11,6 @@ export class ActivitiesService {
     }
 
     public static async getActivityInstancesForMyself(): Promise<ActivityInstance[]> {
-        console.log("getActivityInstancesForMyself")
         return apiRequest("Enrollment/ByLoggedUser", { method: "GET" });
     }
 }
