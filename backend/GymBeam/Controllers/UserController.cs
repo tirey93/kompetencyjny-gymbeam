@@ -245,7 +245,8 @@ namespace GymBeam.Controllers
         {
             try
             {
-                var id = GetIdFromCookies();
+                int id = 1;
+                //var id = GetIdFromCookies();
                 var clientSecret = await _mediator.Send(new CreateSubscriptionUserCommand
                 {
                     UserId = id

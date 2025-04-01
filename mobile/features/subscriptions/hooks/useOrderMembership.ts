@@ -1,8 +1,10 @@
 import { useCallback } from "react";
-import { useRouter } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
-import { Screens } from "@/constants/Screens";
+import { useRouter } from "expo-router";
+
 import { MembershipService } from "../api/membershipService";
+
+import { Screens } from "@/constants/Screens";
 
 type UseOrderGymMembership = {
     orderMembership: () => void;
