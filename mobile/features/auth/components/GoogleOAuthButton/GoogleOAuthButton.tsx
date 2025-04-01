@@ -23,7 +23,9 @@ export const GoogleOAuthButton = () => {
         }
     };
 
-    return <Button onPress={beginSignInWithGoogle}>Continue with Google</Button>;
+    return (
+        <Button onPress={beginSignInWithGoogle}>Continue with Google</Button>
+    );
 };
 
 const errorsMap: HttpErrorsMap = {

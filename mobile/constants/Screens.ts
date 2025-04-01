@@ -6,5 +6,6 @@ export const Screens = {
     GymPass: "/(dashboard)/gym-pass",
     Activities: "/(dashboard)/activities",
     Profile: "/(dashboard)/profile",
+    Reservations: "/(dashboard)/reservations",
     ChangePassword: "/(user)/change-password",
 } as const;
