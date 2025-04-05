@@ -15,10 +15,8 @@ export const useRemoveReservation = (): UseRemoveReservation => {
 
     const removeReservation = useCallback(
         async (reservationId: number) => {
-            console.log(`Try to remove reservation with ID: ${reservationId}.`);
             try {
                 await mutateAsync(reservationId);
-                console.log(`Reservation ${reservationId} removed.`);
             } catch (error) {
                 const errorMessage = mapErrorToErrorMessage(error, errorsMap);
                 throw new Error(errorMessage);
