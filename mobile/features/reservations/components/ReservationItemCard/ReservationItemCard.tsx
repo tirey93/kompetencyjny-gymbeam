@@ -27,8 +27,8 @@ export const ReservationItemCard = ({
     );
 
     const onDismissInternal = () => {
-        if (!onDismiss) return;
-        onDismiss(reservation.activityId);
+        if (!onDismiss || reservation.reservationId === null) return;
+        onDismiss(reservation.reservationId);
     };
 
     const onShowDetailsInternal = () => {

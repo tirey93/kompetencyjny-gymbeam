@@ -2,18 +2,30 @@ import { Stack } from "expo-router";
 import { toast } from "sonner-native";
 import { View, Spinner, Text, styled } from "tamagui";
 
+import { useRemoveReservation } from "@/features/reservations";
 import { useActivitiesInstances } from "@/features/activities";
 import { ReservationsContent } from "@/features/reservations";
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 
 export default function ReservationsPage() {
-    const { activitiesInstances, isLoading } = useActivitiesInstances({
+    const { activitiesInstances, isLoading, refetch } = useActivitiesInstances({
         type: "ReservedByUser",
     });
 
+    const { removeReservation } = useRemoveReservation();
+
     const handleRemoveReservation = async (reservationId: number) => {
-        // Will be done when the reservation logic is complete
-        toast.success("Reservation removed");
+        try {
+            await removeReservation(reservationId);
+            await refetch();
+            toast.success("Reservation removed successfully.");
+        } catch (error) {
+            const errorMessage = (error as { message?: string }).message;
+
+            toast.error("Failed to remove reservation", {
+                description: errorMessage,
+            });
+        }
     };
 
     return (
