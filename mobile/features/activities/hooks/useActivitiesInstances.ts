@@ -1,61 +1,60 @@
-import { useCallback, useState, useEffect } from "react";
-import { ActivitiesService } from "@/features/activities/api/activitiesService";
-import { ActivityInstance } from "@/types";
-import { mapErrorToErrorMessage } from "@/api";
+import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner-native";
 
-type UseActivitiesInstancesResult = {
-    activitiesInstances: ActivityInstance[] | null;
-    isLoading: boolean;
-    error: string | null;
-    refetch: () => Promise<void>;
-};
+import { HttpErrorsMap, mapErrorToErrorMessage } from "@/api";
+import { ActivitiesService } from "@/features/activities/api/activitiesService";
+import { ActivitiesQueryKeyFactory } from "@/features/activities/utils/acivitiesQueryKeyFactory";
 
-type UseActivitiesInstancesOptions = {
-    type: "ReservedByUser";
-} | {
-    type: "ByDateRange";
-    dateRange: { from: Date; to: Date };
-};
+type UseActivitiesInstancesOptions =
+    | {
+          type: "ReservedByUser";
+      }
+    | {
+          type: "ByDateRange";
+          dateRange: { from: Date; to: Date };
+      };
 
-export const useActivitiesInstances = (options: UseActivitiesInstancesOptions): UseActivitiesInstancesResult => {
-    const [activitiesInstances, setActivitiesInstances] = useState<ActivityInstance[] | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+export const useActivitiesInstances = (options: UseActivitiesInstancesOptions) => {
+    const queryKey =
+        options.type === "ReservedByUser"
+            ? ActivitiesQueryKeyFactory.createForOwnInstances()
+            : ActivitiesQueryKeyFactory.createForInstancesByDateRange(options.dateRange);
 
-    const fetchData = useCallback(async () => {
-        setIsLoading(true);
-        setError(null);
-
+    const fetchData = async () => {
         try {
-            const data = await ActivitiesService.getActivityInstancesForMyself();
-            setActivitiesInstances(data.map(item => ({
-                ...item,
-                startTime: new Date(item.startTime)
-            })));
-        } catch (err) {
-            toast.error(mapErrorToErrorMessage(err, errorsMap));
-        } finally {
-            setIsLoading(false);
+            if (options.type === "ReservedByUser") {
+                return await ActivitiesService.getActivityInstancesForMyself();
+            } else {
+                return await ActivitiesService.getActivityInstancesByDates(options.dateRange);
+            }
+        } catch (error) {
+            toast.error(mapErrorToErrorMessage(error, errorsMap));
+            throw error;
         }
-    }, []);
+    };
 
-    useEffect(() => {
-        fetchData();
-    }, [fetchData]);
+    const { data, isLoading, error, refetch } = useQuery({
+        queryKey,
+        queryFn: fetchData,
+        select: (data) =>
+            data.map((item) => ({
+                ...item,
+                startTime: new Date(item.startTime),
+            })),
+    });
 
     return {
-        activitiesInstances,
+        activitiesInstances: data ?? null,
         isLoading,
-        error,
-        refetch: fetchData
+        error: error ? error.message : null,
+        refetch,
     };
 };
 
-const errorsMap = {
+const errorsMap: HttpErrorsMap = {
     defaultError: "Failed to load reservations",
     statusCodesMap: {
         400: "Please log in to view reservations",
-        500: "Server error"
-    }
+        500: "Server error",
+    },
 };

@@ -2,10 +2,9 @@ import { useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner-native";
 
-import { useAuthState } from "../hooks/useAuthState";
-
 import { HttpErrorsMap, mapErrorToErrorMessage } from "@/api";
-import { AuthService } from "@/features/auth";
+import { AuthService } from "@/features/auth/api/authService";
+import { useAuthState } from "@/features/auth/hooks/useAuthState";
 import { AuthCookieStore } from "@/features/auth/store/AuthCookieStore";
 
 type UseSignOut = {
