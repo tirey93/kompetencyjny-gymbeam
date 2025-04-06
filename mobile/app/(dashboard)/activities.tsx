@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Tabs } from "expo-router";
 import { SizableText, styled, View } from "tamagui";
 
@@ -7,7 +8,10 @@ import { useActivities } from "@/features/activities/hooks/useActivities";
 
 // TODO: Loading & error state
 export default function Screen() {
-    const { data, isPending } = useActivities();
+    const { data } = useActivities();
+
+    // Workaround to group same activities with different start time or duration into 1 record
+    const uniqueActivityNames = useMemo(() => data?.map(({ name }) => name), [data]);
 
     return (
         <Styled.OuterContainer>
@@ -16,7 +20,9 @@ export default function Screen() {
 
             <Styled.InnerContainer>
                 <ScreenContainer>
-                    <Styled.ContentWrapper>{data && <ActivitiesList activities={data} />}</Styled.ContentWrapper>
+                    <Styled.ContentWrapper>
+                        {data && <ActivitiesList activities={uniqueActivityNames ?? []} />}
+                    </Styled.ContentWrapper>
                 </ScreenContainer>
             </Styled.InnerContainer>
         </Styled.OuterContainer>

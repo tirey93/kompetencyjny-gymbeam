@@ -22,4 +22,14 @@ export const StyledActivitySchedule = {
     ItemSeparator: styled(View, {
         height: "$0.75",
     }),
+
+    Footer: styled(View, {
+        paddingBlock: "$4",
+        alignItems: "center",
+    }),
+
+    NoContent: styled(View, {
+        paddingBlock: "$4",
+        alignItems: "center",
+    }),
 };
