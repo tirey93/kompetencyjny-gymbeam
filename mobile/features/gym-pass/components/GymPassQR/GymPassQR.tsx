@@ -12,7 +12,7 @@ type GymPassQRProps = {
 export const GymPassQR = ({ owner }: GymPassQRProps) => {
     return (
         <StyledGymPassQR.Container>
-            <StyledGymPassQR.Guard isDisabled={GymPassValidator.validate(owner)}>
+            <StyledGymPassQR.Guard isDisabled={!GymPassValidator.validate(owner)}>
                 <QRCode bgColor="transparent" fgColor="#ffffff" value={GymPassEncoder.encode(owner)} />
             </StyledGymPassQR.Guard>
         </StyledGymPassQR.Container>
