@@ -5,7 +5,7 @@ import { SignUpRequestBody } from "../api/types";
 import { useAuthState } from "./useAuthState";
 
 import { HttpErrorsMap, mapErrorToErrorMessage } from "@/api";
-import { AuthService } from "@/features/auth";
+import { AuthService } from "@/features/auth/api/authService";
 import { mapUserDtoToUser } from "@/features/users/utils/mapUserDtoToUser";
 
 export const useSignUp = () => {

@@ -59,6 +59,7 @@ export default function DashboardLayout() {
                     tabBarIcon: ({ color, size }) => <UserIcon color={color} size={size} />,
                 }}
             />
+            <Tabs.Screen name="activities/[name]" options={{ href: null, headerShown: false }} />
         </Tabs>
     );
 }

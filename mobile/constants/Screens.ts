@@ -5,6 +5,7 @@ export const Screens = {
     Dashboard: "(dashboard)",
     GymPass: "/(dashboard)/gym-pass",
     Activities: "/(dashboard)/activities",
+    Activity: "/(dashboard)/activities/[name]",
     Profile: "/(dashboard)/profile",
     Reservations: "/(dashboard)/reservations",
     ChangePassword: "/(user)/change-password",
