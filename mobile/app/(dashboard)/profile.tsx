@@ -1,11 +1,10 @@
-import { Tabs } from "expo-router";
+import { Link, Tabs } from "expo-router";
 import { LogOutIcon } from "lucide-react-native";
 import { Button, SizableText, styled, View } from "tamagui";
 
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
-import { useSignOut } from "@/features/auth";
 import { Screens } from "@/constants/Screens";
-import { Link } from "expo-router";
+import { useSignOut } from "@/features/auth";
 
 export default function Screen() {
     const { signOut } = useSignOut();

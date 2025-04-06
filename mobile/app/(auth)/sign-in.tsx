@@ -10,7 +10,7 @@ import { SignInFormInputs } from "@/features/auth/components/SignInForm/hooks/us
 import { SignInForm } from "@/features/auth/components/SignInForm/SignInForm";
 
 export default function LoginScreen() {
-    const { signIn } = useSignIn();
+    const { signIn, isPending } = useSignIn();
 
     const onSubmit = useCallback(
         async ({ login, password }: SignInFormInputs) => {
@@ -30,7 +30,7 @@ export default function LoginScreen() {
             <Stack.Screen options={{ headerShown: false }} />
             <Styled.Container>
                 <Styled.Header>Sign in.</Styled.Header>
-                <SignInForm onSubmit={onSubmit} />
+                <SignInForm onSubmit={onSubmit} isLoading={isPending} />
             </Styled.Container>
         </ScreenContainer>
     );

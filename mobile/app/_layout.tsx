@@ -6,6 +6,7 @@ import { StatusBar } from "expo-status-bar";
 
 import "react-native-reanimated";
 
+import { AppOverlay } from "@/components/AppOverlay/AppOverlay";
 import { AppProvider } from "@/components/AppProvider/AppProvider";
 
 void SplashScreen.preventAutoHideAsync();
@@ -32,6 +33,7 @@ export default function RootLayout() {
         <AppProvider>
             <Slot />
             <StatusBar style="auto" />
+            <AppOverlay />
         </AppProvider>
     );
 }
