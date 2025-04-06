@@ -9,7 +9,6 @@ type UseUpdateSignedInUserOptions = {
     force?: boolean;
 };
 
-// TODO: Doesn't work, we receive 400 on each request
 export const useReloadUser = ({ force }: UseUpdateSignedInUserOptions = {}) => {
     const { setUser, user } = useAuthState();
     const setIsLoading = useAppOverlay((state) => state.setIsLoading);
