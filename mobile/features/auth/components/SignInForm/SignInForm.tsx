@@ -1,17 +1,19 @@
 import React from "react";
-import { Button, Form } from "tamagui";
+import { Form } from "tamagui";
 
 import { SignInFormInputs, useSignInForm } from "./hooks/useSignInForm";
 import { GoogleOAuthButton } from "../GoogleOAuthButton/GoogleOAuthButton";
 
+import { Button } from "@/components/Button";
 import { TextInput } from "@/components/TextInput/TextInput";
 import { SignInFormStyled } from "@/features/auth/components/SignInForm/styles";
 
 type SignInFormProps = {
     onSubmit: (inputs: SignInFormInputs) => void;
+    isLoading?: boolean;
 };
 
-export const SignInForm = ({ onSubmit }: SignInFormProps) => {
+export const SignInForm = ({ onSubmit, isLoading }: SignInFormProps) => {
     const {
         control,
         handleSubmit,
@@ -46,7 +48,9 @@ export const SignInForm = ({ onSubmit }: SignInFormProps) => {
 
             <SignInFormStyled.ButtonsContainer>
                 <Form.Trigger asChild>
-                    <Button theme="success">Sign in</Button>
+                    <Button theme="success" isLoading={isLoading}>
+                        Sign in
+                    </Button>
                 </Form.Trigger>
                 <GoogleOAuthButton />
             </SignInFormStyled.ButtonsContainer>

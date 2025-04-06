@@ -1,10 +1,11 @@
 import { Stack } from "expo-router";
 import { toast } from "sonner-native";
-import { View, Spinner, Text, styled } from "tamagui";
+import { styled, Text, View } from "tamagui";
 
+import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
+import { Spinner } from "@/components/Spinner";
 import { useActivitiesInstances } from "@/features/activities";
 import { ReservationsContent } from "@/features/reservations";
-import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 
 export default function ReservationsPage() {
     const { activitiesInstances, isLoading } = useActivitiesInstances({

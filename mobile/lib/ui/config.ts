@@ -21,31 +21,31 @@ const darkShadows = {
 };
 
 const darkPalette = [
-    "hsla(280, 6%, 6%, 1)",
-    "hsla(280, 6%, 11%, 1)",
-    "hsla(280, 6%, 16%, 1)",
-    "hsla(280, 6%, 21%, 1)",
-    "hsla(280, 6%, 26%, 1)",
-    "hsla(280, 6%, 30%, 1)",
-    "hsla(280, 6%, 35%, 1)",
-    "hsla(280, 6%, 40%, 1)",
-    "hsla(280, 6%, 45%, 1)",
-    "hsla(280, 6%, 50%, 1)",
+    "hsla(260, 6%, 6%, 1)",
+    "hsla(260, 6%, 11%, 1)",
+    "hsla(260, 6%, 16%, 1)",
+    "hsla(260, 6%, 21%, 1)",
+    "hsla(260, 6%, 26%, 1)",
+    "hsla(260, 6%, 30%, 1)",
+    "hsla(260, 6%, 35%, 1)",
+    "hsla(260, 6%, 40%, 1)",
+    "hsla(260, 6%, 45%, 1)",
+    "hsla(260, 6%, 50%, 1)",
     "hsla(0, 15%, 93%, 1)",
     "hsla(0, 15%, 99%, 1)",
 ];
 
 const lightPalette = [
-    "hsla(280, 6%, 99%, 1)",
-    "hsla(280, 6%, 94%, 1)",
-    "hsla(280, 6%, 88%, 1)",
-    "hsla(280, 6%, 83%, 1)",
-    "hsla(280, 6%, 77%, 1)",
-    "hsla(280, 6%, 72%, 1)",
-    "hsla(280, 6%, 66%, 1)",
-    "hsla(280, 6%, 61%, 1)",
-    "hsla(280, 6%, 55%, 1)",
-    "hsla(280, 6%, 50%, 1)",
+    "hsla(260, 6%, 99%, 1)",
+    "hsla(260, 6%, 94%, 1)",
+    "hsla(260, 6%, 88%, 1)",
+    "hsla(260, 6%, 83%, 1)",
+    "hsla(260, 6%, 77%, 1)",
+    "hsla(260, 6%, 72%, 1)",
+    "hsla(260, 6%, 66%, 1)",
+    "hsla(260, 6%, 61%, 1)",
+    "hsla(260, 6%, 55%, 1)",
+    "hsla(260, 6%, 50%, 1)",
     "hsla(0, 15%, 15%, 1)",
     "hsla(0, 15%, 1%, 1)",
 ];
@@ -155,6 +155,76 @@ const dangerPalette = {
     light: Object.values(dangerLight),
 };
 
+const secondaryDark = {
+    secondary1: "hsla(260, 76%, 5%, 1)",
+    secondary2: "hsla(260, 76%, 8%, 1)",
+    secondary3: "hsla(260, 76%, 12%, 1)",
+    secondary4: "hsla(260, 76%, 20%, 1)",
+    secondary5: "hsla(260, 76%, 25%, 1)",
+    secondary6: "hsla(260, 76%, 35%, 1)",
+    secondary7: "hsla(260, 76%, 40%, 1)",
+    secondary8: "hsla(260, 76%, 45%, 1)",
+    secondary9: "hsla(260, 76%, 50%, 1)",
+    secondary10: "hsla(260, 76%, 60%, 1)",
+    secondary11: "hsla(260, 50%, 90%, 1)",
+    secondary12: "hsla(260, 50%, 95%, 1)",
+};
+
+const secondaryLight = {
+    secondary1: "hsla(260, 76%, 40%, 1)",
+    secondary2: "hsla(260, 76%, 43%, 1)",
+    secondary3: "hsla(260, 76%, 46%, 1)",
+    secondary4: "hsla(260, 76%, 48%, 1)",
+    secondary5: "hsla(260, 76%, 51%, 1)",
+    secondary6: "hsla(260, 76%, 54%, 1)",
+    secondary7: "hsla(260, 76%, 57%, 1)",
+    secondary8: "hsla(260, 76%, 59%, 1)",
+    secondary9: "hsla(260, 76%, 62%, 1)",
+    secondary10: "hsla(260, 76%, 65%, 1)",
+    secondary11: "hsla(260, 50%, 95%, 1)",
+    secondary12: "hsla(260, 50%, 97%, 1)",
+};
+
+const secondaryPalette = {
+    dark: Object.values(secondaryDark),
+    light: Object.values(secondaryLight),
+};
+
+const neutralDark = {
+    neutral1: "hsla(260, 0%, 5%, 1)",
+    neutral2: "hsla(260, 0%, 8%, 1)",
+    neutral3: "hsla(260, 0%, 12%, 1)",
+    neutral4: "hsla(260, 0%, 20%, 1)",
+    neutral5: "hsla(260, 0%, 25%, 1)",
+    neutral6: "hsla(260, 0%, 35%, 1)",
+    neutral7: "hsla(260, 0%, 40%, 1)",
+    neutral8: "hsla(260, 0%, 45%, 1)",
+    neutral9: "hsla(260, 0%, 50%, 1)",
+    neutral10: "hsla(260, 0%, 60%, 1)",
+    neutral11: "hsla(260, 0%, 90%, 1)",
+    neutral12: "hsla(260, 0%, 95%, 1)",
+};
+
+const neutralLight = {
+    neutral1: "hsla(260, 0%, 40%, 1)",
+    neutral2: "hsla(260, 0%, 43%, 1)",
+    neutral3: "hsla(260, 0%, 46%, 1)",
+    neutral4: "hsla(260, 0%, 48%, 1)",
+    neutral5: "hsla(260, 0%, 51%, 1)",
+    neutral6: "hsla(260, 0%, 54%, 1)",
+    neutral7: "hsla(260, 0%, 57%, 1)",
+    neutral8: "hsla(260, 0%, 59%, 1)",
+    neutral9: "hsla(260, 0%, 62%, 1)",
+    neutral10: "hsla(260, 0%, 65%, 1)",
+    neutral11: "hsla(260, 0%, 95%, 1)",
+    neutral12: "hsla(260, 0%, 97%, 1)",
+};
+
+const neutralPalette = {
+    dark: Object.values(neutralDark),
+    light: Object.values(neutralLight),
+};
+
 const themes = createThemes({
     componentThemes: defaultComponentThemes,
 
@@ -166,6 +236,8 @@ const themes = createThemes({
 
         extra: {
             light: {
+                ...secondaryLight,
+                ...neutralLight,
                 ...successLight,
                 ...warningLight,
                 ...dangerLight,
@@ -173,6 +245,8 @@ const themes = createThemes({
                 shadowColor: lightShadows.shadow1,
             },
             dark: {
+                ...secondaryDark,
+                ...neutralDark,
                 ...successDark,
                 ...warningDark,
                 ...dangerDark,
@@ -226,6 +300,14 @@ const themes = createThemes({
 
         success: {
             palette: successPalette,
+        },
+
+        secondary: {
+            palette: secondaryPalette,
+        },
+
+        neutral: {
+            palette: neutralPalette,
         },
     },
 });

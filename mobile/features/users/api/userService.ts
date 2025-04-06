@@ -8,4 +8,8 @@ export class UserService {
 
         return apiRequest<UserDto>(endpoint, { method: "PUT", body });
     }
+
+    public static getMyself(): Promise<UserDto> {
+        return apiRequest("User/LoggedIn", { method: "GET" });
+    }
 }

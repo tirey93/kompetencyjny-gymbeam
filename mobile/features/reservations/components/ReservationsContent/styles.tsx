@@ -1,8 +1,7 @@
-import { styled, View, Text, Button } from "tamagui";
+import { Button, styled, Text, View } from "tamagui";
 
 export const ReservationsContentStyled = {
     View: styled(View, {
-        backgroundColor: "$background",
         minHeight: "100%",
         flex: 1,
         padding: "$4",
