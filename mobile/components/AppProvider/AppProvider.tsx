@@ -5,7 +5,6 @@ import { Toaster } from "sonner-native";
 import { TamaguiProvider } from "tamagui";
 
 import { StyledAppProvider } from "@/components/AppProvider/styled";
-import { Scrollable } from "@/components/Scrollable/Scrollable";
 import { config } from "@/lib/ui/config";
 
 type AppProviderProps = PropsWithChildren;
@@ -18,17 +17,15 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     return (
         <TamaguiProvider config={config} defaultTheme="dark">
             <StyledAppProvider.SafeAreaViewProvider>
-                <Scrollable>
-                    <GestureHandlerRootView>
-                        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-                        <Toaster
-                            position="top-center"
-                            swipeToDismissDirection="left"
-                            offset={TOP_SAFE_AREA_OFFSET}
-                            richColors
-                        />
-                    </GestureHandlerRootView>
-                </Scrollable>
+                <GestureHandlerRootView>
+                    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+                    <Toaster
+                        position="top-center"
+                        swipeToDismissDirection="left"
+                        offset={TOP_SAFE_AREA_OFFSET}
+                        richColors
+                    />
+                </GestureHandlerRootView>
             </StyledAppProvider.SafeAreaViewProvider>
         </TamaguiProvider>
     );
