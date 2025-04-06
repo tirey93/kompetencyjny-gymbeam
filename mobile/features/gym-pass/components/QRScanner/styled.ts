@@ -1,8 +1,20 @@
 import { View } from "react-native";
 import { CameraView } from "expo-camera";
-import { Button, styled } from "tamagui";
+import { Button, SizableText, styled } from "tamagui";
 
 export const StyledQRScanner = {
+    NoPermissionsPrompt: styled(View, {
+        flex: 1,
+        gap: "$4",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "$background",
+    }),
+
+    NoPermissionsText: styled(SizableText, {
+        color: "$color12",
+    }),
+
     Container: styled(View, {
         flex: 1,
         alignItems: "center",

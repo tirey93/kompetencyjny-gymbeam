@@ -10,7 +10,7 @@ import { SignUpFormInputs } from "@/features/auth/components/SignUpForm/hooks/us
 import { SignUpForm } from "@/features/auth/components/SignUpForm/SignUpForm";
 
 export default function Screen() {
-    const { signUp } = useSignUp();
+    const { signUp, isPending } = useSignUp();
 
     const onSubmit = useCallback(
         async ({ login, name, ...rest }: SignUpFormInputs) => {
@@ -34,7 +34,7 @@ export default function Screen() {
             <Stack.Screen options={{ headerShown: false }} />
             <Styled.Container>
                 <Styled.Header>Join us.</Styled.Header>
-                <SignUpForm onSubmit={onSubmit} />
+                <SignUpForm onSubmit={onSubmit} isLoading={isPending} />
             </Styled.Container>
         </ScreenContainer>
     );

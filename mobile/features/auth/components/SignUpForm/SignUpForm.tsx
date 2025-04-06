@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Form } from "tamagui";
+import { Form } from "tamagui";
 
+import { Button } from "@/components/Button";
 import { TextInput } from "@/components/TextInput/TextInput";
 import { SignInFormStyled } from "@/features/auth/components/SignInForm/styles";
 import {
@@ -13,9 +14,10 @@ import { SignUpFormInputs, useSignUpForm } from "@/features/auth/components/Sign
 
 type SignUpFormProps = {
     onSubmit: (inputs: SignUpFormInputs) => void;
+    isLoading?: boolean;
 };
 
-export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
+export const SignUpForm = ({ onSubmit, isLoading }: SignUpFormProps) => {
     const {
         control,
         handleSubmit,
@@ -72,7 +74,9 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
 
             <SignInFormStyled.ButtonsContainer>
                 <Form.Trigger asChild>
-                    <Button theme="success">Sign up</Button>
+                    <Button theme="success" isLoading={isLoading}>
+                        Sign up
+                    </Button>
                 </Form.Trigger>
             </SignInFormStyled.ButtonsContainer>
         </Form>

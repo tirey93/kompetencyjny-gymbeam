@@ -1,58 +1,41 @@
 import { useCallback } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 import { SignUpRequestBody } from "../api/types";
 import { useAuthState } from "./useAuthState";
 
-import { User } from "@/types/Auth";
+import { HttpErrorsMap, mapErrorToErrorMessage } from "@/api";
+import { AuthService } from "@/features/auth";
+import { mapUserDtoToUser } from "@/features/users/utils/mapUserDtoToUser";
 
-type UseSignUp = {
-    signUp: (signUpData: SignUpRequestBody) => Promise<User>;
-};
-
-export const useSignUp = (): UseSignUp => {
+export const useSignUp = () => {
     const { setUser } = useAuthState();
 
-    // const { mutateAsync } = useMutation({
-    //     mutationFn: AuthService.signUp,
-    // });
-    //
-    // const signUp = useCallback(
-    //     async (signUpRequestBody: SignUpRequestBody) => {
-    //         try {
-    //             const data = await mutateAsync(signUpRequestBody);
-    //             const user = mapUserDtoToUser(data);
-    //             setUser(user);
-    //             return user;
-    //         } catch (error) {
-    //             const errorMessage = mapErrorToErrorMessage(error, errorsMap);
-    //             throw new Error(errorMessage);
-    //         }
-    //     },
-    //     [mutateAsync, setUser]
-    // );
+    const { mutateAsync, isPending } = useMutation({
+        mutationFn: AuthService.signUp,
+    });
 
     const signUp = useCallback(
         async (signUpRequestBody: SignUpRequestBody) => {
-            const user: User = {
-                id: 1,
-                role: "Admin",
-                name: signUpRequestBody.username,
-                login: signUpRequestBody.username,
-                areReservationsForbidden: false,
-                gymPassExpirationTime: null,
-            };
-            setUser(user);
-            return user;
+            try {
+                const data = await mutateAsync(signUpRequestBody);
+                const user = mapUserDtoToUser(data);
+                setUser(user);
+                return user;
+            } catch (error) {
+                const errorMessage = mapErrorToErrorMessage(error, errorsMap);
+                throw new Error(errorMessage);
+            }
         },
-        [setUser]
+        [mutateAsync, setUser]
     );
 
-    return { signUp };
+    return { signUp, isPending };
 };
-//
-// const errorsMap: HttpErrorsMap = {
-//     defaultError: "Unknown error.",
-//     statusCodesMap: {
-//         409: "This login is already taken.",
-//     },
-// };
+
+const errorsMap: HttpErrorsMap = {
+    defaultError: "Unknown error.",
+    statusCodesMap: {
+        409: "This login is already taken.",
+    },
+};
