@@ -1,24 +1,25 @@
 import { SizableText, styled, View } from "tamagui";
 
-import { Scrollable } from "@/components/Scrollable/Scrollable";
-
 export const StyledActivitySchedule = {
-    Container: styled(Scrollable, {
+    Container: styled(View, {
         flex: 1,
-        paddingHorizontal: "$4",
-        gap: "$2",
-    }),
-
-    Day: styled(View, {
-        paddingHorizontal: "$4",
-        paddingBottom: "$5",
-        gap: "$2",
+        paddingHorizontal: "$3.5",
+        paddingBottom: "$3",
     }),
 
     Date: styled(SizableText, {
         fontSize: "$6",
         fontWeight: "bold",
         color: "$color10",
-        paddingBottom: "$2",
+        paddingBlock: "$4",
+        backgroundColor: "$background",
+    }),
+
+    SectionSeparator: styled(View, {
+        height: "$0.25",
+    }),
+
+    ItemSeparator: styled(View, {
+        height: "$0.75",
     }),
 };
