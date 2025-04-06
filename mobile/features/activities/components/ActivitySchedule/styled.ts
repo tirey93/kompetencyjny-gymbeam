@@ -1,4 +1,5 @@
 import { SizableText, styled, View } from "tamagui";
+
 export const StyledActivitySchedule = {
     Container: styled(View, {
         flex: 1,

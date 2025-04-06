@@ -5,6 +5,7 @@ import { ActivityInstanceItem } from "@/features/activities/components/ActivityI
 import { StyledActivitySchedule } from "@/features/activities/components/ActivitySchedule/styled";
 import { ActivityInstance } from "@/types";
 
+
 const mockActivity: ActivityInstance = {
     activityId: 1,
     name: "Boxing",
@@ -76,3 +77,4 @@ export const ActivitySchedule = () => {
         </StyledActivitySchedule.Container>
     );
 };
+
