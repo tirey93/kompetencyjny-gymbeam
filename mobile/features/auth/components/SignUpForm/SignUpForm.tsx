@@ -3,7 +3,6 @@ import { Form } from "tamagui";
 
 import { Button } from "@/components/Button";
 import { TextInput } from "@/components/TextInput/TextInput";
-import { SignInFormStyled } from "@/features/auth/components/SignInForm/styles";
 import {
     LOGIN_LENGTH_REQUIREMENT,
     NAME_LENGTH_REQUIREMENT,
@@ -11,6 +10,7 @@ import {
     PASSWORD_MATCH_REQUIREMENT,
 } from "@/features/auth/components/SignUpForm/constants/requirements";
 import { SignUpFormInputs, useSignUpForm } from "@/features/auth/components/SignUpForm/hooks/useSignUpForm";
+import { SignUpFormStyled } from "@/features/auth/components/SignUpForm/styles";
 
 type SignUpFormProps = {
     onSubmit: (inputs: SignUpFormInputs) => void;
@@ -32,7 +32,7 @@ export const SignUpForm = ({ onSubmit, isLoading }: SignUpFormProps) => {
 
     return (
         <Form width="100%" onSubmit={handleSubmit(onFormSubmit)}>
-            <SignInFormStyled.InputsContainer>
+            <SignUpFormStyled.InputsContainer>
                 <TextInput
                     name="name"
                     label="Name"
@@ -70,15 +70,15 @@ export const SignUpForm = ({ onSubmit, isLoading }: SignUpFormProps) => {
                     requirements={[PASSWORD_MATCH_REQUIREMENT]}
                     secureTextEntry
                 />
-            </SignInFormStyled.InputsContainer>
+            </SignUpFormStyled.InputsContainer>
 
-            <SignInFormStyled.ButtonsContainer>
+            <SignUpFormStyled.ButtonsContainer>
                 <Form.Trigger asChild>
                     <Button theme="success" isLoading={isLoading}>
                         Sign up
                     </Button>
                 </Form.Trigger>
-            </SignInFormStyled.ButtonsContainer>
+            </SignUpFormStyled.ButtonsContainer>
         </Form>
     );
 };

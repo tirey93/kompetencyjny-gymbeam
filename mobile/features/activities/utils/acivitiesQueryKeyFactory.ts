@@ -5,11 +5,15 @@ export class ActivitiesQueryKeyFactory {
         return ["activities"];
     }
 
+    public static createForActivity(id: number) {
+        return [...ActivitiesQueryKeyFactory.createForAll(), `activity:${id}`];
+    }
+
     public static createForInstancesByDateRange(dateRange: DateRange) {
-        return ["activities", "date_range", dateRange.from, dateRange.to];
+        return [...ActivitiesQueryKeyFactory.createForAll(), "date_range", dateRange.from, dateRange.to];
     }
 
     public static createForOwnInstances() {
-        return ["activities", "own"];
+        return [...ActivitiesQueryKeyFactory.createForAll(), "own"];
     }
 }
