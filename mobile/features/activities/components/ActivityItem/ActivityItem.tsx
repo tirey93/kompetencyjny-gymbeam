@@ -6,15 +6,16 @@ import { StyledActivityItem } from "@/features/activities/components/ActivityIte
 
 type ActivityItemProps = {
     name: string;
+    id: number;
 };
 
-export const ActivityItem = ({ name }: ActivityItemProps) => {
+export const ActivityItem = ({ name, id }: ActivityItemProps) => {
     return (
         <Link
             asChild
             href={{
                 pathname: Screens.Activity,
-                params: { name },
+                params: { id },
             }}
         >
             <StyledActivityItem.Container elevate>

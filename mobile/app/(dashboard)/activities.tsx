@@ -10,8 +10,22 @@ import { useActivities } from "@/features/activities/hooks/useActivities";
 export default function Screen() {
     const { data } = useActivities();
 
-    // Workaround to group same activities with different start time or duration into 1 record
-    const uniqueActivityNames = useMemo(() => data?.map(({ name }) => name), [data]);
+    const activitiesWithUniqueName = useMemo(() => {
+        if (!data) {
+            return [];
+        }
+
+        const uniqueNames = new Set();
+
+        return data.filter((activity) => {
+            if (!activity?.name || uniqueNames.has(activity.name)) {
+                return false;
+            }
+
+            uniqueNames.add(activity.name);
+            return true;
+        });
+    }, [data]);
 
     return (
         <Styled.OuterContainer>
@@ -21,7 +35,7 @@ export default function Screen() {
             <Styled.InnerContainer>
                 <ScreenContainer>
                     <Styled.ContentWrapper>
-                        {data && <ActivitiesList activities={uniqueActivityNames ?? []} />}
+                        {data && <ActivitiesList activities={activitiesWithUniqueName} />}
                     </Styled.ContentWrapper>
                 </ScreenContainer>
             </Styled.InnerContainer>
