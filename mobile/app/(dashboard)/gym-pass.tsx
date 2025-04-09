@@ -3,6 +3,7 @@ import { BackHandler } from "react-native";
 import { BarcodeScanningResult } from "expo-camera";
 import { Tabs } from "expo-router";
 import { ScanQrCodeIcon } from "lucide-react-native";
+import { toast } from "sonner-native";
 import { Button, Sheet, styled, View } from "tamagui";
 
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
@@ -10,23 +11,28 @@ import { useAuthState } from "@/features/auth";
 import { GymPassInfo } from "@/features/gym-pass/components/GymPassInfo/GymPassInfo";
 import { GymPassQR } from "@/features/gym-pass/components/GymPassQR/GymPassQR";
 import { QRScanner } from "@/features/gym-pass/components/QRScanner/QRScanner";
+import { ScanResult } from "@/features/gym-pass/components/ScanResult/ScanResult";
 import { Timestamp } from "@/features/gym-pass/components/Timestamp/Timestamp";
+import { GymPassEncoder } from "@/features/gym-pass/services/GymPassEncoder";
+import { User } from "@/types";
 
 export default function Screen() {
     const { user } = useAuthState();
-    const [isSheetOpen, setIsSheetOpen] = useState(false);
+    const [isScannerOpen, setIsScannerOpen] = useState(false);
+    const [scanResult, setScanResult] = useState<User | null>(null);
 
     const hideCamera = () => {
-        setIsSheetOpen(false);
+        setIsScannerOpen(false);
     };
 
     const showCamera = () => {
-        setIsSheetOpen(true);
+        setIsScannerOpen(true);
+        setScanResult(null);
     };
 
     useEffect(() => {
         const backAction = () => {
-            if (isSheetOpen) {
+            if (scanResult) {
                 hideCamera();
                 return true;
             }
@@ -36,12 +42,16 @@ export default function Screen() {
 
         const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
         return () => backHandler.remove();
-    }, [isSheetOpen]);
+    }, [scanResult]);
 
     const handleQRScan = (result: BarcodeScanningResult) => {
-        // TODO: Handle QR scan once endpoint is ready
-        hideCamera();
-        console.log(result.data);
+        try {
+            const decodedUser = GymPassEncoder.decode(result.data);
+            setScanResult(decodedUser);
+            hideCamera();
+        } catch (error) {
+            toast.error("Invalid QR code.");
+        }
     };
 
     if (!user) {
@@ -65,10 +75,29 @@ export default function Screen() {
                     </Styled.ScanQRButton>
                 </Styled.ButtonsWrapper>
 
-                <Sheet modal dismissOnSnapToBottom open={isSheetOpen} onOpenChange={setIsSheetOpen} snapPoints={[100]}>
+                <Sheet
+                    modal
+                    dismissOnSnapToBottom
+                    open={isScannerOpen}
+                    onOpenChange={setIsScannerOpen}
+                    snapPoints={[100]}
+                >
                     <Sheet.Frame>
                         <Sheet.Handle />
-                        <QRScanner isActive={isSheetOpen} onClose={hideCamera} onScanned={handleQRScan} />
+                        <QRScanner isActive={isScannerOpen} onClose={hideCamera} onScanned={handleQRScan} />
+                    </Sheet.Frame>
+                </Sheet>
+
+                <Sheet
+                    modal
+                    dismissOnSnapToBottom
+                    open={!!scanResult}
+                    onOpenChange={() => setScanResult(null)}
+                    snapPoints={[100]}
+                >
+                    <Sheet.Frame>
+                        <Sheet.Handle />
+                        <ScanResult userData={user} />
                     </Sheet.Frame>
                 </Sheet>
             </Styled.ContentWrapper>
