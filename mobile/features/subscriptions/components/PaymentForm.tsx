@@ -28,11 +28,11 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ title, description, cl
             console.warn("clientSecret is missing!");
             return;
         }
-
+        console.log("initializePaymentSheet");
         try {
             const { error } = await initPaymentSheet({
                 paymentIntentClientSecret: clientSecret,
-                merchantDisplayName: "",
+                merchantDisplayName: "Merchant name",
             });
 
             if (error) {
@@ -101,13 +101,16 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ title, description, cl
 
 const styles = StyleSheet.create({
     buttonsContainer: {
-        marginTop: 20,
+        gap: 10,
+        marginTop: 30,
     },
     container: {
         flex: 1,
-        padding: 20,
+        marginTop: 50,
+        padding: 30,
     },
     description: {
+        color: "#FFFFFF",
         fontSize: 16,
         marginBottom: 20,
     },
@@ -121,6 +124,7 @@ const styles = StyleSheet.create({
         color: "#D8000C",
     },
     title: {
+        color: "#FFFFFF",
         fontSize: 24,
         fontWeight: "bold",
         marginBottom: 10,

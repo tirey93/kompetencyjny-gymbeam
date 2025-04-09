@@ -13,9 +13,10 @@ type UseOrderGymMembership = {
 
 export const useOrderMembership = (): UseOrderGymMembership => {
     const router = useRouter();
-
     const retrieveOrderInformation = useCallback(async () => {
+        console.log("3");
         const { clientSecret } = await MembershipService.order();
+        console.log(clientSecret);
         router.push({
             pathname: Screens.Payment,
             params: { clientSecret: clientSecret },

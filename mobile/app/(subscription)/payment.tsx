@@ -5,9 +5,9 @@ import { H2, styled, View } from "tamagui";
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 import { Screens } from "@/constants/Screens";
 import { PaymentForm } from "@/features/subscriptions/components/PaymentForm";
-import { PaymentFormProvider } from "@/features/subscriptions/components/PaymentFormProvider";
+import PaymentScreenWrapper from "@/features/subscriptions/components/PaymentScreenWrapper";
 
-export default function PaymentScren() {
+export default function PaymentScreen() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const clientSecret = searchParams.get("clientSecret");
@@ -24,7 +24,9 @@ export default function PaymentScren() {
     return (
         <ScreenContainer>
             <Styled.Container>
-                <Styled.Header>{searchParams.get("clientSecret")}</Styled.Header>
+                <PaymentScreenWrapper>
+                    <PaymentForm clientSecret={clientSecret} description="After confirming your payment, you will receive gym membership for 30 days. If you already have one, it will be extended by 30 days. Refunds are issued after mail contact." title="Order gym membership"></PaymentForm>
+                </PaymentScreenWrapper>
             </Styled.Container>
         </ScreenContainer>
     );
