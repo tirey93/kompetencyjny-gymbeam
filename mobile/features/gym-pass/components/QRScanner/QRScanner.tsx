@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Text } from "react-native";
+import { Button } from "react-native";
 import { BarcodeScanningResult, CameraType, useCameraPermissions } from "expo-camera";
 import { Flashlight, FlashlightOff, SwitchCameraIcon, XIcon } from "lucide-react-native";
 
@@ -24,12 +24,13 @@ export const QRScanner = ({ isActive, onClose, onScanned }: QRScannerProps) => {
     }
 
     if (!permission.granted) {
-        // TODO: Better error screen
         return (
-            <StyledQRScanner.Container>
-                <Text>We need your permission to show the camera</Text>
+            <StyledQRScanner.NoPermissionsPrompt>
+                <StyledQRScanner.NoPermissionsText>
+                    We need your permission to show the camera
+                </StyledQRScanner.NoPermissionsText>
                 <Button onPress={requestPermission} title="Grant Permission" />
-            </StyledQRScanner.Container>
+            </StyledQRScanner.NoPermissionsPrompt>
         );
     }
 

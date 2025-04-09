@@ -5,7 +5,8 @@ import { useAuthState } from "./useAuthState";
 
 import { HttpErrorsTranslationsMap, mapErrorToErrorTranslationKey, useRequestErrorHandler } from "@/api";
 import { useAppOverlayStore } from "@/components/AppOverlay";
-import { AuthService, SignInRequestBody } from "@/features/auth";
+import { AuthService } from "@/features/auth/api/authService";
+import { SignInRequestBody } from "@/features/auth/api/types";
 import { mapUserDtoToUser } from "@/features/users/utils/mapUserDtoToUser";
 import { User } from "@/types/Auth";
 

@@ -1,17 +1,23 @@
+import dayjs from "dayjs";
 import { Link, router, Stack } from "expo-router";
-import { toast } from "sonner-native";
 import { Button, H1, SizableText, styled, View, YStack } from "tamagui";
 
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 import { Screens } from "@/constants/Screens";
-import { useSignIn } from "@/features/auth";
+import { useAuthState } from "@/features/auth";
 
 export default function Screen() {
-    const { signIn } = useSignIn();
+    const { setUser } = useAuthState();
 
-    const onBackdoor = async () => {
-        const user = await signIn({ username: "admin", password: "admin" });
-        toast.success(`Welcome back, ${user.name}.`);
+    const onBackdoor = () => {
+        setUser({
+            name: "Test",
+            role: "Admin",
+            id: 1,
+            areReservationsForbidden: false,
+            gymPassExpirationTime: dayjs().endOf("year").toDate(),
+            login: "Test",
+        });
         router.replace(Screens.GymPass);
     };
 
