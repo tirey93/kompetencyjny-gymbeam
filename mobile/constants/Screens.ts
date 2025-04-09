@@ -9,4 +9,5 @@ export const Screens = {
     Profile: "/(dashboard)/profile",
     Reservations: "/(dashboard)/reservations",
     ChangePassword: "/(user)/change-password",
+    Payment: "/(subscription)/payment",
 } as const;
