@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { Clock, User, Users } from "@tamagui/lucide-icons";
 import dayjs from "dayjs";
 import { toast } from "sonner-native";
@@ -8,7 +8,6 @@ import { ActivityInstance } from "@/types";
 import { ReservationButton } from "./components/ReservationButton";
 import { useAuthState } from "@/features/auth";
 import { useAddReservation, useRemoveReservation } from "@/features/reservations";
-import { useQueryClient } from "@tanstack/react-query";
 
 const ICON_SIZE = 16;
 

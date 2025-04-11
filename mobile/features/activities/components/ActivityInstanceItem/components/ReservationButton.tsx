@@ -1,4 +1,3 @@
-import React from "react";
 import { toast } from "sonner-native";
 import { StyledReservationButton } from "./styled";
 import { User } from "@/types";

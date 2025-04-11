@@ -24,7 +24,6 @@ export default function ReservationsPage() {
             toast.success("Reservation removed successfully.");
         } catch (error) {
             const errorMessage = (error as { message?: string }).message;
-            
             toast.error("Failed to remove reservation", {
                 description: errorMessage,
             });
