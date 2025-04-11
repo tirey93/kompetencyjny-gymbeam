@@ -1,6 +1,8 @@
 import { Stack } from "expo-router";
 import { toast } from "sonner-native";
 import { styled, Text, View } from "tamagui";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback } from "react";
 
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 import { Spinner } from "@/components/Spinner";
@@ -22,12 +24,18 @@ export default function ReservationsPage() {
             toast.success("Reservation removed successfully.");
         } catch (error) {
             const errorMessage = (error as { message?: string }).message;
-
+            
             toast.error("Failed to remove reservation", {
                 description: errorMessage,
             });
         }
     };
+
+    useFocusEffect(
+        useCallback(() => {
+            refetch();
+        }, [refetch])
+    );
 
     return (
         <ScreenContainer>
