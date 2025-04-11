@@ -36,7 +36,7 @@ export const ReservationButton = ({
             toast.error("You do not have a valid gym pass.");
         } else if (hasReachedCapacity) {
             toast.error("This activity is fully booked.");
-        } else if (isReservationAllowed) {
+        } else if (!isReservationAllowed) {
             toast.error("User is not allowed to place reservations.");
         } else {
             onReservation();
