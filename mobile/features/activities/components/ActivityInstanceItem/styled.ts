@@ -28,4 +28,11 @@ export const StyledActivityInstanceItem = {
     Column: styled(YStack, {
         gap: "$2",
     }),
+
+    ContentRow: styled(View, {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        flex: 1,
+    }),
 };

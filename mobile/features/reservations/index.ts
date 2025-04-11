@@ -3,3 +3,4 @@ export { ReservationItemCard } from "./components/ReservationItemCard/Reservatio
 export { ReservationSection } from "./components/ReservationSection/ReservationSection";
 export { ReservationsContent } from "./components/ReservationsContent/ReservationsContent";
 export { useRemoveReservation } from "./hooks/useRemoveReservation";
+export { useAddReservation } from "./hooks/useAddReservation";
