@@ -8,6 +8,7 @@ import { ActivityInstance } from "@/types";
 import { ReservationButton } from "./components/ReservationButton";
 import { useAuthState } from "@/features/auth";
 import { useAddReservation, useRemoveReservation } from "@/features/reservations";
+import { withConfirmation } from "@/features/reservations/utils/withConfirmation";
 
 const ICON_SIZE = 16;
 
@@ -53,16 +54,22 @@ export const ActivityInstanceItem = ({ activity }: ActivityInstanceItemProps) =>
         }
     }, [addReservation, activity, user]);
 
-    const handleRemoveReservation = useCallback(async () => {
-        try {
-            if (!activity.reservationId) throw new Error();
-
-            await removeReservation(activity.reservationId);
-
-            toast.success(`Reservation for ${activity.name} has been cancelled.`);
-        } catch (error) {
-            toast.error((error as Error).message ?? "Failed to cancel reservation.");
-        }
+    const handleRemoveReservation = useCallback(() => {
+        withConfirmation(
+            `Are you sure you want to cancel the reservation for ${activity.name}?`,
+            async () => {
+                if (activity.reservationId == null) {
+                    toast.error("Missing reservation ID.");
+                    return;
+                }
+                try {
+                    await removeReservation(activity.reservationId);
+                    toast.success(`Reservation for ${activity.name} has been cancelled.`);
+                } catch (error) {
+                    toast.error((error as Error).message ?? "Failed to cancel reservation.");
+                }
+            }
+        );
     }, [removeReservation, activity]);
 
     return (

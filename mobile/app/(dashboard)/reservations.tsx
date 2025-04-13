@@ -9,6 +9,7 @@ import { Spinner } from "@/components/Spinner";
 import { useRemoveReservation } from "@/features/reservations";
 import { useActivitiesInstances } from "@/features/activities";
 import { ReservationsContent } from "@/features/reservations";
+import { withConfirmation } from "@/features/reservations/utils/withConfirmation";
 
 export default function ReservationsPage() {
     const { activitiesInstances, isLoading, refetch } = useActivitiesInstances({
@@ -17,17 +18,19 @@ export default function ReservationsPage() {
 
     const { removeReservation } = useRemoveReservation();
 
-    const handleRemoveReservation = async (reservationId: number) => {
-        try {
-            await removeReservation(reservationId);
-            await refetch();
-            toast.success("Reservation removed successfully.");
-        } catch (error) {
-            const errorMessage = (error as { message?: string }).message;
-            toast.error("Failed to remove reservation", {
-                description: errorMessage,
-            });
-        }
+    const handleRemoveReservation = (reservationId: number) => {
+        withConfirmation("Are you sure you want to remove this reservation?", async () => {
+            try {
+                await removeReservation(reservationId);
+                await refetch();
+                toast.success("Reservation removed successfully.");
+            } catch (error) {
+                const errorMessage = (error as { message?: string }).message;
+                toast.error("Failed to remove reservation", {
+                    description: errorMessage,
+                });
+            }
+        });
     };
 
     useFocusEffect(
