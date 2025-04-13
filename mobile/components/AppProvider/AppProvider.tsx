@@ -15,18 +15,20 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     const [queryClient] = useState(() => new QueryClient());
 
     return (
-        <TamaguiProvider config={config} defaultTheme="dark">
-            <StyledAppProvider.SafeAreaViewProvider>
-                <GestureHandlerRootView>
-                    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-                    <Toaster
-                        position="top-center"
-                        swipeToDismissDirection="left"
-                        offset={TOP_SAFE_AREA_OFFSET}
-                        richColors
-                    />
-                </GestureHandlerRootView>
-            </StyledAppProvider.SafeAreaViewProvider>
-        </TamaguiProvider>
+        <QueryClientProvider client={queryClient}>
+            <TamaguiProvider config={config} defaultTheme="dark">
+                <StyledAppProvider.SafeAreaViewProvider>
+                    <GestureHandlerRootView>
+                        {children}
+                        <Toaster
+                            position="top-center"
+                            swipeToDismissDirection="left"
+                            offset={TOP_SAFE_AREA_OFFSET}
+                            richColors
+                        />
+                    </GestureHandlerRootView>
+                </StyledAppProvider.SafeAreaViewProvider>
+            </TamaguiProvider>
+        </QueryClientProvider>
     );
 };
