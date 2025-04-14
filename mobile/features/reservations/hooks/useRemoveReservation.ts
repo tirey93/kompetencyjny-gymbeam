@@ -2,8 +2,8 @@ import { useCallback } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { ReservationsService } from "../api/reservationsService";
-
-import { HttpErrorsMap, mapErrorToErrorMessage } from "@/api";
+import { mapErrorToErrorMessage, HttpErrorsMap } from "@/api";
+import { ActivitiesQueryKeyFactory } from "@/features/activities/utils/acivitiesQueryKeyFactory";
 import { ReservationsQueryKeyFactory } from "@/features/reservations/utils/reservationsQueryKeyFactory";
 
 type UseRemoveReservation = {
@@ -16,8 +16,12 @@ export const useRemoveReservation = (): UseRemoveReservation => {
     const { mutateAsync } = useMutation({
         mutationFn: ReservationsService.removeReservation,
         onSuccess: () => {
-            void queryClient.invalidateQueries({
+            queryClient.invalidateQueries({
                 queryKey: ReservationsQueryKeyFactory.createForAll(),
+            });
+
+            queryClient.invalidateQueries({
+                queryKey: ActivitiesQueryKeyFactory.createForAll()
             });
         },
     });
