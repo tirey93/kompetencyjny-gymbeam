@@ -8,9 +8,9 @@ export const withConfirmation = (
         "Confirmation",
         message,
         [
-            { text: "Cancel", style: "cancel" },
+            { text: "No", style: "cancel" },
             {
-                text: "Remove",
+                text: "Yes",
                 style: "destructive",
                 onPress: onConfirm,
             },

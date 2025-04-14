@@ -2,7 +2,6 @@ import { Stack } from "expo-router";
 import { toast } from "sonner-native";
 import { styled, Text, View } from "tamagui";
 import { useFocusEffect } from "@react-navigation/native";
-import { useCallback } from "react";
 
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 import { Spinner } from "@/components/Spinner";
@@ -33,11 +32,9 @@ export default function ReservationsPage() {
         });
     };
 
-    useFocusEffect(
-        useCallback(() => {
-            refetch();
-        }, [refetch])
-    );
+    useFocusEffect(() => {
+        refetch();
+      });
 
     return (
         <ScreenContainer>

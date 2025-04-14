@@ -25,7 +25,7 @@ export const ActivityInstanceItem = ({ activity }: ActivityInstanceItemProps) =>
     const { removeReservation } = useRemoveReservation();
 
     const isExpired = dayjs(activity.startTime).isBefore(dayjs());
-    const hasReachedCapacity = activity.totalCapacity - activity.slotsTaken === 0;
+    const hasReachedCapacity = activity.totalCapacity === activity.slotsTaken;
     const isAlreadyReserved = !!activity.reservationId;
 
     const startTimeString = startTime.toLocaleTimeString([], {
