@@ -5,9 +5,11 @@ type GymPassPayload = {
     hash: string;
 };
 
+const HASH = "gym_beam__";
+
 export class GymPassEncoder {
     public static encode(user: User): string {
-        return JSON.stringify(user);
+        return JSON.stringify({ user, hash: HASH });
     }
 
     public static decode(value: string): User {
@@ -26,6 +28,10 @@ export class GymPassEncoder {
         }
 
         if (!payload.user) {
+            return false;
+        }
+
+        if (payload.hash !== HASH) {
             return false;
         }
 

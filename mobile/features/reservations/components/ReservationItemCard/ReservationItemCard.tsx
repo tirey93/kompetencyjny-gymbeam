@@ -16,11 +16,11 @@ type ReservationItemCardProps = {
 };
 
 export const ReservationItemCard = ({
-    reservation,
-    onDismiss,
-    onShowDetails,
-    isLoading,
-}: ReservationItemCardProps) => {
+                                        reservation,
+                                        onDismiss,
+                                        onShowDetails,
+                                        isLoading,
+                                    }: ReservationItemCardProps) => {
     const startTime = new Date(reservation.startTime);
     const endTime = new Date(
         startTime.getTime() + reservation.duration * 60000,

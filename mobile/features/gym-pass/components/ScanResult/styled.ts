@@ -12,6 +12,7 @@ export const StyledScanResult = {
     ContentStack: styled(Card, {
         name: "ScanResultContentStack",
         padding: "$6",
+        gap: "$4",
         alignItems: "center",
         backgroundColor: "$secondary2",
     }),
@@ -27,7 +28,6 @@ export const StyledScanResult = {
         name: "ScanResultUserLogin",
         size: "$5",
         textAlign: "center",
-        marginBottom: "$5",
     }),
 
     Status: styled(SizableText, {

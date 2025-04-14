@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ReservationsService } from "../api/reservationsService";
 import { mapErrorToErrorMessage, HttpErrorsMap } from "@/api";
 import { ActivitiesQueryKeyFactory } from "@/features/activities/utils/acivitiesQueryKeyFactory";
+import { ReservationsQueryKeyFactory } from "@/features/reservations/utils/reservationsQueryKeyFactory";
 
 type UseRemoveReservation = {
     removeReservation: (reservationId: number) => Promise<void>;
@@ -16,8 +17,12 @@ export const useRemoveReservation = (): UseRemoveReservation => {
         mutationFn: ReservationsService.removeReservation,
         onSuccess: () => {
             queryClient.invalidateQueries({
+                queryKey: ReservationsQueryKeyFactory.createForAll(),
+            });
+
+            queryClient.invalidateQueries({
                 queryKey: ActivitiesQueryKeyFactory.createForAll()
-            })
+            });
         },
     });
 
