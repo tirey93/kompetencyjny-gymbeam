@@ -1,6 +1,6 @@
 import { Link, Tabs } from "expo-router";
 import { LogOutIcon } from "lucide-react-native";
-import { Button, SizableText, styled, View } from "tamagui";
+import { Button, styled, View } from "tamagui";
 
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 import { Screens } from "@/constants/Screens";
@@ -13,13 +13,13 @@ export default function Screen() {
         <ScreenContainer>
             <Tabs.Screen options={{ title: "Profile", headerShown: false }} />
             <Styled.View>
-                <SizableText>Profile</SizableText>
-                <Styled.Button theme="danger" iconAfter={<LogOutIcon />} onPress={signOut}>
-                    Sign out
-                </Styled.Button>
                 <Link href={Screens.ChangePassword} asChild>
                     <Styled.Button>Change Password</Styled.Button>
                 </Link>
+
+                <Styled.Button theme="danger" iconAfter={<LogOutIcon />} onPress={signOut}>
+                    Sign out
+                </Styled.Button>
             </Styled.View>
         </ScreenContainer>
     );
@@ -31,6 +31,7 @@ const Styled = {
         justifyContent: "center",
         backgroundColor: "$background",
         minHeight: "100%",
+        gap: "$2",
     }),
     Button: styled(Button, {
         minWidth: "90%",
