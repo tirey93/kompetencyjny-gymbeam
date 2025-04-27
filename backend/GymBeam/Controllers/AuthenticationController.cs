@@ -56,6 +56,7 @@ namespace GymBeam.Controllers
                     Resource.ValidatorAuthorizationCodeNotProvided);
 
             GoogleUserResponse userInfo = null;
+            UserResponse userResponse;
             try
             {
                 var accessToken = await _googleClient.GetAccessTokenAsync(code);
@@ -66,18 +67,18 @@ namespace GymBeam.Controllers
                     Username = userInfo.Email
                 });
 
-                await Login(new LoginRequest
+                userResponse = await _mediator.Send(new LoginQuery
                 {
                     Username = user.Name,
                     Password = null
                 });
-  
+
             }
             catch (UserNotFoundException ex)
             {
                 if (userInfo != null)
                 {
-                    await Register(new RegisterRequest
+                    userResponse = await _mediator.Send(new RegisterCommand
                     {
                         DisplayName = userInfo.Name,
                         Username = userInfo.Email,
@@ -101,6 +102,12 @@ namespace GymBeam.Controllers
                     string.Format(Resource.ControllerInternalError, ex.Message));
             }
             var redirectUrl = Uri.UnescapeDataString(_configuration["GoogleOAuth:ReturnUrl"]);
+
+            var token = generateJwtToken(userResponse);
+            var authToken = new JwtSecurityTokenHandler().WriteToken(token);
+            var userId = userResponse.Id.ToString();
+
+            redirectUrl = $"{redirectUrl}?authToken={authToken}&userId={userId}";
             return Redirect(redirectUrl);
         }
 
@@ -232,6 +239,26 @@ namespace GymBeam.Controllers
             Response.Cookies
                 .AppendToCookie(Cookies.AccessToken, new JwtSecurityTokenHandler().WriteToken(token))
                 .AppendToCookie(Cookies.UserId, response.Id.ToString());
+        }
+
+        private JwtSecurityToken generateJwtToken(UserResponse response)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Role, response.Role)
+            };
+
+            var signingKey = Environment.GetEnvironmentVariable(_configuration["JWT:EnvironmentSecretVariableName"]);
+            if (string.IsNullOrEmpty(signingKey))
+                throw new MissingSigningKeyException();
+
+            return JwtHelper.GetJwtToken(
+                response.Name,
+                signingKey,
+                _configuration["JWT:Issuer"],
+                _configuration["JWT:Audience"],
+                TimeSpan.FromMinutes(24 * 60),
+                claims.ToArray());
         }
     }
 }
