@@ -1,19 +1,19 @@
 import { router } from "expo-router";
-import * as WebBrowser from "expo-web-browser";
 import { Button } from "tamagui";
 import { toast } from "sonner-native";
+import * as WebBrowser from "expo-web-browser";
+import * as AuthSession from "expo-auth-session";
 
 import { HttpErrorsMap, mapErrorToErrorMessage } from "@/api";
 import { Screens } from "@/constants/Screens";
-import { AuthService, useAuthState, useSignIn } from "@/features/auth";
-import * as AuthSession from "expo-auth-session";
+import { AuthService, useAuthState } from "@/features/auth";
 import { useAppOverlay } from "@/hooks/useAppOverlay";
 import { UserService } from "@/features/users";
 import { mapUserDtoToUser } from "@/features/users/utils/mapUserDtoToUser";
 import { setAuthCookie } from "@/api/apiRequest";
 
 WebBrowser.maybeCompleteAuthSession();
-  
+
 export const GoogleOAuthButton = () => {
     const { setUser, user } = useAuthState();
     const setIsLoading = useAppOverlay((state) => state.setIsLoading);
@@ -26,8 +26,7 @@ export const GoogleOAuthButton = () => {
                 setUser(mapUserDtoToUser(data));
             }
         } catch (error) {
-            const message = (error as Error)?.message ?? "";
-            console.log(message)
+
         } finally {
             setIsLoading(false);
         }
@@ -37,11 +36,8 @@ export const GoogleOAuthButton = () => {
         try {
             const { link } = await AuthService.signInWithGoogle();
             const redirectUri = AuthSession.makeRedirectUri();
-
-            console.log(redirectUri)
-            
-            
             const result = await WebBrowser.openAuthSessionAsync(link, redirectUri);
+
             if (result.type == "success") {
                 const url = new URL(result.url);
                 const params = new URLSearchParams(url.search);
@@ -51,6 +47,7 @@ export const GoogleOAuthButton = () => {
                 if (authToken && userId) {
                     setAuthCookie(authToken, userId);
                 }
+
                 loadUserDetails()
                 router.replace(Screens.GymPass);
             }
@@ -66,6 +63,6 @@ export const GoogleOAuthButton = () => {
 };
 
 const errorsMap: HttpErrorsMap = {
-    defaultError: "Unknown error.",
+    defaultError: "Failed to login with google.",
     statusCodesMap: {},
 };

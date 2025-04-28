@@ -72,7 +72,6 @@ namespace GymBeam.Controllers
                     Username = user.Name,
                     Password = null
                 });
-
             }
             catch (UserNotFoundException ex)
             {
