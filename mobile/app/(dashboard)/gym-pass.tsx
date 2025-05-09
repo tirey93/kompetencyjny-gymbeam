@@ -25,6 +25,10 @@ export default function Screen() {
         setIsScannerOpen(false);
     };
 
+    const hideScanResult = () => {
+        setScanResult(null);
+    };
+
     const showCamera = () => {
         setIsScannerOpen(true);
         setScanResult(null);
@@ -34,6 +38,7 @@ export default function Screen() {
         const backAction = () => {
             if (scanResult) {
                 hideCamera();
+                hideScanResult();
                 return true;
             }
 
@@ -48,9 +53,10 @@ export default function Screen() {
         try {
             const decodedUser = GymPassEncoder.decode(result.data);
             setScanResult(decodedUser);
-            hideCamera();
         } catch (error) {
             toast.error("Invalid QR code.");
+        } finally {
+            hideCamera();
         }
     };
 
@@ -88,13 +94,7 @@ export default function Screen() {
                     </Sheet.Frame>
                 </Sheet>
 
-                <Sheet
-                    modal
-                    dismissOnSnapToBottom
-                    open={!!scanResult}
-                    onOpenChange={() => setScanResult(null)}
-                    snapPoints={[100]}
-                >
+                <Sheet modal dismissOnSnapToBottom open={!!scanResult} onOpenChange={hideScanResult} snapPoints={[100]}>
                     <Sheet.Frame>
                         <Sheet.Handle />
                         <ScanResult userData={user} />
