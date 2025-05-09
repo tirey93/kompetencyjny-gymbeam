@@ -5,8 +5,6 @@ import { Button, SizableText, styled, View } from "tamagui";
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 import { Screens } from "@/constants/Screens";
 import { useSignOut } from "@/features/auth";
-import { Screens } from "@/constants/Screens";
-import { Link } from "expo-router";
 import { useOrderMembership } from "@/features/subscriptions/hooks/useOrderMembership";
 
 export default function Screen() {
