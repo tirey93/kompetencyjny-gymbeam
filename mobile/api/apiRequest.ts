@@ -88,3 +88,7 @@ const interceptAuthCookie = async (headers: Headers) => {
         await AuthCookieStore.set(`${AUTH_TOKEN_COOKIE}=${authToken};${USER_ID_COOKIE}=${userId};`);
     }
 };
+
+export const setAuthCookie = async (authToken: string, userId: string) => {
+    await AuthCookieStore.set(`${AUTH_TOKEN_COOKIE}=${authToken};${USER_ID_COOKIE}=${userId};`);
+};
