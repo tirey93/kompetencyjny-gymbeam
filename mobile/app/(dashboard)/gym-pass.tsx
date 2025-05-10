@@ -14,6 +14,7 @@ import { QRScanner } from "@/features/gym-pass/components/QRScanner/QRScanner";
 import { ScanResult } from "@/features/gym-pass/components/ScanResult/ScanResult";
 import { Timestamp } from "@/features/gym-pass/components/Timestamp/Timestamp";
 import { GymPassEncoder } from "@/features/gym-pass/services/GymPassEncoder";
+import { useReloadUser } from "@/features/users/hooks/useReloadUser";
 import { User } from "@/types";
 
 export default function Screen() {
@@ -33,6 +34,8 @@ export default function Screen() {
         setIsScannerOpen(true);
         setScanResult(null);
     };
+
+    useReloadUser({ force: true });
 
     useEffect(() => {
         const backAction = () => {
