@@ -76,9 +76,15 @@ export default function Screen() {
                 </Styled.GymPass>
 
                 <Styled.ButtonsWrapper>
-                    <Styled.ScanQRButton onPress={showCamera} iconAfter={<ScanQrCodeIcon size={24} />} theme="accent">
-                        Scan QR
-                    </Styled.ScanQRButton>
+                    {user.role === "Admin" && (
+                        <Styled.ScanQRButton
+                            onPress={showCamera}
+                            iconAfter={<ScanQrCodeIcon size={24} />}
+                            theme="accent"
+                        >
+                            Scan QR
+                        </Styled.ScanQRButton>
+                    )}
                 </Styled.ButtonsWrapper>
 
                 <Sheet
