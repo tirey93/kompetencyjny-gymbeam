@@ -40,11 +40,11 @@ namespace Infrastructure
             if (predicate == null)
                 return _appDbContext.Reservations
                     .Include(u => u.User)
-                    .Include(a => a.Activity)
+                    .Include(a => a.Activity).ThenInclude(x => x.Leader)
                     .ToList();
             return _appDbContext.Reservations
                 .Include(u => u.User)
-                .Include(a => a.Activity)
+                .Include(a => a.Activity).ThenInclude(x => x.Leader)
                 .Where(predicate)
                 .ToList();
         }

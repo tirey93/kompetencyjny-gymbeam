@@ -5,9 +5,11 @@ import { Button, styled, View } from "tamagui";
 import { ScreenContainer } from "@/components/ScreenContainer/ScreenContainer";
 import { Screens } from "@/constants/Screens";
 import { useSignOut } from "@/features/auth";
+import { useOrderMembership } from "@/features/subscriptions/hooks/useOrderMembership";
 
 export default function Screen() {
     const { signOut } = useSignOut();
+    const { orderMembership, isPending } = useOrderMembership();
 
     return (
         <ScreenContainer>
@@ -20,6 +22,7 @@ export default function Screen() {
                 <Styled.Button theme="danger" iconAfter={<LogOutIcon />} onPress={signOut}>
                     Sign out
                 </Styled.Button>
+                <Styled.Button onPress={orderMembership}>Subscribe</Styled.Button>
             </Styled.View>
         </ScreenContainer>
     );
